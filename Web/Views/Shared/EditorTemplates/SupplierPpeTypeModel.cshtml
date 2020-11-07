@@ -1,0 +1,101 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Web.Snippets.System
+@model SupplierPpeTypeModel
+
+
+@{
+    string selectedVueName = Html.NameFor(m => m.Selected);
+    string costTypeVueName = Html.NameFor(m => m.CostType);
+}
+
+<div class="ppetype">
+    <label>
+        @Html.CheckBoxFor(m => m.Selected, new { v_model = @selectedVueName })
+        @Model.Type.GetText()
+        @Html.HiddenFor(m => m.Type)
+    </label>
+    @if(Model.Type == PpeTypes.Other)
+    {
+        <div v-bind:class="{ active: @selectedVueName }" class="toggleable indent">
+            @Html.LabelsFor(m => m.PpeOther)
+            @Html.TextBoxFor(m => m.PpeOther)
+            @Html.HtmlValidationMessageFor(m => m.PpeOther)
+        </div>
+    }
+    <div v-bind:class="{ active: @selectedVueName }" class="ppetype_details toggleable large indent">
+        <div>
+            @Html.LabelsFor(m => m.MeetsRegulations)
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.MeetsRegulations, MeetsRegulations.Yes.ToString())
+                    @MeetsRegulations.Yes.GetText()
+                </label>
+            </div>
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.MeetsRegulations, MeetsRegulations.No.ToString())
+                    @MeetsRegulations.No.GetText()
+                </label>
+            </div>
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.MeetsRegulations, MeetsRegulations.NotSure.ToString())
+                    @MeetsRegulations.NotSure.GetText()
+                </label>
+            </div>
+            @Html.HtmlValidationMessageFor(m => m.MeetsRegulations)
+        </div>
+
+        <div>
+            @Html.LabelsFor(m => m.CostType)
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.CostType, CostTypes.Free.ToString(), new { v_model = @costTypeVueName })
+                    @CostTypes.Free.GetText()
+                </label>
+            </div>
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.CostType, CostTypes.Charged.ToString(), new { v_model = @costTypeVueName })
+                    @CostTypes.Charged.GetText()
+                </label>
+            </div>
+            <div>
+                <label>
+                    @Html.RadioButtonFor(m => m.CostType, CostTypes.Other.ToString(), new { v_model = @costTypeVueName })
+                    @CostTypes.Other.GetText()
+                </label>
+            </div>
+            @Html.HtmlValidationMessageFor(m => m.CostType)
+            <div v-bind:class="{ active: @costTypeVueName === 'Other' }" class="toggleable indent_small">
+                @Html.LabelsFor(m => m.CostTypeOther)
+                @Html.TextAreaFor(m => m.CostTypeOther)
+                @Html.HtmlValidationMessageFor(m => m.CostTypeOther)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelsFor(m => m.CapacityPerWeek)
+            @Html.NumberPickerFor(m => m.CapacityPerWeek)
+            @Html.HtmlValidationMessageFor(m => m.CapacityPerWeek)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.CurrentStock)
+            @Html.NumberPickerFor(m => m.CurrentStock)
+            @Html.HtmlValidationMessageFor(m => m.CurrentStock)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.LeadTimeInDays)
+            @Html.NumberPickerFor(m => m.LeadTimeInDays)
+            @Html.HtmlValidationMessageFor(m => m.LeadTimeInDays)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.Notes)
+            @Html.TextAreaFor(m => m.Notes)
+            @Html.HtmlValidationMessageFor(m => m.Notes)
+        </div>
+
+    </div>
+</div>

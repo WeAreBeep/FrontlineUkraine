@@ -1,0 +1,5 @@
+﻿@model string
+@if (!String.IsNullOrWhiteSpace(Model))
+{
+    <script type="text/javascript">Help.showMessagesJson(@Html.Raw(Model));</script>
+}

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Web.Db
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+    <main>
+        <h1>Admin</h1>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <h3>@UserManager.GetUserName(User)</h3>
+        }
+        <h2 class="spaced">Needs</h2>
+        <a class="btn_submit btn_manage" href="/requests" title="Requests">
+            <i class="far fa-comment"></i><span>Requests</span>
+        </a>
+        <a class="btn_submit btn_manage" href="/requests?status=underreview" title="Requests Under Review">
+            <i class="far fa-comment"></i><span>Under Review</span>
+        </a>
+        <a class="btn_submit btn_manage" href="/requests?status=published" title="Requests Published">
+            <i class="far fa-comment"></i><span>Published</span>
+        </a>
+        <a  class="btn_submit btn_manage" href="/requests?status=archived" title="Requests Archived">
+            <i class="far fa-comment"></i><span>Archived</span>
+        </a>
+        
+        <h2 class="spaced">Supplies</h2>
+        <a class="btn_submit btn_manage" href="/suppliers" title="Suppliers">
+            <i class="fas fa-comment-medical"></i><span>Suppliers </span>
+        </a>
+        <a  class="btn_submit btn_manage" href="/suppliers?status=underreview" title="Suppliers Under Review">
+            <i class="fas fa-comment-medical"></i><span>Under Review</span>
+        </a>
+        <a class="btn_submit btn_manage" href="/suppliers?status=published" title="Suppliers Published">
+            <i class="fas fa-comment-medical"></i><span>Published</span>
+        </a>
+        <a  class="btn_submit btn_manage" href="/suppliers?status=archived" title="Suppliers Archived">
+            <i class="fas fa-comment-medical"></i><span>Archived</span>
+        </a>
+        
+        <h2 class="spaced">Your Account</h2>
+        <partial name="_LoginPartial" />
+
+
+    </main>
+
+@section Scripts
+{
+    <script>
+
+
+    </script>
+}

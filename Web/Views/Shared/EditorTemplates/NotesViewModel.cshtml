@@ -1,0 +1,17 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Web.Snippets.System
+@model NotesViewModel
+
+<fieldset id="notes">
+    <legend>Notes</legend>
+    <div class="notes_list">
+        @Html.DisplayFor(m => m.Notes)
+    </div>
+
+    <div class="new_note">
+        @Html.LabelsFor(m => m.NewNote)
+        @Html.TextAreaFor(m => m.NewNote)
+    </div>
+</fieldset>

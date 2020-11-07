@@ -1,0 +1,76 @@
+﻿@using Web.Snippets
+@using Web.Snippets.System
+@model EditNeedsViewModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <form method="post" class="modalsubmit">
+        @Html.AntiForgeryToken()
+
+        <div id="vue_app" class="edit_wrap edit_needs">
+            @Html.EditorFor(m => m.Request)
+            @Html.EditorFor(m => m.Status)
+            @Html.EditorFor(m => m.Twitter)
+            <fieldset id="needs_matching">
+                <legend>Needs Matching</legend>
+                <table class="table_needs_matching">
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Supplier</th>
+                        <th>Supplier Other</th>
+                        <th>Date Closed</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @Html.EditorFor(m => m.NeedsMatching)
+                    </tbody>
+                </table>
+            </fieldset>
+            @Html.EditorFor(m => m.Notes)
+            @Html.EditorFor(m => m.Location)
+        </div>
+        <div class="btn_wrap">
+
+            @Html.HtmlValidationSummary(false)
+
+            <button class="btn_submit" type="submit">
+                <i class="fas fa-save"></i><span>Save</span>
+            </button>
+        </div>
+    </form>
+</main>
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="~/js/vue-number-input.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.additions.js"></script>
+
+    <script>
+
+        (function() {
+
+            console.log(@Html.Raw(Model.GetVueData()));
+
+            $(document).ready(function() {
+
+                var vm = new Vue({
+                    el: '#vue_app',
+                    data: JSON.parse('@Html.Raw(Model.GetVueData())'),
+                    mounted: function() {
+                        Help.setupBackendApp();
+                    }
+                });
+            });
+        })();
+
+    </script>
+}

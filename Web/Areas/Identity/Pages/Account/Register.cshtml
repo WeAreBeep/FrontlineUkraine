@@ -1,0 +1,56 @@
+﻿@page
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model RegisterModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <div class="title_area">
+        <h1>Register</h1>
+    </div>
+    <form method="post" class="modalsubmit">
+        @Html.AntiForgeryToken()
+
+        <fieldset class="top">
+            <legend>Create a new account</legend>
+            <div>
+                @Html.LabelsFor(m => m.Input.Email)
+                @Html.TextBoxFor(m => m.Input.Email)
+                @Html.HtmlValidationMessageFor(m => m.Input.Email)
+            </div>
+            <div>
+                @Html.LabelsFor(m => m.Input.Password)
+                @Html.PasswordFor(m => m.Input.Password)
+                @Html.HtmlValidationMessageFor(m => m.Input.Password)
+            </div>
+            <div>
+                @Html.LabelsFor(m => m.Input.ConfirmPassword)
+                @Html.PasswordFor(m => m.Input.ConfirmPassword)
+                @Html.HtmlValidationMessageFor(m => m.Input.ConfirmPassword)
+            </div>
+        </fieldset>
+
+        @Html.HtmlValidationSummary(false)
+
+        <div>
+            <button class="btn_submit" type="submit">
+                <i class="fa fa-check"></i><span>Register</span>
+            </button>
+        </div>
+
+    </form>
+
+</main>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScripts")
+
+    <script>
+        (function () {
+            Help.setupBackendApp();
+        })();
+    </script>
+
+}

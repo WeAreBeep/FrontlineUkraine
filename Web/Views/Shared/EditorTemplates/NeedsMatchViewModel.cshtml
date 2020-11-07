@@ -1,0 +1,48 @@
+﻿@using Web.Snippets
+@using Web.Snippets.System
+@model NeedsMatchViewModel
+
+@{
+    string statusVueName = Html.NameFor(m => m.Status);
+    string supplierIdVueName = Html.NameFor(m => m.SupplierId);
+    string statusIsMetOrInProgress = $"({statusVueName} == 2 || {statusVueName} == 3)";
+    string statusIsMet = $"({statusVueName} == 3)";
+    string supplierIdIsNull = $"({supplierIdVueName} == null || {supplierIdVueName} == 'null' || {supplierIdVueName} == '')";
+    string statusMetOrInProgressAndSupplierNull = $"{statusIsMetOrInProgress} && {supplierIdIsNull}";
+}
+
+<tr>
+    <td>
+        @Model.PpeType.GetText()
+        @Html.HiddenFor(m => m.PpeType)
+    </td>
+    <td>
+        @Html.DropDownListFor(m => m.Status, Model.Statuses, new { v_model = statusVueName })
+    </td>
+    <td>
+        <div :class="{ active  : @statusIsMetOrInProgress }" class="toggleable fast">
+            @Html.DropDownListFor(m => m.SupplierId, Model.Suppliers, new { v_model = supplierIdVueName })
+        </div>
+        <div :class="{ active : !@statusIsMetOrInProgress }" class="toggleable fast subtext">
+            N/A
+        </div>
+    </td>
+    <td>
+        <div :class="{ active : @statusMetOrInProgressAndSupplierNull }" class="toggleable fast">
+            @Html.TextBoxFor(m => m.SupplierOther, new { @class = "med" })
+            @Html.HtmlValidationMessageFor(m => m.SupplierOther)
+        </div>
+        <div :class="{ active : !(@statusMetOrInProgressAndSupplierNull) }" class="toggleable fast subtext">
+            N/A
+        </div>
+    </td>
+    <td>
+        <div :class="{ active  : @statusIsMet }" class="toggleable fast">
+            @Html.EditorFor(m => m.DateClosed, new { @class = "med_small" })
+            @Html.HtmlValidationMessageFor(m => m.DateClosed)
+        </div>
+        <div :class="{ active : !@statusIsMet }" class="toggleable fast subtext">
+            N/A
+        </div>
+    </td>
+</tr>

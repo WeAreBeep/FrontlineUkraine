@@ -1,0 +1,41 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Web.Snippets.System
+@model NeedPpeTypeViewModel
+
+@{
+    string selectedVueName = Html.NameFor(m => m.Selected);
+}
+
+<div class="ppetype">
+    <label class="toggle_switch">
+        @Html.CheckBoxFor(m => m.Selected, new { v_model = @selectedVueName })
+        @Model.Type.GetText()
+        @Html.HiddenFor(m => m.Type)
+    </label>
+
+    @if(Model.Type == PpeTypes.Other)
+    {
+        <div v-bind:class="{ active: @selectedVueName }" class="toggleable indent">
+            @Html.LabelsFor(m => m.PpeTypeOther)
+            @Html.TextBoxFor(m => m.PpeTypeOther)
+            @Html.HtmlValidationMessageFor(m => m.PpeTypeOther)
+        </div>
+    }
+    else if(Model.Type == PpeTypes.FFP1RespiratorMasks)
+    {
+        <div v-bind:class="{ active: @selectedVueName }" class="toggleable indent">
+            <div>
+                @Html.LabelsFor(m => m.DailyShortage)
+                @Html.NumberPickerFor(m => m.DailyShortage)
+                @Html.HtmlValidationMessageFor(m => m.DailyShortage)
+            </div>
+            <div>
+                @Html.LabelsFor(m => m.DailyShortageForWhom)
+                @Html.TextBoxFor(m => m.DailyShortageForWhom)
+                @Html.HtmlValidationMessageFor(m => m.DailyShortageForWhom)
+            </div>
+        </div>
+    }
+</div>

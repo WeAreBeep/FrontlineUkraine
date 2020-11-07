@@ -1,0 +1,60 @@
+﻿@using Web.Snippets
+@model ContactUsViewModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+@{
+    string idReCaptchaValid = Html.IdFor(m => m.ReCaptchaValid);
+    string jquerySelector = $"#{idReCaptchaValid}";
+}
+
+<main>
+    <div class="title_area">
+        <h1>Contact Us</h1>
+        <p class="description">Use this form to contact us</p>
+        <p class="description">Thank you!</p>
+    </div>
+
+    <form id="contact_us" method="post" class="modalsubmit" onsubmit="return validateRecaptcha();">
+        @Html.AntiForgeryToken()
+
+        @Html.EditorForModel()
+
+        @Html.HtmlValidationSummary(false)
+
+        <button class="btn_submit" type="submit">
+            <i class="fas fa-paper-plane"></i><span>Send</span>
+        </button>
+
+    </form>
+
+</main>
+
+@section Scripts
+{
+
+    @await Html.PartialAsync("_ValidationScripts")
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+
+        (function () {
+            Help.setupBackendApp();
+        })();
+
+
+        function validateRecaptcha() {
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                $('@jquerySelector').val("");
+            } else {
+                $('@jquerySelector').val("true");
+            }
+            return true;
+        }
+
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@page
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model EmailModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<form method="post" class="modalsubmit">
+    @Html.AntiForgeryToken()
+
+    <fieldset class="top">
+        <legend>Manage Email Address</legend>
+        <div>
+            @Html.LabelsFor(m => m.Email)
+            @if (Model.IsEmailConfirmed)
+            {
+
+                @Html.TextBoxFor(m => m.Email, new
+                {
+                    @disabled = "disabled"
+                })
+                <span class="input-group-text text-success font-weight-bold" title="Email Address is confirmed" style="color: #00966B;font-weight: 900;font-size: 2.5rem;">✓</span>
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Email, new
+                {
+                    @disabled = "disabled"
+                })
+                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+            }
+            @Html.HtmlValidationMessageFor(m => m.Email)
+        </div>
+
+
+        <div>
+            @Html.LabelsFor(m => m.Input.NewEmail)
+            @Html.PasswordFor(m => m.Input.NewEmail)
+            @Html.HtmlValidationMessageFor(m => m.Input.NewEmail)
+        </div>
+    </fieldset>
+
+    @Html.HtmlValidationSummary(false)
+
+    <div>
+        <button class="btn_submit" type="submit" asp-page-handler="ChangeEmail">
+            <i class="fa fa-check"></i><span>Change Email</span>
+        </button>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScripts")
+
+    <script>
+        (function() {
+            Help.setupBackendApp();
+        })();
+    </script>
+}

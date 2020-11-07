@@ -1,0 +1,23 @@
+﻿CREATE TABLE Needs
+(
+	Id bigint IDENTITY(1,1) NOT NULL,
+	UshahidiId bigint,
+	[Timestamp] datetimeoffset NOT NULL,
+	StatusId int NOT NULL,
+	PublishAnonymously bit NOT NULL,
+	ContactName nvarchar(100) NOT NULL,
+	JobTitle nvarchar(100),
+	Email nvarchar(320) NOT NULL,
+	PhoneNumber nvarchar(100),
+	OrganisationName nvarchar(200),
+	Department nvarchar(200),
+	OrgTypeId int NOT NULL,
+	OrgTypeOther nvarchar(300),
+	TownOrCity nvarchar(200),
+	TweetId bigint,
+	Postcode nvarchar(8) NOT NULL,
+	TellUsMore nvarchar(max),
+	Latitude decimal(9, 6),
+	Longitude decimal(9, 6),
+	CONSTRAINT PK_Needs PRIMARY KEY CLUSTERED (Id),
+)

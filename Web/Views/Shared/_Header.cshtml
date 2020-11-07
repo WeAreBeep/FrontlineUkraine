@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Web.Db
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<div id="title_bar">
+        <span id="icons">
+
+            <a id="logo" href="/" title="Home"><img src="/images/frontline_map_logo.jpg" width="75" height="48"></a>
+
+            <a id="twitter"
+               href="https://twitter.com/FrontlineMap"
+               title="View tweets"
+               class="smlogo faa-parent animated-hover">
+                <span class="faa-tada fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span>
+            </a>
+
+            <a id="facebook"
+               href="https://www.facebook.com/FrontlineMap"
+               title="View facebook page"
+               class="smlogo faa-parent animated-hover"><i class="faa-tada fab fa-facebook fa-4x"></i></a>
+
+            <a id="instagram"
+               href="https://www.instagram.com/FrontlineMap"
+               title="View instagram page"
+               class="smlogo faa-parent animated-hover faa-parent--instagram"><i class="faa-tada fab fa-instagram fa-4x"></i></a>
+            
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a id="account"
+                   href="/admin"
+                   class="smlogo faa-parent animated-hover">
+                    <i class="faa-tada far fa-user fa-4x"></i>
+                </a>
+            }
+           
+        </span>
+
+        <nav>
+            <ol>
+                <li><a href="/request-ppe">REQUEST PPE</a></li>
+                <li><a href="/register-supplies">GIVE PPE</a></li>
+                <li><a href="/about">ABOUT</a></li>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li><a href="/requests">Requests</a></li>
+                }
+            </ol>
+        </nav>
+
+        <div id="title">Putting PPE needs on the <span class="main_hashtag">#FrontlineMap</span></div>
+    </div>

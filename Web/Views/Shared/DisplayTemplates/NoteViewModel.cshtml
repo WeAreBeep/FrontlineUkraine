@@ -1,0 +1,9 @@
+﻿@model NoteViewModel
+
+<div class="note">
+    @Html.DisplayFor(m => m.Text)
+    <div class="authored_details">
+        @Html.DisplayFor(m => m.AuthorFullName)
+        @Html.DisplayFor(m => m.Timestamp)
+    </div>
+</div>
