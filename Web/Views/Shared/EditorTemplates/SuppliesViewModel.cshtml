@@ -1,0 +1,101 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.System
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering;
+@model SuppliesViewModel
+
+
+@{
+    string supplierTypeVueName = Html.NameFor(m => m.SupplierType);
+}
+
+<fieldset id="supplier_details" class="top">
+    <legend>Company Details</legend>
+    <div>
+        @Html.LabelsFor(m => m.OrganisationName)
+        @Html.TextBoxFor(m => m.OrganisationName)
+        @Html.HtmlValidationMessageFor(m => m.OrganisationName)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description)
+        @Html.HtmlValidationMessageFor(m => m.Description)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.SupplierType)
+        <div class="secondary">
+            <label>
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.ExistingPPEsupplier.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.ExistingPPEsupplier.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.AdaptedPPEsupplier.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.AdaptedPPEsupplier.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.Individuals.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.Individuals.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.Other.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.Other.GetText()
+            </label>
+        </div>
+        <div v-bind:class="{ active: @supplierTypeVueName === 'Other' }" class="toggleable indent_small">
+            @Html.LabelsFor(m => m.SupplierTypeOther)
+            @Html.TextBoxFor(m => m.SupplierTypeOther)
+            @Html.HtmlValidationMessageFor(m => m.SupplierTypeOther)
+        </div>
+        @Html.HtmlValidationMessageFor(m => m.SupplierType)
+    </div>
+
+</fieldset>
+
+
+
+<fieldset id="supplier_contact">
+    <legend>Contact Details</legend>
+    <div>
+        @Html.LabelsFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.HtmlValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Website)
+        @Html.TextBoxFor(m => m.Website)
+        @Html.HtmlValidationMessageFor(m => m.Website)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "med" })
+        @Html.HtmlValidationMessageFor(m => m.PhoneNumber)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.ContactName)
+        @Html.TextBoxFor(m => m.ContactName)
+        @Html.HtmlValidationMessageFor(m => m.ContactName)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Postcode)
+        @Html.TextBoxFor(m => m.Postcode, new { @class = "small" })
+        @Html.HtmlValidationMessageFor(m => m.Postcode)
+    </div>
+    @Html.HiddenFor(m => m.Id)
+</fieldset>
+
+
+
+<fieldset id="supplier_ppe">
+    <legend>PPE</legend>
+    <div>
+        @Html.LabelsFor(m => m.PpeTypes)
+        @Html.EditorFor(m => m.PpeTypes)
+        @Html.HtmlValidationMessageFor(m => m.PpeTypes)
+    </div>
+</fieldset>

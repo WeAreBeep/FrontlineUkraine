@@ -1,0 +1,12 @@
+﻿@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model TwitterViewModel
+
+    <fieldset id="twitter">
+        <legend>Twitter ID</legend>
+        <div>
+            @Html.LabelsFor(m => m.TweetId)
+            @Html.TextBoxFor(m => m.TweetId)
+            @Html.HtmlValidationMessageFor(m => m.TweetId)
+        </div>
+    </fieldset>

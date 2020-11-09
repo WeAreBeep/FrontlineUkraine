@@ -1,0 +1,11 @@
+--BEGIN TRANSACTION 
+
+--	DELETE FROM Needs 
+--	DELETE FROM Suppliers 
+--	DELETE FROM Notes
+--	DELETE FROM Audits
+--	DELETE FROM ContactSubmissions
+--	--DELETE FROM SupplierContactDetails
+
+----COMMIT TRANSACTION 
+--ROLLBACK TRANSACTION

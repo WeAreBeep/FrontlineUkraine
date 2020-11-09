@@ -1,0 +1,18 @@
+﻿@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model LocationViewModel
+
+<fieldset id="location">
+    <legend>Location</legend>
+    <p class="description">Will be a map control these are here as a placeholder for dev</p>
+    <div>
+        @Html.LabelsFor(m => m.Latitude)
+        @Html.TextBoxFor(m => m.Latitude)
+        @Html.HtmlValidationMessageFor(m => m.Latitude)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Longitude)
+        @Html.TextBoxFor(m => m.Longitude)
+        @Html.HtmlValidationMessageFor(m => m.Longitude)
+    </div>
+</fieldset>

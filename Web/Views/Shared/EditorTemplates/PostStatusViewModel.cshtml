@@ -1,0 +1,18 @@
+﻿@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model PostStatusViewModel
+
+<fieldset id="post_status">
+    <legend>Post Status</legend>
+    <div>
+        @Html.LabelsFor(m => m.Status)
+        @Html.DropDownListFor(m => m.Status, Model.PostStatuses)
+    </div>
+
+    @if(Model.UshahidiId != null)
+    {
+        <div>
+            <a href="@Model.UshahidiUrl" class="link_style">View Ushahidi Post</a>
+        </div>
+    }
+
+</fieldset>

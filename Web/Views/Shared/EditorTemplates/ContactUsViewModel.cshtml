@@ -1,0 +1,30 @@
+﻿@using Web.Infrastructure
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model ContactUsViewModel
+
+<fieldset>
+    <legend>Your Message</legend>
+    <div>
+        @Html.LabelsFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.HtmlValidationMessageFor(m => m.Name)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.HtmlValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Message)
+        @Html.TextAreaFor(m => m.Message)
+        @Html.HtmlValidationMessageFor(m => m.Message)
+    </div>
+    <div class="recaptcha_wrap">
+        <div class="g-recaptcha" data-sitekey="@Settings.ReCaptcha.SiteKey"></div>
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.ReCaptchaValid)
+        @Html.HtmlValidationMessageFor(m => m.ReCaptchaValid)
+    </div>
+</fieldset>

@@ -1,0 +1,136 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Web.Snippets.System
+@model NeedsViewModel
+
+@{
+    string orgTypeVueName = Html.NameFor(m => m.OrgType);
+}
+
+<fieldset id="needs_details">
+    <legend>Your Details</legend>
+    <div>
+        @Html.LabelsFor(m => m.PublishAnonymously)
+        <div class="ppetype">
+            @Html.CheckBoxFor(m => m.PublishAnonymously)
+        </div>
+        @Html.HtmlValidationMessageFor(m => m.PublishAnonymously)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.ContactName)
+        @Html.TextBoxFor(m => m.ContactName)
+        @Html.HtmlValidationMessageFor(m => m.ContactName)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.HtmlValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "med" })
+        @Html.HtmlValidationMessageFor(m => m.PhoneNumber)
+    </div>
+</fieldset>
+<fieldset id="needs_ppe">
+    <legend>PPE</legend>
+    <div>
+        @Html.LabelsFor(m => m.PpeTypes)
+        @Html.EditorFor(m => m.PpeTypes)
+    </div>
+</fieldset>
+<fieldset id="needs_organisation">
+    <legend>Organisation</legend>
+    <div>
+        @Html.LabelsFor(m => m.OrganisationName)
+        @Html.TextBoxFor(m => m.OrganisationName)
+        @Html.HtmlValidationMessageFor(m => m.OrganisationName)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.OrgType)
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.NhsHospital.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.NhsHospital.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.CareHome.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.CareHome.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.GpSurgery.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.GpSurgery.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.PrivateHospital.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.PrivateHospital.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.ShelteredHousing.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.ShelteredHousing.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.CivicInfrastructure.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.CivicInfrastructure.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.Dentists.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.Dentists.GetText()
+            </label>
+        </div>
+        <div class="secondary">
+            <label class="cursor_pointer">
+                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.Other.ToString(), new { v_model = @orgTypeVueName })
+                @OrgTypes.Other.GetText()
+            </label>
+        </div>
+        <div v-bind:class="{ active: @orgTypeVueName === 'Other' }" class="toggleable indent">
+            @Html.LabelsFor(m => m.OrgTypeOther)
+            @Html.TextBoxFor(m => m.OrgTypeOther)
+            @Html.HtmlValidationMessageFor(m => m.OrgTypeOther)
+        </div>
+        @Html.HtmlValidationMessageFor(m => m.OrgType)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.JobTitle)
+        @Html.TextBoxFor(m => m.JobTitle)
+        @Html.HtmlValidationMessageFor(m => m.JobTitle)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.Department)
+        @Html.TextBoxFor(m => m.Department)
+        @Html.HtmlValidationMessageFor(m => m.Department)
+    </div>
+</fieldset>
+<fieldset id="needs_additional">
+    <legend>Additional Details</legend>
+    <div>
+        @Html.LabelsFor(m => m.Postcode)
+        @Html.TextBoxFor(m => m.Postcode, new { @class = "small"})
+        @Html.HtmlValidationMessageFor(m => m.Postcode)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.TownOrCity)
+        @Html.TextBoxFor(m => m.TownOrCity)
+        @Html.HtmlValidationMessageFor(m => m.TownOrCity)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.TellUsMore)
+        @Html.TextAreaFor(m => m.TellUsMore)
+        @Html.HtmlValidationMessageFor(m => m.TellUsMore)
+    </div>
+    @Html.HiddenFor(m => m.Id)
+</fieldset>
