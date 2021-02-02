@@ -41,8 +41,8 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build . -t frontlineacr.azurecr.io/web:${{ github.run_number }}
-          docker push frontlineacr.azurecr.io/web:${{ github.run_number }}
+          docker build . -t frontlineacr2.azurecr.io/web:${{ github.run_number }}
+          docker push frontlineacr2.azurecr.io/web:${{ github.run_number }}
 
   deploy_dev:
     runs-on: ubuntu-latest
