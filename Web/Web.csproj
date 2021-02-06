@@ -77,9 +77,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' != 'Release'">
-    <Exec Command="lessc wwwroot/style.less wwwroot/style.css" />
+  
+ <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm run build" ConsoleToMSBuild="true" />
   </Target>
 
 </Project>
