@@ -1,0 +1,10 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug"
+    }
+  },
+  "ConnectionStrings": {
+    "DataContext": "Server=db,1433; User Id=SA; Password=veryStrongSecret!; Database=Database; Trusted_Connection=False; MultipleActiveResultSets=true"
+  }
+}

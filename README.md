@@ -39,3 +39,29 @@ Front Line Live code and target operating model
 |APP_DATACONTEXT*|-|
 |WEB_USERSECRETSID*|-|
 |SQL_ADMIN_PASSWORD*|-|
+
+## Local development
+
+### Technologies
+- Docker
+- Docker Compose
+- .NET core 3.1.401
+- SQL Server
+- Azure Data Studio (Non-Windows environment only)
+
+### Setup
+```sh
+# Prepare local development settings
+$ make setup
+
+# Start servers in Docker
+$ make dev
+
+# For those who want to start development on website without Docker
+#
+# You can start depending services in docker
+$ make -f Makefile.nodocker.mk docker-start-db
+# And then run the dotnet process in local
+$ NO_DOCKER=1 MODULE=Web make dev
+```
+After running above commands, visit http://localhost:3000 on browser and you should be able to see the web page.
