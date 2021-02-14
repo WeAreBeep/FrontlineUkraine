@@ -8,6 +8,20 @@
 html {
     box-sizing: border-box;
 }
+.contentfulReset() {
+    ul li > p {
+        // Contentful will wrap content of list item by a p tag.
+        // We reset the style of p tag here
+        margin-block-start: 0;
+        margin-block-end: 0;
+        font-size: unset;
+    }
+
+    div.contentfulStyledList p {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+}
 
 *, *:before, *:after {
     box-sizing: inherit;
@@ -320,6 +334,8 @@ a {
     ul {
         font-size: 1.25em;
     }
+
+    .contentfulReset;
 }
 
 #map_wrapper {

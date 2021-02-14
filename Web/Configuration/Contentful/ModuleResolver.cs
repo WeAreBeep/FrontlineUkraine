@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Contentful.Core.Configuration;
+using Web.Models.Contentful;
 
 namespace Web.Configuration.Contentful
 {
@@ -11,6 +12,7 @@ namespace Web.Configuration.Contentful
     {
         private Dictionary<string, Type> _types = new Dictionary<string, Type>()
         {
+            { "home-page", typeof(HomePageViewModel) }
         };
 
         /// <summary>
