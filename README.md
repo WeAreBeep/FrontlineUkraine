@@ -39,6 +39,8 @@ Front Line Live code and target operating model
 |APP_DATACONTEXT*|-|
 |WEB_USERSECRETSID*|-|
 |SQL_ADMIN_PASSWORD*|-|
+|CONTENTFUL_DELIVERY_ACCESS_TOKEN|Content Delivery API - access token|
+|CONTENTFUL_SPACE_ID|Contentful Space ID|
 
 ## Local development
 
