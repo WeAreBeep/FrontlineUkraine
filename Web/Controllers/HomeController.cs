@@ -53,6 +53,14 @@ namespace Web.Controllers
 			ViewData["contentful"] = await contentfulService.GetFirstByContentType<AboutUsPageViewModel>("about-us-page");
 			return View();
 		}
+
+		[InvertedLayout]
+		public async Task<IActionResult> Partners([FromServices] IContentfulService contentfulService)
+		{
+			ViewData["contentful"] = await contentfulService.GetFirstByContentType<PartnersPageViewModel>("partners-page");
+			return View();
+		}
+
         public IActionResult Resources() => View();
         public IActionResult Reports() => View();
 

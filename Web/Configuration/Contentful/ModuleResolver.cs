@@ -13,7 +13,9 @@ namespace Web.Configuration.Contentful
         private Dictionary<string, Type> _types = new Dictionary<string, Type>()
         {
             { "home-page", typeof(HomePageViewModel) },
-            { "about-us-page", typeof(AboutUsPageViewModel) }
+            { "about-us-page", typeof(AboutUsPageViewModel) },
+            { "partners-page", typeof(PartnersPageViewModel) },
+            { "partner", typeof(PartnerViewModel) }
         };
 
         /// <summary>

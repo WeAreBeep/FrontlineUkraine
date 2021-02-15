@@ -71,8 +71,12 @@ html {
 
 .major_title,
 .minor_title {
-    color: @color_font;
-    background-color: @color_background;
+    color: @color_font_title;
+}
+
+.inverted .major_title,
+.inverted .minor_title {
+    color: @color_font_title_inverted;
 }
 
 .major_title {
@@ -343,6 +347,12 @@ a {
     .contentfulReset;
 }
 
+.inverted .text_section {
+    h1, h2 {
+        color: @color_font_title_inverted;
+    }
+}
+
 #map_wrapper {
     width: 100%;
     height: 400px;
@@ -411,6 +421,24 @@ footer {
 .indent_links {
     a {
         padding-left: 1rem;
+    }
+}
+
+/* PARTNERS PAGE */
+div#partners {
+    .partners {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    .partnerLogo {
+        width: 100%;
+    }
+    .partner {
+        margin: 1rem;
+        display: block;
+        max-width: 160px;
     }
 }
 
@@ -641,6 +669,14 @@ footer {
         padding: 1rem 2rem;
     }
 
+    div#partners.text_section {
+        padding: 1rem;
+
+        h1, h2, h3 {
+            margin: auto;
+        }
+    }
+
     #suppliers_wrap {
         height: calc(100vh - @footer_height - @header_height);
         position: fixed;
@@ -677,6 +713,13 @@ footer {
         h3 {
             margin-top: 3rem;
             margin-bottom: 0;
+        }
+    }
+    div#partners.text_section {
+        padding: 1rem;
+
+        h1, h2, h3 {
+            margin: auto;
         }
     }
 }
