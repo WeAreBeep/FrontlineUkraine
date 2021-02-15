@@ -41,6 +41,7 @@ Front Line Live code and target operating model
 |SQL_ADMIN_PASSWORD*|-|
 |CONTENTFUL_DELIVERY_ACCESS_TOKEN|Content Delivery API - access token|
 |CONTENTFUL_SPACE_ID|Contentful Space ID|
+|CONTENTFUL_ENVIRONMENT|Name of Contentful environment in use|
 
 ## Local development
 

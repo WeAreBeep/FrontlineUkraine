@@ -18,7 +18,7 @@ echo "{
     \"WEB_USERSECRETSID\": \"$WEB_USERSECRETSID\"
     \"ContentfulOptions__DeliveryApiKey\": \"$CONTENTFUL_DELIVERY_ACCESS_TOKEN\",
     \"ContentfulOptions__SpaceId\": \"$CONTENTFUL_SPACE_ID\",
-    \"ContentfulOptions__Environment\": \"$ENVIRONMENT_NAME\",
+    \"ContentfulOptions__Environment\": \"$CONTENTFUL_ENVIRONMENT\",
     \"ContentfulOptions__UsePreviewApi\": false
 }" > ./app-settings.json
 
