@@ -10,7 +10,7 @@
   "ContentfulOptions": {
     "DeliveryApiKey": "<DELIVERY_ACCESS_TOKEN>",
     "SpaceId": "<SPACE_ID>",
-    "Environment": "staging",
+    "Environment": "Development",
     "UsePreviewApi": false
   }
 }
