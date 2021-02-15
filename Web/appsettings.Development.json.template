@@ -6,5 +6,11 @@
   },
   "ConnectionStrings": {
     "DataContext": "Server=db,1433; User Id=SA; Password=veryStrongSecret!; Database=Database; Trusted_Connection=False; MultipleActiveResultSets=true"
+  },
+  "ContentfulOptions": {
+    "DeliveryApiKey": "<DELIVERY_ACCESS_TOKEN>",
+    "SpaceId": "<SPACE_ID>",
+    "Environment": "staging",
+    "UsePreviewApi": false
   }
 }
