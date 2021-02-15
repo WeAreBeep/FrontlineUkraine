@@ -50,8 +50,9 @@ Front Line Live code and target operating model
 - .NET core 3.1.401
 - SQL Server
 - Azure Data Studio (Non-Windows environment only)
+- GNU Make (For Windows user, you may install it using [Chocolatey](https://chocolatey.org/packages/make))
 
-### Setup
+### Setup (Using GNU Make)
 ```sh
 # Prepare local development settings
 $ make setup
@@ -67,3 +68,8 @@ $ make -f Makefile.nodocker.mk docker-start-db
 $ NO_DOCKER=1 MODULE=Web make dev
 ```
 After running above commands, visit http://localhost:3000 on browser and you should be able to see the web page.
+
+### Setup (Using Visual Studio, Windows only)
+TODO: Provide Powershell setup script
+1. Copy `Web/appsettings.Development.json.template` to `Web/appsettings.Development.json`
+2. Start `db` container specified in `docker-compose.dev.yml` by docker-compose command
