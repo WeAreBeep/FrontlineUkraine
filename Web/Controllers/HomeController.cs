@@ -48,7 +48,11 @@ namespace Web.Controllers
 			return View();
 		}
 
-		public IActionResult About() => View();
+		public async Task<IActionResult> About([FromServices] IContentfulService contentfulService)
+		{
+			ViewData["contentful"] = await contentfulService.GetFirstByContentType<AboutUsPageViewModel>("about-us-page");
+			return View();
+		}
         public IActionResult Resources() => View();
         public IActionResult Reports() => View();
 
