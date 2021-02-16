@@ -39,3 +39,38 @@ Front Line Live code and target operating model
 |APP_DATACONTEXT*|-|
 |WEB_USERSECRETSID*|-|
 |SQL_ADMIN_PASSWORD*|-|
+|CONTENTFUL_DELIVERY_ACCESS_TOKEN|Content Delivery API - access token|
+|CONTENTFUL_SPACE_ID|Contentful Space ID|
+|CONTENTFUL_ENVIRONMENT|Name of Contentful environment in use|
+
+## Local development
+
+### Technologies
+- Docker
+- Docker Compose
+- .NET core 3.1.401
+- SQL Server
+- Azure Data Studio (Non-Windows environment only)
+- GNU Make (For Windows user, you may install it using [Chocolatey](https://chocolatey.org/packages/make))
+
+### Setup (Using GNU Make)
+```sh
+# Prepare local development settings
+$ make setup
+
+# Start servers in Docker
+$ make dev
+
+# For those who want to start development on website without Docker
+#
+# You can start depending services in docker
+$ make -f Makefile.nodocker.mk docker-start-db
+# And then run the dotnet process in local
+$ NO_DOCKER=1 MODULE=Web make dev
+```
+After running above commands, visit http://localhost:3000 on browser and you should be able to see the web page.
+
+### Setup (Using Visual Studio, Windows only)
+TODO: Provide Powershell setup script
+1. Copy `Web/appsettings.Development.json.template` to `Web/appsettings.Development.json`
+2. Start `db` container specified in `docker-compose.dev.yml` by docker-compose command
