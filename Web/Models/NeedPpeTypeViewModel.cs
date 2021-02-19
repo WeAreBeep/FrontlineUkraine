@@ -54,11 +54,11 @@ namespace Web.Models
 				respVal.Add(new ValidationResult("Please add <b>PPE Type Other</b> to describe the PPE Type when choosing <b>\"Other...\"</b>", 
 					new List<string> { $"{PpeTypeOther}" }));
 			}
-			if(Type == PpeTypes.FFP1RespiratorMasks && Selected)
+			if (Selected)
 			{
 				if(DailyShortage == null)
 				{
-					respVal.Add(new ValidationResult("Please add <b>Daily FFP1 Shortage</b>", 
+					respVal.Add(new ValidationResult($"Please add <b>{DailyShortageDisplayName}</b>", 
 						new List<string> { $"{nameof(DailyShortage)}" }));
 				}
 				else
@@ -72,6 +72,9 @@ namespace Web.Models
 							new List<string> { $"{nameof(DailyShortage)}" }));
 					}
 				}
+			}
+			if(Type == PpeTypes.FFP1RespiratorMasks && Selected)
+			{
 				if(String.IsNullOrWhiteSpace(DailyShortageForWhom))
 				{
 					respVal.Add(new ValidationResult("Please add <b>Daily FFP1 Shortage Details</b>", 
