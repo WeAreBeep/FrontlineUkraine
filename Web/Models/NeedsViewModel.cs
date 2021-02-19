@@ -57,7 +57,8 @@ namespace Web.Models
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string JobTitle { get; set; }
 
-		[Display(Name = "Department", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website"),
+		[Display(Name = "Department", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website. Please note that we will deliver the PPE package to the department if you didn't leave contact name."),
+		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string Department { get; set; }
 
