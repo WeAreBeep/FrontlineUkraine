@@ -12,5 +12,6 @@
     "SpaceId": "<SPACE_ID>",
     "Environment": "Development",
     "UsePreviewApi": false
-  }
+  },
+  "APP_MAPBOX_TOKEN": "secret"
 }
