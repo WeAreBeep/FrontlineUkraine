@@ -18,13 +18,33 @@ namespace Web.Models
 		StringLength(1000, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string PpeTypeOther { get; set; }
 
-		[Display(Name = "Daily FFP1 Shortage", Description = "Estimate how many are missing per day</p><p class='description'>We are working with our not-for-profit partners <a href='https://www.caregiven.co.uk/'>Care Given</a> to get FFP1 Masks to those in need"),
+		[Display(Name = "Daily Shortage"),
 		NumericalRange(1, 1, 1000000)]
 		public int? DailyShortage { get; set; }
 
 		[Display(Name = "Daily FFP1 Shortage Details", Description = "Please tell us who the daily number above applies to. For example:</p><p class='description'>Entire ICU Ward</p><p class='description'>Team of 15 working nights"),
 		StringLength(500, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string DailyShortageForWhom { get; set; }
+
+		public string DailyShortageDisplayName {
+			get
+			{
+				return Type switch {
+					PpeTypes.FFP1RespiratorMasks => "Daily FFP1 Shortage",
+					_ => "Daily Shortage",
+				};
+			}
+		}
+
+		public string DailyShortageDisplayDescription {
+			get
+			{
+				return Type switch {
+					PpeTypes.FFP1RespiratorMasks => "Estimate how many are missing per day</p><p class='description'>We are working with our not-for-profit partners <a href='https://www.caregiven.co.uk/'>Care Given</a> to get FFP1 Masks to those in need",
+					_ => null,
+				};
+			}
+		}
 
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
