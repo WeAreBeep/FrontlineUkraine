@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,9 +18,11 @@ namespace Web.Models
 		[Display(Name = "Publish Anonymously", Description = "Tick if you don't want your name to be public")]
 		public bool PublishAnonymously { get; set; }
 
-		[Display(Name = "Your Name", Description = "If you tick 'Publish Anonymously' this will not be published on the website nor shared outside the Frontline team"),
-		Required(ErrorMessage = Settings.ValMsgs.Required),
-		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
+		[Display(
+			Name = "Your Name",
+			Description = "If you tick 'Publish Anonymously' this will not be published on the website nor shared outside the Frontline team. If you don't leave your name, we will delivery PPE package to the department you entered."
+		),
+		StringLength(200)]
 		public string ContactName { get; set; }
 
 		[Display(Name = "Email", Description = "Will only be used by the frontline Team to contact you about your PPE Need, will not be shared outside the Frontline team"),
@@ -54,7 +57,8 @@ namespace Web.Models
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string JobTitle { get; set; }
 
-		[Display(Name = "Department", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website"),
+		[Display(Name = "Department", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website. Please note that we will deliver the PPE package to the department if you didn't leave contact name."),
+		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string Department { get; set; }
 
@@ -72,6 +76,10 @@ namespace Web.Models
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			List<ValidationResult> respVal = new List<ValidationResult>();
+			if (!String.IsNullOrEmpty(ContactName) && ContactName.Length > 0 && ContactName.Length < 3)
+			{
+				respVal.Add(new ValidationResult(Settings.ValMsgs.StringLengthWithMinimum));
+			}
 			if(PpeTypes.Count(pt => pt.Selected) == 0)
 			{
 				respVal.Add(new ValidationResult("Please choose at least one <b>PPE Type</b> which you need", new List<string> { "PpeTypes" }));
