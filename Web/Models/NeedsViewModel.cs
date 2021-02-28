@@ -55,12 +55,12 @@ namespace Web.Models
 		StringLength(8, MinimumLength = 6, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string Postcode { get; set; }
 
-		[Display(Name = "Job Title", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website"),
+		[Display(Name = "Job Title", Description = "This will not be published on the site. It will be used for anonymous data reporting."),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string JobTitle { get; set; }
 
-		[Display(Name = "Department", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website. Please note that we will deliver the PPE package to the department if you didn't leave contact name."),
+		[Display(Name = "Department", Description = "This will not be published on the site. It will be used for anonymous data reporting."),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string Department { get; set; }
