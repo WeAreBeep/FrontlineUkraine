@@ -37,6 +37,7 @@ namespace Web.Models
 		public string PhoneNumber { get; set; }
 
 		[Display(Name = "Organisation Name", Description = "Organisation or Company name"),
+		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string OrganisationName { get; set; }
 
@@ -55,6 +56,7 @@ namespace Web.Models
 		public string Postcode { get; set; }
 
 		[Display(Name = "Job Title", Description = "Will be used for aggregation of data (for our reports) this will not be published on the website"),
+		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string JobTitle { get; set; }
 
