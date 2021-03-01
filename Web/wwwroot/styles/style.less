@@ -493,6 +493,8 @@ div#partners {
 
     @v_scroll_buffer: 20px; //TODO:applies to title padding right for x_wide only?
 
+    @vertical_scroll_offset: calc(@header_height + @v_scroll_buffer);
+
     @map_width: calc(100vw - @left_width - @v_scroll_buffer);
     @map_height: calc(100vh - @fixed_height);
 
@@ -553,6 +555,18 @@ div#partners {
 
         h1 {
             margin-top: 5rem;
+        }
+
+        // NOTE: We use CSS pseudo element to display visible content at correct position
+        //       when clicking link to fragment
+        h2[id]::before,
+        h3[id]::before {
+            content: " ";
+            height: @vertical_scroll_offset;
+            position: relative;
+            width: 0;
+            display: block;
+            margin-top: calc(-1 * @vertical_scroll_offset);
         }
     }
 
