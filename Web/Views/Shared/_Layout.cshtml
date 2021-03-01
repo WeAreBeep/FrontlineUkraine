@@ -33,6 +33,7 @@
         gtag('js', new Date());
         gtag('config', 'UA-170651121-1');
     </script>
+    @await Html.PartialAsync("_AppConfig")
 </head>
 <body class="@Helper.GetBodyClass(ViewData)">
 <header>
