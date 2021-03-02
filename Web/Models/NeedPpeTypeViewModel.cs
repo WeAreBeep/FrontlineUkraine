@@ -26,22 +26,46 @@ namespace Web.Models
 		StringLength(500, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string DailyShortageForWhom { get; set; }
 
-		public string DailyShortageDisplayName {
+		public string DailyShortageDisplayName
+		{
 			get
 			{
 				return Type switch {
 					PpeTypes.FFP1RespiratorMasks => "Daily FFP1 Shortage",
-					_ => "Daily Shortage",
+					_ => "", // Description only
 				};
 			}
 		}
 
-		public string DailyShortageDisplayDescription {
+		public string DailyShortageDisplayDescription
+		{
 			get
 			{
 				return Type switch {
 					PpeTypes.FFP1RespiratorMasks => "Estimate how many are missing per day</p><p class='description'>We are working with our not-for-profit partners <a href='https://www.caregiven.co.uk/'>Care Given</a> to get FFP1 Masks to those in need",
-					_ => null,
+					_ => "We are a charity. Our supplies are limited. How many do you (and your team) really need to bridge the gap until supplies arrive?",
+				};
+			}
+		}
+
+		public string DailyShortageForWhomDisplayName
+		{
+			get
+			{
+				return Type switch {
+					PpeTypes.FFP1RespiratorMasks => "Daily FFP1 Shortage Details",
+					_ => "", // Discription only
+				};
+			}
+		}
+
+		public string DailyShortageForWhomDisplayDescription
+		{
+			get
+			{
+				return Type switch {
+					PpeTypes.FFP1RespiratorMasks => "Please tell us who the daily number above applies to. For example:</p><p class='description'>Entire ICU Ward</p><p class='description'>Team of 15 working nights",
+					_ => "How many people will this protect for how long?",
 				};
 			}
 		}
