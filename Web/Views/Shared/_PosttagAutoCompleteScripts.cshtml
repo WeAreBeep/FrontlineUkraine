@@ -1,0 +1,13 @@
+<environment include="Development">
+    <script src="~/js/jquery-ui.min.js"></script>
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/black-tie/jquery-ui.css" type="stylesheet" />
+</environment>
+<environment exclude="Development">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"
+            asp-fallback-src="~/js/jquery-ui.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.ui"
+            integrity="sha384-Dziy8F2VlJQLMShA6FHWNul/veM9bCkRUaLqr199K94ntO5QUrLJBEbYegdSkkqX"
+            crossorigin="anonymous">
+    </script>
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/black-tie/jquery-ui.css" type="stylesheet" />
+</environment>

@@ -34,6 +34,7 @@
         gtag('config', 'UA-170651121-1');
     </script>
     @await Html.PartialAsync("_AppConfig")
+    @RenderSection("head", required: false)
 </head>
 <body class="@Helper.GetBodyClass(ViewData)">
 <header>
