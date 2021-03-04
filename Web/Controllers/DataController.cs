@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SendGrid;
 using Shared;
 using Web.Db;
@@ -140,7 +136,6 @@ namespace Web.Controllers
 		public async Task<IActionResult> PosttagAutocomplete(
 			[FromServices] PosttagService posttag,
 			[FromServices] ILogger<DataController> logger,
-			[FromServices] HttpClient client,
 			[FromQuery] string term)
 		{
 			if (String.IsNullOrEmpty(term))
