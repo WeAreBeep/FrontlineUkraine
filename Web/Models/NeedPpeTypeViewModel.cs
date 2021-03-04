@@ -18,11 +18,11 @@ namespace Web.Models
 		StringLength(1000, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string PpeTypeOther { get; set; }
 
-		[Display(Name = "Daily Shortage"),
+		[Display(Name = "Shortage"),
 		NumericalRange(1, 1, 1000000)]
 		public int? DailyShortage { get; set; }
 
-		[Display(Name = "Daily FFP1 Shortage Details", Description = "Please tell us who the daily number above applies to. For example:</p><p class='description'>Entire ICU Ward</p><p class='description'>Team of 15 working nights"),
+		[Display(Name = "Shortage Details"),
 		StringLength(500, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string DailyShortageForWhom { get; set; }
 
