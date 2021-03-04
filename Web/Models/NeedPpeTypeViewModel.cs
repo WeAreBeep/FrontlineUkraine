@@ -41,7 +41,6 @@ namespace Web.Models
 			get
 			{
 				return Type switch {
-					PpeTypes.FFP1RespiratorMasks => "We are working with our not-for-profit partners <a href='https://www.caregiven.co.uk/'>Care Given</a> to get FFP1 Masks to those in need",
 					_ => "We are a charity. Our supplies are limited. How many do you (and your team) really need to bridge the gap until supplies arrive?",
 				};
 			}
