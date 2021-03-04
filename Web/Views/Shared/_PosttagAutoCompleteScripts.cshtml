@@ -11,3 +11,23 @@
     </script>
     <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/black-tie/jquery-ui.css" type="stylesheet" />
 </environment>
+
+
+<script>
+    $(document).ready(function() {
+        $("input[data-posttag]").each(function (idx, el) {
+            $(el).autocomplete({
+                source: "/posttag-autocomplete",
+                select: function( event, ui ) {
+                    const { item } = ui;
+                    if (el.dataset["addressLineOne"] && $("#" + el.dataset["addressLineOne"]).length) {
+                        $("#" + el.dataset["addressLineOne"]).val(item.addressLineOne);
+                    }
+                    if (el.dataset["addressLineTwo"] && $("#" + el.dataset["addressLineTwo"]).length) {
+                        $("#" + el.dataset["addressLineTwo"]).val(item.addressLineTwo);
+                    }
+                },
+            })
+        })
+    })
+</script>

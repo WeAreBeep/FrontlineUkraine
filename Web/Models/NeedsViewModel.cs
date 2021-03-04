@@ -50,6 +50,13 @@ namespace Web.Models
 		RequiredIf("OrgType", OrgTypes.Other, ErrorMessage = "Please add <b>{0}</b> to describe your Organisation Type when choosing <b>\"Other...\"</b>")]
 		public string OrgTypeOther { get; set; }
 
+		[Display(Name = "Address line 1"),
+		Required(ErrorMessage = Settings.ValMsgs.Required)]
+		public string AddressLineOne { get; set; }
+
+		[Display(Name = "Address line 2")]
+		public string AddressLineTwo { get; set; }
+
 		[Display(Name = "Postcode", Description = "Will be added to the map to locate your PPE Needs"),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(8, MinimumLength = 6, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
