@@ -28,6 +28,8 @@ namespace Web.Db
 		public string OrgTypeOther { get; set; }
 		public string TownOrCity { get; set; }
 		public long? TweetId { get; set; }
+		public string AddressLineOne { get; set; }
+		public string AddressLineTwo { get; set; }
 		public string Postcode { get; set; }
 		public string TellUsMore { get; set; }
 		public decimal? Latitude { get; set; }

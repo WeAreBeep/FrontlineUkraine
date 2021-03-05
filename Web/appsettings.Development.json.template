@@ -13,5 +13,8 @@
     "Environment": "Development",
     "UsePreviewApi": false
   },
-  "APP_MAPBOX_TOKEN": "secret"
+  "APP_MAPBOX_TOKEN": "secret",
+  "PosttagEndpoint": "<POSTTAG_ENDPOINT>",
+  "PosttagId": "<POSTTAG_ID>",
+  "PosttagApiKey": "<POSTTAG_API_KEY>"
 }

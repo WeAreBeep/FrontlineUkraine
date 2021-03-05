@@ -30,6 +30,10 @@ env:
   CONTENTFUL_SPACE_ID: "${{ secrets.CONTENTFUL_SPACE_ID }}"
   CONTENTFUL_ENVIRONMENT: "${{ secrets.CONTENTFUL_ENVIRONMENT }}"
 
+  POSTTAG_ENDPOINT: "${{ secrets.POSTTAG_ENDPOINT }}"
+  POSTTAG_ID: "${{ secrets.POSTTAG_ID }}"
+  POSTTAG_API_KEY: "${{ secrets.POSTTAG_API_KEY }}"
+
 jobs:  
   build:
     runs-on: ubuntu-latest

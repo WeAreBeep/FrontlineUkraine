@@ -118,14 +118,26 @@
 <fieldset id="needs_additional">
     <legend>Additional Details</legend>
     <div>
-        @Html.LabelsFor(m => m.Postcode)
-        @Html.TextBoxFor(m => m.Postcode, new { @class = "small"})
-        @Html.HtmlValidationMessageFor(m => m.Postcode)
+        @Html.LabelsFor(m => m.AddressLineOne)
+        @Html.TextBoxFor(m => m.AddressLineOne)
+        @Html.HtmlValidationMessageFor(m => m.AddressLineOne)
+    </div>
+        @Html.LabelsFor(m => m.AddressLineTwo)
+        @Html.TextBoxFor(m => m.AddressLineTwo)
+        @Html.HtmlValidationMessageFor(m => m.AddressLineTwo)
     </div>
     <div>
-        @Html.LabelsFor(m => m.TownOrCity)
-        @Html.TextBoxFor(m => m.TownOrCity)
-        @Html.HtmlValidationMessageFor(m => m.TownOrCity)
+        @Html.LabelsFor(m => m.Postcode)
+        @Html.TextBoxFor(
+            m => m.Postcode,
+            new
+            {
+                @class = "small",
+                data_posttag = "true",
+                data_address_line_one = nameof(NeedsViewModel.AddressLineOne),
+                data_address_line_two = nameof(NeedsViewModel.AddressLineTwo),
+            })
+        @Html.HtmlValidationMessageFor(m => m.Postcode)
     </div>
     <div>
         @Html.LabelsFor(m => m.TellUsMore)

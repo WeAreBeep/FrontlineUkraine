@@ -31,6 +31,7 @@ namespace Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			ConfigMan configMan = new ConfigMan(_configuration);
+			services.Configure<ServerConfig>(_configuration);
 			services.AddDbContext<DataContext>(options => options.UseSqlServer(Settings.ConnectionStrings.DataContext));
 
 			services.AddDistributedMemoryCache();
@@ -73,6 +74,7 @@ namespace Web
 
             services.AddTransient<UsersFacade>();
             services.AddScoped<IContentfulService, ContentfulService>();
+			services.AddHttpClient<PosttagService>();
 		}
 
 		public void Configure(IApplicationBuilder app)

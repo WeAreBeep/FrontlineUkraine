@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SendGrid;
 using Shared;
@@ -14,6 +12,7 @@ using Web.Db;
 using Web.Import;
 using Web.Infrastructure;
 using Web.Models;
+using Web.Services;
 using Web.Snippets;
 using Web.Snippets.Messaging;
 using Web.Snippets.System.Collections.Generic;
@@ -131,6 +130,38 @@ namespace Web.Controllers
 				}
 			}
 			return View(data);
+		}
+
+		[HttpGet("posttag-autocomplete")]
+		public async Task<IActionResult> PosttagAutocomplete(
+			[FromServices] PosttagService posttag,
+			[FromServices] ILogger<DataController> logger,
+			[FromQuery] string term)
+		{
+			if (String.IsNullOrEmpty(term))
+			{
+				return Ok(new List<PosttagAutocompleteViewModel>());
+			}
+
+			try
+			{
+				var result = await posttag.SearchByPostCode(term);
+				var autoCompleteResult = result
+					.Data
+					.Select(datum => PosttagAutocompleteViewModel.FromResponse(term, datum));
+				return Ok(autoCompleteResult);
+			}
+			catch (JsonException e) // Invalid JSON
+			{
+				logger.LogError(e, "Cannot parse response from Posttag");
+				logger.LogError(e.Source);
+				return NotFound();
+			}
+			catch (Exception e)
+			{
+				logger.LogError(e, "Unexcepted exception thrown when fetching search result from Posttag");
+				throw e;
+			}
 		}
 	}
 }

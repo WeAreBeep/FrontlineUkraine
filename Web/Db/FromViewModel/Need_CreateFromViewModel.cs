@@ -26,6 +26,8 @@ namespace Web.Db
 				OrgTypeId = (int)s.OrgType,
 				OrgTypeOther = s.OrgTypeOther,
 				TownOrCity = s.TownOrCity,
+				AddressLineOne = s.AddressLineOne,
+				AddressLineTwo = s.AddressLineTwo,
 				Postcode = s.Postcode,
 				TellUsMore = s.TellUsMore,
 			};

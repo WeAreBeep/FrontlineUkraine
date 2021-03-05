@@ -19,7 +19,10 @@ echo "{
     \"ContentfulOptions__DeliveryApiKey\": \"$CONTENTFUL_DELIVERY_ACCESS_TOKEN\",
     \"ContentfulOptions__SpaceId\": \"$CONTENTFUL_SPACE_ID\",
     \"ContentfulOptions__Environment\": \"$CONTENTFUL_ENVIRONMENT\",
-    \"ContentfulOptions__UsePreviewApi\": false
+    \"ContentfulOptions__UsePreviewApi\": false,
+    \"PosttagEndpoint\": \"$POSTTAG_ENDPOINT\",
+    \"PosttagId\": \"$POSTTAG_ID\",
+    \"PosttagApiKey\": \"$POSTTAG_API_KEY\"
 }" > ./app-settings.json
 
 echo "Initializing Terraform..."
