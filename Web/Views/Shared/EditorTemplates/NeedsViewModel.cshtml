@@ -134,8 +134,8 @@
             {
                 @class = "small",
                 data_posttag = "true",
-                data_address_line_one = nameof(NeedsViewModel.AddressLineOne),
-                data_address_line_two = nameof(NeedsViewModel.AddressLineTwo),
+                data_address_line_one = Html.IdFor(m => m.AddressLineOne),
+                data_address_line_two = Html.IdFor(m => m.AddressLineTwo),
             })
         @Html.HtmlValidationMessageFor(m => m.Postcode)
     </div>
