@@ -96,7 +96,7 @@ namespace Web.Db
 			OrgTypeOther = s.OrgTypeOther;
 			TownOrCity = s.TownOrCity;
 			AddressLineOne = s.AddressLineOne;
-			AddressLineTwo = s.AddressLineTwo;
+			AddressLineTwo = s.AddressLineTwo ?? "";
 			Postcode = s.Postcode;
 			TellUsMore = s.TellUsMore;
 		}
