@@ -48,3 +48,13 @@ resource "azurerm_application_insights" "insights" {
   application_type    = "web"
   tags                = local.tags
 }
+
+resource "azurerm_app_service_custom_hostname_binding" "customHostnameBindng" {
+  hostname            = var.app_service_custom_domain
+  app_service_name    = azurerm_app_service.web.name
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on          = [
+        azurerm_app_service.web,
+  ]
+}

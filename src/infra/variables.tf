@@ -25,3 +25,7 @@ variable "sql_admin_password" {
   type = string
   sensitive = true
 }
+
+variable "app_service_custom_domain" {
+  type = string
+}
