@@ -38,11 +38,13 @@ echo "Planning Terraform Deployment..."
 terraform plan \
     -var "container_image_tag=$GITHUB_RUN_NUMBER" \
     -var "environment_name=$ENVIRONMENT_NAME" \
-    -var "sql_admin_password=$SQL_ADMIN_PASSWORD"
+    -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
+    -var "app_service_custom_domain=$CUSTOM_DOMAIN"
 
 echo "Applying Terraform Deployment..."
 
 terraform apply -auto-approve \
     -var "container_image_tag=$GITHUB_RUN_NUMBER" \
     -var "environment_name=$ENVIRONMENT_NAME" \
-    -var "sql_admin_password=$SQL_ADMIN_PASSWORD"
+    -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
+    -var "app_service_custom_domain=$CUSTOM_DOMAIN"
