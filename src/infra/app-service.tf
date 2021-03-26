@@ -42,7 +42,9 @@ resource "azurerm_app_service" "web" {
 
   connection_string {
     name = "Redis"
-    type = "RedisCache"
+    // Connection string cannot be injected to container if the type is RedisCache
+    // Configure it to be `Custom` is a workaround
+    type = "Custom"
     value = azurerm_redis_cache.redis_web.primary_connection_string
   }
 
