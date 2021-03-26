@@ -91,6 +91,7 @@ namespace Web
 				{
 					app.UseHttpsRedirection();
 				}
+				app.UseHsts();
 				app.UseExceptionHandler("/Home/Error");
 			}
 			
