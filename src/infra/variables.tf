@@ -26,6 +26,6 @@ variable "sql_admin_password" {
   sensitive = true
 }
 
-variable "app_service_custom_domain" {
-  type = string
+variable "app_service_custom_domain_list" {
+  type = list(string)
 }
