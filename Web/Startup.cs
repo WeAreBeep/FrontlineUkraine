@@ -6,9 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.DataProtection;
 using Contentful.AspNetCore;
+using StackExchange.Redis;
 using Web.Db;
 using Web.Infrastructure;
+using Web.Infrastructure.Extensions;
 using Web.Snippets;
 using Web.Snippets.Microsoft.Extensions.Configuration;
 using Web.Services;
@@ -19,6 +22,7 @@ namespace Web
 {
 	public class Startup
 	{
+		private const string RedisDataProtectionKey = "DataProtection-Keys";
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _currentEnvironment = env;
@@ -32,7 +36,17 @@ namespace Web
 		{
 			ConfigMan configMan = new ConfigMan(_configuration);
 			services.Configure<ServerConfig>(_configuration);
-			services.AddDbContext<DataContext>(options => options.UseSqlServer(Settings.ConnectionStrings.DataContext));
+			services.AddDbContext<DataContext>(
+				options =>
+				{
+					options.UseSqlServer(_configuration.GetConnectionString(ConnectionStringName.DataContext));
+				}
+			);
+
+			// Set up data protection for session cookie/ anti-forgery key
+			var redis = ConnectionMultiplexer.Connect(_configuration.GetConnectionString(ConnectionStringName.Redis));
+			services.AddDataProtection()
+				.PersistKeysToStackExchangeRedis(redis, RedisDataProtectionKey);
 
 			services.AddDistributedMemoryCache();
 			services.AddSession(options =>

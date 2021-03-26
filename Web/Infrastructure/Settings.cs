@@ -48,11 +48,6 @@ namespace Web.Infrastructure
             public static string SiteKey => ConfigMan.Values[$"{nameof(ReCaptcha)}:{nameof(SiteKey)}"];
         }
 
-        public static class ConnectionStrings
-        {
-            public static string DataContext => ConfigMan.Values[$"{nameof(ConnectionStrings)}:{nameof(DataContext)}"];
-        }
-
         public static DeploymentContext DeploymentContext => Enums.Parse<DeploymentContext>(ConfigMan.Values["DeploymentContext"]);
 
         public static class Notifications

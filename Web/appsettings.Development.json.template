@@ -5,7 +5,8 @@
     }
   },
   "ConnectionStrings": {
-    "DataContext": "Server=db,1433; User Id=SA; Password=veryStrongSecret!; Database=Database; Trusted_Connection=False; MultipleActiveResultSets=true"
+    "DataContext": "Server=db,1433; User Id=SA; Password=veryStrongSecret!; Database=Database; Trusted_Connection=False; MultipleActiveResultSets=true",
+    "Redis": "redis:6379"
   },
   "ContentfulOptions": {
     "DeliveryApiKey": "<DELIVERY_ACCESS_TOKEN>",
