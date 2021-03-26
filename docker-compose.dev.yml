@@ -2,6 +2,7 @@ version: '3.4'
 
 volumes:
   db_data: {}
+  redis_data: {}
 
 services:
   web:
@@ -18,7 +19,6 @@ services:
     volumes:
       - ./Web:/src/Web
 
-
   db:
     image: mcr.microsoft.com/azure-sql-edge
     user: root
@@ -29,3 +29,10 @@ services:
       SA_PASSWORD: veryStrongSecret!
     volumes:
     - db_data:/var/opt/mssql:delegated
+
+  redis:
+    image: redis:6-alpine
+    ports:
+    - 6379:6379
+    volumes:
+    - redis_data:/data
