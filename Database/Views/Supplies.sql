@@ -1,4 +1,4 @@
-﻿CREATE VIEW Supplies
+﻿CREATE OR ALTER VIEW Supplies
 	AS 
 
 SELECT 

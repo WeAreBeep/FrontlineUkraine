@@ -31,6 +31,8 @@ namespace Web.Db
 			respVal.JobTitle = s.JobTitle;
 			respVal.NeedsOrgType = ((OrgTypes)s.OrgTypeId).GetText();
 			respVal.NeedsOrgTypeOther = s.OrgTypeOther;
+			respVal.AddressLineOne = s.AddressLineOne;
+			respVal.AddressLineTwo = s.AddressLineTwo;
 			respVal.Postcode = s.Postcode;
 			respVal.Town = s.TownOrCity;
 			respVal.TweetId = s.TweetId?.ToString() ?? "";

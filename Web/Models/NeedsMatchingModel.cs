@@ -29,6 +29,8 @@ namespace Web.Models
         public string JobTitle { get; set; } //not visible by default
         public string NeedsOrgType { get; set; }
         public string NeedsOrgTypeOther { get; set; }//not visible by default
+        public string AddressLineOne { get; set; }//not visible by default
+        public string AddressLineTwo { get; set; }//not visible by default
         public string Postcode { get; set; }//not visible by default
         public string Town { get; set; }
         public string TweetId { get; set; }//not visible by default

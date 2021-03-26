@@ -1,4 +1,4 @@
-﻿CREATE VIEW Requests
+﻿CREATE OR ALTER VIEW Requests
 	AS 
 
 SELECT 
@@ -15,6 +15,8 @@ SELECT
 	,Needs.JobTitle
 	,Needs.OrgTypeId
 	,Needs.OrgTypeOther
+	,Needs.AddressLineOne
+	,Needs.AddressLineTwo
 	,Needs.Postcode
 	,Needs.TownOrCity
 	,Needs.TweetId
