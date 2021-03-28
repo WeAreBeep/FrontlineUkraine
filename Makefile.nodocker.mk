@@ -6,8 +6,8 @@ dev:
 
 .PHONY: docker-start-db
 docker-start-db:
-	$(DOCKER_COMPOSE_CMD) up -d db
+	$(DOCKER_COMPOSE_CMD) up -d db redis
 
 .PHONY: docker-stop-db
 docker-stop-db:
-	$(DOCKER_COMPOSE_CMD) stop db
+	$(DOCKER_COMPOSE_CMD) stop db redis
