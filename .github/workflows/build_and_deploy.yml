@@ -95,4 +95,4 @@ jobs:
         env: 
           DEPLOY_WORKSPACE: prod
           ENVIRONMENT_NAME: Production
-          CUSTOM_DOMAIN_LIST: '["frontline.live", "new.frontline.live"]'
+          CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "new.frontline.live"]'
