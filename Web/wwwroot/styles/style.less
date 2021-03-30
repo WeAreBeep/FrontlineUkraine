@@ -185,10 +185,16 @@ body.inverted {
     background-color: @color_background;
 }
 
+#title_bar #logo > .logo-image {
+    height: 30px;
+}
+
 #icons, .icons {
     display: flex;
     flex-direction: row;
     font-size: 0.75em;
+    align-items: center;
+    flex-wrap: wrap;
 
     a {
         margin-left: 10px;
@@ -515,6 +521,15 @@ div#partners {
 
     nav {
         width: auto;
+        padding: .1rem;
+        ol {
+            li {
+                padding: 0;
+            }
+            a, span {
+                padding: 0 .2em;
+            }
+        }
     }
 
     #title_bar {
@@ -523,6 +538,14 @@ div#partners {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+    }
+
+    #title_bar #logo .logo-image {
+        height: 40px;
+    }
+
+    #icons, .icons {
+        flex-wrap: nowrap;
     }
 
     #title {
@@ -697,6 +720,27 @@ div#partners {
         height: calc(100vh - @footer_height - @header_height);
         position: fixed;
         width: 100%;
+    }
+}
+
+// NOTE: only for new icon
+@media @tablet {
+
+    #title_bar #logo .logo-image {
+        height: 70px;
+    }
+
+    nav {
+        padding: .5rem;
+        ol {
+            li {
+                padding: 0 1em;
+            }
+    
+            a, span {
+                padding: 0 .5em;
+            }
+        }
     }
 }
 
