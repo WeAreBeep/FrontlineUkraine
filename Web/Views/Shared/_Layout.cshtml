@@ -1,11 +1,35 @@
 ﻿@using Web.Infrastructure
+@using Microsoft.Extensions.Options
+@inject IOptions<ServerConfig> serverConfig
+@{
+    var ogTitle = "Empowering Citizen Activism | Frontline.live"; // TODO: Configurable OG title
+    var ogDescription = "We connect UK Healthcare professionals with PPE suppliers near you. Report your PPE shortage and we'll put it on the map."; // TODO: Configurable OG description
+    var ogUrl = new Uri(serverConfig.Value.WebsiteCanonicalUrl);
+    var ogImageUrl = new Uri(ogUrl, "/images/frontline_og.png");
+    var ogImageSquareUrl = new Uri(ogUrl, "/images/frontline_og_square.png");
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name=”description” content="We connect UK Healthcare professionals with PPE suppliers near you. Report your PPE shortage and we'll put it on the map." />
-    <title>Putting PPE Shortages & Suppliers on the Map | Frontlive.live</title>
+    <title>Putting PPE Shortages & Suppliers on the Map | Frontline.live</title>
+    <meta property="og:title" content="@ogTitle" /> 
+    <meta property="og:description" content="@ogDescription"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@ogUrl.AbsoluteUri" />
+    <meta property="og:image" content="@ogImageUrl.AbsoluteUri" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="@ogImageSquareUrl.AbsoluteUri" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <meta property="twitter:title" content="@ogTitle" /> 
+    <meta property="twitter:description" content="@ogDescription"/>
+    <meta property="twitter:content" content="summary" />
+    <meta property="twitter:url" content="@ogUrl.AbsoluteUri" />
+    <meta property="twitter:image" content="@ogImageSquareUrl.AbsoluteUri" />
     @await Html.PartialAsync("_Favicon")
     @await Html.PartialAsync("_Fonts")
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
