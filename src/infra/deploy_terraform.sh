@@ -22,7 +22,8 @@ echo "{
     \"ContentfulOptions__UsePreviewApi\": false,
     \"PosttagEndpoint\": \"$POSTTAG_ENDPOINT\",
     \"PosttagId\": \"$POSTTAG_ID\",
-    \"PosttagApiKey\": \"$POSTTAG_API_KEY\"
+    \"PosttagApiKey\": \"$POSTTAG_API_KEY\",
+    \"WebsiteCanonicalUrl\": \"$WEBSITE_CANONICAL_URL\"
 }" > ./app-settings.json
 
 echo "Initializing Terraform..."
