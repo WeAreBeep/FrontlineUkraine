@@ -12,5 +12,7 @@ namespace Web.Infrastructure
         public string PosttagEndpoint { get; set; }
         public string PosttagId { get; set; }
         public string PosttagApiKey { get; set; }
+
+        public string WebsiteCanonicalUrl { get; set; } = "https://www.frontline.live";
     }
 }

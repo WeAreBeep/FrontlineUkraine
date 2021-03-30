@@ -17,5 +17,6 @@
   "APP_MAPBOX_TOKEN": "secret",
   "PosttagEndpoint": "<POSTTAG_ENDPOINT>",
   "PosttagId": "<POSTTAG_ID>",
-  "PosttagApiKey": "<POSTTAG_API_KEY>"
+  "PosttagApiKey": "<POSTTAG_API_KEY>",
+  "WebsiteCanonicalUrl": "http://localhost:3000"
 }

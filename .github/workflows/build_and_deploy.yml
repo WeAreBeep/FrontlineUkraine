@@ -74,6 +74,7 @@ jobs:
           DEPLOY_WORKSPACE: dev
           ENVIRONMENT_NAME: Development
           CUSTOM_DOMAIN_LIST: '["new-dev.frontline.live"]'
+          WEBSITE_CANONICAL_URL: "https://new-dev.frontline.live"
           
 
   deploy_prod:
@@ -96,3 +97,4 @@ jobs:
           DEPLOY_WORKSPACE: prod
           ENVIRONMENT_NAME: Production
           CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "new.frontline.live"]'
+          WEBSITE_CANONICAL_URL: "https://www.frontline.live"
