@@ -1,12 +1,18 @@
 ﻿@using Web.Infrastructure
 @using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Microsoft.Extensions.DependencyInjection
 @inject IOptions<ServerConfig> serverConfig
 @{
+    // TODO: Create Open Graph Tag Helper for rendering OG tags
+    var fileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+    var ogImagePath = fileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Url.Content("~/images/frontline_og.png"));
+    var ogImageSquarePath = fileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Url.Content("~/images/frontline_og_square.png"));
+    var ogUrl = new Uri(serverConfig.Value.WebsiteCanonicalUrl);
+    var ogImageUrl = new Uri(ogUrl, ogImagePath);
+    var ogImageSquareUrl = new Uri(ogUrl, ogImageSquarePath);
     var ogTitle = "Empowering Citizen Activism | Frontline.live"; // TODO: Configurable OG title
     var ogDescription = "We connect UK Healthcare professionals with PPE suppliers near you. Report your PPE shortage and we'll put it on the map."; // TODO: Configurable OG description
-    var ogUrl = new Uri(serverConfig.Value.WebsiteCanonicalUrl);
-    var ogImageUrl = new Uri(ogUrl, "/images/frontline_og.png");
-    var ogImageSquareUrl = new Uri(ogUrl, "/images/frontline_og_square.png");
 }
 <!DOCTYPE html>
 <html lang="en">
