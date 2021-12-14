@@ -41,6 +41,14 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
 
+  pgloader-cmd:
+    image: dimitri/pgloader:latest
+    volumes:
+    - ./mssql.load:/data/mssql.load
+    environment:
+    - SQL_SERVER_PATH=mssql://sa:veryStrongSecret!@db/Database
+    - POSTGRES_PATH=postgresql://postgres:postgres@pgsql:5432/postgres
+
   redis:
     image: redis:6-alpine
     ports:
