@@ -3,6 +3,7 @@ version: '3.4'
 volumes:
   db_data: {}
   redis_data: {}
+  pgsql_data: {}
 
 services:
   web:
@@ -29,6 +30,16 @@ services:
       SA_PASSWORD: veryStrongSecret!
     volumes:
     - db_data:/var/opt/mssql:delegated
+
+  pgsql:
+    image: postgres:13.5-alpine3.15
+    ports:
+      - 5432:5432
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
 
   redis:
     image: redis:6-alpine
