@@ -16,7 +16,7 @@ namespace Web.Db
 			mb.Entity<Audit>(ent =>
 			{
 				ent.Property(e => e.Timestamp).IsRequired();
-				ent.Property(e => e.Username).HasMaxLength(256);
+				ent.Property(e => e.Username).HasMaxLength(256).HasColumnName("UserName");
 				ent.Property(e => e.TableName).IsRequired().HasMaxLength(128);
 				ent.Property(e => e.Action).IsRequired().HasMaxLength(50);
 			});
