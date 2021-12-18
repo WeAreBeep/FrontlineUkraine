@@ -1,0 +1,20 @@
+FROM python:3.9
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends netcat && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./app/poetry.lock ./app/pyproject.toml ./
+RUN pip install poetry==1.1 && \
+    poetry config virtualenvs.in-project true && \
+    poetry install
+
+COPY ./app/ ./
+COPY ./app/worker-start.sh /worker-start.sh
+
+RUN chmod +x /worker-start.sh
+CMD ["bash", "/worker-start.sh"]

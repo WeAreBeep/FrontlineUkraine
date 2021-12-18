@@ -1,0 +1,21 @@
+FROM python:3.9
+
+EXPOSE 80
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends netcat && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./app/poetry.lock ./app/pyproject.toml ./
+RUN pip install poetry==1.1 && \
+    poetry config virtualenvs.in-project true && \
+    poetry install
+
+COPY ./app/ ./
+
+CMD poetry run alembic upgrade head && \
+    poetry run uvicorn --host=0.0.0.0 app.main:app --port 80
