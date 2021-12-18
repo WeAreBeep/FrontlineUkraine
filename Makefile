@@ -9,6 +9,8 @@ else
 DOCKER_RUN :=
 endif
 
+SERVICES := web core celeryworker
+
 .PHONY: setup
 setup:
 	@cp Web/appsettings.Development.json.template Web/appsettings.Development.json
@@ -36,3 +38,11 @@ dev:
 	else \
 		make -f Makefile.nodocker.mk dev; \
 	fi
+
+.PHONY: docker-build
+docker-build:
+	docker-compose -f $(SELF_DIR)docker-compose.build.yml build $(SERVICES)
+
+.PHONY: docker-push
+docker-push:
+	docker-compose -f $(SELF_DIR)docker-compose.build.yml push $(SERVICES)
