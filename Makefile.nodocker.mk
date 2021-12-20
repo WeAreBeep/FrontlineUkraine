@@ -6,8 +6,8 @@ dev:
 
 .PHONY: docker-start-db
 docker-start-db:
-	$(DOCKER_COMPOSE_CMD) up -d db redis
+	$(DOCKER_COMPOSE_CMD) up -d db pgsql redis
 
 .PHONY: docker-stop-db
 docker-stop-db:
-	$(DOCKER_COMPOSE_CMD) stop db redis
+	$(DOCKER_COMPOSE_CMD) stop db pgsql redis
