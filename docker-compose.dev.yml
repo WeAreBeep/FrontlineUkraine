@@ -6,6 +6,7 @@ volumes:
   pgsql_data: {}
   core_poetry_cache_data: {}
   celery_poetry_cache_data: {}
+  public_web_node_data: {}
 
 services:
   web:
@@ -105,7 +106,20 @@ services:
       - SENTRY_DSN=
       - FIRST_SUPERUSER=admin@example.com
       - FIRST_SUPERUSER_PASSWORD=secret
-      - CELERY_BROKER_URL=redis://redis:6379/1    
+      - CELERY_BROKER_URL=redis://redis:6379/1
+
+  public-web:
+    image: ${DOCKER_REGISTRY-}public-web
+    build:
+      context: ./src/public-web
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3002:3002
+    volumes:
+      - ./src/public-web:/app
+      - public_web_node_data:/app/node_modules
+    environment:
+      - PORT=3002
 
   redis:
     image: redis:6-alpine

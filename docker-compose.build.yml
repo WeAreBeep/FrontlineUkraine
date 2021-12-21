@@ -18,3 +18,9 @@ services:
     build:
       context: ./src/core
       dockerfile: Dockerfile.celeryworker
+
+  public-web:
+    image: ${DOCKER_REGISTRY-}public-web:${TAG:-latest}
+    build:
+      context: ./src/public-web
+      dockerfile: Dockerfile

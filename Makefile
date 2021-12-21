@@ -9,7 +9,7 @@ else
 DOCKER_RUN :=
 endif
 
-SERVICES := web core celeryworker
+SERVICES := web core celeryworker public-web
 
 .PHONY: setup
 setup:
