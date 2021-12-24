@@ -210,8 +210,11 @@ function build(previousFileSizes) {
 }
 
 function copyPublicFolder() {
+  // appConfig.js is the runtime config file for the React app.
+  // To keep the build is environment free, we populate this file
+  // to the deployment target during the deployment process.
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml,
+    filter: file => file !== paths.appHtml && file !== paths.appConfig,
   });
 }

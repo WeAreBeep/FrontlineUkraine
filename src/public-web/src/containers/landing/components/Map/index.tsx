@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMapGL from 'react-map-gl';
+import { config } from '../../../../config';
 
 export const Map: React.FC = () => {
   const [viewport, setViewport] = React.useState({
@@ -11,7 +12,7 @@ export const Map: React.FC = () => {
   return (
     <ReactMapGL
       {...viewport}
-      mapboxApiAccessToken=""
+      mapboxApiAccessToken={config.mapboxToken}
       width="100%"
       height="100%"
       mapStyle="mapbox://styles/mapbox/streets-v11"
