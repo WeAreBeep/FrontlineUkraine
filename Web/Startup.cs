@@ -39,7 +39,7 @@ namespace Web
             services.AddDbContext<DataContext>(
                 options =>
                 {
-                    options.UseSqlServer(_configuration.GetConnectionString(ConnectionStringName.DataContext));
+                    options.UseNpgsql(_configuration.GetConnectionString(ConnectionStringName.DataContext));
                 }
             );
 

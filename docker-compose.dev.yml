@@ -3,6 +3,10 @@ version: '3.4'
 volumes:
   db_data: {}
   redis_data: {}
+  pgsql_data: {}
+  core_poetry_cache_data: {}
+  celery_poetry_cache_data: {}
+  public_web_node_data: {}
 
 services:
   web:
@@ -29,6 +33,93 @@ services:
       SA_PASSWORD: veryStrongSecret!
     volumes:
     - db_data:/var/opt/mssql:delegated
+
+  pgsql:
+    image: postgres:13.5-alpine3.15
+    ports:
+      - 5432:5432
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+
+  pgloader-cmd:
+    image: dimitri/pgloader:latest
+    volumes:
+    - ./mssql.load:/data/mssql.load
+    environment:
+    - SQL_SERVER_PATH=mssql://sa:veryStrongSecret!@db/Database
+    - POSTGRES_PATH=postgresql://postgres:postgres@pgsql:5432/postgres
+
+  core:
+    image: ${DOCKER_REGISTRY-}core
+    depends_on:
+      - pgsql
+    build:
+      context: ./src/core
+      dockerfile: Dockerfile.dev
+    command: poetry run alembic upgrade head && poetry run uvicorn --host=0.0.0.0 app.main:app --port 3001
+    ports:
+      - 3001:3001
+    volumes:
+      - ./src/core/app:/app
+      - core_poetry_cache_data:/var/poetry/cache
+    environment:
+      - PROJECT_NAME=Frontline.live
+      - SERVER_NAME=localhost
+      - SERVER_HOST=https://localhost
+      # Allow explicit env var override for tests
+      - SMTP_HOST=
+      - PORT=3001
+      - POSTGRES_SERVER=pgsql
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - SENTRY_DSN=
+      - FIRST_SUPERUSER=admin@example.com
+      - FIRST_SUPERUSER_PASSWORD=secret
+      - CELERY_BROKER_URL=redis://redis:6379/1
+
+  celeryworker:
+    image: ${DOCKER_REGISTRY-}celeryworker
+    depends_on:
+      - db
+      - redis
+    build:
+      context: ./src/core
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./src/core/app:/app
+      - celery_poetry_cache_data:/var/poetry/cache
+    environment:
+      - PROJECT_NAME=Frontline.live
+      - SERVER_NAME=localhost
+      - SERVER_HOST=https://localhost
+      # Allow explicit env var override for tests
+      - SMTP_HOST=
+      - PORT=3001
+      - POSTGRES_SERVER=pgsql
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - SENTRY_DSN=
+      - FIRST_SUPERUSER=admin@example.com
+      - FIRST_SUPERUSER_PASSWORD=secret
+      - CELERY_BROKER_URL=redis://redis:6379/1
+
+  public-web:
+    image: ${DOCKER_REGISTRY-}public-web
+    build:
+      context: ./src/public-web
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3002:3002
+    volumes:
+      - ./src/public-web:/app
+      - public_web_node_data:/app/node_modules
+    environment:
+      - PORT=3002
 
   redis:
     image: redis:6-alpine

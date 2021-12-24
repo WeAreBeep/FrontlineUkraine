@@ -9,6 +9,8 @@ else
 DOCKER_RUN :=
 endif
 
+SERVICES := web core celeryworker public-web
+
 .PHONY: setup
 setup:
 	@cp Web/appsettings.Development.json.template Web/appsettings.Development.json
@@ -20,6 +22,12 @@ setup:
 	@echo "Please choose either docker-based or localhost setup before starting server"
 	@echo "export NO_DOCKER=1 and replace Database part in ConnectionStrings.DataContext to 'localhost,1433' in Web/appsettings.Development.json if you use local development"
 	@$(MAKE) db-setup
+	@cp ./src/public-web/appConfig.js.template ./src/public-web/public/appConfig.js
+	@echo '[public-web]: Please update public/appConfig.js for your local development'
+	@echo "Your public/appConfig.js now is"
+	@echo "================"
+	@cat ./src/public-web/public/appConfig.js
+	@echo "================"	
 
 
 .PHONY: db-setup
@@ -36,3 +44,11 @@ dev:
 	else \
 		make -f Makefile.nodocker.mk dev; \
 	fi
+
+.PHONY: docker-build
+docker-build:
+	docker-compose -f $(SELF_DIR)docker-compose.build.yml build $(SERVICES)
+
+.PHONY: docker-push
+docker-push:
+	docker-compose -f $(SELF_DIR)docker-compose.build.yml push $(SERVICES)

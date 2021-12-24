@@ -1,0 +1,3 @@
+window.appConfig = {
+  mapboxToken: "${REACT_APP_MAPBOX_TOKEN}",
+};

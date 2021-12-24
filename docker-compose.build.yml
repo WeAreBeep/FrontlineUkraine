@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  web:
+    image: ${DOCKER_REGISTRY-}web:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+  core:
+    image: ${DOCKER_REGISTRY-}core:${TAG:-latest}
+    build:
+      context: ./src/core
+      dockerfile: Dockerfile.core
+
+  celeryworker:
+    image: ${DOCKER_REGISTRY-}celeryworker:${TAG:-latest}
+    build:
+      context: ./src/core
+      dockerfile: Dockerfile.celeryworker
+
+  public-web:
+    image: ${DOCKER_REGISTRY-}public-web:${TAG:-latest}
+    build:
+      context: ./src/public-web
+      dockerfile: Dockerfile
