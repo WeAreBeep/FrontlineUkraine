@@ -12,6 +12,15 @@ variable "container_image_name" {
   default = "web"
 }
 
+variable "public_web_image_name" {
+  type    = string
+  default = "public-web"
+}
+
+variable "public_web_image_tag" {
+  type    = string
+}
+
 variable "container_image_tag" {
   type    = string
 }
@@ -28,4 +37,8 @@ variable "sql_admin_password" {
 
 variable "app_service_custom_domain_list" {
   type = list(string)
+}
+
+variable "mapbox_token" {
+  type = string
 }

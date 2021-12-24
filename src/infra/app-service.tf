@@ -53,6 +53,24 @@ resource "azurerm_app_service" "web" {
   ]
 }
 
+resource "azurerm_app_service" "public_web" {
+  name                = "${local.prefix}-publicweb-${terraform.workspace}"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  app_service_plan_id = azurerm_app_service_plan.asp.id
+  tags                = local.tags
+
+  site_config {
+    always_on        = "true"
+    linux_fx_version = "DOCKER|${local.public_web_image}"
+  }
+
+  app_settings = {
+    "REACT_APP_MAPBOX_TOKEN": var.mapbox_token
+  }
+}
+
+
 resource "azurerm_application_insights" "insights" {
   name                = "${local.prefix}-appi-${terraform.workspace}"
   location            = data.azurerm_resource_group.rg.location
