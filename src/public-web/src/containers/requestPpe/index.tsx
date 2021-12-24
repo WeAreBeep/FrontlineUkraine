@@ -1,6 +1,8 @@
 import React from 'react';
-import { styles } from './style';
+import { useStyles } from './style';
 
-export function RequestPpe() {
+export const RequestPpe: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { classes } = useStyles();  
   return <div>Request PPE page</div>;
 }

@@ -3,7 +3,7 @@ import { Group } from '@mantine/core';
 import cn from 'classnames';
 import { useStyles } from './style';
 
-export function FLFooter({ className }: { className?: string }) {
+export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
   const { classes } = useStyles();
   return (
     <footer className={cn(className, classes.footer)}>

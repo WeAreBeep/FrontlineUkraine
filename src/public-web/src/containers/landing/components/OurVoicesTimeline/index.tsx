@@ -2,7 +2,9 @@ import React from 'react';
 import { Timeline } from 'react-twitter-widgets';
 import { useStyles } from './style';
 
-export function OurVoicesTimeline({ className }: {className?: string}) {
+export const OurVoicesTimeline: React.FC<{ className?: string }> = ({
+  className,
+}) => {
   const { classes } = useStyles();
   return (
     <div className={className}>
@@ -12,4 +14,4 @@ export function OurVoicesTimeline({ className }: {className?: string}) {
       />
     </div>
   );
-}
+};

@@ -5,7 +5,7 @@ import { Col, Grid } from '@mantine/core';
 import { FeedContent } from './components/FeedContent';
 import { OurVoicesTimeline } from './components/OurVoicesTimeline';
 
-export function Landing() {
+export const Landing: React.FC = () => {
   const { classes } = useStyles();
   return (
     <Grid sx={{ height: '100%' }} gutter={0}>

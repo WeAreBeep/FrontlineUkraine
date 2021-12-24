@@ -1,3 +1,3 @@
 import { createStyles } from '@mantine/styles';
 
-export const styles = createStyles({});
+export const useStyles = createStyles({});

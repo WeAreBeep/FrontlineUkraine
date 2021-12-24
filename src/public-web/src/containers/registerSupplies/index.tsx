@@ -1,6 +1,8 @@
 import React from 'react';
-import { styles } from './style';
+import { useStyles } from './style';
 
-export function RegisterSupplies() {
+export const RegisterSupplies: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { classes } = useStyles();
   return <div>Register Supplies page</div>;
 }

@@ -1,16 +1,23 @@
 import React from 'react';
-import { Header } from '@mantine/core';
+import { CSSObject, Header, MantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './style';
 import { RouteType } from '../../routes';
 // import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import logoSrc from '../../assets/images/frontline_map_logo.png';
+import { getThemePrimaryColor } from '../../utils/mantine';
 
-export function FLHeader() {
+function getHeaderCss(theme: MantineTheme): CSSObject {
+  return {
+    backgroundColor: getThemePrimaryColor(theme),
+  };
+}
+
+export const FLHeader: React.FC = () => {
   const { classes } = useStyles();
   return (
-    <Header height={96} padding="sm" sx={(theme) => ({backgroundColor: theme.colors['flGreen'][0]})}>
+    <Header height={96} padding="sm" sx={getHeaderCss}>
       <div className={classes.container}>
         <div className={classes.iconContainer}>
           <Link to={RouteType.Landing} title="Home">
@@ -48,19 +55,27 @@ export function FLHeader() {
 
         <ul className={classes.linksContainer}>
           <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.RequestPpe}>REQUEST PPE</Link>
+            <Link className={classes.link} to={RouteType.RequestPpe}>
+              REQUEST PPE
+            </Link>
           </li>
           <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.RegisterSupplies}>GIVE PPE</Link>
+            <Link className={classes.link} to={RouteType.RegisterSupplies}>
+              GIVE PPE
+            </Link>
           </li>
           <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.About}>ABOUT</Link>
+            <Link className={classes.link} to={RouteType.About}>
+              ABOUT
+            </Link>
           </li>
           <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.Partners}>PARTNERS</Link>
+            <Link className={classes.link} to={RouteType.Partners}>
+              PARTNERS
+            </Link>
           </li>
         </ul>
       </div>
     </Header>
   );
-}
+};

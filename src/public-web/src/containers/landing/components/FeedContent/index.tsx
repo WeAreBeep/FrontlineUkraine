@@ -3,8 +3,8 @@ import { ContentfulText } from '../../../../components/ContentfulText';
 import { useStyles } from './style';
 import { OurVoicesTimeline } from '../OurVoicesTimeline';
 
-export function FeedContent() {
-  const { classes } = useStyles();
+export const FeedContent: React.FC = () => {
+const { classes } = useStyles();
   return (
     <div className={classes.container}>
       <ContentfulText

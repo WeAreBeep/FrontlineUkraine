@@ -5,7 +5,7 @@ interface Props {
     html: string
 }
 
-export function ContentfulText({ html }: Props) {
+export const ContentfulText: React.FC<Props> = ({ html }) => {
     const { classes } = useStyles();
     return <div className={classes.contentfulText} dangerouslySetInnerHTML={{ __html: html }} />
 }

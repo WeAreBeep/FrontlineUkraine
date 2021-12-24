@@ -5,7 +5,7 @@ import { RouteType } from './routes';
 import * as Containers from './containers';
 import { FLAppShell } from './components/FLAppShell';
 
-function InnerFLApp() {
+const InnerFLApp: React.FC = () => {
   const Match = useRoutes([
     { path: RouteType.RequestPpe, element: <Containers.RequestPpe /> },
     {
@@ -32,7 +32,7 @@ function InnerFLApp() {
   );
 }
 
-export function FLApp() {
+export const FLApp: React.FC = () => {
   return (
     <BrowserRouter>
       <InnerFLApp />
