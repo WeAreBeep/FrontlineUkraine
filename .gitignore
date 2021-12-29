@@ -557,3 +557,6 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/node,terraform,visualstudio,visualstudiocode,macos,linux
+
+# Jetbranins IDE related files
+.idea
