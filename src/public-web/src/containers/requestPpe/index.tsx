@@ -1,5 +1,5 @@
 import React from 'react';
-import {useStyles} from './style';
+import { useStyles } from './style';
 import {
   Container,
   InputWrapper,
@@ -9,21 +9,21 @@ import {
   Textarea,
   Switch,
 } from '@mantine/core';
-import {useForm} from 'react-hook-form';
-import {DevTool} from '@hookform/devtools';
-import {PpeRequestSubForm} from './components/PpeRequestSubForm';
-import {PPE_TYPES, PpeTypeName} from '../../models/ppeType';
-import {ReactHookFormRadioGroup} from '../../components/ReactHookFormRadioGroup';
-import {defaultRegisterRequestForm, RegisterRequestForm} from './types';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+import { PpeRequestSubForm } from './components/PpeRequestSubForm';
+import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
+import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
+import { defaultRegisterRequestForm, RegisterRequestForm } from './types';
 
 export const RequestPpe: React.FC = () => {
-  const {classes} = useStyles();
+  const { classes } = useStyles();
   const {
     register,
     unregister,
     control,
     watch,
-    formState: {isSubmitting},
+    formState: { isSubmitting },
   } = useForm<RegisterRequestForm>({
     defaultValues: defaultRegisterRequestForm,
   });
@@ -44,7 +44,7 @@ export const RequestPpe: React.FC = () => {
           </p>
         </section>
         <section className={classes.section}>
-          <DevTool control={control}/>
+          <DevTool control={control} />
           <form>
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Your Details</legend>
@@ -54,7 +54,7 @@ export const RequestPpe: React.FC = () => {
                 description="Check this if you do not wish your name to be published on the Frontline Map"
               >
                 <Switch
-                  {...register('publishAnonymously', {required: true})}
+                  {...register('publishAnonymously', { required: true })}
                   size="md"
                 />
               </InputWrapper>
@@ -119,7 +119,7 @@ export const RequestPpe: React.FC = () => {
               <ReactHookFormRadioGroup
                 name="orgType"
                 control={control}
-                className={classes.inputWrapper}
+                classNames={{ root: classes.inputWrapper }}
                 variant="vertical"
                 label="Type"
                 description="Which best describes your organisation?"
@@ -136,7 +136,7 @@ export const RequestPpe: React.FC = () => {
               </ReactHookFormRadioGroup>
               {watchedOrgType === 'Other' && (
                 <TextInput
-                  {...register('orgTypeOther', {required: true})}
+                  {...register('orgTypeOther', { required: true })}
                   className={classes.inputWrapper}
                   label="Type Other"
                   description={`If the list above does not fit choose "Other..." and describe here`}
@@ -161,7 +161,7 @@ export const RequestPpe: React.FC = () => {
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Additional Details</legend>
               <TextInput
-                {...register('addressLineOne', {required: true})}
+                {...register('addressLineOne', { required: true })}
                 className={classes.inputWrapper}
                 label="Address line 1"
                 required={true}
@@ -172,7 +172,7 @@ export const RequestPpe: React.FC = () => {
                 label="Address line 2"
               />
               <TextInput
-                {...register('postcode', {required: true})}
+                {...register('postcode', { required: true })}
                 className={classes.inputWrapper}
                 label="Postcode"
                 description="Will be added to the map to indicate location of your supplies"

@@ -1,5 +1,5 @@
 import { createStyles } from '@mantine/styles';
-import {getThemePrimaryColor} from "../../utils/mantine";
+import { getThemePrimaryColor } from '../../utils/mantine';
 
 export const useStyles = createStyles((theme) => ({
   scrollContainer: {
@@ -13,7 +13,7 @@ export const useStyles = createStyles((theme) => ({
   section: {
     '&:not(:last-child)': {
       marginBottom: theme.spacing.xl,
-    }
+    },
   },
   legend: {
     color: getThemePrimaryColor(theme),
@@ -35,5 +35,5 @@ export const useStyles = createStyles((theme) => ({
   },
   submitBtn: {
     marginBottom: theme.spacing.md,
-  }
+  },
 }));

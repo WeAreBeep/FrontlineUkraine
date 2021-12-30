@@ -16,7 +16,6 @@ import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGrou
 import { defaultRegisterSuppliesForm, RegisterSuppliesForm } from './types';
 
 export const RegisterSupplies: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { classes } = useStyles();
   const {
     register,
@@ -31,39 +30,46 @@ export const RegisterSupplies: React.FC = () => {
   return (
     <div className={classes.scrollContainer}>
       <Container>
-        <h1>PPE Supplies</h1>
-        <section>
+        <h1 className={classes.header}>PPE Supplies</h1>
+        <section className={classes.section}>
           <p>
             Use this form so we can add you to our collated database of
             suppliers
           </p>
-          <p>Email frontline@wearebeep.com to tell us about:</p>
+          <p>
+            Email{' '}
+            <a href="mailto:frontline@wearebeep.com">frontline@wearebeep.com</a>{' '}
+            to tell us about:
+          </p>
           <ul>
             <li>any needs you have met: so we can remove them from the map</li>
             <li>any stories of supplying needs: so we can raise awareness</li>
           </ul>
           <p>Thank you!</p>
         </section>
-        <section>
+        <section className={classes.section}>
           <DevTool control={control} />
           <form>
-            <fieldset>
-              <legend>Company Details</legend>
+            <fieldset className={classes.fieldSet}>
+              <legend className={classes.legend}>Company Details</legend>
               <TextInput
-                description="Company or organisation name"
-                label="Organisation Name"
-                required={true}
                 {...register('organisationName')}
+                className={classes.inputWrapper}
+                label="Organisation Name"
+                description="Company or organisation name"
+                required={true}
               />
               <TextInput
-                description="Brief description of what your organisation does"
-                label="Description"
-                required={true}
                 {...register('description')}
+                className={classes.inputWrapper}
+                label="Description"
+                description="Brief description of what your organisation does"
+                required={true}
               />
               <ReactHookFormRadioGroup
                 name="supplierType"
                 control={control}
+                classNames={{ root: classes.inputWrapper }}
                 variant="vertical"
                 label="Type"
                 description="Which best describes your organisation?"
@@ -84,46 +90,53 @@ export const RegisterSupplies: React.FC = () => {
               {watchedSupplierType === 'Other' && (
                 <TextInput
                   {...register('supplierTypeOther', { required: true })}
+                  className={classes.inputWrapper}
                   label="Type Other"
                   description={`If the list above does not fit choose "Other..." and describe here`}
                 />
               )}
             </fieldset>
-            <fieldset>
-              <legend>Contact Details</legend>
+            <fieldset className={classes.fieldSet}>
+              <legend className={classes.legend}>Contact Details</legend>
               <TextInput
-                description="Email address"
-                label="Email"
-                required={true}
                 {...register('email')}
+                className={classes.inputWrapper}
+                label="Email"
+                description="Email address"
+                required={true}
               />
               <TextInput
-                description="Web address"
-                label="Website"
                 {...register('website')}
+                className={classes.inputWrapper}
+                label="Website"
+                description="Web address"
               />
               <TextInput
-                description="Phone number"
-                label="Phone number"
-                required={true}
                 {...register('phoneNumber')}
+                className={classes.inputWrapper}
+                label="Phone number"
+                description="Phone number"
+                required={true}
               />
               <TextInput
-                description="Name of person who deals with PPE enquiries"
-                label="Contact Name"
-                required={true}
                 {...register('contactName')}
+                className={classes.inputWrapper}
+                label="Contact Name"
+                description="Name of person who deals with PPE enquiries"
+                required={true}
               />
               <TextInput
-                description="Will be added to the map to indicate location of your supplies"
-                label="Postcode"
-                required={true}
                 {...register('postcode')}
+                className={classes.inputWrapper}
+                label="Postcode"
+                description="Will be added to the map to indicate location of your supplies"
+                required={true}
               />
             </fieldset>
-            <fieldset>
-              <legend>PPE</legend>
+            <fieldset className={classes.fieldSet}>
+              <legend className={classes.legend}>PPE</legend>
               <InputWrapper
+                className={classes.inputWrapper}
                 label="What You Can Supply"
                 description="Tick as many as apply"
                 required={true}
@@ -132,7 +145,9 @@ export const RegisterSupplies: React.FC = () => {
                   <div key={ppeType}>
                     <Switch
                       {...register(`ppe.${ppeType}.can`)}
+                      className={classes.switchInput}
                       label={PpeTypeName[ppeType]}
+                      size="md"
                     />
                     {watchedPpe[ppeType].can && (
                       <PpeSupplySubForm
@@ -146,6 +161,7 @@ export const RegisterSupplies: React.FC = () => {
               </InputWrapper>
             </fieldset>
             <Button
+              className={classes.submitBtn}
               variant="filled"
               type="submit"
               color="blue"
