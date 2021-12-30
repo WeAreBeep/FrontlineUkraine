@@ -433,7 +433,7 @@ module.exports = function (webpackEnv) {
                 compact: isEnvProduction,
                 // Need to exclude this file since Mapbox ships this file in ES6
                 // refs: https://docs.mapbox.com/mapbox-gl-js/guides/install/#transpiling
-                ignore: [ `${paths.appNodeModules}/mapbox-gl/dist/mapbox-gl.js` ]
+                ignore: [`${paths.appNodeModules}/mapbox-gl/dist/mapbox-gl.js`],
               },
             },
             // Process any JS outside of the app with Babel.
@@ -463,7 +463,7 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
                 // Need to exclude this file since Mapbox ships this file in ES6
                 // refs: https://docs.mapbox.com/mapbox-gl-js/guides/install/#transpiling
-                ignore: [ `${paths.appNodeModules}/mapbox-gl/dist/mapbox-gl.js` ]
+                ignore: [`${paths.appNodeModules}/mapbox-gl/dist/mapbox-gl.js`],
               },
             },
             // "postcss" loader applies autoprefixer to our CSS.

@@ -22,10 +22,10 @@ export const useStyles = createStyles(() => {
       listStyle: 'none',
     },
     linkItem: {
-        padding: '0 1rem',
-        fontSize: '1.45rem',
-        letterSpacing: '0.05rem',
-        fontWeight: 700,
+      padding: '0 1rem',
+      fontSize: '1.45rem',
+      letterSpacing: '0.05rem',
+      fontWeight: 700,
     },
     link: {
       textDecoration: 'none',
@@ -33,8 +33,8 @@ export const useStyles = createStyles(() => {
 
       color: '#ffffff',
       '&:hover': {
-          color: '#000000',
-      }
+        color: '#000000',
+      },
     },
   };
 });
