@@ -7,7 +7,7 @@ from .note import Note
 from .post_status import PostStatus
 from .postcode_region import PostcodeRegion
 from .ppe_status import PpeStatus
-from .ppe_type import PpeType
+from .ppe_type import PpeType, PpeTypeEnum
 from .supplier import Supplier
 from .supplier_note import SupplierNote
 from .supplier_ppe_type import SupplierPpeType

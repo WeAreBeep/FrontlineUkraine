@@ -1,7 +1,23 @@
+from enum import IntEnum
 from sqlalchemy import SMALLINT, Column, PrimaryKeyConstraint, Text
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import FLBase
+
+
+class PpeTypeEnum(IntEnum):
+    TypeIIRSurgicalMasks = 1
+    FFP1RespiratorMasks = 2
+    FFP2RespiratorMasks = 3
+    FFP3RespiratorMasks = 4
+    Gowns = 5
+    Aprons = 6
+    Gloves = 7
+    Scrubs = 8
+    SafetyGlasses = 9
+    FaceVisors = 10
+    AlcoholHandGel = 11
+    Other = 12
 
 
 class PpeType(FLBase):
