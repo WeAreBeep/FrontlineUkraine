@@ -19,4 +19,4 @@ export const Map: React.FC = () => {
       onViewportChange={setViewport}
     />
   );
-}
+};

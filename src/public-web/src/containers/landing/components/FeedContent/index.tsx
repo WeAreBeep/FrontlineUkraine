@@ -4,7 +4,7 @@ import { useStyles } from './style';
 import { OurVoicesTimeline } from '../OurVoicesTimeline';
 
 export const FeedContent: React.FC = () => {
-const { classes } = useStyles();
+  const { classes } = useStyles();
   return (
     <div className={classes.container}>
       <ContentfulText
@@ -155,4 +155,4 @@ const { classes } = useStyles();
       <OurVoicesTimeline className={classes.ourVoiceTimeline} />
     </div>
   );
-}
+};

@@ -11,14 +11,24 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
         <div className={classes.container} style={{ display: 'inline' }}>
           <span>Charity Reg Number 191225&nbsp;</span>
           <span>
-            <a className={classes.footerLinkItem} href="/terms-and-conditions">Terms and Conditions</a>
+            <a className={classes.footerLinkItem} href="/terms-and-conditions">
+              Terms and Conditions
+            </a>
           </span>
         </div>
         <div className={classes.container} style={{ display: 'inline' }}>
           This site is open source
-          <a className={classes.footerLinkItem} href="https://github.com/WeAreBeep/FrontLineLive">Contribute</a>
+          <a
+            className={classes.footerLinkItem}
+            href="https://github.com/WeAreBeep/FrontLineLive"
+          >
+            Contribute
+          </a>
         </div>
-        <ol className={classes.container} style={{ listStyle: 'none', display: 'flex', marginBlock: 0 }}>
+        <ol
+          className={classes.container}
+          style={{ listStyle: 'none', display: 'flex', marginBlock: 0 }}
+        >
           <li className={classes.footerLinkItem}>
             <a href="/contact-us">Contact Us</a>
           </li>
@@ -31,4 +41,4 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
       </Group>
     </footer>
   );
-}
+};
