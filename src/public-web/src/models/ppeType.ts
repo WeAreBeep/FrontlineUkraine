@@ -31,7 +31,7 @@ export const PPE_TYPES = [
 ];
 
 export const PpeTypeName = {
-  [PpeType.TypeIIRSurgicalMasks]: 'TypeIIR Surgical Masks',
+  [PpeType.TypeIIRSurgicalMasks]: 'Type IIR Surgical Masks',
   [PpeType.FFP1RespiratorMasks]: 'FFP1 Respirator Masks',
   [PpeType.FFP2RespiratorMasks]: 'FFP2 Respirator Masks',
   [PpeType.FFP3RespiratorMasks]: 'FFP3 Respirator Masks',
