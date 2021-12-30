@@ -22,9 +22,9 @@ const InnerFLApp: React.FC = () => {
         fontFamily:
           '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue',
         colors: {
-          'flGreen': ['#00966B'],
+          flGreen: ['#00966B', '#00966B', '#00966B', '#00966B', '#00966B', '#00966B', '#00966B', '#00966B', '#00966B', '#00966B']
         },
-        primaryColor: 'flGreen'
+        primaryColor: 'flGreen',
       }}
     >
       <FLAppShell>{Match}</FLAppShell>
