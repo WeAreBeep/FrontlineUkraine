@@ -1,3 +1,4 @@
+from .base import BaseModel
 from .item import Item
 from .item import ItemCreate
 from .item import ItemInDB
