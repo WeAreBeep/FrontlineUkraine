@@ -1,10 +1,10 @@
-from typing import Any, List
 from dataclasses import dataclass
+from typing import List
 
 from sqlalchemy.orm import Session
 
 from app import crud
-from app.models import PostStatus, PpeStatus, Need, Supplier
+from app.models import Need, PostStatus, PpeStatus, Supplier
 
 
 @dataclass
@@ -20,8 +20,4 @@ def get_map_data(db: Session) -> GetMapDataResult:
         db, statuses={PpeStatus.NotMet, PpeStatus.New, PpeStatus.InProgress}
     )
     suppliers = crud.supplier.get_all_by_post_status(db, status=PostStatus.Published)
-    return GetMapDataResult(
-        met=needs_met,
-        needs=needs_not_met,
-        suppliers=suppliers,
-    )
+    return GetMapDataResult(met=needs_met, needs=needs_not_met, suppliers=suppliers,)

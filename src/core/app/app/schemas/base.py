@@ -4,8 +4,7 @@ from pydantic import BaseModel as PydanticBaseModel
 def to_camel(string: str) -> str:
     return "".join(
         word if idx == 0 else word.capitalize()
-        for (idx, word)
-        in enumerate(string.split("_"))
+        for (idx, word) in enumerate(string.split("_"))
     )
 
 
