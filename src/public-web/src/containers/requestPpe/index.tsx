@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useStyles } from './style';
 import {
   Container,
@@ -9,24 +9,29 @@ import {
   Textarea,
   Switch,
 } from '@mantine/core';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
 import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterRequestForm, RegisterRequestForm } from './types';
+import { VALIDATION_MSG } from '../../utils/validation';
 
 export const RequestPpe: React.FC = () => {
   const { classes } = useStyles();
-  const {
-    register,
-    unregister,
-    control,
-    watch,
-    formState: { isSubmitting },
-  } = useForm<RegisterRequestForm>({
-    defaultValues: defaultRegisterRequestForm,
-  });
+  const { register, control, watch, handleSubmit, formState } =
+    useForm<RegisterRequestForm>({
+      defaultValues: defaultRegisterRequestForm,
+    });
+  const { isSubmitting, errors } = formState;
+  const handleValidSubmit: SubmitHandler<RegisterRequestForm> = useCallback(
+    (data) => {
+      console.log('submitting');
+      console.log(data);
+      console.log('TODO: submit the form');
+    },
+    []
+  );
   const watchedPpe = watch('ppe');
   const watchedOrgType = watch('orgType');
   return (
@@ -45,38 +50,50 @@ export const RequestPpe: React.FC = () => {
         </section>
         <section className={classes.section}>
           <DevTool control={control} />
-          <form>
+          <form onSubmit={handleSubmit(handleValidSubmit)}>
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Your Details</legend>
               <InputWrapper
+                error={errors.publishAnonymously?.message}
                 className={classes.inputWrapper}
                 label="Publish Anonymously"
                 description="Check this if you do not wish your name to be published on the Frontline Map"
               >
                 <Switch
-                  {...register('publishAnonymously', { required: true })}
+                  {...register('publishAnonymously', {
+                    required: { value: true, message: VALIDATION_MSG.required },
+                  })}
                   size="md"
                 />
               </InputWrapper>
               <TextInput
                 {...register('contactName')}
+                error={errors.contactName?.message}
                 className={classes.inputWrapper}
                 label="Your Name"
                 description="If you tick 'Publish Anonymously' this will not be published on the website nor shared outside the Frontline team. If you don't leave your name, we will delivery PPE package to the department you entered."
               />
               <TextInput
-                {...register('email')}
+                {...register('email', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.email?.message}
                 className={classes.inputWrapper}
+                type="email"
                 label="Email"
                 description="We need to contact you to confirm information and successful delivery."
                 required={true}
               />
               <TextInput
-                description="Phone number"
+                {...register('phoneNumber', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.phoneNumber?.message}
                 className={classes.inputWrapper}
+                type="tel"
                 label="Phone number"
+                description="Phone number"
                 required={true}
-                {...register('phoneNumber')}
               />
             </fieldset>
             <fieldset className={classes.fieldSet}>
@@ -100,7 +117,8 @@ export const RequestPpe: React.FC = () => {
                         ppeType={ppeType}
                         control={control}
                         register={register}
-                        unregister={unregister}
+                        formState={formState}
+                        shouldUnregister={true}
                       />
                     )}
                   </div>
@@ -110,7 +128,10 @@ export const RequestPpe: React.FC = () => {
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Organisation</legend>
               <TextInput
-                {...register('organisationName')}
+                {...register('organisationName', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.organisationName?.message}
                 className={classes.inputWrapper}
                 label="Organisation Name"
                 description="Organisation or Company name"
@@ -119,6 +140,10 @@ export const RequestPpe: React.FC = () => {
               <ReactHookFormRadioGroup
                 name="orgType"
                 control={control}
+                rules={{
+                  required: { value: true, message: VALIDATION_MSG.required },
+                }}
+                error={errors.orgType?.message}
                 classNames={{ root: classes.inputWrapper }}
                 variant="vertical"
                 label="Type"
@@ -136,7 +161,11 @@ export const RequestPpe: React.FC = () => {
               </ReactHookFormRadioGroup>
               {watchedOrgType === 'Other' && (
                 <TextInput
-                  {...register('orgTypeOther', { required: true })}
+                  {...register('orgTypeOther', {
+                    required: { value: true, message: VALIDATION_MSG.required },
+                    shouldUnregister: true,
+                  })}
+                  error={errors.orgTypeOther?.message}
                   className={classes.inputWrapper}
                   label="Type Other"
                   description={`If the list above does not fit choose "Other..." and describe here`}
@@ -144,14 +173,20 @@ export const RequestPpe: React.FC = () => {
               )}
 
               <TextInput
-                {...register('jobTitle')}
+                {...register('jobTitle', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.jobTitle?.message}
                 className={classes.inputWrapper}
                 label="Job Title"
                 description="This will not be published on the site. It will be used for anonymous data reporting."
                 required={true}
               />
               <TextInput
-                {...register('department')}
+                {...register('department', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.department?.message}
                 className={classes.inputWrapper}
                 label="Department"
                 description="This will not be published on the site. It will be used for anonymous data reporting."
@@ -161,18 +196,25 @@ export const RequestPpe: React.FC = () => {
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Additional Details</legend>
               <TextInput
-                {...register('addressLineOne', { required: true })}
+                {...register('addressLineOne', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.addressLineOne?.message}
                 className={classes.inputWrapper}
                 label="Address line 1"
                 required={true}
               />
               <TextInput
                 {...register('addressLineTwo')}
+                error={errors.addressLineTwo?.message}
                 className={classes.inputWrapper}
                 label="Address line 2"
               />
               <TextInput
-                {...register('postcode', { required: true })}
+                {...register('postcode', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.postcode?.message}
                 className={classes.inputWrapper}
                 label="Postcode"
                 description="Will be added to the map to indicate location of your supplies"
@@ -180,6 +222,7 @@ export const RequestPpe: React.FC = () => {
               />
               <Textarea
                 {...register('tellUsMore')}
+                error={errors.tellUsMore?.message}
                 className={classes.inputWrapper}
                 label="Tell Us More"
                 description="Tell us more about how the shortage affects you"
