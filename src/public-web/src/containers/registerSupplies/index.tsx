@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useStyles } from './style';
 import {
   Container,
@@ -8,23 +8,30 @@ import {
   Button,
   Switch,
 } from '@mantine/core';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeSupplySubForm } from './components/PpeSupplySubForm';
 import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterSuppliesForm, RegisterSuppliesForm } from './types';
+import { RegisterRequestForm } from '../requestPpe/types';
+import { VALIDATION_MSG } from '../../utils/validation';
 
 export const RegisterSupplies: React.FC = () => {
   const { classes } = useStyles();
-  const {
-    register,
-    control,
-    watch,
-    formState: { isSubmitting },
-  } = useForm<RegisterSuppliesForm>({
-    defaultValues: defaultRegisterSuppliesForm,
-  });
+  const { register, control, watch, handleSubmit, formState } =
+    useForm<RegisterSuppliesForm>({
+      defaultValues: defaultRegisterSuppliesForm,
+    });
+  const { isSubmitting, errors } = formState;
+  const handleValidSubmit: SubmitHandler<RegisterRequestForm> = useCallback(
+    (data) => {
+      console.log('submitting');
+      console.log(data);
+      console.log('TODO: submit the form');
+    },
+    []
+  );
   const watchedPpe = watch('ppe');
   const watchedSupplierType = watch('supplierType');
   return (
@@ -49,18 +56,24 @@ export const RegisterSupplies: React.FC = () => {
         </section>
         <section className={classes.section}>
           <DevTool control={control} />
-          <form>
+          <form onSubmit={handleSubmit(handleValidSubmit)}>
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Company Details</legend>
               <TextInput
-                {...register('organisationName')}
+                {...register('organisationName', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.organisationName?.message}
                 className={classes.inputWrapper}
                 label="Organisation Name"
                 description="Company or organisation name"
                 required={true}
               />
               <TextInput
-                {...register('description')}
+                {...register('description', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.description?.message}
                 className={classes.inputWrapper}
                 label="Description"
                 description="Brief description of what your organisation does"
@@ -69,6 +82,10 @@ export const RegisterSupplies: React.FC = () => {
               <ReactHookFormRadioGroup
                 name="supplierType"
                 control={control}
+                rules={{
+                  required: { value: true, message: VALIDATION_MSG.required },
+                }}
+                error={errors.supplierType?.message}
                 classNames={{ root: classes.inputWrapper }}
                 variant="vertical"
                 label="Type"
@@ -89,7 +106,11 @@ export const RegisterSupplies: React.FC = () => {
               </ReactHookFormRadioGroup>
               {watchedSupplierType === 'Other' && (
                 <TextInput
-                  {...register('supplierTypeOther', { required: true })}
+                  {...register('supplierTypeOther', {
+                    required: { value: true, message: VALIDATION_MSG.required },
+                    shouldUnregister: true,
+                  })}
+                  error={errors.supplierTypeOther?.message}
                   className={classes.inputWrapper}
                   label="Type Other"
                   description={`If the list above does not fit choose "Other..." and describe here`}
@@ -99,7 +120,10 @@ export const RegisterSupplies: React.FC = () => {
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Contact Details</legend>
               <TextInput
-                {...register('email')}
+                {...register('email', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.email?.message}
                 className={classes.inputWrapper}
                 label="Email"
                 description="Email address"
@@ -107,26 +131,36 @@ export const RegisterSupplies: React.FC = () => {
               />
               <TextInput
                 {...register('website')}
+                error={errors.website?.message}
                 className={classes.inputWrapper}
                 label="Website"
                 description="Web address"
               />
               <TextInput
-                {...register('phoneNumber')}
+                {...register('phoneNumber', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.phoneNumber?.message}
                 className={classes.inputWrapper}
                 label="Phone number"
                 description="Phone number"
                 required={true}
               />
               <TextInput
-                {...register('contactName')}
+                {...register('contactName', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.contactName?.message}
                 className={classes.inputWrapper}
                 label="Contact Name"
                 description="Name of person who deals with PPE enquiries"
                 required={true}
               />
               <TextInput
-                {...register('postcode')}
+                {...register('postcode', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.postcode?.message}
                 className={classes.inputWrapper}
                 label="Postcode"
                 description="Will be added to the map to indicate location of your supplies"
@@ -154,6 +188,9 @@ export const RegisterSupplies: React.FC = () => {
                         ppeType={ppeType}
                         control={control}
                         register={register}
+                        watch={watch}
+                        formState={formState}
+                        shouldUnregister={true}
                       />
                     )}
                   </div>
