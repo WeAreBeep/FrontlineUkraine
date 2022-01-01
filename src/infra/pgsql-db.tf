@@ -1,9 +1,9 @@
 resource "azurerm_postgresql_server" "pgsql_svr" {
-  name                         = "${local.prefix}-pgsqlsvr-${terraform.workspace}"
-  resource_group_name          = data.azurerm_resource_group.rg.name
-  location                     = data.azurerm_resource_group.rg.location
+  name                = "${local.prefix}-pgsqlsvr-${terraform.workspace}"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
 
-  sku_name                     = "B_Gen5_1"
+  sku_name = "B_Gen5_1"
 
   storage_mb                   = 5120
   backup_retention_days        = 7

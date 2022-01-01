@@ -13,7 +13,7 @@ provider "azurerm" {
 
 locals {
   prefix = "frontline"
-  
+
   # if you update this - please update the Terraform backend too (see line #3).
   baseline_resource_group = "frontline-rg-baseline"
 
@@ -25,12 +25,12 @@ locals {
 
   tags = {
     owner = "terraform"
-    site = "frontline.live"
+    site  = "frontline.live"
   }
 }
 
 data "azurerm_resource_group" "rg" {
-  name     = "${local.prefix}-rg-${terraform.workspace}"
+  name = "${local.prefix}-rg-${terraform.workspace}"
 }
 
 data "azurerm_container_registry" "acr" {
