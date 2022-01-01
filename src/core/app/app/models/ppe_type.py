@@ -1,4 +1,5 @@
 from enum import IntEnum
+
 from sqlalchemy import SMALLINT, Column, PrimaryKeyConstraint, Text
 from sqlalchemy.orm import relationship
 

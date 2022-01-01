@@ -34,7 +34,7 @@ export interface RegisterSuppliesForm {
   phoneNumber: string;
   contactName: string;
   postcode: string;
-  ppe: { [key in PpeType]: PpeSupplyTypeSubForm };
+  ppeTypes: { [key in PpeType]: PpeSupplyTypeSubForm };
 }
 
 export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
@@ -47,7 +47,7 @@ export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
   phoneNumber: '',
   contactName: '',
   postcode: '',
-  ppe: {
+  ppeTypes: {
     [PpeType.TypeIIRSurgicalMasks]: defaultPpeSupplyTypeSubForm,
     [PpeType.FFP1RespiratorMasks]: defaultPpeSupplyTypeSubForm,
     [PpeType.FFP2RespiratorMasks]: defaultPpeSupplyTypeSubForm,

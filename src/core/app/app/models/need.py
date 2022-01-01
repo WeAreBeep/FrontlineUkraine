@@ -11,6 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import FLBase
+from app.models import PostStatus
 
 
 class Need(FLBase):
@@ -19,9 +20,9 @@ class Need(FLBase):
     __table_args__ = (PrimaryKeyConstraint("Id", name="idx_20762_PK_Needs"),)
 
     id = Column("Id", BigInteger, quote=True)
-    ushahidiId = Column("UshahidiId", BigInteger, quote=True)
+    ushahidiId = Column("UshahidiId", BigInteger, quote=True, default=0)
     timestamp = Column("Timestamp", DateTime(timezone=True), quote=True)
-    statusId = Column("StatusId", Integer, quote=True)
+    statusId = Column("StatusId", Integer, quote=True, default=PostStatus.UnderReview)
     publishAnonymously = Column("PublishAnonymously", Boolean, quote=True)
     contactName = Column("ContactName", Text, quote=True)
     jobTitle = Column("JobTitle", Text, quote=True)

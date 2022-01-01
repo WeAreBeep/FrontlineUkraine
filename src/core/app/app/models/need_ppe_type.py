@@ -11,6 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import FLBase
+from app.models import PpeStatus
 
 
 class NeedPpeType(FLBase):
@@ -43,7 +44,7 @@ class NeedPpeType(FLBase):
     ppeTypeOther = Column("PpeTypeOther", Text)
     dailyShortage = Column("DailyShortage", Integer)
     dailyShortageForWhom = Column("DailyShortageForWhom", Text)
-    statusId = Column("StatusId", Integer, nullable=False)
+    statusId = Column("StatusId", Integer, nullable=False, default=PpeStatus.New)
     supplierId = Column("SupplierId", BigInteger)
     supplierOther = Column("SupplierOther", Text)
     dateClosed = Column("DateClosed", DateTime(timezone=True))

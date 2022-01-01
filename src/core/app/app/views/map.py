@@ -1,13 +1,14 @@
-from typing import List, Optional, Union, Dict
+import dataclasses
 import functools
 from datetime import datetime, timezone
-import dataclasses
 from decimal import Decimal
+from typing import Dict, List, Optional, Union
+
 from sqlalchemy.orm import Session
 
 from app import services
-from app.models import Need, Supplier, PpeTypeEnum, NeedPpeType, SupplierPpeType
-from app.schemas.map import MapData, Point, PointsList, FeedNew
+from app.models import Need, NeedPpeType, PpeTypeEnum, Supplier, SupplierPpeType
+from app.schemas.map import FeedNew, MapData, Point, PointsList
 
 
 def get_ppe_type_enum_text(e: PpeTypeEnum) -> str:
@@ -76,16 +77,14 @@ class MapBase:
         self.posted_html = "TODO"
         self.ppe_type_names = [
             get_ppe_type_enum_text(PpeTypeEnum(ppeType.ppeTypeId))
-            for ppeType
-            in self.ppe_types
+            for ppeType in self.ppe_types
         ]
-        other_ppe_types = [p for p in self.ppe_types if PpeTypeEnum(p.ppeTypeId) == PpeTypeEnum.Other]
+        other_ppe_types = [
+            p for p in self.ppe_types if PpeTypeEnum(p.ppeTypeId) == PpeTypeEnum.Other
+        ]
         if len(other_ppe_types) != 0:
             self.other_ppe_types = other_ppe_types[0].ppeTypeOther
-        self.location_array = [
-            self.latitude,
-            self.longitude
-        ]
+        self.location_array = [self.latitude, self.longitude]
 
 
 @dataclasses.dataclass
@@ -103,7 +102,11 @@ class SupplierMapPointData(MapBase):
 
     def __post_init__(self):
         self.website_valid = self.website is not None and len(self.website) != 0
-        self.website_html = f"<a class='website_link' target='_blank' title='Visit supplier website' href='{self.website}'><i class='fas fa-link fa-2x'></i></a>" if self.website_valid else None
+        self.website_html = (
+            f"<a class='website_link' target='_blank' title='Visit supplier website' href='{self.website}'><i class='fas fa-link fa-2x'></i></a>"
+            if self.website_valid
+            else None
+        )
 
 
 class MapPointDataFactory(object):
@@ -117,7 +120,7 @@ class MapPointDataFactory(object):
             longitude=need.longitude,
             organisation=need.organisationName,
             ppe_types=[p for p in need.ppeTypes],
-            tweet_id=f"{need.tweetId}"
+            tweet_id=f"{need.tweetId}",
         )
 
     @classmethod
@@ -145,24 +148,35 @@ class MapDataFactory:
         for datum in data:
             posts.append(Point(location=datum.location_array, popup_html="TODO"))
             for ppe_type_name in datum.ppe_type_names:
-                type_points_map[ppe_type_name].append(Point(location=datum.location_array, popup_html="TODO"))
+                type_points_map[ppe_type_name].append(
+                    Point(location=datum.location_array, popup_html="TODO")
+                )
         return MapData(
             points_count=functools.reduce(
                 lambda x, y: x + y,
                 map(lambda point_list: len(point_list), type_points_map.values()),
-                0),
+                0,
+            ),
             points_list=[
-                PointsList(ppe_type=key, class_name=TYPES_TO_CLASSES[key], points=point_list)
-                for (key, point_list)
-                in type_points_map.items()],
-            posts=posts
+                PointsList(
+                    ppe_type=key, class_name=TYPES_TO_CLASSES[key], points=point_list
+                )
+                for (key, point_list) in type_points_map.items()
+            ],
+            posts=posts,
         )
 
 
 def get_map_data(db: Session):
     result = services.map.get_map_data(db)
     return FeedNew(
-        needs=MapDataFactory.from_point_data(data=[MapPointDataFactory.from_need(n) for n in result.needs]),
-        needs_met=MapDataFactory.from_point_data(data=[MapPointDataFactory.from_need(n) for n in result.met]),
-        supplies=MapDataFactory.from_point_data(data=[MapPointDataFactory.from_supplier(s) for s in result.suppliers])
+        needs=MapDataFactory.from_point_data(
+            data=[MapPointDataFactory.from_need(n) for n in result.needs]
+        ),
+        needs_met=MapDataFactory.from_point_data(
+            data=[MapPointDataFactory.from_need(n) for n in result.met]
+        ),
+        supplies=MapDataFactory.from_point_data(
+            data=[MapPointDataFactory.from_supplier(s) for s in result.suppliers]
+        ),
     )
