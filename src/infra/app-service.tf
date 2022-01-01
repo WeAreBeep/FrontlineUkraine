@@ -36,8 +36,8 @@ resource "azurerm_app_service" "web" {
 
   connection_string {
     name = "DataContext"
-    type = "SQLServer"
-    value = "Server=tcp:${azurerm_sql_server.sql_svr.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.sql_db.name};Persist Security Info=False;User ID=${var.sql_admin_login};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    type = "Custom"
+    value = "Host=${azurerm_postgresql_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login}@${azurerm_postgresql_database.pgsql_db.name};Password=${var.sql_admin_password};SearchPath=frontlinelive,public;"
   }
 
   connection_string {
@@ -53,8 +53,13 @@ resource "azurerm_app_service" "web" {
   ]
 }
 
+locals {
+  core_app_service_name = "${local.prefix}-core-${terraform.workspace}"
+  public_web_app_service_name = "${local.prefix}-publicweb-${terraform.workspace}"
+}
+
 resource "azurerm_app_service" "public_web" {
-  name                = "${local.prefix}-publicweb-${terraform.workspace}"
+  name                = local.public_web_app_service_name
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.asp.id
@@ -66,10 +71,49 @@ resource "azurerm_app_service" "public_web" {
   }
 
   app_settings = {
-    "REACT_APP_MAPBOX_TOKEN": var.mapbox_token
+    DOCKER_REGISTRY_SERVER_URL      = "https://${data.azurerm_container_registry.acr.login_server}"
+    DOCKER_REGISTRY_SERVER_USERNAME = data.azurerm_container_registry.acr.admin_username
+    DOCKER_REGISTRY_SERVER_PASSWORD = data.azurerm_container_registry.acr.admin_password
+    REACT_APP_MAPBOX_TOKEN: var.mapbox_token
+    REACT_APP_API_ENDPOINT: "https://${azurerm_app_service.core.default_site_hostname}/api"
+    REACT_APP_API_KEY: var.core_api_key
   }
 }
 
+resource "azurerm_app_service" "core" {
+  name                = local.core_app_service_name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  app_service_plan_id = azurerm_app_service_plan.asp.id
+  tags                = local.tags
+
+  site_config {
+    always_on        = "true"
+    linux_fx_version = "DOCKER|${local.core_image}"
+  }
+
+  app_settings = {
+      DOCKER_REGISTRY_SERVER_URL      = "https://${data.azurerm_container_registry.acr.login_server}"
+      DOCKER_REGISTRY_SERVER_USERNAME = data.azurerm_container_registry.acr.admin_username
+      DOCKER_REGISTRY_SERVER_PASSWORD = data.azurerm_container_registry.acr.admin_password
+      PORT = 80
+      PROJECT_NAME="Frontline.live"
+      SERVER_NAME=azurerm_app_service.core.default_site_hostname
+      SERVER_HOST="https://${azurerm_app_service.core.default_site_hostname}"
+      POSTGRES_SERVER=azurerm_postgresql_server.pgsql_svr.fqdn
+      POSTGRES_USER=var.sql_admin_login
+      POSTGRES_PASSWORD=var.sql_admin_password
+      POSTGRES_DB=azurerm_postgresql_database.pgsql_db.name
+      POSTGRES_SCHEMA="frontlinelive"
+      // To prevent cycle, we should register custom domain later
+      BACKEND_CORS_ORIGINS = "[\"${local.public_web_app_service_name}.azurewebsites.net\"]"
+    }
+
+  depends_on = [
+    azurerm_postgresql_server.pgsql_svr,
+    azurerm_postgresql_database.pgsql_db
+  ]
+}
 
 resource "azurerm_application_insights" "insights" {
   name                = "${local.prefix}-appi-${terraform.workspace}"

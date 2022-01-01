@@ -21,6 +21,8 @@ locals {
 
   public_web_image = "${data.azurerm_container_registry.acr.login_server}/${var.public_web_image_name}:${var.public_web_image_tag}"
 
+  core_image = "${data.azurerm_container_registry.acr.login_server}/${var.core_image_name}:${var.core_image_tag}"
+
   tags = {
     owner = "terraform"
     site = "frontline.live"
