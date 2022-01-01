@@ -129,8 +129,23 @@ function useMakeActions(rpc: Rpc) {
         };
         return rpc.post('v1/supply', data);
       },
-      [ActionType.CreateRequest]: async (_form: RegisterRequestForm) => {
-        return Promise.resolve();
+      [ActionType.CreateRequest]: async (form: RegisterRequestForm) => {
+        const { ppeTypes: ppeTypeDict, ...rest } = form;
+        const needPpeTypes = Object.keys(ppeTypeDict).filter(
+          (ppeType) => form.ppeTypes[ppeType as PpeType].need
+        );
+        const ppeTypes = needPpeTypes.map((ppeType) => {
+          const { need, ...details } = form.ppeTypes[ppeType as PpeType];
+          return {
+            type: ppeType,
+            ...details,
+          };
+        });
+        const data = {
+          ...rest,
+          ppeTypes,
+        };
+        return rpc.post('v1/need', data);
       },
     }),
     [rpc]

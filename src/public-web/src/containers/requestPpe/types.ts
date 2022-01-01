@@ -28,7 +28,7 @@ export interface RegisterRequestForm {
   addressLineTwo: string;
   postcode: string;
   tellUsMore: string;
-  ppe: { [key in PpeType]: PpeRequestTypeSubForm };
+  ppeTypes: { [key in PpeType]: PpeRequestTypeSubForm };
 }
 
 export const defaultRegisterRequestForm: RegisterRequestForm = {
@@ -45,7 +45,7 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
   addressLineTwo: '',
   postcode: '',
   tellUsMore: '',
-  ppe: {
+  ppeTypes: {
     [PpeType.TypeIIRSurgicalMasks]: defaultPpeRequestTypeSubForm,
     [PpeType.FFP1RespiratorMasks]: defaultPpeRequestTypeSubForm,
     [PpeType.FFP2RespiratorMasks]: defaultPpeRequestTypeSubForm,

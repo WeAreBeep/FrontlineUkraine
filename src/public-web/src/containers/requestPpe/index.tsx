@@ -9,30 +9,85 @@ import {
   Textarea,
   Switch,
 } from '@mantine/core';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
 import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterRequestForm, RegisterRequestForm } from './types';
 import { VALIDATION_MSG } from '../../utils/validation';
+import { useNavigate } from 'react-router-dom';
+import { useNotifications } from '@mantine/notifications';
+import {
+  APIError,
+  isSchemaValidationErrorData,
+  useAPIContext,
+} from '../../contexts/APIContext';
 
 export const RequestPpe: React.FC = () => {
   const { classes } = useStyles();
-  const { register, control, watch, handleSubmit, formState } =
+  const navigate = useNavigate();
+  const notification = useNotifications();
+  const {
+    actions: { createRequest },
+  } = useAPIContext();
+  const { register, control, watch, handleSubmit, formState, setError } =
     useForm<RegisterRequestForm>({
       defaultValues: defaultRegisterRequestForm,
     });
-  const { isSubmitting, errors } = formState;
+  const { isSubmitting, errors, isSubmitSuccessful } = formState;
   const handleValidSubmit: SubmitHandler<RegisterRequestForm> = useCallback(
-    (data) => {
-      console.log('submitting');
-      console.log(data);
-      console.log('TODO: submit the form');
+    async (data) => {
+      await createRequest(data);
+      notification.showNotification({
+        color: 'flGreen',
+        title: 'Save Successful',
+        message:
+          'Thanks you have been added to the database, we will be in contact in due course. You will be redirected to home page in 5 seconds.',
+        autoClose: 5000,
+        onClose: () => {
+          navigate('/');
+        },
+      });
     },
-    []
+    [createRequest, navigate, notification]
   );
-  const watchedPpe = watch('ppe');
+  const handleSubmitError = useCallback(
+    (e: APIError) => {
+      console.error(e);
+      const data = e.data;
+      if (!isSchemaValidationErrorData(data)) {
+        notification.showNotification({
+          color: 'red',
+          title: 'Cannot save supply',
+          message: 'Unexpected error occurred. Please try again.',
+          autoClose: 5000,
+        });
+        return;
+      }
+      data.detail.forEach((fieldError) => {
+        const { loc, msg, type } = fieldError;
+        let key = loc[loc.length - 1] as FieldPath<RegisterRequestForm>;
+        if (key === 'ppeTypes') {
+          // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
+          // select at least one of the PPE type.
+          key = 'ppeTypes.AlcoholHandGel.need';
+        }
+        setError(key, {
+          message: msg,
+          type: type,
+        });
+      });
+      notification.showNotification({
+        color: 'red',
+        title: 'Cannot save supply',
+        message: 'Problems saving details, please fix and try again.',
+        autoClose: 5000,
+      });
+    },
+    [notification, setError]
+  );
+  const watchedPpe = watch('ppeTypes');
   const watchedOrgType = watch('orgType');
   return (
     <div className={classes.scrollContainer}>
@@ -50,7 +105,11 @@ export const RequestPpe: React.FC = () => {
         </section>
         <section className={classes.section}>
           <DevTool control={control} />
-          <form onSubmit={handleSubmit(handleValidSubmit)}>
+          <form
+            onSubmit={async (e) =>
+              handleSubmit(handleValidSubmit)(e).catch(handleSubmitError)
+            }
+          >
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>Your Details</legend>
               <InputWrapper
@@ -102,12 +161,15 @@ export const RequestPpe: React.FC = () => {
                 label="Needs"
                 className={classes.inputWrapper}
                 description="Tick as many as apply"
+                // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
+                // select at least one of the PPE type.
+                error={errors.ppeTypes?.AlcoholHandGel?.need?.message}
                 required={true}
               >
                 {PPE_TYPES.map((ppeType) => (
                   <div key={ppeType}>
                     <Switch
-                      {...register(`ppe.${ppeType}.need`)}
+                      {...register(`ppeTypes.${ppeType}.need`)}
                       className={classes.switchInput}
                       label={PpeTypeName[ppeType]}
                       size="md"
@@ -233,9 +295,10 @@ export const RequestPpe: React.FC = () => {
               variant="filled"
               type="submit"
               color="blue"
+              disabled={isSubmitSuccessful}
               loading={isSubmitting}
             >
-              Save
+              {isSubmitSuccessful ? 'Saved!' : 'Save'}
             </Button>
           </form>
         </section>
