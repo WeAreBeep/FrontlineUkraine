@@ -59,7 +59,7 @@ services:
     build:
       context: ./src/core
       dockerfile: Dockerfile.dev
-    command: poetry run alembic upgrade head && poetry run uvicorn --host=0.0.0.0 app.main:app --port 3001
+    command: bash -c 'alembic upgrade head && uvicorn --reload --host=0.0.0.0 app.main:app --port 3001 --log-level=debug'
     ports:
       - 3001:3001
     volumes:
@@ -76,6 +76,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+      - POSTGRES_SCHEMA=frontlinelive
+      - 'BACKEND_CORS_ORIGINS=["http://localhost:3000"]'
       - SENTRY_DSN=
       - FIRST_SUPERUSER=admin@example.com
       - FIRST_SUPERUSER_PASSWORD=secret
