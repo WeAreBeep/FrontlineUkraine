@@ -20,14 +20,14 @@ export const PpeSupplySubForm: React.FC<
       'control' | 'formState' | 'register' | 'watch'
     >
 > = ({ ppeType, shouldUnregister, control, formState, register, watch }) => {
-  const watchedCostType = watch(`ppe.${ppeType}.costType`);
+  const watchedCostType = watch(`ppeTypes.${ppeType}.costType`);
   const { errors } = formState;
   const { classes } = useStyles();
   return (
     <div>
       {ppeType === PpeType.Other && (
         <TextInput
-          {...register(`ppe.${ppeType}.typeOther`, {
+          {...register(`ppeTypes.${ppeType}.typeOther`, {
             required: { value: true, message: VALIDATION_MSG.required },
             shouldUnregister,
           })}
@@ -38,13 +38,13 @@ export const PpeSupplySubForm: React.FC<
       )}
       <ReactHookFormRadioGroup
         control={control}
-        name={`ppe.${ppeType}.meetRegulations`}
+        name={`ppeTypes.${ppeType}.meetRegulations`}
         classNames={{ root: classes.inputWrapper }}
         rules={{
           required: { value: true, message: VALIDATION_MSG.required },
           shouldUnregister,
         }}
-        error={errors.ppe?.[ppeType]?.meetRegulations?.message}
+        error={errors.ppeTypes?.[ppeType]?.meetRegulations?.message}
         required={true}
         label="Meets Regulations"
         description={
@@ -62,13 +62,13 @@ export const PpeSupplySubForm: React.FC<
       </ReactHookFormRadioGroup>
       <ReactHookFormRadioGroup
         control={control}
-        name={`ppe.${ppeType}.costType`}
+        name={`ppeTypes.${ppeType}.costType`}
         classNames={{ root: classes.inputWrapper }}
         rules={{
           required: { value: true, message: VALIDATION_MSG.required },
           shouldUnregister,
         }}
-        error={errors.ppe?.[ppeType]?.costType?.message}
+        error={errors.ppeTypes?.[ppeType]?.costType?.message}
         label="Costs"
         description="How are you offering this type of PPE"
         variant="vertical"
@@ -81,21 +81,21 @@ export const PpeSupplySubForm: React.FC<
         <Textarea
           label="Other Cost Type"
           description="Describe how are you offering this type of PPE"
-          {...register(`ppe.${ppeType}.costTypeOther`, {
+          {...register(`ppeTypes.${ppeType}.costTypeOther`, {
             required: { value: true, message: VALIDATION_MSG.required },
             shouldUnregister,
           })}
-          error={errors.ppe?.[ppeType]?.costTypeOther?.message}
+          error={errors.ppeTypes?.[ppeType]?.costTypeOther?.message}
         />
       )}
       <ReactHookFormNumberInput
-        name={`ppe.${ppeType}.capacityPerWeek`}
+        name={`ppeTypes.${ppeType}.capacityPerWeek`}
         control={control}
         rules={{
           required: { value: true, message: VALIDATION_MSG.required },
           shouldUnregister,
         }}
-        error={errors.ppe?.[ppeType]?.capacityPerWeek?.message}
+        error={errors.ppeTypes?.[ppeType]?.capacityPerWeek?.message}
         className={classes.inputWrapper}
         label="Capacity"
         description="How many units you can supply per week"
@@ -104,13 +104,13 @@ export const PpeSupplySubForm: React.FC<
         step={1}
       />
       <ReactHookFormNumberInput
-        name={`ppe.${ppeType}.currentStock`}
+        name={`ppeTypes.${ppeType}.currentStock`}
         control={control}
         rules={{
           required: { value: true, message: VALIDATION_MSG.required },
           shouldUnregister,
         }}
-        error={errors.ppe?.[ppeType]?.currentStock?.message}
+        error={errors.ppeTypes?.[ppeType]?.currentStock?.message}
         className={classes.inputWrapper}
         label="Current Stock"
         description="How many units are available immediately"
@@ -119,13 +119,13 @@ export const PpeSupplySubForm: React.FC<
         step={1}
       />
       <ReactHookFormNumberInput
-        name={`ppe.${ppeType}.leadTimeInDays`}
+        name={`ppeTypes.${ppeType}.leadTimeInDays`}
         control={control}
         rules={{
           required: { value: true, message: VALIDATION_MSG.required },
           shouldUnregister,
         }}
-        error={errors.ppe?.[ppeType]?.leadTimeInDays?.message}
+        error={errors.ppeTypes?.[ppeType]?.leadTimeInDays?.message}
         className={classes.inputWrapper}
         label="Lead Time"
         description="Lead times on production in days"
@@ -134,8 +134,8 @@ export const PpeSupplySubForm: React.FC<
         step={1}
       />
       <Textarea
-        {...register(`ppe.${ppeType}.notes`)}
-        error={errors.ppe?.[ppeType]?.notes?.message}
+        {...register(`ppeTypes.${ppeType}.notes`)}
+        error={errors.ppeTypes?.[ppeType]?.notes?.message}
         className={classes.inputWrapper}
         label="Notes"
         description="Any additional notes"
