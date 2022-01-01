@@ -6,6 +6,7 @@ from .need import Need
 from .need_note import NeedNote
 from .need_ppe_type import NeedPpeType
 from .note import Note
+from .org_type import OrgType
 from .post_status import PostStatus
 from .postcode_region import PostcodeRegion
 from .ppe_status import PpeStatus
