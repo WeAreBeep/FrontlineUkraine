@@ -1,5 +1,5 @@
 variable "environment_name" {
-  type  = string
+  type = string
 }
 
 variable "container_registry_name" {
@@ -23,24 +23,24 @@ variable "core_image_name" {
 }
 
 variable "public_web_image_tag" {
-  type    = string
+  type = string
 }
 
 variable "container_image_tag" {
-  type    = string
+  type = string
 }
 
 variable "core_image_tag" {
-  type    = string
+  type = string
 }
 
 variable "sql_admin_login" {
-  type = string
+  type    = string
   default = "frontline"
 }
 
 variable "sql_admin_password" {
-  type = string
+  type      = string
   sensitive = true
 }
 
@@ -53,6 +53,6 @@ variable "mapbox_token" {
 }
 
 variable "core_api_key" {
-  type = string
+  type    = string
   default = "DUMMY"
 }
