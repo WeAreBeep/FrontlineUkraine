@@ -17,11 +17,20 @@ variable "public_web_image_name" {
   default = "public-web"
 }
 
+variable "core_image_name" {
+  type    = string
+  default = "core"
+}
+
 variable "public_web_image_tag" {
   type    = string
 }
 
 variable "container_image_tag" {
+  type    = string
+}
+
+variable "core_image_tag" {
   type    = string
 }
 
@@ -41,4 +50,9 @@ variable "app_service_custom_domain_list" {
 
 variable "mapbox_token" {
   type = string
+}
+
+variable "core_api_key" {
+  type = string
+  default = "DUMMY"
 }

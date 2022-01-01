@@ -40,6 +40,7 @@ terraform plan \
     -var "container_image_tag=$GITHUB_RUN_NUMBER" \
     -var "public_web_image_tag=$GITHUB_RUN_NUMBER" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
+    -var "core_api_key=$APP_CORE_API_KEY" \
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
     -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"
@@ -50,6 +51,7 @@ terraform apply -auto-approve \
     -var "container_image_tag=$GITHUB_RUN_NUMBER" \
     -var "public_web_image_tag=$GITHUB_RUN_NUMBER" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
+    -var "core_api_key=$APP_CORE_API_KEY" \
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
     -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"
