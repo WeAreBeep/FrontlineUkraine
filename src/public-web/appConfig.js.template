@@ -1,3 +1,5 @@
 window.appConfig = {
   mapboxToken: "${REACT_APP_MAPBOX_TOKEN}",
+  apiKey: "${REACT_APP_API_KEY}",
+  apiEndpoint: "${REACT_APP_API_ENDPOINT}",
 };
