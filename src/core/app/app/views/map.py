@@ -101,6 +101,7 @@ class SupplierMapPointData(MapBase):
     website_html: str = dataclasses.field(init=False)
 
     def __post_init__(self):
+        super(SupplierMapPointData, self).__post_init__()
         self.website_valid = self.website is not None and len(self.website) != 0
         self.website_html = (
             f"<a class='website_link' target='_blank' title='Visit supplier website' href='{self.website}'><i class='fas fa-link fa-2x'></i></a>"
