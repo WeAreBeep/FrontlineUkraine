@@ -109,6 +109,8 @@ resource "azurerm_app_service" "core" {
     POSTGRES_SCHEMA                 = "frontlinelive"
     // To prevent cycle, we should register custom domain later
     BACKEND_CORS_ORIGINS            = "[\"https://${local.public_web_app_service_default_site_hostname}\"]"
+    // Specify Sentry DSN if any
+    SENTRY_DSN                      = ""
   }
 
   depends_on = [
