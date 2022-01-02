@@ -81,10 +81,10 @@ class Settings(BaseSettings):
         )
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"  # type: ignore
-    FIRST_SUPERUSER: EmailStr
-    FIRST_SUPERUSER_PASSWORD: str
+    FIRST_SUPERUSER: EmailStr = "admin@example.com"  # type: ignore
+    FIRST_SUPERUSER_PASSWORD: str = "dummy"
     USERS_OPEN_REGISTRATION: bool = False
-    CELERY_BROKER_URL: str
+    CELERY_BROKER_URL: str = ""
 
     class Config:
         case_sensitive = True
