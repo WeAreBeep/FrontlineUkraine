@@ -108,7 +108,9 @@ resource "azurerm_app_service" "core" {
     POSTGRES_DB                     = azurerm_postgresql_database.pgsql_db.name
     POSTGRES_SCHEMA                 = "frontlinelive"
     // To prevent cycle, we should register custom domain later
-    BACKEND_CORS_ORIGINS            = "[\"https://${local.core_app_service_default_site_hostname}\"]"
+    BACKEND_CORS_ORIGINS            = "[\"https://${local.public_web_app_service_default_site_hostname}\"]"
+    // Specify Sentry DSN if any
+    SENTRY_DSN                      = ""
   }
 
   depends_on = [
