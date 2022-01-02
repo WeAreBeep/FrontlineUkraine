@@ -1,6 +1,7 @@
 import secrets
 from typing import Any, Dict, List, Optional, Union
 
+from urllib.parse import quote
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
 
 
@@ -46,8 +47,8 @@ class Settings(BaseSettings):
             return v
         return PostgresDsn.build(
             scheme="postgresql",
-            user=values.get("POSTGRES_USER"),
-            password=values.get("POSTGRES_PASSWORD"),
+            user=quote(values.get("POSTGRES_USER")),
+            password=quote(values.get("POSTGRES_PASSWORD")),
             host=values.get("POSTGRES_SERVER"),
             path=f"/{values.get('POSTGRES_DB') or ''}",
             query=f"options=-csearch_path%3D{values.get('POSTGRES_SCHEMA', '$user')},public",
