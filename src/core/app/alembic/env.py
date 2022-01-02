@@ -2,6 +2,7 @@ from __future__ import with_statement
 
 import os
 
+from urllib.parse import quote
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
@@ -31,8 +32,8 @@ target_metadata = FLBase.metadata
 
 
 def get_url():
-    user = os.getenv("POSTGRES_USER", "postgres")
-    password = os.getenv("POSTGRES_PASSWORD", "")
+    user = quote(os.getenv("POSTGRES_USER", "postgres"))
+    password = quote(os.getenv("POSTGRES_PASSWORD", ""))
     server = os.getenv("POSTGRES_SERVER", "db")
     db = os.getenv("POSTGRES_DB", "app")
     schema = os.getenv("POSTGRES_SCHEMA", "public")
