@@ -103,7 +103,7 @@ resource "azurerm_app_service" "core" {
     SERVER_NAME                     = local.core_app_service_default_site_hostname
     SERVER_HOST                     = "https://${local.core_app_service_default_site_hostname}"
     POSTGRES_SERVER                 = azurerm_postgresql_server.pgsql_svr.fqdn
-    POSTGRES_USER                   = var.sql_admin_login
+    POSTGRES_USER                   = "${var.sql_admin_login}@${azurerm_postgresql_server.pgsql_svr.fqdn}"
     POSTGRES_PASSWORD               = var.sql_admin_password
     POSTGRES_DB                     = azurerm_postgresql_database.pgsql_db.name
     POSTGRES_SCHEMA                 = "frontlinelive"
