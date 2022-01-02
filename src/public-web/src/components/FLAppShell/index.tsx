@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { AppShell, CSSObject, MantineTheme } from '@mantine/core';
 import { FLHeader } from '../FLHeader';
 import { FLFooter } from '../FLFooter';
-import { getThemePrimaryColor } from '../../utils/mantine';
+import { getThemePrimaryColor, tablet } from '../../utils/mantine';
 import { FOOTER_HEIGHT, useStyles } from './style';
 import { FLNavbar } from '../FLNavbar';
 import { useScrollLock } from '@mantine/hooks';
@@ -20,7 +20,9 @@ function makeGetAppShellCss(
     minHeight: '100vh',
     backgroundColor:
       background === 'white' ? theme.white : getThemePrimaryColor(theme),
-    paddingBottom: FOOTER_HEIGHT,
+    [tablet(theme)]: {
+      paddingBottom: FOOTER_HEIGHT,
+    },
   });
 }
 
