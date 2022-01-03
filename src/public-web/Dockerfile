@@ -2,7 +2,7 @@ FROM node:16.0-buster AS builder
 
 WORKDIR /app
 
-COPY ./Makefile ./package.json ./package-lock.json ./
+COPY ./Makefile ./package.json ./package-lock.json ./patches/ ./
 
 RUN make vendor
 
