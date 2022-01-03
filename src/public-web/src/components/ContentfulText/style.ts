@@ -16,14 +16,14 @@ export const useStyles = createStyles({
     },
     h1: {
       color: '#ffffff',
-      fontSize: '2.5em',
+      fontSize: '2.5rem',
       margin: '1rem auto',
       fontWeight: 500,
       lineHeight: '1.1em',
     },
     h2: {
       color: '#ffffff',
-      fontSize: '2.5em',
+      fontSize: '2rem',
       margin: '1rem auto',
       whiteSpace: 'normal',
       letterSpacing: '0.03em',
@@ -34,11 +34,11 @@ export const useStyles = createStyles({
     },
     p: {
       color: '#ffffff',
-      fontSize: '1em',
+      fontSize: '1rem',
       letterSpacing: '0.002em',
     },
     ul: {
-      fontSize: '1.25em',
+      fontSize: '1.2rem',
       color: '#ffffff',
     },
     'ul li > p': {
@@ -54,7 +54,7 @@ export const useStyles = createStyles({
       color: '#00966B',
     },
     '.bignumber': {
-      fontSize: '1.5em',
+      fontSize: '1.5rem',
       fontWeight: 700,
     },
     a: {
