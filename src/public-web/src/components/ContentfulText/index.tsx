@@ -52,6 +52,7 @@ export const ContentfulText: React.FC<Props> = ({ contentType, inverted }) => {
       <div
         className={cn(classes.contentfulText, {
           [classes.contentfulTextInverted]: inverted,
+          [classes.contentfulTextNormal]: inverted == null || !inverted,
         })}
         dangerouslySetInnerHTML={rawHtml}
       />

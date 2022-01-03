@@ -10,6 +10,14 @@ export const useStyles = createStyles((theme) => ({
       color: getThemePrimaryColor(theme),
     },
   },
+  contentfulTextNormal: {
+    'ul.hashtag_list li span': {
+      color: '#f7f0f0',
+    },
+    'h1, h2, p, ul, a': {
+      color: theme.white,
+    },
+  },
   contentfulText: {
     /* CONTENT */
     padding: '0 0.5rem',
@@ -20,18 +28,15 @@ export const useStyles = createStyles((theme) => ({
     },
     'ul.hashtag_list li span': {
       fontWeight: 'normal',
-      color: '#f7f0f0',
       marginLeft: '0.5rem',
     },
     h1: {
-      color: '#ffffff',
       fontSize: '2.5rem',
       margin: '1rem auto',
       fontWeight: 500,
       lineHeight: '1.1em',
     },
     h2: {
-      color: '#ffffff',
       fontSize: '2rem',
       margin: '1rem auto',
       whiteSpace: 'normal',
@@ -42,13 +47,11 @@ export const useStyles = createStyles((theme) => ({
       whiteSpace: 'normal',
     },
     p: {
-      color: '#ffffff',
       fontSize: '1rem',
       letterSpacing: '0.002em',
     },
     ul: {
       fontSize: '1.2rem',
-      color: '#ffffff',
     },
     'ul li > p': {
       marginBlockStart: 0,
@@ -60,14 +63,13 @@ export const useStyles = createStyles((theme) => ({
       marginBlockEnd: 0,
     },
     '.inverted': {
-      color: '#00966B',
+      color: getThemePrimaryColor(theme),
     },
     '.bignumber': {
       fontSize: '1.5rem',
       fontWeight: 700,
     },
     a: {
-      color: '#ffffff',
       '&:hover': {
         color: '#000000',
       },
