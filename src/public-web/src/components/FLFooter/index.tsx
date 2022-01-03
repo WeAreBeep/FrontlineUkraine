@@ -2,6 +2,8 @@ import React from 'react';
 import { Group } from '@mantine/core';
 import cn from 'classnames';
 import { useStyles } from './style';
+import { Link } from 'react-router-dom';
+import { RouteType } from '../../routes';
 
 export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
   const { classes } = useStyles();
@@ -16,9 +18,12 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
         <div className={classes.container}>
           <span>Charity Reg Number 191225&nbsp;</span>
           <span>
-            <a className={classes.footerLinkItem} href="/terms-and-conditions">
+            <Link
+              className={classes.footerLinkItem}
+              to={RouteType.TermsAndConditions}
+            >
               Terms and Conditions
-            </a>
+            </Link>
           </span>
         </div>
         <div className={classes.container}>
@@ -35,7 +40,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
           style={{ listStyle: 'none', display: 'flex', marginBlock: 0 }}
         >
           <li className={classes.footerLinkItem}>
-            <a href="/contact-us">Contact Us</a>
+            <Link to={RouteType.ContactUs}>Contact Us</Link>
           </li>
           <li className={classes.footerLinkItem}>
             <a href="https://careers.smartrecruiters.com/frontlinelive">

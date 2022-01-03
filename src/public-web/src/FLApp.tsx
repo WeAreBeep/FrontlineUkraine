@@ -16,6 +16,11 @@ const InnerFLApp: React.FC = () => {
     },
     { path: RouteType.About, element: <Containers.About /> },
     { path: RouteType.Partners, element: <Containers.Partners /> },
+    { path: RouteType.ContactUs, element: <Containers.ContactUs /> },
+    {
+      path: RouteType.TermsAndConditions,
+      element: <Containers.TermsAndConditions />,
+    },
     { path: RouteType.Landing, element: <Containers.Landing /> },
   ]);
   return (
