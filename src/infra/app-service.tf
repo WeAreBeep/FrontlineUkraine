@@ -79,6 +79,10 @@ resource "azurerm_app_service" "public_web" {
     REACT_APP_MAPBOX_TOKEN : var.mapbox_token
     REACT_APP_API_ENDPOINT : "https://${azurerm_app_service.core.default_site_hostname}/api"
     REACT_APP_API_KEY : var.core_api_key
+    // Contentful
+    REACT_APP_CONTENTFUL_DELIVERY_ACCESS_TOKEN = var.contentful_delivery_access_token
+    REACT_APP_CONTENTFUL_SPACE_ID = var.contentful_space_id
+    REACT_APP_CONTENTFUL_ENVIRONMENT = var.contentful_environment
   }
 }
 

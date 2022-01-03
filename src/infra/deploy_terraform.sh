@@ -42,6 +42,9 @@ terraform plan \
     -var "core_image_tag=$GITHUB_RUN_NUMBER" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
     -var "core_api_key=$APP_CORE_API_KEY" \
+    -var "contentful_delivery_access_token=$CONTENTFUL_DELIVERY_ACCESS_TOKEN"\
+    -var "contentful_space_id=$CONTENTFUL_SPACE_ID"\
+    -var "contentful_environment=$CONTENTFUL_ENVIRONMENT"\
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
     -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"
@@ -54,6 +57,9 @@ terraform apply -auto-approve \
     -var "core_image_tag=$GITHUB_RUN_NUMBER" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
     -var "core_api_key=$APP_CORE_API_KEY" \
+    -var "contentful_delivery_access_token=$CONTENTFUL_DELIVERY_ACCESS_TOKEN"\
+    -var "contentful_space_id=$CONTENTFUL_SPACE_ID"\
+    -var "contentful_environment=$CONTENTFUL_ENVIRONMENT"\
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
     -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"

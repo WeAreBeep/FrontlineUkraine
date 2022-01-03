@@ -56,3 +56,15 @@ variable "core_api_key" {
   type    = string
   default = "DUMMY"
 }
+
+variable "contentful_delivery_access_token" {
+  type = string
+}
+
+variable "contentful_space_id" {
+  type = string
+}
+
+variable "contentful_environment" {
+  type = string
+}
