@@ -43,7 +43,6 @@ export interface SchemaValidationErrorData {
 export function isSchemaValidationErrorData(
   v: any
 ): v is SchemaValidationErrorData {
-  console.log(v);
   return (
     typeof v === 'object' &&
     Array.isArray(v.detail) &&
