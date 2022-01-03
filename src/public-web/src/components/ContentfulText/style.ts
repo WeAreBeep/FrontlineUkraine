@@ -1,6 +1,15 @@
 import { createStyles } from '@mantine/core';
+import { getThemePrimaryColor } from '../../utils/mantine';
 
-export const useStyles = createStyles({
+export const useStyles = createStyles((theme) => ({
+  contentfulTextInverted: {
+    'ul.hashtag_list li span': {
+      color: getThemePrimaryColor(theme),
+    },
+    'h1, h2, p, ul, a': {
+      color: getThemePrimaryColor(theme),
+    },
+  },
   contentfulText: {
     /* CONTENT */
     padding: '0 0.5rem',
@@ -64,4 +73,4 @@ export const useStyles = createStyles({
       },
     },
   },
-});
+}));

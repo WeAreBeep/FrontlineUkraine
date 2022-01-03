@@ -3,9 +3,11 @@ import { CSSObject, Global, MantineTheme } from '@mantine/core';
 import { useStyles } from './style';
 import { useContentful } from 'react-contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import cn from 'classnames';
 
 interface Props {
   contentType: string;
+  inverted?: boolean;
 }
 
 function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
@@ -27,7 +29,7 @@ function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
   };
 }
 
-export const ContentfulText: React.FC<Props> = ({ contentType }) => {
+export const ContentfulText: React.FC<Props> = ({ contentType, inverted }) => {
   const { classes } = useStyles();
   const { data } = useContentful({
     contentType,
@@ -48,7 +50,9 @@ export const ContentfulText: React.FC<Props> = ({ contentType }) => {
     <>
       <Global styles={getVimeoGlobalStyle} />
       <div
-        className={classes.contentfulText}
+        className={cn(classes.contentfulText, {
+          [classes.contentfulTextInverted]: inverted,
+        })}
         dangerouslySetInnerHTML={rawHtml}
       />
     </>
