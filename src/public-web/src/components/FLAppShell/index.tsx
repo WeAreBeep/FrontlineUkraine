@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { AppShell, CSSObject, MantineTheme } from '@mantine/core';
 import { FLHeader } from '../FLHeader';
 import { FLFooter } from '../FLFooter';
-import { getThemePrimaryColor } from '../../utils/mantine';
+import { getThemePrimaryColor, tablet } from '../../utils/mantine';
 import { FOOTER_HEIGHT, useStyles } from './style';
+import { FLNavbar } from '../FLNavbar';
+import { useScrollLock } from '@mantine/hooks';
 
 type BackgroundColor = 'primary' | 'white';
 
@@ -18,19 +20,56 @@ function makeGetAppShellCss(
     minHeight: '100vh',
     backgroundColor:
       background === 'white' ? theme.white : getThemePrimaryColor(theme),
-    paddingBottom: FOOTER_HEIGHT,
+    [tablet(theme)]: {
+      paddingBottom: FOOTER_HEIGHT,
+    },
   });
 }
 
 export const FLAppShell: React.FC<Props> = ({ background, children }) => {
   const { classes } = useStyles();
+  const [_, setScrollLocked] = useScrollLock();
+  const [menuOpened, setMenuOpened] = useState(false);
+  const openMenu = useCallback(
+    (isMenuVisible: boolean) => {
+      setMenuOpened(isMenuVisible);
+      setScrollLocked(isMenuVisible);
+    },
+    [setScrollLocked]
+  );
+  const handleMenuToggle = useCallback(() => {
+    const isMenuVisible = !menuOpened;
+    openMenu(isMenuVisible);
+  }, [menuOpened, openMenu]);
+  const handleSiteLogoClick = useCallback(() => {
+    openMenu(false);
+  }, [openMenu]);
   const getAppShellCss = useMemo(
     () => makeGetAppShellCss(background),
     [background]
   );
   return (
     <>
-      <AppShell sx={getAppShellCss} header={<FLHeader />} padding={0}>
+      <AppShell
+        sx={getAppShellCss}
+        header={
+          <FLHeader
+            burgerOpened={menuOpened}
+            onBurgerClick={handleMenuToggle}
+            onSiteLogoClick={handleSiteLogoClick}
+          />
+        }
+        padding={0}
+        navbarOffsetBreakpoint="md"
+        navbar={
+          <FLNavbar
+            hiddenBreakpoint="md"
+            hidden={!menuOpened}
+            className={classes.navbar}
+            onClick={handleMenuToggle}
+          />
+        }
+      >
         <div className={classes.contentContainer}>{children}</div>
       </AppShell>
       <div className={classes.footerContainer}>

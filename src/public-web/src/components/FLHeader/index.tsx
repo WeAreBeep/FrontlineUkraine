@@ -1,12 +1,14 @@
 import React from 'react';
-import { CSSObject, Header, MantineTheme } from '@mantine/core';
+import { CSSObject, Header, MantineTheme, Burger } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './style';
 import { RouteType } from '../../routes';
+import { HEADER_HEIGHT } from '../FLAppShell/style';
 // import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import logoSrc from '../../assets/images/frontline_map_logo.png';
 import { getThemePrimaryColor } from '../../utils/mantine';
+import { MainLinks } from '../MainLinks';
 
 function getHeaderCss(theme: MantineTheme): CSSObject {
   return {
@@ -14,14 +16,30 @@ function getHeaderCss(theme: MantineTheme): CSSObject {
   };
 }
 
-export const FLHeader: React.FC = () => {
+interface Props {
+  burgerOpened: boolean;
+  onBurgerClick: () => void;
+  onSiteLogoClick: () => void;
+}
+
+export const FLHeader: React.FC<Props> = ({
+  burgerOpened,
+  onBurgerClick,
+  onSiteLogoClick,
+}) => {
   const { classes } = useStyles();
   return (
-    <Header height={96} padding="sm" sx={getHeaderCss}>
+    <Header height={HEADER_HEIGHT} padding="sm" sx={getHeaderCss} fixed={true}>
       <div className={classes.container}>
         <div className={classes.iconContainer}>
-          <Link to={RouteType.Landing} title="Home">
-            <img className={classes.logo} src={logoSrc} />
+          <Burger
+            className={classes.burger}
+            opened={burgerOpened}
+            onClick={onBurgerClick}
+            color="white"
+          />
+          <Link to={RouteType.Landing} title="Home" onClick={onSiteLogoClick}>
+            <img className={classes.logo} src={logoSrc} alt="Logo" />
           </Link>
 
           {/* <a
@@ -53,28 +71,7 @@ export const FLHeader: React.FC = () => {
           </a> */}
         </div>
 
-        <ul className={classes.linksContainer}>
-          <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.RequestPpe}>
-              REQUEST PPE
-            </Link>
-          </li>
-          <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.RegisterSupplies}>
-              GIVE PPE
-            </Link>
-          </li>
-          <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.About}>
-              ABOUT
-            </Link>
-          </li>
-          <li className={classes.linkItem}>
-            <Link className={classes.link} to={RouteType.Partners}>
-              PARTNERS
-            </Link>
-          </li>
-        </ul>
+        <MainLinks variant="header" className={classes.linksContainer} />
       </div>
     </Header>
   );

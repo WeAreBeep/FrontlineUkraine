@@ -1,6 +1,7 @@
 import { createStyles } from '@mantine/core';
+import { tablet } from '../../utils/mantine';
 
-export const useStyles = createStyles(() => {
+export const useStyles = createStyles((theme) => {
   return {
     container: {
       display: 'flex',
@@ -12,28 +13,21 @@ export const useStyles = createStyles(() => {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
+    burger: {
+      marginRight: theme.spacing.xl,
+      display: 'block',
+      [tablet(theme)]: {
+        display: 'none',
+      },
+    },
     logo: {
-      height: 60,
+      height: '3rem',
     },
     linksContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      listStyle: 'none',
-    },
-    linkItem: {
-      padding: '0 1rem',
-      fontSize: '1.45rem',
-      letterSpacing: '0.05rem',
-      fontWeight: 700,
-    },
-    link: {
-      textDecoration: 'none',
-      transition: 'all 1s ease-out',
-
-      color: '#ffffff',
-      '&:hover': {
-        color: '#000000',
+      display: 'none',
+      margin: 0,
+      [tablet(theme)]: {
+        display: 'flex',
       },
     },
   };
