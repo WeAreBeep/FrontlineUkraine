@@ -35,6 +35,7 @@ export const useStyles = createStyles((theme) => ({
       paddingTop: HEADER_HEIGHT,
       minHeight: 0,
       height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`,
+      overflowY: 'scroll',
     },
   },
 }));
