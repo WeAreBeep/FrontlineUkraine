@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { CSSObject, Global, MantineTheme } from '@mantine/core';
 import { useStyles } from './style';
+import {useContentful} from "react-contentful";
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 interface Props {
-  html: string;
+  contentType: string;
 }
 
 function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
@@ -25,14 +27,29 @@ function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
   };
 }
 
-export const ContentfulText: React.FC<Props> = ({ html }) => {
+export const ContentfulText: React.FC<Props> = ({ contentType }) => {
   const { classes } = useStyles();
+  const { data } = useContentful({
+    contentType,
+    include: 1
+  });
+  const rawHtml = useMemo(() => {
+    const doc = data == null ? null : (data as any).items[0].fields.content;
+    if (doc) {
+      return {
+        __html: documentToHtmlString(doc, {}),
+      }
+    }
+    return {
+      __html: ''
+    };
+  }, [data])
   return (
     <>
       <Global styles={getVimeoGlobalStyle} />
       <div
         className={classes.contentfulText}
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={rawHtml}
       />
     </>
   );
