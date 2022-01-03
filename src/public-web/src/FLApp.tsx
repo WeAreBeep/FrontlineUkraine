@@ -1,11 +1,20 @@
 import React from 'react';
 import { useRoutes, BrowserRouter } from 'react-router-dom';
+import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { RouteType } from './routes';
 import * as Containers from './containers';
 import { FLAppShell } from './components/FLAppShell';
 import { APIContextProvider } from './contexts/APIContext';
+import {config} from "./config";
+
+// @ts-expect-error
+const contentfulClient = new ContentfulClient({
+  accessToken: config.contentful.deliveryApiKey,
+  space: config.contentful.spaceId,
+  environment: config.contentful.environment,
+});
 
 const InnerFLApp: React.FC = () => {
   const Match = useRoutes([
@@ -24,9 +33,11 @@ const InnerFLApp: React.FC = () => {
     { path: RouteType.Landing, element: <Containers.Landing /> },
   ]);
   return (
-    <APIContextProvider>
-      <FLAppShell>{Match}</FLAppShell>
-    </APIContextProvider>
+    <ContentfulProvider client={contentfulClient}>
+      <APIContextProvider>
+        <FLAppShell>{Match}</FLAppShell>
+      </APIContextProvider>
+    </ContentfulProvider>
   );
 };
 
