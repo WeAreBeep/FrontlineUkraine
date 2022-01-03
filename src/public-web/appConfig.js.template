@@ -2,4 +2,10 @@ window.appConfig = {
   mapboxToken: "${REACT_APP_MAPBOX_TOKEN}",
   apiKey: "${REACT_APP_API_KEY}",
   apiEndpoint: "${REACT_APP_API_ENDPOINT}",
+  contentful: {
+    deliveryApiKey: "${REACT_APP_CONTENTFUL_DELIVERY_API_KEY}",
+    spaceId: "${REACT_APP_CONTENTFUL_SPACE_ID}",
+    environment: "${REACT_APP_CONTENTFUL_ENVIRONMENT}",
+    usePreviewApi: "${REACT_APP_CONTENTFUL_USE_PREVIEW_API}",
+  },
 };
