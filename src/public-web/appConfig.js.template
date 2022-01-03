@@ -3,7 +3,7 @@ window.appConfig = {
   apiKey: "${REACT_APP_API_KEY}",
   apiEndpoint: "${REACT_APP_API_ENDPOINT}",
   contentful: {
-    deliveryApiKey: "${REACT_APP_CONTENTFUL_DELIVERY_API_KEY}",
+    deliveryApiKey: "${REACT_APP_CONTENTFUL_DELIVERY_ACCESS_TOKEN}",
     spaceId: "${REACT_APP_CONTENTFUL_SPACE_ID}",
     environment: "${REACT_APP_CONTENTFUL_ENVIRONMENT}",
     usePreviewApi: "${REACT_APP_CONTENTFUL_USE_PREVIEW_API}",
