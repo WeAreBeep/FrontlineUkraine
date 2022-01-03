@@ -50,14 +50,14 @@ export const FeedContent: React.FC = () => {
     time/ services and over 500,000 units of PPE delivered.&nbsp;
   </p>
   <p>
-    <iframe
-      class="bordered"
-      src="https://player.vimeo.com/video/427037095?title=0&amp;byline=0&amp;portrait=0"
-      width="540"
-      height="310"
-      frameBorder="0"
-      allow="autoplay;"
-    ></iframe>
+    <div class="vimeo-container">
+      <iframe
+        class="bordered"
+        src="https://player.vimeo.com/video/427037095?title=0&amp;byline=0&amp;portrait=0"
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      ></iframe>
+    </div>  
   </p>
   <p></p>
   <h2 id="howitworks"> HOW IT HAS WORKED </h2>
@@ -67,14 +67,14 @@ export const FeedContent: React.FC = () => {
     support healthcare workers.
   </p>
   <p>
-    <iframe
-      class="bordered"
-      src="https://player.vimeo.com/video/432241181?title=0&amp;byline=0&amp;portrait=0"
-      width="540"
-      height="310"
-      frameBorder="0"
-      allow="autoplay"
-    ></iframe>
+    <div class="vimeo-container">
+      <iframe
+        class="bordered"
+        src="https://player.vimeo.com/video/432241181?title=0&amp;byline=0&amp;portrait=0"
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      ></iframe>
+    </div> 
   </p>
   <p></p>
   <div class="indent contentfulStyledList">
