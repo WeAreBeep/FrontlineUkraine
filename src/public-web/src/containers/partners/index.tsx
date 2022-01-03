@@ -1,8 +1,31 @@
 import React from 'react';
 import { useStyles } from './style';
+import { ContentfulText } from '../../components/ContentfulText';
+import { usePartnersData } from './hooks/usePartnersData';
+import { Group } from '@mantine/core';
 
 export const Partners: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { classes } = useStyles();
-  return <div>Partbers page</div>;
+  const { state, data } = usePartnersData();
+  return (
+    <div className={classes.container}>
+      <ContentfulText contentType="partners-page" inverted={true} />
+      <Group spacing="md">
+        {state === 'loaded' &&
+          data.map((partner) => (
+            <a
+              key={partner.title}
+              href={partner.websiteUrl}
+              className={classes.partner}
+            >
+              <img
+                src={partner.logo.url}
+                alt={partner.logo.description}
+                className={classes.partnerImg}
+              />
+            </a>
+          ))}
+      </Group>
+    </div>
+  );
 };
