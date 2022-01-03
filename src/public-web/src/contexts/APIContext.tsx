@@ -51,12 +51,17 @@ export function isSchemaValidationErrorData(
   );
 }
 
+function buildApiHref(endpoint: string, path: string): string {
+  const baseUrl = endpoint.endsWith('/') ? endpoint : `${endpoint}/`;
+  return new URL(path, baseUrl).href;
+}
+
 async function fetchApi(
   apiEndpoint: string,
   path: string,
   init: RequestInit
 ): Promise<any> {
-  const url = new URL(path, apiEndpoint).href;
+  const url = buildApiHref(apiEndpoint, path);
   const response = await fetch(url, init);
   const respData = await response.json();
   if (isStatusSuccess(response.status)) {
