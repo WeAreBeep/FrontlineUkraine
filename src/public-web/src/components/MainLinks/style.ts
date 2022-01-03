@@ -1,4 +1,5 @@
 import { createStyles } from '@mantine/core';
+import { getThemePrimaryColor } from '../../utils/mantine';
 
 export const useStyles = createStyles((theme) => {
   return {
@@ -12,15 +13,18 @@ export const useStyles = createStyles((theme) => {
       justifyContent: 'space-between',
     },
     navLinksContainer: {
-      listStyle: 'none',
-      padding: 0,
       display: 'block',
+      margin: 0,
+      padding: 0,
     },
     linkItem: {
       padding: '0 1rem',
       fontSize: '1.45rem',
       letterSpacing: '0.05rem',
       fontWeight: 700,
+    },
+    navLinkItem: {
+      padding: '0.5rem',
     },
     link: {
       textDecoration: 'none',
@@ -33,9 +37,10 @@ export const useStyles = createStyles((theme) => {
       },
     },
     navLink: {
-      color: theme.colors.dark[0],
+      color: getThemePrimaryColor(theme),
       '&:hover': {
-        color: theme.colors.dark[2],
+        textDecoration: 'underline',
+        filter: 'brightness(1.25)',
       },
     },
   };

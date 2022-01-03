@@ -17,24 +17,27 @@ export const MainLinks: React.FC<{
   onClick?: () => void;
 }> = ({ className, variant, onClick }) => {
   const { classes } = useStyles();
-  const { containerClassVariant, linkClassVariant } = useMemo(() => {
-    if (variant === 'header') {
+  const { containerClassVariant, linkItemVariant, linkClassVariant } =
+    useMemo(() => {
+      if (variant === 'header') {
+        return {
+          containerClassVariant: classes.headerLinksContainer,
+          linkClassVariant: classes.headerLink,
+          linkItemVariant: null,
+        };
+      }
       return {
-        containerClassVariant: classes.headerLinksContainer,
-        linkClassVariant: classes.headerLink,
+        containerClassVariant: classes.navLinksContainer,
+        linkClassVariant: classes.navLink,
+        linkItemVariant: classes.navLinkItem,
       };
-    }
-    return {
-      containerClassVariant: classes.navLinksContainer,
-      linkClassVariant: classes.navLink,
-    };
-  }, [classes, variant]);
+    }, [classes, variant]);
   return (
     <ul
       className={cn(classes.linksContainer, containerClassVariant, className)}
     >
       {links.map(({ routeType, name }) => (
-        <li key={routeType} className={classes.linkItem}>
+        <li key={routeType} className={cn(classes.linkItem, linkItemVariant)}>
           <Link
             className={cn(classes.link, linkClassVariant)}
             to={routeType}
