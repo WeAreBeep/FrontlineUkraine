@@ -83,7 +83,8 @@
     "test:dev": "node scripts/test.js --watchAll",
     "test:cov": "node scripts/test.js --collectCoverage",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
-    "format": "prettier --write --list-different 'src/**/*.{js,jsx,ts,tsx}' 'config/**/*.{js,jsx,ts,tsx}'"
+    "format": "prettier --write --list-different 'src/**/*.{js,jsx,ts,tsx}' 'config/**/*.{js,jsx,ts,tsx}'",
+    "postinstall": "patch-package"
   },
   "eslintConfig": {
     "extends": [
@@ -164,6 +165,7 @@
     "@hookform/devtools": "4.0.1",
     "@oursky/eslint-plugin": "7.0.0",
     "eslint": "7.32.0",
+    "patch-package": "^6.4.7",
     "prettier": "2.5.1"
   }
 }

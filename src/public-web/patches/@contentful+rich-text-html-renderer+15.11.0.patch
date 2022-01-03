@@ -1,0 +1,16 @@
+diff --git a/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js b/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
+index 7b5f6ee..c4d7484 100644
+--- a/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
++++ b/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
+@@ -8128,7 +8128,10 @@ function nodeListToHtmlString(nodes, _a) {
+ function nodeToHtmlString(node, _a) {
+     var renderNode = _a.renderNode, renderMark = _a.renderMark;
+     if (dist_2.isText(node)) {
+-        var nodeValue = escapeHtml_1(node.value);
++        // NOTE: Remove escape functionality here since we need to support raw HTML editing in
++        //  Contentful WYSIWYG editor
++        // var nodeValue = escapeHtml_1(node.value);
++        var nodeValue = node.value;
+         if (node.marks.length > 0) {
+             return node.marks.reduce(function (value, mark) {
+                 if (!renderMark[mark.type]) {
