@@ -7,8 +7,13 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
   const { classes } = useStyles();
   return (
     <footer className={cn(className, classes.footer)}>
-      <Group align="center" position="apart">
-        <div className={classes.container} style={{ display: 'inline' }}>
+      <Group
+        className={classes.groupContainer}
+        align="center"
+        position="apart"
+        spacing="xs"
+      >
+        <div className={classes.container}>
           <span>Charity Reg Number 191225&nbsp;</span>
           <span>
             <a className={classes.footerLinkItem} href="/terms-and-conditions">
@@ -16,7 +21,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
             </a>
           </span>
         </div>
-        <div className={classes.container} style={{ display: 'inline' }}>
+        <div className={classes.container}>
           This site is open source
           <a
             className={classes.footerLinkItem}
@@ -25,7 +30,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
             Contribute
           </a>
         </div>
-        <ol
+        <ul
           className={classes.container}
           style={{ listStyle: 'none', display: 'flex', marginBlock: 0 }}
         >
@@ -37,7 +42,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
               Volunteer
             </a>
           </li>
-        </ol>
+        </ul>
       </Group>
     </footer>
   );
