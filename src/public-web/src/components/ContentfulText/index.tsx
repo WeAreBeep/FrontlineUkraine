@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import { CSSObject, Global, MantineTheme } from '@mantine/core';
 import { useStyles } from './style';
-import {useContentful} from "react-contentful";
+import { useContentful } from 'react-contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 interface Props {
@@ -31,19 +31,19 @@ export const ContentfulText: React.FC<Props> = ({ contentType }) => {
   const { classes } = useStyles();
   const { data } = useContentful({
     contentType,
-    include: 1
+    include: 1,
   });
   const rawHtml = useMemo(() => {
     const doc = data == null ? null : (data as any).items[0].fields.content;
     if (doc) {
       return {
         __html: documentToHtmlString(doc, {}),
-      }
+      };
     }
     return {
-      __html: ''
+      __html: '',
     };
-  }, [data])
+  }, [data]);
   return (
     <>
       <Global styles={getVimeoGlobalStyle} />

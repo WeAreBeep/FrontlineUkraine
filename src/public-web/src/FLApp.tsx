@@ -7,7 +7,7 @@ import { RouteType } from './routes';
 import * as Containers from './containers';
 import { FLAppShell } from './components/FLAppShell';
 import { APIContextProvider } from './contexts/APIContext';
-import {config} from "./config";
+import { config } from './config';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
