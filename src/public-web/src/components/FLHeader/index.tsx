@@ -19,9 +19,14 @@ function getHeaderCss(theme: MantineTheme): CSSObject {
 interface Props {
   burgerOpened: boolean;
   onBurgerClick: () => void;
+  onSiteLogoClick: () => void;
 }
 
-export const FLHeader: React.FC<Props> = ({ burgerOpened, onBurgerClick }) => {
+export const FLHeader: React.FC<Props> = ({
+  burgerOpened,
+  onBurgerClick,
+  onSiteLogoClick,
+}) => {
   const { classes } = useStyles();
   return (
     <Header height={HEADER_HEIGHT} padding="sm" sx={getHeaderCss} fixed={true}>
@@ -33,7 +38,7 @@ export const FLHeader: React.FC<Props> = ({ burgerOpened, onBurgerClick }) => {
             onClick={onBurgerClick}
             color="white"
           />
-          <Link to={RouteType.Landing} title="Home">
+          <Link to={RouteType.Landing} title="Home" onClick={onSiteLogoClick}>
             <img className={classes.logo} src={logoSrc} alt="Logo" />
           </Link>
 

@@ -30,11 +30,20 @@ export const FLAppShell: React.FC<Props> = ({ background, children }) => {
   const { classes } = useStyles();
   const [_, setScrollLocked] = useScrollLock();
   const [menuOpened, setMenuOpened] = useState(false);
+  const openMenu = useCallback(
+    (isMenuVisible: boolean) => {
+      setMenuOpened(isMenuVisible);
+      setScrollLocked(isMenuVisible);
+    },
+    [setScrollLocked]
+  );
   const handleMenuToggle = useCallback(() => {
     const isMenuVisible = !menuOpened;
-    setMenuOpened(isMenuVisible);
-    setScrollLocked(isMenuVisible);
-  }, [menuOpened, setScrollLocked]);
+    openMenu(isMenuVisible);
+  }, [menuOpened, openMenu]);
+  const handleSiteLogoClick = useCallback(() => {
+    openMenu(false);
+  }, [openMenu]);
   const getAppShellCss = useMemo(
     () => makeGetAppShellCss(background),
     [background]
@@ -47,6 +56,7 @@ export const FLAppShell: React.FC<Props> = ({ background, children }) => {
           <FLHeader
             burgerOpened={menuOpened}
             onBurgerClick={handleMenuToggle}
+            onSiteLogoClick={handleSiteLogoClick}
           />
         }
         padding={0}
