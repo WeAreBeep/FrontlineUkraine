@@ -119,9 +119,7 @@ export const RequestPpe: React.FC = () => {
                 description="Check this if you do not wish your name to be published on the Frontline Map"
               >
                 <Switch
-                  {...register('publishAnonymously', {
-                    required: { value: true, message: VALIDATION_MSG.required },
-                  })}
+                  {...register('publishAnonymously')}
                   size="md"
                 />
               </InputWrapper>
