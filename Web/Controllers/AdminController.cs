@@ -37,7 +37,8 @@ namespace Web.Controllers
 			IQueryable<Request> data;
             if (status != null)
             {
-                data = dataContext.Requests.Where(s => s.StatusId == (int)status);
+                // NOTE: This is a workaround for https://github.com/dotnet/efcore/issues/21770
+                data = dataContext.Requests.Where(s => s.StatusId == status.GetHashCode());
             }
             else
             {
