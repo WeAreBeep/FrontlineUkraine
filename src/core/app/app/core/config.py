@@ -1,7 +1,7 @@
 import secrets
 from typing import Any, Dict, List, Optional, Union
-
 from urllib.parse import quote
+
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
 
 

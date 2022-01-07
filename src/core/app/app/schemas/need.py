@@ -1,10 +1,12 @@
+from datetime import timezone
 from typing import List, Optional
 
 from pydantic import EmailStr, conint, validator
 
-from app.models import OrgType, PpeTypeEnum
+from app.models import Need, NeedPpeType, OrgType, PpeStatus, PpeTypeEnum
 
 from .base import BaseModel
+from .record import Record
 from .utils import map_enum_from_name
 
 
@@ -60,3 +62,34 @@ class NeedCreate(BaseModel):
         has_can = len(v) != 0
         assert has_can, "Please choose at least one PPE Type which you can supply"
         return v
+
+
+class PublicNeedPpeType(BaseModel):
+    status: PpeStatus
+    ppe_type: PpeTypeEnum
+    ppe_type_other: Optional[str]
+
+    @classmethod
+    def from_data(cls, data: NeedPpeType) -> "PublicNeedPpeType":
+        return PublicNeedPpeType.construct(
+            status=PpeStatus(data.statusId),
+            ppe_type=PpeTypeEnum(data.ppeTypeId),
+            ppe_type_other=None if not data.ppeTypeOther else data.ppeTypeOther,
+        )
+
+
+class PublicNeed(Record):
+    ppe_types: List[PublicNeedPpeType]
+
+    @classmethod
+    def from_data(cls, data: Need) -> "PublicNeed":
+        return PublicNeed.construct(
+            id=data.id,
+            datetime=data.timestamp.astimezone(timezone.utc),
+            postcode=data.postcode,
+            latitude=data.latitude,
+            longitude=data.longitude,
+            organisation=data.organisationName,
+            ppe_types=[PublicNeedPpeType.from_data(p) for p in data.ppeTypes],
+            tweet_id=f"{data.tweetId}" if data.tweetId else None,
+        )

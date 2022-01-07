@@ -1,14 +1,20 @@
-import dataclasses
 import functools
-from datetime import datetime, timezone
-from decimal import Decimal
-from typing import Dict, List, Optional, Union
+from typing import Dict, List
 
+from geojson_pydantic import Point as GeoPoint
 from sqlalchemy.orm import Session
 
 from app import services
-from app.models import Need, NeedPpeType, PpeTypeEnum, Supplier, SupplierPpeType
-from app.schemas.map import FeedNew, MapData, Point, PointsList
+from app.models import PpeTypeEnum
+from app.schemas import PublicNeed, PublicSupply
+from app.schemas.map import (
+    FeatureData,
+    FeedNew,
+    MapData,
+    PointsBreakdown,
+    RecordFeature,
+    RecordFeatureCollection,
+)
 
 
 def get_ppe_type_enum_text(e: PpeTypeEnum) -> str:
@@ -51,118 +57,140 @@ TYPES_TO_CLASSES = {
 }
 
 
-def make_type_points_dict() -> Dict[str, List[Point]]:
+def make_type_points_breakdown_dict() -> Dict[PpeTypeEnum, RecordFeatureCollection]:
     result = {}
-    for k in TYPES_TO_CLASSES.keys():
-        result[k] = []
+    for k, v in PpeTypeEnum.__members__.items():
+        result[v] = RecordFeatureCollection(features=[])
     return result
 
 
-@dataclasses.dataclass
-class MapBase:
-    id: int
-    date_time: datetime
-    organisation: str
-    postcode: str
-    ppe_type_names: List[str] = dataclasses.field(init=False)
-    ppe_types: List[Union[SupplierPpeType, NeedPpeType]]
-    other_ppe_types: Optional[str] = dataclasses.field(init=False)
-    latitude: Optional[Decimal]
-    longitude: Optional[Decimal]
-    tweet_id: Optional[str]
-    posted_html: str = dataclasses.field(init=False)
-    location_array: List[Decimal] = dataclasses.field(init=False)
-
-    def __post_init__(self):
-        self.posted_html = "TODO"
-        self.ppe_type_names = [
-            get_ppe_type_enum_text(PpeTypeEnum(ppeType.ppeTypeId))
-            for ppeType in self.ppe_types
-        ]
-        other_ppe_types = [
-            p for p in self.ppe_types if PpeTypeEnum(p.ppeTypeId) == PpeTypeEnum.Other
-        ]
-        if len(other_ppe_types) != 0:
-            self.other_ppe_types = other_ppe_types[0].ppeTypeOther
-        self.location_array = [self.latitude, self.longitude]
-
-
-@dataclasses.dataclass
-class NeedMapPointData(MapBase):
-    pass
-
-
-@dataclasses.dataclass
-class SupplierMapPointData(MapBase):
-    description: str
-    capacity_notes: str
-    website: str
-    website_valid: bool = dataclasses.field(init=False)
-    website_html: str = dataclasses.field(init=False)
-
-    def __post_init__(self):
-        super(SupplierMapPointData, self).__post_init__()
-        self.website_valid = self.website is not None and len(self.website) != 0
-        self.website_html = (
-            f"<a class='website_link' target='_blank' title='Visit supplier website' href='{self.website}'><i class='fas fa-link fa-2x'></i></a>"
-            if self.website_valid
-            else None
-        )
-
-
-class MapPointDataFactory(object):
-    @classmethod
-    def from_need(cls, need: Need) -> NeedMapPointData:
-        return NeedMapPointData(
-            id=need.id,
-            date_time=need.timestamp.astimezone(timezone.utc),
-            postcode=need.postcode,
-            latitude=need.latitude,
-            longitude=need.longitude,
-            organisation=need.organisationName,
-            ppe_types=[p for p in need.ppeTypes],
-            tweet_id=f"{need.tweetId}",
-        )
-
-    @classmethod
-    def from_supplier(cls, supplier: Supplier) -> SupplierMapPointData:
-        return SupplierMapPointData(
-            id=supplier.id,
-            date_time=supplier.timestamp.astimezone(timezone.utc),
-            postcode=supplier.postcode,
-            latitude=supplier.latitude,
-            longitude=supplier.longitude,
-            organisation=supplier.name,
-            ppe_types=[p for p in supplier.ppeTypes],
-            tweet_id=None,
-            description=supplier.description,
-            capacity_notes=supplier.capacityNotes,
-            website=supplier.website,
-        )
+def _append_feature_to_breakdown(a, kv):
+    a[kv[0]].features.append(kv[1])
+    return a
 
 
 class MapDataFactory:
+    # TODO: Refactor factory
     @classmethod
-    def from_point_data(cls, *, data: List[MapBase]) -> MapData:
-        type_points_map = make_type_points_dict()
-        posts = []
-        for datum in data:
-            posts.append(Point(location=datum.location_array, popup_html="TODO"))
-            for ppe_type_name in datum.ppe_type_names:
-                type_points_map[ppe_type_name].append(
-                    Point(location=datum.location_array, popup_html="TODO")
-                )
+    def from_need_records(cls, *, data: List[PublicNeed]) -> MapData:
+        type_points_map = make_type_points_breakdown_dict()
+        posts = RecordFeatureCollection(features=[])
+        post_features = list(
+            map(
+                lambda d: {
+                    "post": RecordFeature.construct(
+                        id=f"{d.id}_post",
+                        geometry=GeoPoint.construct(coordinates=d.coordinate_array),
+                        properties=FeatureData.construct(
+                            record_type="need", record_id=int(d.id)
+                        ),
+                    ),
+                    "ppe_type_breakdowns": dict(
+                        map(
+                            lambda ppe_type_record: (
+                                ppe_type_record.ppe_type,
+                                RecordFeature.construct(
+                                    id=f"{d.id}_{ppe_type_record.ppe_type}",
+                                    geometry=GeoPoint.construct(
+                                        coordinates=d.coordinate_array
+                                    ),
+                                    properties=FeatureData(
+                                        record_type="need", record_id=int(d.id)
+                                    ),
+                                ),
+                            ),
+                            d.ppe_types,
+                        )
+                    ),
+                },
+                data,
+            )
+        )
+        posts.features.extend(list(map(lambda entry: entry["post"], post_features)))
+
+        functools.reduce(
+            lambda acc, curr: functools.reduce(
+                _append_feature_to_breakdown, curr["ppe_type_breakdowns"].items(), acc
+            ),
+            post_features,
+            type_points_map,
+        )
         return MapData(
             points_count=functools.reduce(
                 lambda x, y: x + y,
-                map(lambda point_list: len(point_list), type_points_map.values()),
+                map(
+                    lambda point_list: len(point_list.features),
+                    type_points_map.values(),
+                ),
                 0,
             ),
-            points_list=[
-                PointsList(
-                    ppe_type=key, class_name=TYPES_TO_CLASSES[key], points=point_list
+            points_breakdowns=[
+                PointsBreakdown.construct(
+                    type=key, geojson_feature_collection=collection
                 )
-                for (key, point_list) in type_points_map.items()
+                for (key, collection) in type_points_map.items()
+            ],
+            posts=posts,
+        )
+
+    @classmethod
+    def from_supply_records(cls, *, data: List[PublicSupply]) -> MapData:
+        type_points_map = make_type_points_breakdown_dict()
+        posts = RecordFeatureCollection(features=[])
+        post_features = list(
+            map(
+                lambda d: {
+                    "post": RecordFeature.construct(
+                        id=f"{d.id}_post",
+                        geometry=GeoPoint.construct(coordinates=d.coordinate_array),
+                        properties=FeatureData.construct(
+                            record_type="supply", record_id=int(d.id)
+                        ),
+                    ),
+                    "ppe_type_breakdowns": dict(
+                        map(
+                            lambda ppe_type_record: (
+                                ppe_type_record.ppe_type,
+                                RecordFeature.construct(
+                                    id=f"{d.id}_{ppe_type_record.ppe_type}",
+                                    geometry=GeoPoint.construct(
+                                        coordinates=d.coordinate_array
+                                    ),
+                                    properties=FeatureData(
+                                        record_type="supply", record_id=int(d.id)
+                                    ),
+                                ),
+                            ),
+                            d.ppe_types,
+                        )
+                    ),
+                },
+                data,
+            )
+        )
+        posts.features.extend(list(map(lambda entry: entry["post"], post_features)))
+
+        functools.reduce(
+            lambda acc, curr: functools.reduce(
+                _append_feature_to_breakdown, curr["ppe_type_breakdowns"].items(), acc
+            ),
+            post_features,
+            type_points_map,
+        )
+        return MapData(
+            points_count=functools.reduce(
+                lambda x, y: x + y,
+                map(
+                    lambda point_list: len(point_list.features),
+                    type_points_map.values(),
+                ),
+                0,
+            ),
+            points_breakdowns=[
+                PointsBreakdown.construct(
+                    type=key, geojson_feature_collection=collection
+                )
+                for (key, collection) in type_points_map.items()
             ],
             posts=posts,
         )
@@ -170,14 +198,22 @@ class MapDataFactory:
 
 def get_map_data(db: Session):
     result = services.map.get_map_data(db)
+    needs = [PublicNeed.from_data(n) for n in result.needs]
+    needs_met = [PublicNeed.from_data(n) for n in result.met]
+    supplies = [PublicSupply.from_data(s) for s in result.suppliers]
+
+    all_needs = []
+    all_needs.extend(needs_met)
+    all_needs.extend(needs)
+
+    need_dict = dict(map(lambda need: (need.id, need), all_needs))
+    supply_dict = dict(map(lambda supply: (supply.id, supply), supplies))
+
     return FeedNew(
-        needs=MapDataFactory.from_point_data(
-            data=[MapPointDataFactory.from_need(n) for n in result.needs]
-        ),
-        needs_met=MapDataFactory.from_point_data(
-            data=[MapPointDataFactory.from_need(n) for n in result.met]
-        ),
-        supplies=MapDataFactory.from_point_data(
-            data=[MapPointDataFactory.from_supplier(s) for s in result.suppliers]
-        ),
+        categories={
+            "needs": MapDataFactory.from_need_records(data=needs),
+            "needs_met": MapDataFactory.from_need_records(data=needs_met),
+            "supplies": MapDataFactory.from_supply_records(data=supplies),
+        },
+        records={"need": need_dict, "supply": supply_dict},
     )
