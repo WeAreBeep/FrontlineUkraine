@@ -5,6 +5,7 @@ import mapboxGl, {
   Expression,
   GeoJSONSource,
   Map as MapboxMap,
+  NavigationControl,
   Popup,
 } from 'mapbox-gl';
 import { config } from '../../../../config';
@@ -266,6 +267,13 @@ export const Map: React.FC = () => {
     mapRef.current.on('load', () => {
       setLoaded(true);
     });
+    mapRef.current.addControl(
+      new NavigationControl({
+        showCompass: true,
+        showZoom: true,
+      }),
+      'top-left'
+    );
   });
 
   useEffect(() => {
