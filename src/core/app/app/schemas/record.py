@@ -8,6 +8,7 @@ from .base import BaseModel
 class Record(BaseModel):
     id: int
     datetime: datetime
+    organisation: str
     postcode: str
     latitude: Optional[Decimal]
     longitude: Optional[Decimal]

@@ -89,7 +89,7 @@ class PublicNeed(Record):
             postcode=data.postcode,
             latitude=data.latitude,
             longitude=data.longitude,
-            organisation=data.organisationName,
+            organisation=f"{data.organisationName}",
             ppe_types=[PublicNeedPpeType.from_data(p) for p in data.ppeTypes],
             tweet_id=f"{data.tweetId}" if data.tweetId else None,
         )
