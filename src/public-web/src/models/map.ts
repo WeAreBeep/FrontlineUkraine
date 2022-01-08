@@ -1,6 +1,7 @@
 import GeoJSON from 'geojson';
 import { Need } from './need';
 import { Supply } from './supply';
+import { CategoryEnum } from '../containers/landing/type';
 
 /*
 {
@@ -35,13 +36,13 @@ interface PointsBreakdown {
 }
 
 interface Category {
-  pointCount: number;
+  pointsCount: number;
   pointsBreakdowns: PointsBreakdown[];
   posts: FLFeatureCollection;
 }
 
 export interface MapData {
-  categories: Record<string, Category>;
+  categories: Record<CategoryEnum, Category>;
   records: {
     need: Record<number, Need>;
     supply: Record<number, Supply>;

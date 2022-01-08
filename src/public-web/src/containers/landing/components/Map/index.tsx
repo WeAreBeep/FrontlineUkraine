@@ -383,6 +383,7 @@ export const Map: React.FC = () => {
         <MapControl
           visibility={categoryVisibilityMap}
           onVisibilityChange={setCategoryVisibilityMap}
+          mapData={mapData}
         />
       </div>
       <div ref={mapContainer} className={classes.map} />
