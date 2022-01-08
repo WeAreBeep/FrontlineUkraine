@@ -20,7 +20,7 @@ import { Supply } from './supply';
     "bbox": null
 }
 */
-interface FLFeatureProps {
+export interface FLFeatureProps {
   recordType: 'need' | 'supply';
   recordId: number;
 }

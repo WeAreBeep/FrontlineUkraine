@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import mapboxGl, {
   CirclePaint,
   Expression,
@@ -9,7 +10,7 @@ import mapboxGl, {
 import { config } from '../../../../config';
 import { useStyles } from './style';
 import { useAPIContext } from '../../../../contexts/APIContext';
-import { MapData } from '../../../../models/map';
+import { FLFeatureProps, MapData } from '../../../../models/map';
 import { Nullable } from '../../../../utils/nullable';
 import { getPpeTypeEnumFromInt, PpeTypeEnum } from '../../../../models/ppeType';
 import {
@@ -68,6 +69,7 @@ function addCluster(
     initialVisible,
     clusterColors,
     pointColor,
+    popupRenderer,
   }: {
     sourceId: string;
     clusterIdBase: string;
@@ -78,6 +80,7 @@ function addCluster(
       large: ClusterColor;
     };
     pointColor: PointColor;
+    popupRenderer: (props: FLFeatureProps) => React.ReactNode;
   }
 ) {
   const { clusterId, clusterCountId, unclusteredId } =
@@ -167,6 +170,44 @@ function addCluster(
   map.on('mouseleave', clusterId, () => {
     map.getCanvas().style.cursor = '';
   });
+
+  // When a click event occurs on a feature in
+  // the unclustered-point layer, open a popup at
+  // the location of the feature, with
+  // description HTML from its properties.
+  map.on('click', unclusteredId, (e) => {
+    const feature = e.features?.[0];
+    if (feature == null) return;
+    const point = feature.geometry;
+    if (point.type !== 'Point') return;
+    const coordinates = point.coordinates.slice();
+    const properties = feature.properties as FLFeatureProps;
+
+    // Ensure that if the map is zoomed out such that
+    // multiple copies of the feature are visible, the
+    // popup appears over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    new Popup()
+      .setLngLat(coordinates as [number, number])
+      .setOffset({
+        // Set offset to avoid overlapping with the marker
+        top: [0, 10],
+        bottom: [0, -10],
+        left: [10, 0],
+        right: [-10, 0],
+        'top-left': [5, 5],
+        'top-right': [-5, 5],
+        'bottom-left': [5, -5],
+        'bottom-right': [-5, -5],
+      })
+      .setHTML(
+        ReactDOMServer.renderToStaticMarkup(<>{popupRenderer(properties)}</>)
+      )
+      .addTo(map);
+  });
 }
 
 function setClusterVisibility(
@@ -175,6 +216,9 @@ function setClusterVisibility(
   visible: boolean
 ) {
   Object.values(getClusterId(clusterIdBase)).forEach((layerId) => {
+    const layer = map.getLayer(layerId);
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (layer == null) return;
     map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none');
   });
 }
@@ -239,6 +283,16 @@ export const Map: React.FC = () => {
         initialVisible: true,
         clusterColors: CLUSTER_COLORS[category],
         pointColor: { inner: POINT_COLORS[category] },
+        // eslint-disable-next-line react/no-unstable-nested-components
+        popupRenderer: ({ recordType, recordId }) => {
+          return (
+            <div>
+              <p>category: {category}</p>
+              <p>recordId: {recordId}</p>
+              <p>recordType: {recordType}</p>
+            </div>
+          );
+        },
       });
 
       mapData.categories[category].pointsBreakdowns.forEach(
@@ -262,35 +316,20 @@ export const Map: React.FC = () => {
               outer: POINT_COLORS[category],
               inner: PPE_TYPE_COLOR[ppeType],
             },
+            // eslint-disable-next-line react/no-unstable-nested-components
+            popupRenderer: ({ recordType, recordId }) => {
+              return (
+                <div>
+                  <p>category: {category}</p>
+                  <p>ppeType: {ppeType}</p>
+                  <p>recordId: {recordId}</p>
+                  <p>recordType: {recordType}</p>
+                </div>
+              );
+            },
           });
         }
       );
-    });
-
-    // When a click event occurs on a feature in
-    // the unclustered-point layer, open a popup at
-    // the location of the feature, with
-    // description HTML from its properties.
-    map.on('click', 'unclustered-point', (e) => {
-      const feature = e.features?.[0];
-      if (feature == null) return;
-      const point = feature.geometry;
-      if (point.type !== 'Point') return;
-      const coordinates = point.coordinates.slice();
-      const mag: string = feature.properties?.mag ?? '';
-      const tsunami = feature.properties?.tsunami === 1 ? 'yes' : 'no';
-
-      // Ensure that if the map is zoomed out such that
-      // multiple copies of the feature are visible, the
-      // popup appears over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      new Popup()
-        .setLngLat(coordinates as [number, number])
-        .setHTML(`magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`)
-        .addTo(map);
     });
   }, [mapData, loaded]);
 
@@ -298,7 +337,6 @@ export const Map: React.FC = () => {
     const map = mapRef.current;
     if (map == null) return;
     if (!loaded) return;
-    console.log(categoryVisibilityMap);
     Object.keys(categoryVisibilityMap).forEach((k) => {
       const category = k as CategoryEnum;
       const categoryVisibility = categoryVisibilityMap[category];
