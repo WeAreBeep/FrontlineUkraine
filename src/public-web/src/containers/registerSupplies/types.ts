@@ -1,4 +1,4 @@
-import { PpeType } from '../../models/ppeType';
+import { PpeTypeEnum } from '../../models/ppeType';
 
 export interface PpeSupplyTypeSubForm {
   can: boolean;
@@ -34,7 +34,7 @@ export interface RegisterSuppliesForm {
   phoneNumber: string;
   contactName: string;
   postcode: string;
-  ppeTypes: { [key in PpeType]: PpeSupplyTypeSubForm };
+  ppeTypes: { [key in PpeTypeEnum]: PpeSupplyTypeSubForm };
 }
 
 export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
@@ -48,17 +48,17 @@ export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
   contactName: '',
   postcode: '',
   ppeTypes: {
-    [PpeType.TypeIIRSurgicalMasks]: defaultPpeSupplyTypeSubForm,
-    [PpeType.FFP1RespiratorMasks]: defaultPpeSupplyTypeSubForm,
-    [PpeType.FFP2RespiratorMasks]: defaultPpeSupplyTypeSubForm,
-    [PpeType.FFP3RespiratorMasks]: defaultPpeSupplyTypeSubForm,
-    [PpeType.Gowns]: defaultPpeSupplyTypeSubForm,
-    [PpeType.Aprons]: defaultPpeSupplyTypeSubForm,
-    [PpeType.Gloves]: defaultPpeSupplyTypeSubForm,
-    [PpeType.Scrubs]: defaultPpeSupplyTypeSubForm,
-    [PpeType.SafetyGlasses]: defaultPpeSupplyTypeSubForm,
-    [PpeType.FaceVisors]: defaultPpeSupplyTypeSubForm,
-    [PpeType.AlcoholHandGel]: defaultPpeSupplyTypeSubForm,
-    [PpeType.Other]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.TypeIIRSurgicalMasks]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.FFP1RespiratorMasks]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.FFP2RespiratorMasks]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.FFP3RespiratorMasks]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.Gowns]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.Aprons]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.Gloves]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.Scrubs]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.SafetyGlasses]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.FaceVisors]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.AlcoholHandGel]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.Other]: defaultPpeSupplyTypeSubForm,
   },
 };

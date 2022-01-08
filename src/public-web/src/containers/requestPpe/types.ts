@@ -1,4 +1,4 @@
-import { PpeType } from '../../models/ppeType';
+import { PpeTypeEnum } from '../../models/ppeType';
 
 export interface PpeRequestTypeSubForm {
   need: boolean;
@@ -28,7 +28,7 @@ export interface RegisterRequestForm {
   addressLineTwo: string;
   postcode: string;
   tellUsMore: string;
-  ppeTypes: { [key in PpeType]: PpeRequestTypeSubForm };
+  ppeTypes: { [key in PpeTypeEnum]: PpeRequestTypeSubForm };
 }
 
 export const defaultRegisterRequestForm: RegisterRequestForm = {
@@ -46,17 +46,17 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
   postcode: '',
   tellUsMore: '',
   ppeTypes: {
-    [PpeType.TypeIIRSurgicalMasks]: defaultPpeRequestTypeSubForm,
-    [PpeType.FFP1RespiratorMasks]: defaultPpeRequestTypeSubForm,
-    [PpeType.FFP2RespiratorMasks]: defaultPpeRequestTypeSubForm,
-    [PpeType.FFP3RespiratorMasks]: defaultPpeRequestTypeSubForm,
-    [PpeType.Gowns]: defaultPpeRequestTypeSubForm,
-    [PpeType.Aprons]: defaultPpeRequestTypeSubForm,
-    [PpeType.Gloves]: defaultPpeRequestTypeSubForm,
-    [PpeType.Scrubs]: defaultPpeRequestTypeSubForm,
-    [PpeType.SafetyGlasses]: defaultPpeRequestTypeSubForm,
-    [PpeType.FaceVisors]: defaultPpeRequestTypeSubForm,
-    [PpeType.AlcoholHandGel]: defaultPpeRequestTypeSubForm,
-    [PpeType.Other]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.TypeIIRSurgicalMasks]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.FFP1RespiratorMasks]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.FFP2RespiratorMasks]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.FFP3RespiratorMasks]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.Gowns]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.Aprons]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.Gloves]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.Scrubs]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.SafetyGlasses]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.FaceVisors]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.AlcoholHandGel]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.Other]: defaultPpeRequestTypeSubForm,
   },
 };
