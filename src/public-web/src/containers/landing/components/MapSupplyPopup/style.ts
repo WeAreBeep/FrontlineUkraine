@@ -2,22 +2,11 @@ import { createStyles } from '@mantine/core';
 import { POINT_COLORS } from '../../constant';
 import { CategoryEnum } from '../../type';
 
-export const useStyles = createStyles((theme, _, getRef) => {
-  const needRef = getRef('need');
-  const needMetRef = getRef('needMet');
+export const useStyles = createStyles((theme) => {
   return {
-    need: {
-      ref: needRef,
-    },
-    needMet: {
-      ref: needMetRef,
-    },
     container: {
-      [`&.${needRef} h1, &.${needRef} dt`]: {
-        color: POINT_COLORS[CategoryEnum.Need],
-      },
-      [`&.${needMetRef} h1, &.${needMetRef} dt`]: {
-        color: POINT_COLORS[CategoryEnum.NeedMet],
+      [`h1, dt`]: {
+        color: POINT_COLORS[CategoryEnum.Supply],
       },
       dd: {
         marginInlineStart: theme.spacing.md,

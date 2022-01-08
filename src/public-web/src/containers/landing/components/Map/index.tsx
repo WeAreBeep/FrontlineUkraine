@@ -28,6 +28,7 @@ import {
 } from '../../constant';
 import { MapNeedPopup } from '../MapNeedPopup';
 import { PpeStatus } from '../../../../models/ppeStatus';
+import { MapSupplyPopup } from '../MapSupplyPopup';
 
 mapboxGl.accessToken = config.mapboxToken;
 
@@ -205,6 +206,7 @@ function addCluster(
         'bottom-left': [5, -5],
         'bottom-right': [-5, -5],
       })
+      .setMaxWidth('70%')
       .setHTML(
         ReactDOMServer.renderToStaticMarkup(<>{popupRenderer(properties)}</>)
       )
@@ -288,12 +290,7 @@ export const Map: React.FC = () => {
         // eslint-disable-next-line react/no-unstable-nested-components
         popupRenderer: ({ recordId }) => {
           if (category === CategoryEnum.Supply) {
-            return (
-              <div>
-                <p>category: {category}</p>
-                <p>recordId: {recordId}</p>
-              </div>
-            );
+            return <MapSupplyPopup supply={mapData.records.supply[recordId]} />;
           }
           return (
             <MapNeedPopup
@@ -334,10 +331,7 @@ export const Map: React.FC = () => {
             popupRenderer: ({ recordId }) => {
               if (category === CategoryEnum.Supply) {
                 return (
-                  <div>
-                    <p>category: {category}</p>
-                    <p>recordId: {recordId}</p>
-                  </div>
+                  <MapSupplyPopup supply={mapData.records.supply[recordId]} />
                 );
               }
               return (

@@ -93,7 +93,10 @@ export const MapNeedPopup: React.FC<Props> = ({
               })
               .map(({ ppeType }) => (
                 <li key={ppeType}>
-                  <PpeTypeEnumLabel ppeType={getPpeTypeEnumFromInt(ppeType)!} />
+                  <PpeTypeEnumLabel
+                    ppeType={getPpeTypeEnumFromInt(ppeType)!}
+                    variant="compact"
+                  />
                 </li>
               ))}
           </ul>

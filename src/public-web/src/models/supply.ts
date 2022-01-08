@@ -34,5 +34,8 @@ export interface Supply {
   longitude: string;
   organisation: string;
   tweetId: Nullable<string>;
+  description: Nullable<string>;
+  capacityNotes: Nullable<string>;
+  website: Nullable<string>;
   ppeTypes: PpeType[];
 }
