@@ -8,6 +8,7 @@ import { NeedPpeType } from './ppeType';
     "postcode": "POST_CODE",
     "latitude": 55.6789,
     "longitude": -1.2345,
+    "organisation": "Example",
     "tweetId": null,
     "ppeTypes": [
         {
@@ -29,6 +30,7 @@ export interface Need {
   postcode: string;
   latitude: number;
   longitude: string;
+  organisation: string;
   tweetId: Nullable<string>;
   ppeTypes: NeedPpeType[];
 }

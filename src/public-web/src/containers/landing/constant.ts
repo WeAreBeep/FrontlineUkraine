@@ -1,7 +1,11 @@
 import { CategoryEnum, ClusterColorStep } from './type';
 import { PpeTypeEnum } from '../../models/ppeType';
 
-export const CATEGORIES = ['needs', 'needs_met', 'supplies'];
+export const CATEGORIES: CategoryEnum[] = [
+  CategoryEnum.Need,
+  CategoryEnum.NeedMet,
+  CategoryEnum.Supply,
+];
 
 export const CLUSTER_COLORS: Record<string, ClusterColorStep> = {
   needs: {
@@ -52,10 +56,10 @@ export const CLUSTER_COLORS: Record<string, ClusterColorStep> = {
   },
 };
 
-export const POINT_COLORS: Record<string, string> = {
-  needs: '#A51A1A',
-  needs_met: '#0065cc',
-  supplies: '#00966B',
+export const POINT_COLORS: Record<CategoryEnum, string> = {
+  [CategoryEnum.Need]: '#A51A1A',
+  [CategoryEnum.NeedMet]: '#0065cc',
+  [CategoryEnum.Supply]: '#00966B',
 };
 
 export const CATEGORY_NAME: Record<CategoryEnum, string> = {

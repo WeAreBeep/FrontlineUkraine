@@ -1,11 +1,7 @@
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { CategoryEnum, CategoryVisibilityMap } from '../../type';
 import { Control, useController, useForm } from 'react-hook-form';
-import {
-  PPE_TYPES,
-  PpeTypeEnum,
-  PpeTypeName,
-} from '../../../../models/ppeType';
+import { PPE_TYPES, PpeTypeEnum } from '../../../../models/ppeType';
 import {
   Accordion,
   Checkbox,
@@ -16,7 +12,8 @@ import {
 } from '@mantine/core';
 import { ReactHookFormRadioGroup } from '../../../../components/ReactHookFormRadioGroup';
 import { useAccordionStyles, useStyles } from './style';
-import { CATEGORY_NAME, POINT_COLORS, PPE_TYPE_COLOR } from '../../constant';
+import { CATEGORY_NAME, POINT_COLORS } from '../../constant';
+import { PpeTypeEnumLabel } from '../PpeTypeEnumLabel';
 
 interface Props {
   visibility: CategoryVisibilityMap;
@@ -30,22 +27,6 @@ interface PpeTypeEnumCheckboxProps {
     | 'needs_met.breakdownVisibility'
     | 'supplies.breakdownVisibility';
 }
-
-const PpeTypeEnumLabel: React.FC<{ ppeType: PpeTypeEnum }> = ({ ppeType }) => {
-  const theme = useMantineTheme();
-  return (
-    <Group noWrap={true} spacing="xs">
-      <ColorSwatch
-        color={PPE_TYPE_COLOR[ppeType]}
-        size={theme.fontSizes.sm}
-        radius="xs"
-      />
-      <span style={{ fontSize: theme.fontSizes.sm }}>
-        {PpeTypeName[ppeType]}
-      </span>
-    </Group>
-  );
-};
 
 const PpeTypeEnumCheckbox: React.FC<PpeTypeEnumCheckboxProps> = ({
   control,

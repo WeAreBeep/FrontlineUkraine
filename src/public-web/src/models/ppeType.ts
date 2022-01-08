@@ -1,4 +1,3 @@
-import { PostStatus } from './postStatus';
 import { Nullable } from '../utils/nullable';
 
 export enum PpeTypeEnum {
@@ -55,10 +54,10 @@ export const PpeTypeName = {
 };
 
 export interface PpeType {
-  ppeType: PpeTypeEnum;
+  ppeType: number;
   ppeTypeOther: Nullable<string>;
 }
 
 export interface NeedPpeType extends PpeType {
-  status: PostStatus;
+  status: number; // TODO: Conversion from int to enum
 }

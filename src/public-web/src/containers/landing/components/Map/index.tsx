@@ -26,6 +26,8 @@ import {
   POINT_COLORS,
   PPE_TYPE_COLOR,
 } from '../../constant';
+import { MapNeedPopup } from '../MapNeedPopup';
+import { PpeStatus } from '../../../../models/ppeStatus';
 
 mapboxGl.accessToken = config.mapboxToken;
 
@@ -284,13 +286,25 @@ export const Map: React.FC = () => {
         clusterColors: CLUSTER_COLORS[category],
         pointColor: { inner: POINT_COLORS[category] },
         // eslint-disable-next-line react/no-unstable-nested-components
-        popupRenderer: ({ recordType, recordId }) => {
+        popupRenderer: ({ recordId }) => {
+          if (category === CategoryEnum.Supply) {
+            return (
+              <div>
+                <p>category: {category}</p>
+                <p>recordId: {recordId}</p>
+              </div>
+            );
+          }
           return (
-            <div>
-              <p>category: {category}</p>
-              <p>recordId: {recordId}</p>
-              <p>recordType: {recordType}</p>
-            </div>
+            <MapNeedPopup
+              need={mapData.records.need[recordId]}
+              allowStatuses={
+                category === CategoryEnum.Need
+                  ? [PpeStatus.New, PpeStatus.InProgress, PpeStatus.NotMet]
+                  : [PpeStatus.Met]
+              }
+              variant={category}
+            />
           );
         },
       });
@@ -317,14 +331,25 @@ export const Map: React.FC = () => {
               inner: PPE_TYPE_COLOR[ppeType],
             },
             // eslint-disable-next-line react/no-unstable-nested-components
-            popupRenderer: ({ recordType, recordId }) => {
+            popupRenderer: ({ recordId }) => {
+              if (category === CategoryEnum.Supply) {
+                return (
+                  <div>
+                    <p>category: {category}</p>
+                    <p>recordId: {recordId}</p>
+                  </div>
+                );
+              }
               return (
-                <div>
-                  <p>category: {category}</p>
-                  <p>ppeType: {ppeType}</p>
-                  <p>recordId: {recordId}</p>
-                  <p>recordType: {recordType}</p>
-                </div>
+                <MapNeedPopup
+                  need={mapData.records.need[recordId]}
+                  allowStatuses={
+                    category === CategoryEnum.Need
+                      ? [PpeStatus.New, PpeStatus.InProgress, PpeStatus.NotMet]
+                      : [PpeStatus.Met]
+                  }
+                  variant={category}
+                />
               );
             },
           });
