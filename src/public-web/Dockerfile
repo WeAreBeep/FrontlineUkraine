@@ -16,4 +16,5 @@ FROM nginx:stable
 COPY --from=builder /app/build/ /usr/share/nginx/html/
 
 COPY ./nginx/docker-entrypoint.d/ /docker-entrypoint.d/
+COPY ./nginx/templates/ /etc/nginx/templates/
 COPY ./appConfig.js.template /app/
