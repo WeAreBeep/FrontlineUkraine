@@ -73,16 +73,17 @@ resource "azurerm_app_service" "public_web" {
   }
 
   app_settings = {
-    DOCKER_REGISTRY_SERVER_URL      = "https://${data.azurerm_container_registry.acr.login_server}"
-    DOCKER_REGISTRY_SERVER_USERNAME = data.azurerm_container_registry.acr.admin_username
-    DOCKER_REGISTRY_SERVER_PASSWORD = data.azurerm_container_registry.acr.admin_password
-    REACT_APP_MAPBOX_TOKEN : var.mapbox_token
-    REACT_APP_API_ENDPOINT : "https://${azurerm_app_service.core.default_site_hostname}/api"
-    REACT_APP_API_KEY : var.core_api_key
+    DOCKER_REGISTRY_SERVER_URL                 = "https://${data.azurerm_container_registry.acr.login_server}"
+    DOCKER_REGISTRY_SERVER_USERNAME            = data.azurerm_container_registry.acr.admin_username
+    DOCKER_REGISTRY_SERVER_PASSWORD            = data.azurerm_container_registry.acr.admin_password
+    PUBLIC_URL                                 = "https://${local.public_web_app_service_default_site_hostname}"
+    REACT_APP_MAPBOX_TOKEN                     = var.mapbox_token
+    REACT_APP_API_ENDPOINT                     = "https://${azurerm_app_service.core.default_site_hostname}/api"
+    REACT_APP_API_KEY                          = var.core_api_key
     // Contentful
     REACT_APP_CONTENTFUL_DELIVERY_ACCESS_TOKEN = var.contentful_delivery_access_token
-    REACT_APP_CONTENTFUL_SPACE_ID = var.contentful_space_id
-    REACT_APP_CONTENTFUL_ENVIRONMENT = var.contentful_environment
+    REACT_APP_CONTENTFUL_SPACE_ID              = var.contentful_space_id
+    REACT_APP_CONTENTFUL_ENVIRONMENT           = var.contentful_environment
   }
 }
 
