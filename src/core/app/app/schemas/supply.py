@@ -1,10 +1,19 @@
+from datetime import timezone
 from typing import List, Optional
 
 from pydantic import EmailStr, conint, validator
 
-from app.models import CostType, MeetRegulations, PpeTypeEnum, SupplierType
+from app.models import (
+    CostType,
+    MeetRegulations,
+    PpeTypeEnum,
+    Supplier,
+    SupplierPpeType,
+    SupplierType,
+)
 
 from .base import BaseModel
+from .record import Record
 from .utils import map_enum_from_name
 
 
@@ -73,3 +82,44 @@ class SupplyCreate(BaseModel):
         has_can = len(v) != 0
         assert has_can, "Please choose at least one PPE Type which you can supply"
         return v
+
+
+class PublicSupplyPpeType(BaseModel):
+    ppe_type: PpeTypeEnum
+    ppe_type_other: Optional[str]
+
+    @validator("ppe_type_other")
+    def ppe_type_other_to_none_if_empty(cls, v):
+        if not v:
+            return None
+        return v
+
+    @classmethod
+    def from_data(cls, data: SupplierPpeType) -> "PublicSupplyPpeType":
+        return PublicSupplyPpeType.construct(
+            ppe_type=PpeTypeEnum(data.ppeTypeId),
+            ppe_type_other=None if not data.ppeTypeOther else data.ppeTypeOther,
+        )
+
+
+class PublicSupply(Record):
+    ppe_types: List[PublicSupplyPpeType]
+    description: str
+    capacity_notes: Optional[str]
+    website: Optional[str]
+
+    @classmethod
+    def from_data(cls, data: Supplier) -> "PublicSupply":
+        return PublicSupply.construct(
+            id=data.id,
+            datetime=data.timestamp.astimezone(timezone.utc),
+            postcode=data.postcode,
+            latitude=data.latitude,
+            longitude=data.longitude,
+            organisation=data.name,
+            ppe_types=[PublicSupplyPpeType.from_data(p) for p in data.ppeTypes],
+            tweet_id=None,
+            description=data.description,
+            capacity_notes=data.capacityNotes,
+            website=data.website,
+        )

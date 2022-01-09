@@ -1,4 +1,6 @@
-export enum PpeType {
+import { Nullable } from '../utils/nullable';
+
+export enum PpeTypeEnum {
   TypeIIRSurgicalMasks = 'TypeIIRSurgicalMasks',
   FFP1RespiratorMasks = 'FFP1RespiratorMasks',
   FFP2RespiratorMasks = 'FFP2RespiratorMasks',
@@ -13,34 +15,49 @@ export enum PpeType {
   Other = 'Other',
 }
 
-export const allPpeTypes = Object.keys(PpeType);
+export const allPpeTypes = Object.keys(PpeTypeEnum);
 
+// NOTE: Order matters, it represents the ordinal value
 export const PPE_TYPES = [
-  PpeType.TypeIIRSurgicalMasks,
-  PpeType.FFP1RespiratorMasks,
-  PpeType.FFP2RespiratorMasks,
-  PpeType.FFP3RespiratorMasks,
-  PpeType.Gowns,
-  PpeType.Aprons,
-  PpeType.Gloves,
-  PpeType.Scrubs,
-  PpeType.SafetyGlasses,
-  PpeType.FaceVisors,
-  PpeType.AlcoholHandGel,
-  PpeType.Other,
+  PpeTypeEnum.TypeIIRSurgicalMasks,
+  PpeTypeEnum.FFP1RespiratorMasks,
+  PpeTypeEnum.FFP2RespiratorMasks,
+  PpeTypeEnum.FFP3RespiratorMasks,
+  PpeTypeEnum.Gowns,
+  PpeTypeEnum.Aprons,
+  PpeTypeEnum.Gloves,
+  PpeTypeEnum.Scrubs,
+  PpeTypeEnum.SafetyGlasses,
+  PpeTypeEnum.FaceVisors,
+  PpeTypeEnum.AlcoholHandGel,
+  PpeTypeEnum.Other,
 ];
 
+export function getPpeTypeEnumFromInt(value: number): PpeTypeEnum | undefined {
+  // Starting from 1
+  return PPE_TYPES[value - 1];
+}
+
 export const PpeTypeName = {
-  [PpeType.TypeIIRSurgicalMasks]: 'Type IIR Surgical Masks',
-  [PpeType.FFP1RespiratorMasks]: 'FFP1 Respirator Masks',
-  [PpeType.FFP2RespiratorMasks]: 'FFP2 Respirator Masks',
-  [PpeType.FFP3RespiratorMasks]: 'FFP3 Respirator Masks',
-  [PpeType.Gowns]: 'Gowns',
-  [PpeType.Aprons]: 'Aprons',
-  [PpeType.Gloves]: 'Gloves',
-  [PpeType.Scrubs]: 'Scrubs',
-  [PpeType.SafetyGlasses]: 'Safety Glasses',
-  [PpeType.FaceVisors]: 'FaceVisors',
-  [PpeType.AlcoholHandGel]: 'Alcohol Hand Gel',
-  [PpeType.Other]: 'Other',
+  [PpeTypeEnum.TypeIIRSurgicalMasks]: 'Type IIR Surgical Masks',
+  [PpeTypeEnum.FFP1RespiratorMasks]: 'FFP1 Respirator Masks',
+  [PpeTypeEnum.FFP2RespiratorMasks]: 'FFP2 Respirator Masks',
+  [PpeTypeEnum.FFP3RespiratorMasks]: 'FFP3 Respirator Masks',
+  [PpeTypeEnum.Gowns]: 'Gowns',
+  [PpeTypeEnum.Aprons]: 'Aprons',
+  [PpeTypeEnum.Gloves]: 'Gloves',
+  [PpeTypeEnum.Scrubs]: 'Scrubs',
+  [PpeTypeEnum.SafetyGlasses]: 'Safety Glasses',
+  [PpeTypeEnum.FaceVisors]: 'Face Visors',
+  [PpeTypeEnum.AlcoholHandGel]: 'Alcohol Hand Gel',
+  [PpeTypeEnum.Other]: 'Other',
 };
+
+export interface PpeType {
+  ppeType: number;
+  ppeTypeOther: Nullable<string>;
+}
+
+export interface NeedPpeType extends PpeType {
+  status: number; // TODO: Conversion from int to enum
+}

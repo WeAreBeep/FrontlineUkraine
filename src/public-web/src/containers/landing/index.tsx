@@ -8,11 +8,11 @@ import { OurVoicesTimeline } from './components/OurVoicesTimeline';
 export const Landing: React.FC = () => {
   const { classes } = useStyles();
   return (
-    <Grid sx={{ height: '100%' }} gutter={0}>
-      <Col span={12} md={4} sx={{ maxHeight: '100%', overflowY: 'scroll' }}>
+    <Grid className={classes.gridContainer} gutter={0}>
+      <Col className={classes.feedContentContainer} span={12} md={4}>
         <FeedContent />
       </Col>
-      <Col span={12} md={8} sx={{ minHeight: 320 }}>
+      <Col className={classes.mapContainer} span={12} md={8}>
         <Map />
       </Col>
       <Col span={12}>

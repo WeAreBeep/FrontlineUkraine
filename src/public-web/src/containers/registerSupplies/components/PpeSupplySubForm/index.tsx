@@ -3,13 +3,13 @@ import { Radio, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturn } from 'react-hook-form';
 import { RegisterSuppliesForm } from '../../types';
 import { ReactHookFormRadioGroup } from '../../../../components/ReactHookFormRadioGroup';
-import { PpeType } from '../../../../models/ppeType';
+import { PpeTypeEnum } from '../../../../models/ppeType';
 import { ReactHookFormNumberInput } from '../../../../components/ReactHookFormNumberInput';
 import { useStyles } from '../../../requestPpe/components/PpeRequestSubForm/style';
 import { VALIDATION_MSG } from '../../../../utils/validation';
 
 interface Props {
-  ppeType: PpeType;
+  ppeType: PpeTypeEnum;
   shouldUnregister: boolean;
 }
 
@@ -25,7 +25,7 @@ export const PpeSupplySubForm: React.FC<
   const { classes } = useStyles();
   return (
     <div>
-      {ppeType === PpeType.Other && (
+      {ppeType === PpeTypeEnum.Other && (
         <TextInput
           {...register(`ppeTypes.${ppeType}.typeOther`, {
             required: { value: true, message: VALIDATION_MSG.required },

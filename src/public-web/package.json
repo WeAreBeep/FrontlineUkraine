@@ -44,6 +44,7 @@
     "jest": "^27.4.3",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
+    "mapbox-gl": "2.6.1",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -57,7 +58,6 @@
     "react-dev-utils": "^12.0.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "7.22.5",
-    "react-map-gl": "6.1.18",
     "react-refresh": "^0.11.0",
     "react-router-dom": "6.2.1",
     "react-twitter-widgets": "1.10.0",
@@ -164,6 +164,7 @@
   "devDependencies": {
     "@hookform/devtools": "4.0.1",
     "@oursky/eslint-plugin": "7.0.0",
+    "@types/mapbox-gl": "2.6.0",
     "eslint": "7.32.0",
     "patch-package": "^6.4.7",
     "prettier": "2.5.1"

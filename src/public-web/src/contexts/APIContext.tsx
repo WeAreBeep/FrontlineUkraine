@@ -2,7 +2,8 @@ import React, { createContext, useContext, useMemo } from 'react';
 import { RegisterSuppliesForm } from '../containers/registerSupplies/types';
 import { RegisterRequestForm } from '../containers/requestPpe/types';
 import { config } from '../config';
-import { PpeType } from '../models/ppeType';
+import { PpeTypeEnum } from '../models/ppeType';
+import { MapData } from '../models/map';
 
 function isStatusSuccess(status: number) {
   return status >= 200 && status < 400;
@@ -101,6 +102,7 @@ function useMakeRpc() {
 type Rpc = ReturnType<typeof useMakeRpc>;
 
 enum ActionType {
+  GetMapData = 'getMapData',
   CreateSupply = 'createSupply',
   CreateRequest = 'createRequest',
 }
@@ -110,10 +112,10 @@ function useMakeActions(rpc: Rpc) {
     () => ({
       [ActionType.CreateSupply]: async (form: RegisterSuppliesForm) => {
         const canSupplyPpeTypes = Object.keys(form.ppeTypes).filter(
-          (ppeType) => form.ppeTypes[ppeType as PpeType].can
+          (ppeType) => form.ppeTypes[ppeType as PpeTypeEnum].can
         );
         const ppeTypes = canSupplyPpeTypes.map((ppeType) => {
-          const { can, ...details } = form.ppeTypes[ppeType as PpeType];
+          const { can, ...details } = form.ppeTypes[ppeType as PpeTypeEnum];
           return {
             type: ppeType,
             ...details,
@@ -136,10 +138,10 @@ function useMakeActions(rpc: Rpc) {
       [ActionType.CreateRequest]: async (form: RegisterRequestForm) => {
         const { ppeTypes: ppeTypeDict, ...rest } = form;
         const needPpeTypes = Object.keys(ppeTypeDict).filter(
-          (ppeType) => form.ppeTypes[ppeType as PpeType].need
+          (ppeType) => form.ppeTypes[ppeType as PpeTypeEnum].need
         );
         const ppeTypes = needPpeTypes.map((ppeType) => {
-          const { need, ...details } = form.ppeTypes[ppeType as PpeType];
+          const { need, ...details } = form.ppeTypes[ppeType as PpeTypeEnum];
           return {
             type: ppeType,
             ...details,
@@ -150,6 +152,10 @@ function useMakeActions(rpc: Rpc) {
           ppeTypes,
         };
         return rpc.post('v1/need', data);
+      },
+      [ActionType.GetMapData]: async () => {
+        const resp = await rpc.get('v1/map');
+        return resp as MapData;
       },
     }),
     [rpc]
