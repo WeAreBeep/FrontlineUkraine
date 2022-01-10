@@ -73,6 +73,7 @@ resource "azurerm_app_service" "public_web" {
   }
 
   app_settings = {
+    NGINX_PORT                                 = 80
     DOCKER_REGISTRY_SERVER_URL                 = "https://${data.azurerm_container_registry.acr.login_server}"
     DOCKER_REGISTRY_SERVER_USERNAME            = data.azurerm_container_registry.acr.admin_username
     DOCKER_REGISTRY_SERVER_PASSWORD            = data.azurerm_container_registry.acr.admin_password
