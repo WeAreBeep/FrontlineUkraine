@@ -1,7 +1,7 @@
 # Supported environment: Unix-like / Powershell
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-DOCKER_COMPOSE_CMD := docker-compose -f $(SELF_DIR)docker-compose.dev.yml
+DOCKER_COMPOSE_CMD := docker-compose -f $(SELF_DIR)docker-compose.dev.yml -f $(SELF_DIR)docker-compose.override.yml
 
 ifeq (,${NO_DOCKER})
 DOCKER_RUN := $(DOCKER_COMPOSE_CMD) run --rm web

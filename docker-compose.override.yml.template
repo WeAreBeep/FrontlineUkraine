@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  public-web:
+  core:
     environment:
       - POSTTAG_ENDPOINT=DUMMY
       - POSTTAG_ID=DUMMY
