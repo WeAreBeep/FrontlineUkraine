@@ -27,7 +27,13 @@ setup:
 	@echo "Your public/appConfig.js now is"
 	@echo "================"
 	@cat ./src/public-web/public/appConfig.js
-	@echo "================"	
+	@echo "================"
+	@cp ./docker-compose.override.yml.template ./docker-compose.override.yml
+	@echo '[general]: Please update docker-compose.override.yml for your local development'
+	@echo "Your docker-compose.override.yml now is"
+	@echo "================"
+	@cat ./docker-compose.override.yml
+	@echo "================"
 
 
 .PHONY: db-setup

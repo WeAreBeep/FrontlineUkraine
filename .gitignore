@@ -560,3 +560,6 @@ MigrationBackup/
 
 # Jetbranins IDE related files
 .idea
+
+# Docker Compose
+docker-compose.override.yml
