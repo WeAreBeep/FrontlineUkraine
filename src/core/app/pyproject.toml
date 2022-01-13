@@ -25,6 +25,7 @@ pytest = "^5.4.1"
 python-jose = {extras = ["cryptography"], version = "^3.1.0"}
 SQLAlchemy = "1.4.29"
 geojson-pydantic = "^0.3.1"
+httpx = "0.21.3"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.770"
