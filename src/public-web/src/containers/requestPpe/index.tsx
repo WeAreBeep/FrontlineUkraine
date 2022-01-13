@@ -24,7 +24,7 @@ import {
   useAPIContext,
 } from '../../contexts/APIContext';
 import { ReactHookFormPosttagAddressAutocomplete } from '../../components/ReactHookFormPosttagAddressAutocomplete';
-import { PosttagAddressEntry } from '../../models/posttag';
+import { AddressEntry } from '../../models/posttag';
 
 export const RequestPpe: React.FC = () => {
   const { classes } = useStyles();
@@ -46,7 +46,7 @@ export const RequestPpe: React.FC = () => {
   });
   const { isSubmitting, errors, isSubmitSuccessful } = formState;
   const handleAddressSelect = useCallback(
-    (item: PosttagAddressEntry) => {
+    (item: AddressEntry) => {
       setValue('addressLineOne', item.addressLineOne);
       setValue('addressLineTwo', item.addressLineTwo);
     },
