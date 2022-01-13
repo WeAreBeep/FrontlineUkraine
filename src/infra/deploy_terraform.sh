@@ -47,7 +47,10 @@ terraform plan \
     -var "contentful_environment=$CONTENTFUL_ENVIRONMENT"\
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
-    -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"
+    -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST" \
+    -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
+    -var "posttag_id=$POSTTAG_ID" \
+    -var "posttag_api_key=$POSTTAG_API_KEY"
 
 echo "Applying Terraform Deployment..."
 
@@ -62,4 +65,7 @@ terraform apply -auto-approve \
     -var "contentful_environment=$CONTENTFUL_ENVIRONMENT"\
     -var "environment_name=$ENVIRONMENT_NAME" \
     -var "sql_admin_password=$SQL_ADMIN_PASSWORD" \
-    -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST"
+    -var "app_service_custom_domain_list=$CUSTOM_DOMAIN_LIST" \
+    -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
+    -var "posttag_id=$POSTTAG_ID" \
+    -var "posttag_api_key=$POSTTAG_API_KEY"
