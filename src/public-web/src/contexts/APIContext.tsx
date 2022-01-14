@@ -4,6 +4,7 @@ import { RegisterRequestForm } from '../containers/requestPpe/types';
 import { config } from '../config';
 import { PpeTypeEnum } from '../models/ppeType';
 import { MapData } from '../models/map';
+import { SearchAddressResponse } from '../models/posttag';
 
 function isStatusSuccess(status: number) {
   return status >= 200 && status < 400;
@@ -87,13 +88,18 @@ function useMakeRpc() {
         };
         return fetchApi(apiEndpoint, path, init);
       },
-      get: async (path: string) => {
+      get: async (path: string, searchParams?: URLSearchParams) => {
+        const query = searchParams?.toString();
+        let fullPath = path;
+        if (query) {
+          fullPath = `${fullPath}?${query}`;
+        }
         const init: RequestInit = {
           method: 'GET',
           mode: 'cors',
           headers,
         };
-        return fetchApi(apiEndpoint, path, init);
+        return fetchApi(apiEndpoint, fullPath, init);
       },
     };
   }, []);
@@ -105,6 +111,7 @@ enum ActionType {
   GetMapData = 'getMapData',
   CreateSupply = 'createSupply',
   CreateRequest = 'createRequest',
+  SearchAddress = 'searchAddress',
 }
 
 function useMakeActions(rpc: Rpc) {
@@ -156,6 +163,13 @@ function useMakeActions(rpc: Rpc) {
       [ActionType.GetMapData]: async () => {
         const resp = await rpc.get('v1/map');
         return resp as MapData;
+      },
+      [ActionType.SearchAddress]: async (postcode: string) => {
+        const params = new URLSearchParams({
+          term: postcode,
+        });
+        const resp = await rpc.get('v1/address', params);
+        return resp as SearchAddressResponse;
       },
     }),
     [rpc]

@@ -68,3 +68,15 @@ variable "contentful_space_id" {
 variable "contentful_environment" {
   type = string
 }
+
+variable "posttag_endpoint" {
+  type = string
+}
+
+variable "posttag_id" {
+  type = string
+}
+
+variable "posttag_api_key" {
+  type = string
+}

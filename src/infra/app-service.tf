@@ -117,6 +117,10 @@ resource "azurerm_app_service" "core" {
     BACKEND_CORS_ORIGINS            = "[\"https://${local.public_web_app_service_default_site_hostname}\"]"
     // Specify Sentry DSN if any
     SENTRY_DSN                      = ""
+    // Posttag
+    POSTTAG_ENDPOINT                = var.posttag_endpoint
+    POSTTAG_ID                      = var.posttag_id
+    POSTTAG_API_KEY                 = var.posttag_api_key
   }
 
   depends_on = [

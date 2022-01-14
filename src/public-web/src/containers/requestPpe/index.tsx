@@ -23,6 +23,8 @@ import {
   isSchemaValidationErrorData,
   useAPIContext,
 } from '../../contexts/APIContext';
+import { ReactHookFormPosttagAddressAutocomplete } from '../../components/ReactHookFormPosttagAddressAutocomplete';
+import { AddressEntry } from '../../models/posttag';
 
 export const RequestPpe: React.FC = () => {
   const { classes } = useStyles();
@@ -31,11 +33,25 @@ export const RequestPpe: React.FC = () => {
   const {
     actions: { createRequest },
   } = useAPIContext();
-  const { register, control, watch, handleSubmit, formState, setError } =
-    useForm<RegisterRequestForm>({
-      defaultValues: defaultRegisterRequestForm,
-    });
+  const {
+    register,
+    control,
+    watch,
+    handleSubmit,
+    formState,
+    setError,
+    setValue,
+  } = useForm<RegisterRequestForm>({
+    defaultValues: defaultRegisterRequestForm,
+  });
   const { isSubmitting, errors, isSubmitSuccessful } = formState;
+  const handleAddressSelect = useCallback(
+    (item: AddressEntry) => {
+      setValue('addressLineOne', item.addressLineOne);
+      setValue('addressLineTwo', item.addressLineTwo);
+    },
+    [setValue]
+  );
   const handleValidSubmit: SubmitHandler<RegisterRequestForm> = useCallback(
     async (data) => {
       await createRequest(data);
@@ -267,15 +283,18 @@ export const RequestPpe: React.FC = () => {
                 className={classes.inputWrapper}
                 label="Address line 2"
               />
-              <TextInput
-                {...register('postcode', {
+              <ReactHookFormPosttagAddressAutocomplete
+                control={control}
+                name="postcode"
+                rules={{
                   required: { value: true, message: VALIDATION_MSG.required },
-                })}
+                }}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
                 label="Postcode"
                 description="Will be added to the map to indicate location of your supplies"
                 required={true}
+                onAddressSelect={handleAddressSelect}
               />
               <Textarea
                 {...register('tellUsMore')}

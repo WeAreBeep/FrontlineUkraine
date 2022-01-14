@@ -1,7 +1,7 @@
 # Supported environment: Unix-like / Powershell
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-DOCKER_COMPOSE_CMD := docker-compose -f $(SELF_DIR)docker-compose.dev.yml
+DOCKER_COMPOSE_CMD := docker-compose -f $(SELF_DIR)docker-compose.dev.yml -f $(SELF_DIR)docker-compose.override.yml
 
 ifeq (,${NO_DOCKER})
 DOCKER_RUN := $(DOCKER_COMPOSE_CMD) run --rm web
@@ -27,7 +27,13 @@ setup:
 	@echo "Your public/appConfig.js now is"
 	@echo "================"
 	@cat ./src/public-web/public/appConfig.js
-	@echo "================"	
+	@echo "================"
+	@cp ./docker-compose.override.yml.template ./docker-compose.override.yml
+	@echo '[general]: Please update docker-compose.override.yml for your local development'
+	@echo "Your docker-compose.override.yml now is"
+	@echo "================"
+	@cat ./docker-compose.override.yml
+	@echo "================"
 
 
 .PHONY: db-setup
