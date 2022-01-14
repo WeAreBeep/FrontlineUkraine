@@ -2,7 +2,15 @@ import React from 'react';
 import { useStyles } from './style';
 
 export const ContactUs: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { classes } = useStyles();
-  return <div>Terms and conditions page</div>;
+  return <div className={classes.content}>
+    <h1>Contact Us</h1>
+
+    <p>
+      Please contact us by sending email to <a href="mailto:admin@example.com">admin@example.com</a>.
+    </p>
+    <p>
+      Thank you!
+    </p>
+  </div>;
 };
