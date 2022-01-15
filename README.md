@@ -14,7 +14,7 @@ Front Line Live code and target operating model
 ### Deployment secrets
 
 |Secret Name|Description|
-|-|-|
+|---|---|
 |ARM_ACCESS_KEY|Azure Storage Account used for TF remote state. See [here](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage).|
 |ARM_CLIENT_ID*||
 |ARM_CLIENT_SECRET*||
@@ -27,7 +27,7 @@ Front Line Live code and target operating model
 ### Application secrets
 
 |Secret Name|Description|
-|-|-|
+|---|---|
 |APP_DATA_SUPPLIERS_SHEET*|-|
 |APP_EMAIL_FROMADDRESS*|-|
 |APP_EMAIL_SENDGRIDKEY*|-|
