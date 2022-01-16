@@ -246,10 +246,6 @@ export const Map: React.FC = () => {
   const [mapData, setMapData] = useState<Nullable<MapData>>(null);
   const [loaded, setLoaded] = useState(false);
 
-  const [lng] = useState(-0.118092);
-  const [lat] = useState(51.509865);
-  const [zoom] = useState(8);
-
   const [categoryVisibilityMap, setCategoryVisibilityMap] = useState(
     defaultCategoryVisibilityMap
   );
@@ -260,8 +256,16 @@ export const Map: React.FC = () => {
     mapRef.current = new MapboxMap({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [lng, lat],
-      zoom: zoom,
+      // The bound of the UK
+      bounds: [
+        [-10.809872337116673, 49.300494132364435],
+        [9.028203002610155, 59.13892469548853],
+      ],
+      fitBoundsOptions: {
+        padding: 20,
+      },
+      minZoom: 1,
+      maxZoom: 18,
       pitchWithRotate: false,
     });
     mapRef.current.on('load', () => {

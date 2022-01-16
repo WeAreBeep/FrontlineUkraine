@@ -203,13 +203,13 @@ export const MapControl: React.FC<Props> = ({
             spacing="xs"
           >
             <Radio value="post">
-              Post{' '}
+              All requests{' '}
               {countMap?.[CategoryEnum.Need].posts && (
                 <i>{countMap[CategoryEnum.Need].posts}</i>
               )}
             </Radio>
             <Radio value="breakdown">
-              Breakdowns{' '}
+              Filter items{' '}
               {countMap?.[CategoryEnum.Need].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Need].totalBreakdowns}</i>
               )}
@@ -236,13 +236,13 @@ export const MapControl: React.FC<Props> = ({
             spacing="xs"
           >
             <Radio value="post">
-              Post{' '}
+              All requests{' '}
               {countMap?.[CategoryEnum.NeedMet].posts && (
                 <i>{countMap[CategoryEnum.NeedMet].posts}</i>
               )}
             </Radio>
             <Radio value="breakdown">
-              Breakdowns{' '}
+              Filter items{' '}
               {countMap?.[CategoryEnum.NeedMet].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.NeedMet].totalBreakdowns}</i>
               )}
@@ -269,13 +269,13 @@ export const MapControl: React.FC<Props> = ({
             spacing="xs"
           >
             <Radio value="post">
-              Post{' '}
+              All supplies{' '}
               {countMap?.[CategoryEnum.Supply].posts && (
                 <i>{countMap[CategoryEnum.Supply].posts}</i>
               )}
             </Radio>
             <Radio value="breakdown">
-              Breakdowns{' '}
+              Filter items{' '}
               {countMap?.[CategoryEnum.Supply].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Supply].totalBreakdowns}</i>
               )}

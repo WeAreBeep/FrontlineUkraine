@@ -59,8 +59,8 @@ export const RequestPpe: React.FC = () => {
         color: 'flGreen',
         title: 'Save Successful',
         message:
-          'Thanks you have been added to the database, we will be in contact in due course. You will be redirected to home page in 5 seconds.',
-        autoClose: 5000,
+          'Thanks you have been added to the database, we will be in contact in due course. You will be redirected to home page in 10 seconds.',
+        autoClose: 10000,
         onClose: () => {
           navigate('/');
         },
