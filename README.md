@@ -39,9 +39,12 @@ Front Line Live code and target operating model
 |APP_DATACONTEXT*|-|
 |WEB_USERSECRETSID*|-|
 |SQL_ADMIN_PASSWORD*|-|
-|CONTENTFUL_DELIVERY_ACCESS_TOKEN|Content Delivery API - access token|
-|CONTENTFUL_SPACE_ID|Contentful Space ID|
-|CONTENTFUL_ENVIRONMENT|Name of Contentful environment in use|
+|CONTENTFUL_DELIVERY_ACCESS_TOKEN*|Content Delivery API - access token|
+|CONTENTFUL_SPACE_ID*|Contentful Space ID|
+|CONTENTFUL_ENVIRONMENT*|Name of Contentful environment in use|
+|POSTTAG_ENDPOINT*|-|
+|POSTTAG_ID*|-|
+|POSTTAG_API_KEY*|-|
 
 ## Local development
 
