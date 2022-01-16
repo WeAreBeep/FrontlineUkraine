@@ -37,9 +37,9 @@ terraform workspace select $DEPLOY_WORKSPACE
 echo "Planning Terraform Deployment..."
 
 terraform plan \
-    -var "container_image_tag=$GITHUB_RUN_NUMBER" \
-    -var "public_web_image_tag=$GITHUB_RUN_NUMBER" \
-    -var "core_image_tag=$GITHUB_RUN_NUMBER" \
+    -var "container_image_tag=$IMAGE_TAG" \
+    -var "public_web_image_tag=$IMAGE_TAG" \
+    -var "core_image_tag=$IMAGE_TAG" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
     -var "core_api_key=$APP_CORE_API_KEY" \
     -var "contentful_delivery_access_token=$CONTENTFUL_DELIVERY_ACCESS_TOKEN"\
@@ -55,9 +55,9 @@ terraform plan \
 echo "Applying Terraform Deployment..."
 
 terraform apply -auto-approve \
-    -var "container_image_tag=$GITHUB_RUN_NUMBER" \
-    -var "public_web_image_tag=$GITHUB_RUN_NUMBER" \
-    -var "core_image_tag=$GITHUB_RUN_NUMBER" \
+    -var "container_image_tag=$IMAGE_TAG" \
+    -var "public_web_image_tag=$IMAGE_TAG" \
+    -var "core_image_tag=$IMAGE_TAG" \
     -var "mapbox_token=$APP_MAPBOX_TOKEN" \
     -var "core_api_key=$APP_CORE_API_KEY" \
     -var "contentful_delivery_access_token=$CONTENTFUL_DELIVERY_ACCESS_TOKEN"\

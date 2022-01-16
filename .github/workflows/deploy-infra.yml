@@ -1,10 +1,10 @@
-name: Build and Deploy
+name: Deploy infra change for revamp
 
 on:
   push:
-    branches: [ master ]
+    branches: [ deploy-infra ]
   pull_request:
-    branches: [ master ]
+    branches: [ deploy-infra ]
 
 env:
   ARM_CLIENT_ID: "${{ secrets.ARM_CLIENT_ID }}"
@@ -34,51 +34,9 @@ env:
   POSTTAG_ID: "${{ secrets.POSTTAG_ID }}"
   POSTTAG_API_KEY: "${{ secrets.POSTTAG_API_KEY }}"
 
-jobs:  
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Azure Container Registry Login
-        uses: Azure/docker-login@v1
-        with:
-           username: ${{ secrets.ACR_USERNAME }}
-           password: ${{ secrets.ACR_PASSWORD }}
-           login-server: ${{ secrets.ACR_SERVER }}
-
-      - name: Build and push
-        run: DOCKER_REGISTRY='frontlineacr2.azurecr.io/' TAG='${{ github.run_number }}' make docker-build docker-push
-
-  deploy_dev:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-
-    environment: Development
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-
-      - name: Terraform
-        run: ./deploy_terraform.sh 
-        shell: bash
-        working-directory: ./src/infra
-        env:
-          IMAGE_TAG: $GITHUB_RUN_NUMBER
-          DEPLOY_WORKSPACE: dev
-          ENVIRONMENT_NAME: Development
-          CUSTOM_DOMAIN_LIST: '["new-dev.frontline.live"]'
-          WEBSITE_CANONICAL_URL: "https://new-dev.frontline.live"
-          
-
+jobs:
   deploy_prod:
     runs-on: ubuntu-latest
-    needs: deploy_dev
 
     environment: Production
 
@@ -93,7 +51,8 @@ jobs:
         shell: bash
         working-directory: ./src/infra
         env:
-          IMAGE_TAG: $GITHUB_RUN_NUMBER
+          # Current production tag
+          IMAGE_TAG: 78
           DEPLOY_WORKSPACE: prod
           ENVIRONMENT_NAME: Production
           CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "new.frontline.live"]'
