@@ -5,8 +5,8 @@ import { RouteType } from '../../routes';
 import { useStyles } from './style';
 
 const links: { name: string; routeType: RouteType }[] = [
-  { routeType: RouteType.RequestPpe, name: 'REQUEST PPE' },
-  { routeType: RouteType.RegisterSupplies, name: 'GIVE PPE' },
+  { routeType: RouteType.RequestPpe, name: 'I NEED' },
+  { routeType: RouteType.RegisterSupplies, name: 'I HAVE' },
   { routeType: RouteType.About, name: 'ABOUT' },
   { routeType: RouteType.Partners, name: 'PARTNERS' },
 ];
