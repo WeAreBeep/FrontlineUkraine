@@ -44,17 +44,41 @@ variable "sql_admin_password" {
   sensitive = true
 }
 
-variable "app_service_custom_domain_list" {
+variable "core_custom_domain_list" {
   type = list(string)
 }
 
-variable "mapbox_token" {
-  type = string
+variable "core_server_host" {
+  type    = string
+}
+
+variable "core_cors_allowed_origins" {
+  type = list(string)
 }
 
 variable "core_api_key" {
   type    = string
   default = "DUMMY"
+}
+
+variable "web_custom_domain_list" {
+  type = list(string)
+}
+
+variable "publicweb_custom_domain_list" {
+  type = list(string)
+}
+
+variable "publicweb_public_url" {
+  type = string
+}
+
+variable "publicweb_api_endpoint" {
+  type = string
+}
+
+variable "mapbox_token" {
+  type = string
 }
 
 variable "contentful_delivery_access_token" {

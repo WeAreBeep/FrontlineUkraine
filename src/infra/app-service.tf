@@ -77,9 +77,9 @@ resource "azurerm_app_service" "public_web" {
     DOCKER_REGISTRY_SERVER_URL                 = "https://${data.azurerm_container_registry.acr.login_server}"
     DOCKER_REGISTRY_SERVER_USERNAME            = data.azurerm_container_registry.acr.admin_username
     DOCKER_REGISTRY_SERVER_PASSWORD            = data.azurerm_container_registry.acr.admin_password
-    PUBLIC_URL                                 = "https://${local.public_web_app_service_default_site_hostname}"
+    PUBLIC_URL                                 = var.publicweb_public_url
     REACT_APP_MAPBOX_TOKEN                     = var.mapbox_token
-    REACT_APP_API_ENDPOINT                     = "https://${azurerm_app_service.core.default_site_hostname}/api"
+    REACT_APP_API_ENDPOINT                     = var.publicweb_api_endpoint
     REACT_APP_API_KEY                          = var.core_api_key
     // Contentful
     REACT_APP_CONTENTFUL_DELIVERY_ACCESS_TOKEN = var.contentful_delivery_access_token
@@ -107,14 +107,13 @@ resource "azurerm_app_service" "core" {
     PORT                            = 80
     PROJECT_NAME                    = "Frontline.live"
     SERVER_NAME                     = local.core_app_service_default_site_hostname
-    SERVER_HOST                     = "https://${local.core_app_service_default_site_hostname}"
+    SERVER_HOST                     = var.core_server_host
     POSTGRES_SERVER                 = azurerm_postgresql_server.pgsql_svr.fqdn
     POSTGRES_USER                   = "${var.sql_admin_login}@${azurerm_postgresql_server.pgsql_svr.fqdn}"
     POSTGRES_PASSWORD               = var.sql_admin_password
     POSTGRES_DB                     = azurerm_postgresql_database.pgsql_db.name
     POSTGRES_SCHEMA                 = "frontlinelive"
-    // To prevent cycle, we should register custom domain later
-    BACKEND_CORS_ORIGINS            = "[\"https://${local.public_web_app_service_default_site_hostname}\"]"
+    BACKEND_CORS_ORIGINS            = jsonencode(var.core_cors_allowed_origins)
     // Specify Sentry DSN if any
     SENTRY_DSN                      = ""
     // Posttag
@@ -127,6 +126,12 @@ resource "azurerm_app_service" "core" {
     azurerm_postgresql_server.pgsql_svr,
     azurerm_postgresql_database.pgsql_db
   ]
+
+  site_config {
+    cors {
+      allowed_origins = var.core_cors_allowed_origins
+    }
+  }
 }
 
 resource "azurerm_application_insights" "insights" {
@@ -137,14 +142,38 @@ resource "azurerm_application_insights" "insights" {
   tags                = local.tags
 }
 
-resource "azurerm_app_service_custom_hostname_binding" "customHostnameBindng" {
-  count = length(var.app_service_custom_domain_list)
+resource "azurerm_app_service_custom_hostname_binding" "core_custom_hostname_binding" {
+  count = length(var.core_custom_domain_list)
 
-  hostname            = var.app_service_custom_domain_list[count.index]
+  hostname            = var.core_custom_domain_list[count.index]
+  app_service_name    = azurerm_app_service.core.name
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [
+    azurerm_app_service.core,
+  ]
+}
+
+resource "azurerm_app_service_custom_hostname_binding" "web_custom_hostname_binding" {
+  count = length(var.web_custom_domain_list)
+
+  hostname            = var.web_custom_domain_list[count.index]
   app_service_name    = azurerm_app_service.web.name
   resource_group_name = data.azurerm_resource_group.rg.name
 
   depends_on = [
     azurerm_app_service.web,
+  ]
+}
+
+resource "azurerm_app_service_custom_hostname_binding" "publicweb_custom_hostname_binding" {
+  count = length(var.publicweb_custom_domain_list)
+
+  hostname            = var.publicweb_custom_domain_list[count.index]
+  app_service_name    = azurerm_app_service.public_web.name
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [
+    azurerm_app_service.public_web,
   ]
 }
