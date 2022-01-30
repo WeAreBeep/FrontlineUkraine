@@ -98,6 +98,9 @@ resource "azurerm_app_service" "core" {
   site_config {
     always_on        = "true"
     linux_fx_version = "DOCKER|${local.core_image}"
+    cors {
+      allowed_origins = var.core_cors_allowed_origins
+    }
   }
 
   app_settings = {
@@ -126,12 +129,6 @@ resource "azurerm_app_service" "core" {
     azurerm_postgresql_server.pgsql_svr,
     azurerm_postgresql_database.pgsql_db
   ]
-
-  site_config {
-    cors {
-      allowed_origins = var.core_cors_allowed_origins
-    }
-  }
 }
 
 resource "azurerm_application_insights" "insights" {
