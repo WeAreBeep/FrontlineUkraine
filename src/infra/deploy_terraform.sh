@@ -54,7 +54,6 @@ terraform plan \
     -var "publicweb_public_url=$PUBLICWEB_PUBLIC_URL" \
     -var "publicweb_api_endpoint=$PUBLICWEB_API_ENDPOINT" \
     -var "web_custom_domain_list=$WEB_CUSTOM_DOMAIN_LIST" \
-    -var "website_canonical_url=$WEBSITE_CANONICAL_URL" \
     -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
     -var "posttag_id=$POSTTAG_ID" \
     -var "posttag_api_key=$POSTTAG_API_KEY"
@@ -79,7 +78,6 @@ terraform apply -auto-approve \
     -var "publicweb_public_url=$PUBLICWEB_PUBLIC_URL" \
     -var "publicweb_api_endpoint=$PUBLICWEB_API_ENDPOINT" \
     -var "web_custom_domain_list=$WEB_CUSTOM_DOMAIN_LIST" \
-    -var "website_canonical_url=$WEBSITE_CANONICAL_URL" \
     -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
     -var "posttag_id=$POSTTAG_ID" \
     -var "posttag_api_key=$POSTTAG_API_KEY"
