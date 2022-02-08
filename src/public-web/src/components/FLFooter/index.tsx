@@ -16,7 +16,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
         spacing="xs"
       >
         <div className={classes.container}>
-          <span>Charity Reg Number 191225&nbsp;</span>
+          <span>Charity Reg Number 1191255&nbsp;</span>
           <span>
             <Link
               className={classes.footerLinkItem}

@@ -9,7 +9,7 @@ export const ContactUs: React.FC = () => {
 
       <p>
         Please contact us by sending email to{' '}
-        <a href="mailto:frontline@wearebeep.com">frontline@wearebeep.com</a>.
+        <a href="mailto:hello@frontline.live">frontline@wearebeep.com</a>.
       </p>
       <p>Thank you!</p>
     </div>
