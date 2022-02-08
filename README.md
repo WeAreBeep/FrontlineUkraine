@@ -2,7 +2,7 @@
 
 Front Line Live code and target operating model
 
-- Description of the platorm
+- Description of the platform
 - Who built it
 - Why it's important
 - How to install your own instance
@@ -46,15 +46,21 @@ Front Line Live code and target operating model
 |POSTTAG_ID*|-|
 |POSTTAG_API_KEY*|-|
 
+### Domain names and CORS allowed origins setting
+Check [build_and_deploy.yml](.github/workflows/build_and_deploy.yml). For list values, they should be JSON encoded.
+
 ## Local development
 
 ### Technologies
 - Docker
 - Docker Compose
 - .NET core 3.1.401
+- PgSQL
+- Node.js 14 + React.js 17
+- Python 3.9 + FastAPI 0.71.0
 - SQL Server
 - Azure Data Studio (Non-Windows environment only)
-- GNU Make (For Windows user, you may install it using [Chocolatey](https://chocolatey.org/packages/make))
+- GNU Make (For Linux/ macOS users)
 
 ### Setup (Using GNU Make)
 ```sh
@@ -68,12 +74,23 @@ $ make dev
 #
 # You can start depending services in docker
 $ make -f Makefile.nodocker.mk docker-start-db
-# And then run the dotnet process in local
+# And then run the dotnet process in local for admin portal
 $ NO_DOCKER=1 MODULE=Web make dev
+#
+# For public-web
+$ NO_DOCKER=1 PORT=3002 MODULE=public-web make dev
+# For core API server
+$ NO_DOCKER=1 MODULE=core make dev
 ```
-After running above commands, visit http://localhost:3000 on browser and you should be able to see the web page.
+After running above commands, 
+- visit http://localhost:3000 on browser and you should be able to see the admin portal website;
+- visit http://localhost:3002 on browser and you should be able to see the public website.
 
 ### Setup (Using Visual Studio, Windows only)
 TODO: Provide Powershell setup script
 1. Copy `Web/appsettings.Development.json.template` to `Web/appsettings.Development.json`
 2. Start `db` container specified in `docker-compose.dev.yml` by docker-compose command
+
+
+## Diagrams
+- [ER diagram](docs/ERD.svg)
