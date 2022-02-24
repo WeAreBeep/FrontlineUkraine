@@ -13,6 +13,7 @@ SERVICES := web core celeryworker public-web
 
 .PHONY: setup
 setup:
+	@cp ./docker-compose.override.yml.template ./docker-compose.override.yml
 	@cp Web/appsettings.Development.json.template Web/appsettings.Development.json
 	@echo "Please update Web/appsettings.Development.json for your local development"
 	@echo "Your .env now is"
@@ -28,7 +29,6 @@ setup:
 	@echo "================"
 	@cat ./src/public-web/public/appConfig.js
 	@echo "================"
-	@cp ./docker-compose.override.yml.template ./docker-compose.override.yml
 	@echo '[general]: Please update docker-compose.override.yml for your local development'
 	@echo "Your docker-compose.override.yml now is"
 	@echo "================"
