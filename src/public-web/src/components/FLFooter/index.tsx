@@ -43,7 +43,7 @@ export const FLFooter: React.FC<{ className?: string }> = ({ className }) => {
             <Link to={RouteType.ContactUs}>Contact Us</Link>
           </li>
           <li className={classes.footerLinkItem}>
-            <a href="https://careers.smartrecruiters.com/frontlinelive">
+            <a href="https://www.goodsted.com/group/frontline-live/">
               Volunteer
             </a>
           </li>
