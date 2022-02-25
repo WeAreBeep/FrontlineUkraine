@@ -103,8 +103,8 @@ jobs:
           CORE_CUSTOM_DOMAIN_LIST: '["core.frontline.live"]'
           CORE_SERVER_HOST: 'https://core.frontline.live'
           CORE_CORS_ALLOWED_ORIGINS: '["https://beta.frontline.live", "https://admin.frontline.live", "https://www.frontline.live", "https://frontline.live"]'
-          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["beta.frontline.live"]'
+          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "beta.frontline.live"]'
           PUBLICWEB_PUBLIC_URL: 'https://beta.frontline.live'
           PUBLICWEB_API_ENDPOINT: 'https://core.frontline.live/api'
-          WEB_CUSTOM_DOMAIN_LIST: '["admin.frontline.live", "www.frontline.live", "frontline.live"]'
+          WEB_CUSTOM_DOMAIN_LIST: '["admin.frontline.live"]'
           WEBSITE_CANONICAL_URL: "https://www.frontline.live"
