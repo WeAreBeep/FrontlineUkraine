@@ -59,7 +59,7 @@ services:
     build:
       context: ./src/core
       dockerfile: Dockerfile.dev
-    command: bash -c 'alembic upgrade head && uvicorn --reload --host=0.0.0.0 app.main:app --port 3001 --log-level=debug'
+    command: bash -c 'PYTHONPATH=/app alembic upgrade head && uvicorn --reload --host=0.0.0.0 app.main:app --port 3001 --log-level=debug'
     ports:
       - 3001:3001
     volumes:
@@ -82,6 +82,7 @@ services:
       - FIRST_SUPERUSER=admin@example.com
       - FIRST_SUPERUSER_PASSWORD=secret
       - CELERY_BROKER_URL=redis://redis:6379/1
+      - CACHE_BACKEND_URL=redis://redis:6379/2
 
   celeryworker:
     image: ${DOCKER_REGISTRY-}celeryworker
@@ -109,6 +110,7 @@ services:
       - FIRST_SUPERUSER=admin@example.com
       - FIRST_SUPERUSER_PASSWORD=secret
       - CELERY_BROKER_URL=redis://redis:6379/1
+      - CACHE_BACKEND_URL=redis://redis:6379/2
 
   public-web:
     image: ${DOCKER_REGISTRY-}public-web

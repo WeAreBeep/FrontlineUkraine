@@ -85,6 +85,7 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_PASSWORD: str = "dummy"
     USERS_OPEN_REGISTRATION: bool = False
     CELERY_BROKER_URL: str = ""
+    CACHE_BACKEND_URL: str = ""
     POSTTAG_ENDPOINT: str
     POSTTAG_ID: str
     POSTTAG_API_KEY: str
