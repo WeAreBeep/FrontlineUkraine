@@ -82,6 +82,7 @@ services:
       - FIRST_SUPERUSER=admin@example.com
       - FIRST_SUPERUSER_PASSWORD=secret
       - CELERY_BROKER_URL=redis://redis:6379/1
+      - CACHE_BACKEND_URL=redis://redis:6379/2
 
   celeryworker:
     image: ${DOCKER_REGISTRY-}celeryworker
