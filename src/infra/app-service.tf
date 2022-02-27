@@ -125,9 +125,18 @@ resource "azurerm_app_service" "core" {
     POSTTAG_API_KEY                 = var.posttag_api_key
   }
 
+  connection_string {
+    name  = "CACHE_BACKEND_URL"
+    // Connection string cannot be injected to container if the type is RedisCache
+    // Configure it to be `Custom` is a workaround
+    type  = "Custom"
+    value = "redis://:${azurerm_redis_cache.redis_web.primary_access_key}@${azurerm_redis_cache.redis_web.hostname}:${azurerm_redis_cache.redis_web.enable_non_ssl_port ? azurerm_redis_cache.redis_web.port : azurerm_redis_cache.redis_web.ssl_port}/2?ssl=${!azurerm_redis_cache.redis_web.enable_non_ssl_port}"
+  }
+
   depends_on = [
     azurerm_postgresql_server.pgsql_svr,
-    azurerm_postgresql_database.pgsql_db
+    azurerm_postgresql_database.pgsql_db,
+    azurerm_redis_cache.redis_web
   ]
 }
 
