@@ -1,11 +1,150 @@
 # FrontLineLive
 
-Front Line Live code and target operating model
+## Introduction
 
-- Description of the platform
-- Who built it
-- Why it's important
-- How to install your own instance
+Frontline.live is a web-based medical supplies matching platform.
+
+General public can submit medical supplies requests at the public site (frontline.live).
+
+Admin can approve and manage all requests at the admin site. (frontline.live/admin).
+
+## Technology
+
+| Component                        | Tech stack   |
+|:---------------------------------|:-------------|
+| Public site                      | React.js     |
+| API server (for the public site) | Python       |
+| Admin site                       | Plain HTML   |
+| API server (for the admin site)  | ASP.NET Core |
+| Deployment                       | Docker       |
+| Infrastructure provisioning      | Terraform    |
+
+The public site and the admin site uses different technology because we are in the midst of migrating the whole site to
+React.js + Python.
+
+The admin site will be revamped into the said tech stack at a later stage.
+
+## 3rd Party Services Used
+
+| Component                  | Services                                 |
+|:---------------------------|:-----------------------------------------|
+| Map                        | Map Box (https://www.mapbox.com/)        |
+| CMS                        | Contentful (https://www.contentful.com/) |
+| Last mile postcode look up | Posttag (https://www.posttag.com)        |
+
+## Initialise local development environment
+
+### Prerequisit for all systems
+
+- Docker ^20.10.8
+- Docker Compose ^1.29.2
+
+### For Mac/ Linux
+
+#### Steps
+
+```sh
+# Prepare local development settings
+$ make setup
+
+# Start servers in Docker
+$ make dev
+
+# For those who want to start development on website without Docker
+#
+# You can start depending services in docker
+$ make -f Makefile.nodocker.mk docker-start-db
+# And then run the dotnet process in local for admin portal
+$ NO_DOCKER=1 MODULE=Web make dev
+#
+# For public-web
+$ NO_DOCKER=1 PORT=3002 MODULE=public-web make dev
+# For core API server
+$ NO_DOCKER=1 MODULE=core make dev
+```
+
+After running above commands,
+
+- visit http://localhost:3000 on browser and you should be able to see the admin portal website;
+- visit http://localhost:3002 on browser and you should be able to see the public website.
+
+### For Windows
+
+#### Steps
+
+This setup guide assumes you are using Powershell.
+
+1. Open your Powershell and navigate to the project root directory
+2. Run the following commands to copy local configuration files
+
+```shell=Powershell
+Copy-Item ".\docker-compose.override.yml.template" -Destination ".\docker-compose.override.yml"
+
+Copy-Item ".\Web\appsettings.Development.json.template" -Destination ".\Web\appsettings.Development.json"
+
+Copy-Item ".\src\public-web\appConfig.js.template" -Destination ".\.\src\public-web\public\appConfig.js"
+```
+
+3. Run the following command to start servers
+
+```shell=Powershell
+docker-compose -f ".\docker-compose.dev.yml" -f ".\docker-compose.override.yml" up
+```
+
+After running above commands,
+
+- visit http://localhost:3000 on browser and you should be able to see the admin portal website;
+- visit http://localhost:3002 on browser and you should be able to see the public website.
+
+#### Not yet supported
+
+The Makefiles only support Mac/ Linux environment. We need support to make it Powershell-friendly
+
+## Useful scripts and hints
+
+### Add database migration script
+
+```shell=bash
+$ docker-compose -f ./docker-compose.dev.yml -f ./docker-compose.override.yml run --rm core alembic revision -m 'Your message'
+```
+
+### Migrate database schema to the latest version
+
+```shell=bash
+$ docker-compose -f ./docker-compose.dev.yml -f ./docker-compose.override.yml run --rm core alembic upgrade head
+```
+
+### Add environment variables
+
+To add more environment variables, make sure you have already updated the following essential files
+
+- docker-compose.dev.yml
+- src/infra/variables.tf
+- resource definition in any src/infra/*.tf
+- src/infra/deploy_terraform.sh
+- .github/workflows/build_and_deploy.yml
+
+## Project Structure
+
+This project is organised in the following structure:
+
+```
+|-- Database (Obsoleted SQL Server database project)
+|-- Shared  (Shared code for admin portal)
+|-- Web (Codebase for API server (for the admin site) and admin site)
+|-- docs
+`-- src
+    |-- core (Codebase for API Server (for the public site))
+    |-- infra (Terraform project for infrastructure provisioning and deployment)
+    `-- public-web (Codebase for public site)
+```
+
+## Deployment
+
+All deployment will be run by the GitHub Action. Changes pushed to `master` branch will be automatically deployed to dev
+sites.
+
+To deploy changes to production environment, you need approval from one of the maintainers of the repository.
 
 ## GitHub Secrets
 
@@ -47,50 +186,9 @@ Front Line Live code and target operating model
 |POSTTAG_API_KEY*|-|
 
 ### Domain names and CORS allowed origins setting
+
 Check [build_and_deploy.yml](.github/workflows/build_and_deploy.yml). For list values, they should be JSON encoded.
 
-## Local development
-
-### Technologies
-- Docker
-- Docker Compose
-- .NET core 3.1.401
-- PgSQL
-- Node.js 14 + React.js 17
-- Python 3.9 + FastAPI 0.71.0
-- SQL Server
-- Azure Data Studio (Non-Windows environment only)
-- GNU Make (For Linux/ macOS users)
-
-### Setup (Using GNU Make)
-```sh
-# Prepare local development settings
-$ make setup
-
-# Start servers in Docker
-$ make dev
-
-# For those who want to start development on website without Docker
-#
-# You can start depending services in docker
-$ make -f Makefile.nodocker.mk docker-start-db
-# And then run the dotnet process in local for admin portal
-$ NO_DOCKER=1 MODULE=Web make dev
-#
-# For public-web
-$ NO_DOCKER=1 PORT=3002 MODULE=public-web make dev
-# For core API server
-$ NO_DOCKER=1 MODULE=core make dev
-```
-After running above commands, 
-- visit http://localhost:3000 on browser and you should be able to see the admin portal website;
-- visit http://localhost:3002 on browser and you should be able to see the public website.
-
-### Setup (Using Visual Studio, Windows only)
-TODO: Provide Powershell setup script
-1. Copy `Web/appsettings.Development.json.template` to `Web/appsettings.Development.json`
-2. Start `db` container specified in `docker-compose.dev.yml` by docker-compose command
-
-
 ## Diagrams
+
 - [ER diagram](docs/ERD.svg)
