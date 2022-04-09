@@ -32,7 +32,7 @@ locals {
 
   tags = {
     owner = "terraform"
-    site  = "frontline.live"
+    site  = "frontline.ua"
   }
 }
 
