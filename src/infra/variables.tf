@@ -4,7 +4,7 @@ variable "environment_name" {
 
 variable "container_registry_name" {
   type    = string
-  default = "frontlineacr2"
+  default = "frontlineukraineacr2"
 }
 
 variable "container_image_name" {
@@ -36,7 +36,7 @@ variable "core_image_tag" {
 
 variable "sql_admin_login" {
   type    = string
-  default = "frontline"
+  default = "frontlineukraine"
 }
 
 variable "sql_admin_password" {
