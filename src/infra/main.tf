@@ -1,4 +1,11 @@
 terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>2.49.0"
+    }
+  }
+
   backend "azurerm" {
     resource_group_name  = "frontline-rg-baseline"
     storage_account_name = "frontlinesa2"
