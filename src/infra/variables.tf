@@ -46,6 +46,7 @@ variable "sql_admin_password" {
 
 variable "core_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "core_server_host" {
@@ -54,6 +55,7 @@ variable "core_server_host" {
 
 variable "core_cors_allowed_origins" {
   type = list(string)
+  default = []
 }
 
 variable "core_api_key" {
@@ -63,10 +65,12 @@ variable "core_api_key" {
 
 variable "web_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "publicweb_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "publicweb_public_url" {
