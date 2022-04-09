@@ -13,7 +13,9 @@ resource "azurerm_postgresql_flexible_server" "pgsql_svr" {
   administrator_password = var.sql_admin_password
 
   version = "11"
-  zone = "3"
+  zone    = "3"
+
+  tags = local.tags
 
   # No need to migrate the server back to primary zone after failover
   lifecycle {
@@ -25,17 +27,17 @@ resource "azurerm_postgresql_flexible_server" "pgsql_svr" {
 }
 
 resource "azurerm_postgresql_flexible_server_database" "pgsql_db" {
-  name                = "${local.prefix}-pgsqldb-${terraform.workspace}"
-  server_id           = azurerm_postgresql_flexible_server.pgsql_svr.id
-  charset             = "UTF8"
-  collation           = "en_US.utf8"
+  name      = "${local.prefix}-pgsqldb-${terraform.workspace}"
+  server_id = azurerm_postgresql_flexible_server.pgsql_svr.id
+  charset   = "UTF8"
+  collation = "en_US.utf8"
 }
 
 resource "azurerm_postgresql_flexible_server_firewall_rule" "pgsql_fw" {
-  name                = "AllowAzure"
-  server_id           = azurerm_postgresql_flexible_server.pgsql_svr.id
+  name             = "AllowAzure"
+  server_id        = azurerm_postgresql_flexible_server.pgsql_svr.id
   // REF: https://docs.microsoft.com/en-us/rest/api/sql/2021-02-01-preview/firewall-rules/create-or-update
   // The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.
-  start_ip_address    = "0.0.0.0"
-  end_ip_address      = "0.0.0.0"
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
 }
