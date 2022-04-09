@@ -1,0 +1,12 @@
+﻿@{
+    var contentfulModel = ViewData["contentful"] as Web.Models.Contentful.AboutUsPageViewModel;
+}
+@section header{
+   @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <div class="text_section">
+        <contentful-rich-text document="@contentfulModel.Content"></contentful-rich-text>
+    </div>
+</main>

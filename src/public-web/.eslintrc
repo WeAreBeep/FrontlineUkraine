@@ -1,0 +1,29 @@
+{
+  "plugins": ["@oursky"],
+  // If you are using TypeScript, you need to configure parserOptions.
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
+  },
+  "extends": [
+    // You should always include these two.
+    "plugin:@oursky/eslint",
+    "plugin:@oursky/oursky",
+    // Include this if you are using TypeScript.
+    "plugin:@oursky/typescript",
+    "plugin:@oursky/tsdoc",
+    // Include these two if your project is React.
+    "plugin:@oursky/react",
+    "plugin:@oursky/react-hooks"
+  ]
+}

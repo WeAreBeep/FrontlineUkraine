@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  core:
+    environment:
+      - POSTTAG_ENDPOINT=DUMMY
+      - POSTTAG_ID=DUMMY
+      - POSTTAG_API_KEY=DUMMY

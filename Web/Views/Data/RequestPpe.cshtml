@@ -1,0 +1,60 @@
+﻿@using Web.Snippets
+
+@model NeedsViewModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <div class="title_area">
+        <h1>PPE Needs</h1>
+        <p class="description">Complete this form if you don't use twitter or would prefer to report your PPE shortage anonymously.</p>
+        <p class="description">We'll put your need on the map and try to get equipment to you as quickly as possible.</p>
+    </div>
+
+    <form method="post" class="modalsubmit" id="vue_app">
+        @Html.AntiForgeryToken()
+
+        @Html.EditorForModel()
+
+        @Html.HtmlValidationSummary(false)
+
+        <button class="btn_submit save_button" type="submit">
+            <i class="fas fa-save"></i><span>Save</span>
+        </button>
+
+    </form>
+
+</main>
+
+@section head
+{
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.validate.js" asp-append-version="true"></script>
+    <partial name="_PosttagAutoCompleteScripts" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="~/js/vue-number-input.js" asp-append-version="true"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.additions.js" asp-append-version="true"></script>
+}
+
+@section Scripts
+{
+    <script>
+
+        (function () {
+
+            var vm = new Vue({
+                el: '#vue_app',
+                data: JSON.parse('@Html.Raw(Model.GetVueData())'),
+                mounted: function() {
+                    Help.setupBackendApp();
+                }
+            });
+
+        })();
+
+    </script>
+}

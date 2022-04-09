@@ -1,0 +1,11 @@
+FROM node:16.0-buster
+
+WORKDIR /app
+
+COPY ./Makefile ./package.json ./package-lock.json ./
+
+RUN make vendor
+
+COPY ./ ./
+
+CMD [ "make", "dev" ]

@@ -1,0 +1,47 @@
+﻿@page
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@model IndexModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+        <form method="post" class="modalsubmit">
+            @Html.AntiForgeryToken()
+
+            <fieldset class="top">
+                <legend>Profile</legend>
+                <div>
+                    @Html.LabelsFor(m => m.Username)
+                    @Html.TextBoxFor(m => m.Username, new { @disabled = "disabled" })
+                    @Html.HtmlValidationMessageFor(m => m.Username)
+                </div>
+                <div>
+                    @Html.LabelsFor(m => m.Input.PhoneNumber)
+                    @Html.PasswordFor(m => m.Input.PhoneNumber)
+                    @Html.HtmlValidationMessageFor(m => m.Input.PhoneNumber)
+                </div>
+            </fieldset>
+
+            @Html.HtmlValidationSummary(false)
+
+            <div>
+                <button class="btn_submit" type="submit">
+                    <i class="fa fa-check"></i><span>Save</span>
+                </button>
+            </div>
+
+        </form>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScripts")
+
+    <script>
+        (function() {
+            Help.setupBackendApp();
+        })();
+    </script>
+}

@@ -1,0 +1,110 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  ARM_CLIENT_ID: "${{ secrets.ARM_CLIENT_ID }}"
+  ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
+  ARM_SUBSCRIPTION_ID: "${{ secrets.ARM_SUBSCRIPTION_ID }}"
+  ARM_TENANT_ID: "${{ secrets.ARM_TENANT_ID }}"
+  ARM_SKIP_PROVIDER_REGISTRATION: true
+
+  APP_DATA_SUPPLIERS_SHEET: "${{ secrets.APP_DATA_SUPPLIERS_SHEET }}"
+  APP_EMAIL_FROMADDRESS: "${{ secrets.APP_EMAIL_FROMADDRESS }}"
+  APP_EMAIL_SENDGRIDKEY: "${{ secrets.APP_EMAIL_SENDGRIDKEY }}"
+  APP_EMAIL_SENDGRIDUSER: "${{ secrets.APP_EMAIL_SENDGRIDUSER }}"
+  APP_EMAIL_TOADDRESS: "${{ secrets.APP_EMAIL_TOADDRESS }}"
+  APP_MAPBOX_TOKEN: "${{ secrets.APP_MAPBOX_TOKEN }}"
+  APP_RECAPTCHA_SECRETKEY: "${{ secrets.APP_RECAPTCHA_SECRETKEY }}"
+  APP_RECAPTCHA_SITEKEY: "${{ secrets.APP_RECAPTCHA_SITEKEY }}"
+  APP_DATACONTEXT: "${{ secrets.APP_DATACONTEXT }}"
+  WEB_USERSECRETSID: "${{ secrets.WEB_USERSECRETSID }}"
+
+  SQL_ADMIN_PASSWORD: ${{ secrets.SQL_ADMIN_PASSWORD }}
+
+  CONTENTFUL_DELIVERY_ACCESS_TOKEN: "${{ secrets.CONTENTFUL_DELIVERY_ACCESS_TOKEN }}"
+  CONTENTFUL_SPACE_ID: "${{ secrets.CONTENTFUL_SPACE_ID }}"
+  CONTENTFUL_ENVIRONMENT: "${{ secrets.CONTENTFUL_ENVIRONMENT }}"
+
+  POSTTAG_ENDPOINT: "${{ secrets.POSTTAG_ENDPOINT }}"
+  POSTTAG_ID: "${{ secrets.POSTTAG_ID }}"
+  POSTTAG_API_KEY: "${{ secrets.POSTTAG_API_KEY }}"
+
+jobs:  
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Azure Container Registry Login
+        uses: Azure/docker-login@v1
+        with:
+           username: ${{ secrets.ACR_USERNAME }}
+           password: ${{ secrets.ACR_PASSWORD }}
+           login-server: ${{ secrets.ACR_SERVER }}
+
+      - name: Build and push
+        run: DOCKER_REGISTRY='frontlineacr2.azurecr.io/' TAG='${{ github.run_number }}' make docker-build docker-push
+
+  deploy_dev:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+
+    environment: Development
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform
+        run: ./deploy_terraform.sh 
+        shell: bash
+        working-directory: ./src/infra
+        env: 
+          DEPLOY_WORKSPACE: dev
+          ENVIRONMENT_NAME: Development
+          CORE_CUSTOM_DOMAIN_LIST: '["core-dev.frontline.live"]'
+          CORE_SERVER_HOST: 'https://core-dev.frontline.live'
+          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["beta-dev.frontline.live"]'
+          PUBLICWEB_PUBLIC_URL: 'https://beta-dev.frontline.live'
+          PUBLICWEB_API_ENDPOINT: 'https://core-dev.frontline.live/api'
+          CORE_CORS_ALLOWED_ORIGINS: '["https://beta-dev.frontline.live", "https://new-dev.frontline.live", "https://admin-dev.frontline.live"]'
+          WEB_CUSTOM_DOMAIN_LIST: '["new-dev.frontline.live", "admin-dev.frontline.live"]'
+          WEBSITE_CANONICAL_URL: "https://new-dev.frontline.live"
+          
+
+  deploy_prod:
+    runs-on: ubuntu-latest
+    needs: deploy_dev
+
+    environment: Production
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform
+        run: ./deploy_terraform.sh 
+        shell: bash
+        working-directory: ./src/infra
+        env: 
+          DEPLOY_WORKSPACE: prod
+          ENVIRONMENT_NAME: Production
+          CORE_CUSTOM_DOMAIN_LIST: '["core.frontline.live"]'
+          CORE_SERVER_HOST: 'https://core.frontline.live'
+          CORE_CORS_ALLOWED_ORIGINS: '["https://beta.frontline.live", "https://admin.frontline.live", "https://www.frontline.live", "https://frontline.live"]'
+          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "beta.frontline.live"]'
+          PUBLICWEB_PUBLIC_URL: 'https://beta.frontline.live'
+          PUBLICWEB_API_ENDPOINT: 'https://core.frontline.live/api'
+          WEB_CUSTOM_DOMAIN_LIST: '["admin.frontline.live"]'
+          WEBSITE_CANONICAL_URL: "https://www.frontline.live"

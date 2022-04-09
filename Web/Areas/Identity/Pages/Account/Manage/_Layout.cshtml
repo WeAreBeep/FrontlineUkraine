@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+
+    <h2>Manage your account</h2>
+
+    <div>
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

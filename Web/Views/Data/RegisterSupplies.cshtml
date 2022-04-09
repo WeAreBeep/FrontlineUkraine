@@ -1,0 +1,61 @@
+﻿@using Web.Snippets
+
+@model SuppliesViewModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <div class="title_area">
+        <h1>PPE Supplies</h1>
+        <p class="description">Use this form so we can add you to our collated database of suppliers</p>
+        <p class="description">Email <a href="mailto:frontline@wearebeep.com?subject=Met Needs | Supplying Needs">frontline@wearebeep.com</a> to tell us about:</p>
+        <p class="description">-any needs <a href="mailto:frontline@wearebeep.com?subject=Met Needs">you have met</a>: so we can remove them from the map</p>
+        <p class="description">-any stories of <a href="mailto:frontline@wearebeep.com?subject=Supplying Needs">supplying needs</a>: so we can raise awareness</p>
+        <p class="description">Thank you!</p>
+    </div>
+
+    <form method="post" class="modalsubmit" id="vue_app">
+        @Html.AntiForgeryToken()
+
+        @Html.EditorForModel()
+
+        @Html.HtmlValidationSummary(false)
+
+        <button class="btn_submit save_button" type="submit">
+            <i class="fas fa-save"></i><span>Save</span>
+        </button>
+
+    </form>
+
+</main>
+
+@section Scripts
+{
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="~/js/vue-number-input.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.validate.js" asp-append-version="true"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="~/js/ac.jquery.validate.unobtrusive.additions.js" asp-append-version="true"></script>
+
+    <script>
+
+        (function() {
+
+            console.log(@Html.Raw(Model.GetVueData()));
+
+            var vm = new Vue({
+                el: '#vue_app',
+                data: JSON.parse('@Html.Raw(Model.GetVueData())'),
+                mounted: function() {
+                    Help.setupBackendApp();
+                }
+            });
+
+        })();
+
+    </script>
+}

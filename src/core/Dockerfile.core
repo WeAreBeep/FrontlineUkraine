@@ -1,0 +1,25 @@
+FROM python:3.9.9
+
+EXPOSE 80
+
+ARG POETRY_CACHE_DIR=/var/poetry/cache
+
+ENV PYTHONUNBUFFERED 1
+
+ENV POETRY_CACHE_DIR ${POETRY_CACHE_DIR}
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends netcat && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./app/poetry.lock ./app/pyproject.toml ./
+RUN pip install poetry==1.1 && \
+    poetry install
+
+COPY ./app/ ./
+
+ENTRYPOINT [ "poetry", "run" ]
+# Dirty fix to resolve missing module issue
+CMD bash -c "PYTHONPATH=. alembic upgrade head && uvicorn --host=0.0.0.0 app.main:app --port=80"

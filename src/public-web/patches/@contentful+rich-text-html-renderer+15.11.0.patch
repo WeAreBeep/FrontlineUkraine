@@ -1,0 +1,32 @@
+diff --git a/node_modules/@contentful/rich-text-html-renderer/dist/lib/index.js b/node_modules/@contentful/rich-text-html-renderer/dist/lib/index.js
+index bcad7fe..d2d84ec 100644
+--- a/node_modules/@contentful/rich-text-html-renderer/dist/lib/index.js
++++ b/node_modules/@contentful/rich-text-html-renderer/dist/lib/index.js
+@@ -77,7 +77,10 @@ function nodeListToHtmlString(nodes, _a) {
+ function nodeToHtmlString(node, _a) {
+     var renderNode = _a.renderNode, renderMark = _a.renderMark;
+     if (rich_text_types_1.helpers.isText(node)) {
+-        var nodeValue = (0, escape_html_1.default)(node.value);
++        // NOTE: Remove escape functionality here since we need to support raw HTML editing in
++        //  Contentful WYSIWYG editor
++        // var nodeValue = (0, escape_html_1.default)(node.value);
++        var nodeValue = node.value;
+         if (node.marks.length > 0) {
+             return node.marks.reduce(function (value, mark) {
+                 if (!renderMark[mark.type]) {
+diff --git a/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js b/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
+index 7b5f6ee..ff29389 100644
+--- a/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
++++ b/node_modules/@contentful/rich-text-html-renderer/dist/rich-text-html-renderer.es5.js
+@@ -8128,7 +8128,10 @@ function nodeListToHtmlString(nodes, _a) {
+ function nodeToHtmlString(node, _a) {
+     var renderNode = _a.renderNode, renderMark = _a.renderMark;
+     if (dist_2.isText(node)) {
+-        var nodeValue = escapeHtml_1(node.value);
++        // NOTE: Remove escape functionality here since we need to support raw HTML editing in
++        //  Contentful WYSIWYG editor
++        // var nodeValue = escapeHtml_1(node.value);
++        var nodeValue = node.value;
+         if (node.marks.length > 0) {
+             return node.marks.reduce(function (value, mark) {
+                 if (!renderMark[mark.type]) {

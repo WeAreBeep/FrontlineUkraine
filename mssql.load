@@ -1,0 +1,161 @@
+load database
+     from {{SQL_SERVER_PATH}}
+     into {{POSTGRES_PATH}}
+
+WITH quote identifiers
+
+including only table names like
+     '__RefactorLog',
+     'AspNetRoleClaims',
+     'AspNetRoles',
+     'AspNetUserClaims',
+     'AspNetUserLogins',
+     'AspNetUserRoles',
+     'AspNetUsers',
+     'AspNetUserTokens',
+     'Audits',
+     'ContactSubmissions',
+     'NeedNotes',
+     'NeedPpeTypes',
+     'Needs',
+     'Notes',
+     'PostcodesRegions',
+     'PpeTypes',
+     'SupplierNotes',
+     'SupplierPpeTypes',
+     'Suppliers'
+in schema 'dbo'
+
+set work_mem to '32MB', maintenance_work_mem to '1024 MB'
+
+before load do
+     $$ drop schema if exists dbo cascade; $$,
+     $$ drop schema if exists frontlinelive cascade; $$
+
+after load do
+     $$ alter schema "dbo" rename to "frontlinelive"; $$,
+     $$ set search_path = "frontlinelive", "public"; $$,
+     $$ -- Requests
+     CREATE VIEW "Requests"
+     AS
+     SELECT "Needs"."Id"
+          , "Needs"."Timestamp"
+          , "Needs"."UshahidiId"
+          , "Needs"."StatusId"
+          , "Needs"."ContactName"
+          , "Needs"."OrganisationName"
+          , "Needs"."Email"
+          , "Needs"."PhoneNumber"
+          , "Needs"."Department"
+          , "Needs"."JobTitle"
+          , "Needs"."OrgTypeId"
+          , "Needs"."OrgTypeOther"
+          , "Needs"."AddressLineOne"
+          , "Needs"."AddressLineTwo"
+          , "Needs"."Postcode"
+          , "Needs"."TownOrCity"
+          , "Needs"."TweetId"
+          , "Needs"."Longitude"
+          , "Needs"."Latitude"
+          , "Needs"."TellUsMore"
+          --Ppe
+          , "NeedPpeTypes"."PpeTypeId"
+          , "NeedPpeTypes"."PpeTypeOther"
+          , "NeedPpeTypes"."DailyShortage"
+          , "NeedPpeTypes"."DailyShortageForWhom"
+          , "NeedPpeTypes"."StatusId"     AS "PpeStatusId"
+          , "NeedPpeTypes"."SupplierId"
+          , "NeedPpeTypes"."SupplierOther"
+          , "NeedPpeTypes"."DateClosed"
+          --Ppe Suppliers
+          , "Suppliers"."Name"            AS "SupplierName"
+          --Notes
+          , MostRecentNotes.NoteText      AS "NoteText"
+          , MostRecentNotes.NoteTimestamp AS "NoteTimestamp"
+          , MostRecentNotes.NoteAuthor    AS "NoteAuthor"
+     FROM "NeedPpeTypes"
+          INNER JOIN "Needs" ON "NeedPpeTypes"."NeedId" = "Needs"."Id"
+          LEFT OUTER JOIN "Suppliers" ON "NeedPpeTypes"."SupplierId" = "Suppliers"."Id"
+          LEFT JOIN LATERAL (
+     SELECT LatestNotes."Text"       AS NoteText
+          , LatestNotes."Timestamp"  AS NoteTimestamp
+          , "AspNetUsers"."UserName" AS NoteAuthor
+     FROM "Notes" AS LatestNotes
+               LEFT OUTER JOIN "NeedNotes" ON "NeedNotes"."NoteId" = LatestNotes."Id"
+               INNER JOIN "AspNetUsers" ON LatestNotes."UserId" = "AspNetUsers"."Id"
+     WHERE "NeedNotes"."NeedId" = "Needs"."Id"
+     ORDER BY LatestNotes."Timestamp" DESC
+     LIMIT 1
+     ) AS MostRecentNotes ON TRUE;
+     $$,
+     $$ -- Supplies
+     CREATE VIEW "Supplies"
+     AS
+     SELECT "Suppliers"."Id"
+          , "Suppliers"."Timestamp"
+          , "Suppliers"."UshahidiId"
+          , "Suppliers"."StatusId"
+          , "Suppliers"."Name"
+          , "Suppliers"."Description"
+          , "Suppliers"."SupplierTypeId"
+          , "Suppliers"."SupplierTypeOther"
+          , "Suppliers"."Email"
+          , "Suppliers"."Website"
+          , "Suppliers"."PhoneNumber"
+          , "Suppliers"."ContactName"
+          , "Suppliers"."Postcode"
+          , "Suppliers"."TellUsMore"
+          , "Suppliers"."Longitude"
+          , "Suppliers"."Latitude"
+          --Ppe
+          , "SupplierPpeTypes"."PpeTypeId"
+          , "SupplierPpeTypes"."PpeTypeOther"
+          , "SupplierPpeTypes"."CostTypeId"
+          , "SupplierPpeTypes"."CostTypeOther"
+          , "SupplierPpeTypes"."CapacityPerWeek"
+          , "SupplierPpeTypes"."CurrentStock"
+          , "SupplierPpeTypes"."LeadTimeInDays"
+          , "SupplierPpeTypes"."Notes"
+          , "SupplierPpeTypes"."MeetsRegulatoryRequirementsId"
+          --Notes
+          , MostRecentNotes.NoteText      AS "NoteText"
+          , MostRecentNotes.NoteTimestamp AS "NoteTimestamp"
+          , MostRecentNotes.NoteAuthor    AS "NoteAuthor"
+     FROM "SupplierPpeTypes"
+          INNER JOIN "Suppliers" ON "SupplierPpeTypes"."SupplierId" = "Suppliers"."Id"
+          LEFT JOIN LATERAL (SELECT LatestNotes."Text"       AS NoteText
+                                   , LatestNotes."Timestamp"  AS NoteTimestamp
+                                   , "AspNetUsers"."UserName" AS NoteAuthor
+                              FROM "Notes" AS LatestNotes
+                                        LEFT OUTER JOIN "SupplierNotes" ON "SupplierNotes"."NoteId" = LatestNotes."Id"
+                                        INNER JOIN "AspNetUsers" ON LatestNotes."UserId" = "AspNetUsers"."Id"
+                              WHERE "SupplierNotes"."SupplierId" = "Suppliers"."Id"
+                              ORDER BY LatestNotes."Timestamp" DESC
+                              LIMIT 1
+     ) AS MostRecentNotes ON TRUE;
+     $$,
+     $$
+     -- Fix nullability
+     ALTER TABLE "Needs" ALTER COLUMN "AddressLineTwo" DROP NOT NULL;
+     $$,
+     $$ CREATE SEQUENCE "Audits_Id_seq"; $$,
+     $$ ALTER SEQUENCE "Audits_Id_seq" OWNED BY "Audits"."Id"; $$,
+     $$ ALTER TABLE "Audits" ALTER COLUMN "Id" SET DEFAULT nextval('"Audits_Id_seq"'); $$,
+     $$ SELECT setval('"Audits_Id_seq"', coalesce(MAX("Id") + 1, 1), false) FROM "Audits"; $$,
+     $$ CREATE SEQUENCE "Needs_Id_seq"; $$,
+     $$ ALTER SEQUENCE "Needs_Id_seq" OWNED BY "Needs"."Id"; $$,
+     $$ ALTER TABLE "Needs" ALTER COLUMN "Id" SET DEFAULT nextval('"Needs_Id_seq"'); $$,
+     $$ SELECT setval('"Needs_Id_seq"', coalesce(MAX("Id") + 1, 1), false) FROM "Needs"; $$,
+     $$ CREATE SEQUENCE "Notes_Id_seq"; $$,
+     $$ ALTER SEQUENCE "Notes_Id_seq" OWNED BY "Notes"."Id"; $$,
+     $$ ALTER TABLE "Notes" ALTER COLUMN "Id" SET DEFAULT nextval('"Notes_Id_seq"'); $$,
+     $$ SELECT setval('"Notes_Id_seq"', coalesce(MAX("Id") + 1, 1), false) FROM "Notes"; $$,
+     $$ CREATE SEQUENCE "PpeTypes_Id_seq"; $$,
+     $$ ALTER SEQUENCE "PpeTypes_Id_seq" OWNED BY "PpeTypes"."Id"; $$,
+     $$ ALTER TABLE "PpeTypes" ALTER COLUMN "Id" SET DEFAULT nextval('"PpeTypes_Id_seq"'); $$,
+     $$ SELECT setval('"PpeTypes_Id_seq"', coalesce(MAX("Id") + 1, 1), false) FROM "PpeTypes"; $$,
+     $$ CREATE SEQUENCE "Suppliers_Id_seq"; $$,
+     $$ ALTER SEQUENCE "Suppliers_Id_seq" OWNED BY "Suppliers"."Id"; $$,
+     $$ ALTER TABLE "Suppliers" ALTER COLUMN "Id" SET DEFAULT nextval('"Suppliers_Id_seq"'); $$,
+     $$ SELECT setval('"Suppliers_Id_seq"', coalesce(MAX("Id") + 1, 1), false) FROM "Suppliers"; $$
+;

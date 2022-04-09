@@ -1,0 +1,85 @@
+﻿@using Web.Infrastructure
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Microsoft.Extensions.DependencyInjection
+@inject IOptions<ServerConfig> serverConfig
+@{
+    // TODO: Create Open Graph Tag Helper for rendering OG tags
+    var fileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+    var ogImagePath = fileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Url.Content("~/images/frontline_og.png"));
+    var ogImageSquarePath = fileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Url.Content("~/images/frontline_og_square.png"));
+    var ogUrl = new Uri(serverConfig.Value.WebsiteCanonicalUrl);
+    var ogImageUrl = new Uri(ogUrl, ogImagePath);
+    var ogImageSquareUrl = new Uri(ogUrl, ogImageSquarePath);
+    var ogTitle = "Empowering Citizen Activism | Frontline.live"; // TODO: Configurable OG title
+    var ogDescription = "We connect UK Healthcare professionals with PPE suppliers near you. Report your PPE shortage and we'll put it on the map."; // TODO: Configurable OG description
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name=”description” content="We connect UK Healthcare professionals with PPE suppliers near you. Report your PPE shortage and we'll put it on the map." />
+    <title>Putting PPE Shortages & Suppliers on the Map | Frontline.live</title>
+    <meta property="og:title" content="@ogTitle" /> 
+    <meta property="og:description" content="@ogDescription"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@ogUrl.AbsoluteUri" />
+    <meta property="og:image" content="@ogImageUrl.AbsoluteUri" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="@ogImageSquareUrl.AbsoluteUri" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <meta property="twitter:title" content="@ogTitle" /> 
+    <meta property="twitter:description" content="@ogDescription"/>
+    <meta property="twitter:content" content="summary" />
+    <meta property="twitter:url" content="@ogUrl.AbsoluteUri" />
+    <meta property="twitter:image" content="@ogImageSquareUrl.AbsoluteUri" />
+    @await Html.PartialAsync("_Favicon")
+    @await Html.PartialAsync("_Fonts")
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <script src="https://kit.fontawesome.com/e10dd0382c.js" crossorigin="anonymous"></script>
+    <script src="~/polyfills.js" asp-append-version="true"></script>
+    @*less compiled on server = PRODUCTION *@
+    <link href='~/css/style.css' rel='stylesheet' asp-append-version="true" />
+    @*less with js for easy DEBUG *@
+    @*<link rel="stylesheet/less" type="text/css" href="/style.less" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js"></script>*@
+    @* end less with js for easy DEBUG *@
+    <link href='~/L.Control.Layers.Tree.css' rel='stylesheet' asp-append-version="true"/>
+    <link href="~/js/noty.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/js/metroui.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/js/animate.css" rel="stylesheet" asp-append-version="true"/>
+    <script src="~/js/noty.min.js" asp-append-version="true"></script>
+    <script src="~/noty.messenger.js" asp-append-version="true"></script>
+    <script src="~/help.js" asp-append-version="true"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170651121-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170651121-1');
+    </script>
+    @await Html.PartialAsync("_AppConfig")
+    @RenderSection("head", required: false)
+</head>
+<body class="@Helper.GetBodyClass(ViewData)">
+<header>
+    @RenderSection("header", required: false)
+</header>
+@RenderBody()
+
+<!-- Messages here -->
+@await Component.InvokeAsync("Messages")
+<!-- End Messages -->
+
+<footer>
+    @await Html.PartialAsync("_Footer")
+</footer>
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

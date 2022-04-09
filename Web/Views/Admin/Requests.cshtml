@@ -1,0 +1,180 @@
+﻿@using Web.Snippets.System
+
+@model NeedsMatchingViewModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <table id="requests" class="display content">
+        <thead>
+            <tr>
+                <th>Edit</th>
+                
+                <th>Last Note</th>
+                <th>Note</th>
+                <th>Note Author</th>
+
+                <th>Id</th>
+                <th>Timestamp</th>
+                <th>Ush. Id</th>
+                <th>Ush. Url</th>
+
+                <th>Status</th>
+                <th>PPE Status</th>
+
+                <th>Closed</th>
+                <th>Contact Name</th>
+                <th>Organisation</th>
+                <th>Ppe Type</th>
+                <th>Other</th>
+                <th>Daily Shortage/ Shortage</th>
+                <th>Shortage For</th>
+                <th>Supplier</th>
+                <th>Supplier Other</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Dept</th>
+                <th>Job</th>
+                <th>Org Type</th>
+                <th>Type Other</th>
+                <th>Address#1</th>
+                <th>Address#2</th>
+                <th>Pcode</th>
+                <th>Town</th>
+
+                <th>Tweet Id</th>
+                <th>Twitter Url</th>
+
+                <th>Tell Us More</th>
+                <th>Lng</th>
+                <th>Lat</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(NeedsMatchingModel item in Model.NeedsMatchingItems)
+        {
+            <tr>
+                <td class="cell_links">
+                    <a class="btn_action" href="../edit-needs/@item.Id">Edit</a>
+                </td>
+                <td>@item.NoteTimestamp</td>
+                <td>@item.NoteText</td>
+                <td>@item.NoteAuthor</td>
+
+                <td>@item.Id</td>
+                <td>@item.Timestamp</td>
+                <td>@item.UshahidiId</td>
+                <td>@Html.Raw(item.UshahidiUrl)</td>
+
+                <td>@item.Status</td>
+                <td>@item.PpeStatus</td>
+
+                <td>@item.DateClosed</td>
+                <td>@item.ContactName</td>
+                <td>@item.OrganisationName</td>
+                <td>@item.PpeType</td>
+                <td>@item.PpeTypeOther</td>
+                <td>@item.DailyShortage</td>
+                <td>@item.DailyShortageForWhom</td>
+                <td>@item.SuppliesOfferBy</td>
+                <td>@item.SuppliesOfferByOther</td>
+                <td>@item.ContactEmail</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Department</td>
+                <td>@item.JobTitle</td>
+                <td>@item.NeedsOrgType</td>
+                <td>@item.NeedsOrgTypeOther</td>
+                <td>@item.AddressLineOne</td>
+                <td>@item.AddressLineTwo</td>
+                <td>@item.Postcode</td>
+                <td>@item.Town</td>
+
+                <td>@item.TweetId</td>
+                <td>@Html.Raw(item.TwitterUrl)</td>
+
+                <td>@item.TellUsMore</td>
+                <td>@item.Longitude</td>
+                <td>@item.Latitude</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</main>
+
+@section Scripts
+{
+
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_DataTables")
+
+    <script>
+
+        $(document).ready(function() {
+            $('#requests').DataTable({
+                //stateSave: true,
+                sScrollX: "100%",
+                order: [[1, "desc"]],
+                dom: 'fBrtlip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print', {
+                        extend: 'colvis',
+                        text: 'Cols',
+                        postfixButtons: [{ extend: 'colvisRestore', text: 'Default'}]
+                    }
+                ],
+                columnDefs: [
+                    //counting from start inwards, 0 based
+                    {
+                        targets: [4],
+                        visible: false
+                    },
+                    {
+                        targets: [5],
+                        visible: false
+                    },
+                    {
+                        targets: [6],
+                        visible: false
+                    },
+                    {
+                        targets: [7],
+                        visible: false
+                    },
+                    //counting from end inwards
+                    {
+                        targets: [-4],
+                        visible: false
+                    },
+                    {
+                        targets: [-3],
+                        visible: false
+                    },
+                    {
+                        targets: [-2],
+                        visible: false
+                    },
+                    {
+                        targets: [-1],
+                        visible: false
+                    }
+                ],
+                language: {
+                    info: "_START_ to _END_ of _TOTAL_",
+                    infoFiltered: "(filtered from _MAX_)",
+                    lengthMenu: "Display _MENU_",
+                    search: "",
+                    searchPlaceholder: "Search...",
+                    emptyTable: "No records",
+                    processing: "Table loading..."
+                }
+                ,select: {
+                    style: 'os'
+                }
+            });
+        });
+
+    </script>
+}

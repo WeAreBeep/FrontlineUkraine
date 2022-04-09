@@ -1,0 +1,140 @@
+﻿@{
+    var contentfulModel = ViewData["contentful"] as Web.Models.Contentful.HomePageViewModel;
+}
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main class="home_main">
+
+    <div id="intro">
+        <contentful-rich-text document="@contentfulModel.Content"></contentful-rich-text>
+    </div>
+
+    <div id="map_wrapper">
+        <div id="map">
+        </div>
+    </div>
+
+    <div id="feeds">
+
+        <h2>Our Voice</h2>
+        <div id="our_voice">
+            <a class="twitter-timeline" data-dnt="true" data-chrome="noheader,nofooter" data-limit="4" href="https://twitter.com/FrontlineMap?ref_src=twsrc%5Etfw">Tweets by FrontlineMap</a>
+        </div>
+        <!---<h2>Your Needs</h2>-->
+        <div id="needs">
+        </div>
+
+        @*
+        <div id="charts">
+            <canvas id="chart_results"></canvas> @{ //width="500"}@
+            <canvas id="chart_contactable"></canvas>
+        </div>
+        *@
+    </div>
+
+</main>
+
+
+@section scripts{
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.0.5/dist/leaflet.markercluster.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src="https://platform.twitter.com/widgets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="~/L.Control.Layers.Tree.js" asp-append-version="true"></script>
+    <script src="~/oms.js" asp-append-version="true"></script>
+    <script src="~/moment.min.js" asp-append-version="true"></script>
+    <script src="~/loadJS.js" asp-append-version="true"></script>
+
+    <script src="~/data.js" asp-append-version="true"></script>
+    <script src="~/app.js" asp-append-version="true"></script>
+
+    @*
+    <script>
+
+        (function() {
+            let ctx = document.getElementById('chart_results').getContext('2d');
+            /***
+            let myDoughnutChart = new Chart(ctx,
+                {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [
+                            {
+                                data: [
+                                    @ViewData["met"],
+                                    @ViewData["partial"],
+                                    @ViewData["new"]
+                                    ],
+                                backgroundColor: [
+                                    ChartHelp.chartColors.green3,
+                                    ChartHelp.chartColors.blue2,
+                                    ChartHelp.chartColors.red3
+                                ]
+                            }
+                        ],
+                        labels: [
+                            'Met',
+                            'Partial                ', //This right padding wspace is v. important - keeps charts aligned without any fussing about e.g. see open issue https://github.com/chartjs/Chart.js/issues/4982
+                            'New'
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                fontColor: 'white'
+                            }
+                        },
+                        tooltips: { callbacks: { label: ChartHelp.tootlTipLabelForPie } },
+                    }
+                });
+                */
+        let ctxContacable = document.getElementById('chart_contactable').getContext('2d');
+            /*
+            let myDoughnutChartContacable = new Chart(ctxContacable,
+                {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [
+                            {
+                                data: [
+                                    @ViewData["contactable"],
+                                    @ViewData["noncontactable"]
+                                    ],
+                                backgroundColor: [
+                                    ChartHelp.chartColors.green3,
+                                    ChartHelp.chartColors.red3
+                                ]
+                            }
+                        ],
+                        labels: [
+                            'Contacable',
+                            'Non Contacable'
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                fontColor: 'white'
+                            }
+                        },
+                        tooltips: { callbacks: { label: ChartHelp.tootlTipLabelForPie } },
+                    }
+                });
+            */
+
+        }());
+
+
+    </script>
+    *@
+}

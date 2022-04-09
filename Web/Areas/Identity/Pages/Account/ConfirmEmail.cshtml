@@ -1,0 +1,21 @@
+﻿@page
+@model ConfirmEmailModel
+
+@section header{
+    @await Html.PartialAsync("_Header")
+}
+
+<main>
+    <div class="title_area">
+        <h1>Thank you for confirming your email</h1>
+
+        <p class="description">
+            Please click below to login
+        </p>
+
+        <a id="login" class="btn_submit" href="/admin"><i class="fa fa-check"></i><span>Login</span></a>
+        
+
+    </div>
+   
+</main>

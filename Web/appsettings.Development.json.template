@@ -1,0 +1,22 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug"
+    }
+  },
+  "ConnectionStrings": {
+    "DataContext": "Host=pgsql;Port=5432;Database=postgres;Username=postgres;Password=postgres;SearchPath=frontlinelive,public;",
+    "Redis": "redis:6379"
+  },
+  "ContentfulOptions": {
+    "DeliveryApiKey": "<DELIVERY_ACCESS_TOKEN>",
+    "SpaceId": "<SPACE_ID>",
+    "Environment": "Development",
+    "UsePreviewApi": false
+  },
+  "APP_MAPBOX_TOKEN": "secret",
+  "PosttagEndpoint": "<POSTTAG_ENDPOINT>",
+  "PosttagId": "<POSTTAG_ID>",
+  "PosttagApiKey": "<POSTTAG_API_KEY>",
+  "WebsiteCanonicalUrl": "http://localhost:3000"
+}

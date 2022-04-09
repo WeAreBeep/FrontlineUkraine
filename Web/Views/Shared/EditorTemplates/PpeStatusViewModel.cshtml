@@ -1,0 +1,51 @@
+﻿@using Web.Db
+@using Web.Snippets
+@using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Web.Snippets.System
+@model PpeStatusViewModel
+
+
+    <fieldset class="needs_matching">
+        <legend>Needs Matching</legend>
+        @*<div>
+            @Html.LabelsFor(m => m.PpeType)
+            @Html.DropDownListFor(m => m.PpeType, Model.PpeTypes)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.Status)
+            @Html.DropDownListFor(m => m.Status, Model.PpeStatuses)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.SupplierId)
+            @Html.DropDownListFor(m => m.SupplierId, Model.Suppliers)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.SupplierOther)
+            @Html.TextBoxFor(m => m.SupplierOther)
+            @Html.HtmlValidationMessageFor(m => m.SupplierOther)
+        </div>
+        <div>
+            @Html.LabelsFor(m => m.DateNeedsMet)
+            @Html.TextBoxFor(m => m.DateNeedsMet)
+            @Html.ValidationMessageFor(m => m.DateNeedsMet)
+        </div>*@
+
+        @*
+            , new { v_model = "SelectedPpeStatus" }
+
+            <div v-if="isNeedMet">
+            @Html.LabelsFor(m => m.SuppliesOfferedBy)
+            @Html.DropDownListFor(m => m.SuppliesOfferedBy, Model.Suppliers, new { v_model = "SelectedSupplier" })
+        </div>
+        <div v-if="isNeedMet && isOtherSuppliesSelected">
+            @Html.LabelsFor(m => m.SupplierOfferedByOther)
+            @Html.TextBoxFor(m => m.SupplierOfferedByOther)
+            @Html.HtmlValidationMessageFor(m => m.SupplierOfferedByOther)
+        </div>
+        <div v-if="isNeedMet || isNeedNotMet">
+            @Html.LabelsFor(m => m.DateNeedsMet)
+            @Html.TextBoxFor(m => m.DateNeedsMet)
+            @Html.ValidationMessageFor(m => m.DateNeedsMet)
+        </div>*@
+        @*@Html.HiddenFor(m => m.PpeNeedId)*@
+    </fieldset>
