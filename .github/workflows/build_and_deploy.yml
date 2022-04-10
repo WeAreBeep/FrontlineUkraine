@@ -49,7 +49,7 @@ jobs:
            login-server: ${{ secrets.ACR_SERVER }}
 
       - name: Build and push
-        run: DOCKER_REGISTRY='frontlineacr2.azurecr.io/' TAG='${{ github.run_number }}' make docker-build docker-push
+        run: DOCKER_REGISTRY='frontlineukraineacr2.azurecr.io/' TAG='${{ github.run_number }}' make docker-build docker-push
 
   deploy_dev:
     runs-on: ubuntu-latest
