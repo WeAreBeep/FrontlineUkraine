@@ -21,17 +21,12 @@ def upgrade():
         """
 create sequence "PpeTypes_Id_seq";
 
-alter sequence "PpeTypes_Id_seq" owner to postgres;
-
 create table "__RefactorLog"
 (
     "OperationKey" uuid not null
         constraint "idx_20690_PK____Refact__D3AEFFDB8DF00E8E"
             primary key
 );
-
-alter table "__RefactorLog"
-    owner to postgres;
 
 create table "AspNetRoles"
 (
@@ -42,9 +37,6 @@ create table "AspNetRoles"
     "NormalizedName"   text,
     "ConcurrencyStamp" text
 );
-
-alter table "AspNetRoles"
-    owner to postgres;
 
 create table "AspNetRoleClaims"
 (
@@ -58,9 +50,6 @@ create table "AspNetRoleClaims"
     "ClaimType"  text,
     "ClaimValue" text
 );
-
-alter table "AspNetRoleClaims"
-    owner to postgres;
 
 create index "idx_20695_IX_AspNetRoleClaims_RoleId"
     on "AspNetRoleClaims" ("RoleId");
@@ -90,9 +79,6 @@ create table "AspNetUsers"
     "AccessFailedCount"    integer not null
 );
 
-alter table "AspNetUsers"
-    owner to postgres;
-
 create table "AspNetUserClaims"
 (
     "Id"         bigserial
@@ -105,9 +91,6 @@ create table "AspNetUserClaims"
     "ClaimType"  text,
     "ClaimValue" text
 );
-
-alter table "AspNetUserClaims"
-    owner to postgres;
 
 create index "idx_20710_IX_AspNetUserClaims_UserId"
     on "AspNetUserClaims" ("UserId");
@@ -125,9 +108,6 @@ create table "AspNetUserLogins"
         primary key ("LoginProvider", "ProviderKey")
 );
 
-alter table "AspNetUserLogins"
-    owner to postgres;
-
 create index "idx_20717_IX_AspNetUserLogins_UserId"
     on "AspNetUserLogins" ("UserId");
 
@@ -144,9 +124,6 @@ create table "AspNetUserRoles"
     constraint "idx_20723_PK_AspNetUserRoles"
         primary key ("UserId", "RoleId")
 );
-
-alter table "AspNetUserRoles"
-    owner to postgres;
 
 create index "idx_20723_IX_AspNetUserRoles_RoleId"
     on "AspNetUserRoles" ("RoleId");
@@ -171,9 +148,6 @@ create table "AspNetUserTokens"
         primary key ("UserId", "LoginProvider", "Name")
 );
 
-alter table "AspNetUserTokens"
-    owner to postgres;
-
 create table "Audits"
 (
     "Id"        bigserial
@@ -188,9 +162,6 @@ create table "Audits"
     "NewValues" text
 );
 
-alter table "Audits"
-    owner to postgres;
-
 create table "ContactSubmissions"
 (
     "Id"        bigint                   not null
@@ -202,9 +173,6 @@ create table "ContactSubmissions"
     "EmailedTo" text,
     "Created"   timestamp with time zone not null
 );
-
-alter table "ContactSubmissions"
-    owner to postgres;
 
 create table "Needs"
 (
@@ -233,9 +201,6 @@ create table "Needs"
     "AddressLineTwo"     text default ''::text
 );
 
-alter table "Needs"
-    owner to postgres;
-
 create table "Notes"
 (
     "Id"        bigserial
@@ -248,9 +213,6 @@ create table "Notes"
             on delete cascade,
     "Text"      text
 );
-
-alter table "Notes"
-    owner to postgres;
 
 create table "NeedNotes"
 (
@@ -266,9 +228,6 @@ create table "NeedNotes"
         primary key ("NeedId", "NoteId")
 );
 
-alter table "NeedNotes"
-    owner to postgres;
-
 create table "PostcodesRegions"
 (
     "Postcode"    text     not null
@@ -277,9 +236,6 @@ create table "PostcodesRegions"
     "NhsRegionId" smallint not null
 );
 
-alter table "PostcodesRegions"
-    owner to postgres;
-
 create table "PpeTypes"
 (
     "Id"   smallint default nextval('frontlinelive."PpeTypes_Id_seq"'::regclass) not null
@@ -287,9 +243,6 @@ create table "PpeTypes"
             primary key,
     "Name" text
 );
-
-alter table "PpeTypes"
-    owner to postgres;
 
 alter sequence "PpeTypes_Id_seq" owned by "PpeTypes"."Id";
 
@@ -316,9 +269,6 @@ create table "Suppliers"
     "CapacityNotes"     text
 );
 
-alter table "Suppliers"
-    owner to postgres;
-
 create table "NeedPpeTypes"
 (
     "NeedId"               bigint   not null
@@ -343,9 +293,6 @@ create table "NeedPpeTypes"
         primary key ("NeedId", "PpeTypeId")
 );
 
-alter table "NeedPpeTypes"
-    owner to postgres;
-
 create table "SupplierNotes"
 (
     "SupplierId" bigint not null
@@ -359,9 +306,6 @@ create table "SupplierNotes"
     constraint "idx_20788_PK_SupplierNotes"
         primary key ("SupplierId", "NoteId")
 );
-
-alter table "SupplierNotes"
-    owner to postgres;
 
 create table "SupplierPpeTypes"
 (
@@ -384,9 +328,6 @@ create table "SupplierPpeTypes"
     constraint "idx_20791_PK_SupplierPpeTypes"
         primary key ("SupplierId", "PpeTypeId")
 );
-
-alter table "SupplierPpeTypes"
-    owner to postgres;
 
 create view "Requests"
             ("Id", "Timestamp", "UshahidiId", "StatusId", "ContactName", "OrganisationName", "Email", "PhoneNumber",
@@ -440,9 +381,6 @@ FROM "NeedPpeTypes"
                              ORDER BY latestnotes."Timestamp" DESC
                              LIMIT 1) mostrecentnotes ON true;
 
-alter table "Requests"
-    owner to postgres;
-
 create view "Supplies"
             ("Id", "Timestamp", "UshahidiId", "StatusId", "Name", "Description", "SupplierTypeId", "SupplierTypeOther",
              "Email", "Website", "PhoneNumber", "ContactName", "Postcode", "TellUsMore", "Longitude", "Latitude",
@@ -489,11 +427,6 @@ FROM "SupplierPpeTypes"
                              WHERE "SupplierNotes"."SupplierId" = "Suppliers"."Id"
                              ORDER BY latestnotes."Timestamp" DESC
                              LIMIT 1) mostrecentnotes ON true;
-
-alter table "Supplies"
-    owner to postgres;
-
-
         """
     )
 
