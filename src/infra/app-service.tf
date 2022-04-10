@@ -13,6 +13,10 @@ resource "azurerm_app_service_plan" "asp" {
   }
 }
 
+locals {
+  pgsql_schema = 'frontlineukraine'
+}
+
 resource "azurerm_app_service" "web" {
   name                = "${local.prefix}-web-${terraform.workspace}"
   location            = data.azurerm_resource_group.rg.location
@@ -37,7 +41,7 @@ resource "azurerm_app_service" "web" {
   connection_string {
     name  = "DataContext"
     type  = "Custom"
-    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login}@${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Password=${var.sql_admin_password};SearchPath=frontlinelive,public;SSL Mode=Require;"
+    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login}@${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Password=${var.sql_admin_password};SearchPath=${local.pgsql_schema},public;SSL Mode=Require;"
   }
 
   connection_string {
@@ -115,7 +119,7 @@ resource "azurerm_app_service" "core" {
     POSTGRES_USER                   = "${var.sql_admin_login}@${azurerm_postgresql_flexible_server.pgsql_svr.fqdn}"
     POSTGRES_PASSWORD               = var.sql_admin_password
     POSTGRES_DB                     = azurerm_postgresql_flexible_server_database.pgsql_db.name
-    POSTGRES_SCHEMA                 = "frontlinelive"
+    POSTGRES_SCHEMA                 = local.pgsql_schema
     BACKEND_CORS_ORIGINS            = jsonencode(var.core_cors_allowed_origins)
     // Specify Sentry DSN if any
     SENTRY_DSN                      = ""
