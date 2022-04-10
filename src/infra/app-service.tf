@@ -14,7 +14,7 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 locals {
-  pgsql_schema = 'frontlinelive'
+  pgsql_schema = "frontlinelive"
 }
 
 resource "azurerm_app_service" "web" {
