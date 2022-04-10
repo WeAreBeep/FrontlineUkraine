@@ -14,7 +14,7 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 locals {
-  pgsql_schema = 'frontlineukraine'
+  pgsql_schema = 'frontlinelive'
 }
 
 resource "azurerm_app_service" "web" {
@@ -41,7 +41,7 @@ resource "azurerm_app_service" "web" {
   connection_string {
     name  = "DataContext"
     type  = "Custom"
-    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login}@${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Password=${var.sql_admin_password};SearchPath=${local.pgsql_schema},public;SSL Mode=Require;"
+    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login};Password=${var.sql_admin_password};SearchPath=${local.pgsql_schema},public;SSL Mode=Require;"
   }
 
   connection_string {
@@ -116,7 +116,7 @@ resource "azurerm_app_service" "core" {
     SERVER_NAME                     = local.core_app_service_default_site_hostname
     SERVER_HOST                     = var.core_server_host
     POSTGRES_SERVER                 = azurerm_postgresql_flexible_server.pgsql_svr.fqdn
-    POSTGRES_USER                   = "${var.sql_admin_login}@${azurerm_postgresql_flexible_server.pgsql_svr.fqdn}"
+    POSTGRES_USER                   = var.sql_admin_login
     POSTGRES_PASSWORD               = var.sql_admin_password
     POSTGRES_DB                     = azurerm_postgresql_flexible_server_database.pgsql_db.name
     POSTGRES_SCHEMA                 = local.pgsql_schema
