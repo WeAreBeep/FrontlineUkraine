@@ -71,14 +71,14 @@ jobs:
         env: 
           DEPLOY_WORKSPACE: dev
           ENVIRONMENT_NAME: Development
-          CORE_CUSTOM_DOMAIN_LIST: '["core-dev.frontline.live"]'
-          CORE_SERVER_HOST: 'https://core-dev.frontline.live'
-          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["beta-dev.frontline.live"]'
-          PUBLICWEB_PUBLIC_URL: 'https://beta-dev.frontline.live'
-          PUBLICWEB_API_ENDPOINT: 'https://core-dev.frontline.live/api'
-          CORE_CORS_ALLOWED_ORIGINS: '["https://beta-dev.frontline.live", "https://new-dev.frontline.live", "https://admin-dev.frontline.live"]'
-          WEB_CUSTOM_DOMAIN_LIST: '["new-dev.frontline.live", "admin-dev.frontline.live"]'
-          WEBSITE_CANONICAL_URL: "https://new-dev.frontline.live"
+          CORE_CUSTOM_DOMAIN_LIST: '[]'
+          CORE_SERVER_HOST: ''
+          PUBLICWEB_CUSTOM_DOMAIN_LIST: '[]'
+          PUBLICWEB_PUBLIC_URL: ''
+          PUBLICWEB_API_ENDPOINT: ''
+          CORE_CORS_ALLOWED_ORIGINS: '[]'
+          WEB_CUSTOM_DOMAIN_LIST: '[]'
+          WEBSITE_CANONICAL_URL: ""
           
 
   deploy_prod:
@@ -100,11 +100,11 @@ jobs:
         env: 
           DEPLOY_WORKSPACE: prod
           ENVIRONMENT_NAME: Production
-          CORE_CUSTOM_DOMAIN_LIST: '["core.frontline.live"]'
-          CORE_SERVER_HOST: 'https://core.frontline.live'
-          CORE_CORS_ALLOWED_ORIGINS: '["https://beta.frontline.live", "https://admin.frontline.live", "https://www.frontline.live", "https://frontline.live"]'
-          PUBLICWEB_CUSTOM_DOMAIN_LIST: '["www.frontline.live", "frontline.live", "beta.frontline.live"]'
-          PUBLICWEB_PUBLIC_URL: 'https://beta.frontline.live'
-          PUBLICWEB_API_ENDPOINT: 'https://core.frontline.live/api'
-          WEB_CUSTOM_DOMAIN_LIST: '["admin.frontline.live"]'
-          WEBSITE_CANONICAL_URL: "https://www.frontline.live"
+          CORE_CUSTOM_DOMAIN_LIST: '[]'
+          CORE_SERVER_HOST: ''
+          CORE_CORS_ALLOWED_ORIGINS: '[]'
+          PUBLICWEB_CUSTOM_DOMAIN_LIST: '[]'
+          PUBLICWEB_PUBLIC_URL: ''
+          PUBLICWEB_API_ENDPOINT: ''
+          WEB_CUSTOM_DOMAIN_LIST: '[]'
+          WEBSITE_CANONICAL_URL: ""
