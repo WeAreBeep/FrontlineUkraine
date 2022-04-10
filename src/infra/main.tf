@@ -1,9 +1,16 @@
 terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "=2.99.0"
+    }
+  }
+
   backend "azurerm" {
-    resource_group_name  = "frontline-rg-baseline"
-    storage_account_name = "frontlinesa2"
+    resource_group_name  = "frontline-ukraine-rg-baseline"
+    storage_account_name = "frontlineukrainesa2"
     container_name       = "tf-state"
-    key                  = "frontline.tfstate"
+    key                  = "frontline-ukraine.tfstate"
   }
 }
 
@@ -12,10 +19,10 @@ provider "azurerm" {
 }
 
 locals {
-  prefix = "frontline"
+  prefix = "frontline-ukraine"
 
   # if you update this - please update the Terraform backend too (see line #3).
-  baseline_resource_group = "frontline-rg-baseline"
+  baseline_resource_group = "frontline-ukraine-rg-baseline"
 
   container_image = "${data.azurerm_container_registry.acr.login_server}/${var.container_image_name}:${var.container_image_tag}"
 
@@ -25,7 +32,7 @@ locals {
 
   tags = {
     owner = "terraform"
-    site  = "frontline.live"
+    site  = "frontline.ua"
   }
 }
 
@@ -39,7 +46,7 @@ data "azurerm_container_registry" "acr" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     = "${local.prefix}sa${terraform.workspace}"
+  name                     = "${replace(local.prefix, "-", "")}sa${terraform.workspace}"
   resource_group_name      = data.azurerm_resource_group.rg.name
   location                 = data.azurerm_resource_group.rg.location
   account_tier             = "Standard"

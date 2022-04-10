@@ -4,7 +4,7 @@ variable "environment_name" {
 
 variable "container_registry_name" {
   type    = string
-  default = "frontlineacr2"
+  default = "frontlineukraineacr2"
 }
 
 variable "container_image_name" {
@@ -36,7 +36,7 @@ variable "core_image_tag" {
 
 variable "sql_admin_login" {
   type    = string
-  default = "frontline"
+  default = "frontlineukraine"
 }
 
 variable "sql_admin_password" {
@@ -46,6 +46,7 @@ variable "sql_admin_password" {
 
 variable "core_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "core_server_host" {
@@ -54,6 +55,7 @@ variable "core_server_host" {
 
 variable "core_cors_allowed_origins" {
   type = list(string)
+  default = []
 }
 
 variable "core_api_key" {
@@ -63,10 +65,12 @@ variable "core_api_key" {
 
 variable "web_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "publicweb_custom_domain_list" {
   type = list(string)
+  default = []
 }
 
 variable "publicweb_public_url" {
