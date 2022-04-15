@@ -28,8 +28,8 @@ export const MainLinks: React.FC<{
       };
     }, [classes, variant]);
   const links = useMemo(() => [
-    { routeType: RouteType.RequestPpe, name: renderToString('nav_link_item_i_need') },
-    { routeType: RouteType.RegisterSupplies, name: renderToString('nav_link_item_i_have') },
+    { routeType: RouteType.RegisterNeed, name: renderToString('nav_link_item_i_need') },
+    { routeType: RouteType.RegisterSupply, name: renderToString('nav_link_item_i_have') },
     { routeType: RouteType.About, name: renderToString('nav_link_item_about') },
     { routeType: RouteType.Partners, name: renderToString('nav_link_item_partners') },
   ], [renderToString]);

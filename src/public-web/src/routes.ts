@@ -1,7 +1,7 @@
 export enum RouteType {
   Landing = '/',
-  RequestPpe = '/request-ppe',
-  RegisterSupplies = '/register-supplies',
+  RegisterNeed = '/register-needs',
+  RegisterSupply = '/register-supplies',
   About = '/about',
   Partners = '/partners',
   TermsAndConditions = '/terms-and-conditions',

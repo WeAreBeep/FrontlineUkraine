@@ -5,7 +5,7 @@ import { RegisterSuppliesForm } from '../../types';
 import { ReactHookFormRadioGroup } from '../../../../components/ReactHookFormRadioGroup';
 import { PpeTypeEnum } from '../../../../models/ppeType';
 import { ReactHookFormNumberInput } from '../../../../components/ReactHookFormNumberInput';
-import { useStyles } from '../../../requestPpe/components/PpeRequestSubForm/style';
+import { useStyles } from '../../../registerNeeds/components/PpeRequestSubForm/style';
 import { VALIDATION_MSG } from '../../../../utils/validation';
 
 interface Props {

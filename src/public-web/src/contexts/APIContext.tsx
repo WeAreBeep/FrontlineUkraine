@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { RegisterSuppliesForm } from '../containers/registerSupplies/types';
-import { RegisterRequestForm } from '../containers/requestPpe/types';
+import { RegisterRequestForm } from '../containers/registerNeeds/types';
 import { config } from '../config';
 import { PpeTypeEnum } from '../models/ppeType';
 import { MapData } from '../models/map';

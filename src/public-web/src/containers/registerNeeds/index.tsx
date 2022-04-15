@@ -29,7 +29,7 @@ import { FormattedMessage } from '../../locale/FormattedMessage';
 import { ProcedureList } from './components/ProcedureList';
 import { useLocale } from '../../locale/LocaleProvider';
 
-export const RequestPpe: React.FC = () => {
+export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
   const {renderToString} = useLocale();
   const navigate = useNavigate();
