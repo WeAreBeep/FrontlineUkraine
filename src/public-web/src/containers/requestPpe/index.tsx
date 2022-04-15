@@ -14,7 +14,7 @@ import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
 import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
-import { defaultRegisterRequestForm, RegisterRequestForm } from './types';
+import { defaultRegisterRequestForm, ORG_TYPES, RegisterRequestForm } from './types';
 import { VALIDATION_MSG } from '../../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '@mantine/notifications';
@@ -25,9 +25,13 @@ import {
 } from '../../contexts/APIContext';
 import { ReactHookFormPosttagAddressAutocomplete } from '../../components/ReactHookFormPosttagAddressAutocomplete';
 import { AddressEntry } from '../../models/posttag';
+import { FormattedMessage } from '../../locale/FormattedMessage';
+import { ProcedureList } from './components/ProcedureList';
+import { useLocale } from '../../locale/LocaleProvider';
 
 export const RequestPpe: React.FC = () => {
   const { classes } = useStyles();
+  const {renderToString} = useLocale();
   const navigate = useNavigate();
   const notification = useNotifications();
   const {
@@ -108,16 +112,13 @@ export const RequestPpe: React.FC = () => {
   return (
     <div className={classes.scrollContainer}>
       <Container>
-        <h1 className={classes.header}>PPE Needs</h1>
+        <h1 className={classes.header}>
+          <FormattedMessage id="i_need_form_title" />
+        </h1>
         <section className={classes.section}>
-          <p>
-            Complete this form if you don&apos;t use twitter or would prefer to
-            report your PPE shortage anonymously.
-          </p>
-          <p>
-            We&apos;ll put your need on the map and try to get equipment to you
-            as quickly as possible.
-          </p>
+          <FormattedMessage id="i_need_form_form_intro" components={{
+            ProcedureList
+          }} />
         </section>
         <section className={classes.section}>
           <DevTool control={control} />
@@ -131,8 +132,8 @@ export const RequestPpe: React.FC = () => {
               <InputWrapper
                 error={errors.publishAnonymously?.message}
                 className={classes.inputWrapper}
-                label="Publish Anonymously"
-                description="Check this if you do not wish your name to be published on the Frontline Map"
+                label={renderToString('i_need_form_fieldset_your_detail_field_publish_anonymously_title')}
+                description={renderToString('i_need_form_fieldset_your_detail_field_publish_anonymously_description')}
               >
                 <Switch {...register('publishAnonymously')} size="md" />
               </InputWrapper>
@@ -140,7 +141,7 @@ export const RequestPpe: React.FC = () => {
                 {...register('contactName')}
                 error={errors.contactName?.message}
                 className={classes.inputWrapper}
-                label="Your Name"
+                label={renderToString('i_need_form_fieldset_your_detail_field_contact_name_title')}
                 description="If you tick 'Publish Anonymously' this will not be published on the website nor shared outside the Frontline team. If you don't leave your name, we will delivery PPE package to the department you entered."
               />
               <TextInput
@@ -199,15 +200,27 @@ export const RequestPpe: React.FC = () => {
               </InputWrapper>
             </fieldset>
             <fieldset className={classes.fieldSet}>
-              <legend className={classes.legend}>Organisation</legend>
+              <legend className={classes.legend}>
+                <FormattedMessage id="i_need_form_fieldset_organisation_title" />
+              </legend>
               <TextInput
                 {...register('organisationName', {
                   required: { value: true, message: VALIDATION_MSG.required },
                 })}
                 error={errors.organisationName?.message}
                 className={classes.inputWrapper}
-                label="Organisation Name"
-                description="Organisation or Company name"
+                label={renderToString('i_need_form_fieldset_organisation_field_organisation_name_title')}
+                description={renderToString('i_need_form_fieldset_organisation_field_organisation_name_description')}
+                required={true}
+              />
+              <TextInput
+                {...register('orgRegCode', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.orgRegCode?.message}
+                className={classes.inputWrapper}
+                label={renderToString('i_need_form_fieldset_organisation_field_org_reg_code_title')}
+                description={renderToString('i_need_form_fieldset_organisation_field_org_reg_code_description')}
                 required={true}
               />
               <ReactHookFormRadioGroup
@@ -219,18 +232,13 @@ export const RequestPpe: React.FC = () => {
                 error={errors.orgType?.message}
                 classNames={{ root: classes.inputWrapper }}
                 variant="vertical"
-                label="Type"
-                description="Which best describes your organisation?"
+                label={renderToString('i_need_form_fieldset_organisation_field_org_type_title')}
+                description={renderToString('i_need_form_fieldset_organisation_field_org_type_description')}
                 required={true}
               >
-                <Radio value="NhsHospital">NHS Hospital</Radio>
-                <Radio value="CareHome">Care Home</Radio>
-                <Radio value="GpSurgery">GP Surgery</Radio>
-                <Radio value="PrivateHospital">Private Hospital</Radio>
-                <Radio value="ShelteredHousing">Sheltered Housing</Radio>
-                <Radio value="CivicInfrastructure">Civic Infrastructure</Radio>
-                <Radio value="Dentists">Dentists</Radio>
-                <Radio value="Other">Other...</Radio>
+                { ORG_TYPES.map(({ value, name}) => <Radio key={value} value={value}>
+                  <FormattedMessage id={name} />
+                </Radio>)}
               </ReactHookFormRadioGroup>
               {watchedOrgType === 'Other' && (
                 <TextInput
