@@ -3,19 +3,14 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { RouteType } from '../../routes';
 import { useStyles } from './style';
-
-const links: { name: string; routeType: RouteType }[] = [
-  { routeType: RouteType.RequestPpe, name: 'I NEED' },
-  { routeType: RouteType.RegisterSupplies, name: 'I HAVE' },
-  { routeType: RouteType.About, name: 'ABOUT' },
-  { routeType: RouteType.Partners, name: 'PARTNERS' },
-];
+import { useLocale } from '../../locale/LocaleProvider';
 
 export const MainLinks: React.FC<{
   className?: string;
   variant: 'header' | 'navbar';
   onClick?: () => void;
 }> = ({ className, variant, onClick }) => {
+  const { renderToString } = useLocale();
   const { classes } = useStyles();
   const { containerClassVariant, linkItemVariant, linkClassVariant } =
     useMemo(() => {
@@ -32,6 +27,12 @@ export const MainLinks: React.FC<{
         linkItemVariant: classes.navLinkItem,
       };
     }, [classes, variant]);
+  const links = useMemo(() => [
+    { routeType: RouteType.RequestPpe, name: renderToString('nav_link_item_i_need') },
+    { routeType: RouteType.RegisterSupplies, name: renderToString('nav_link_item_i_have') },
+    { routeType: RouteType.About, name: renderToString('nav_link_item_about') },
+    { routeType: RouteType.Partners, name: renderToString('nav_link_item_partners') },
+  ], [renderToString]);
   return (
     <ul
       className={cn(classes.linksContainer, containerClassVariant, className)}
