@@ -1,13 +1,16 @@
 import React from 'react';
-import { useRoutes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { RouteType } from './routes';
 import * as Containers from './containers';
-import { FLAppShell } from './components/FLAppShell';
 import { APIContextProvider } from './contexts/APIContext';
 import { config } from './config';
+import { ServiceProvider } from './contexts/ServiceContext';
+import { LocaleProvider } from './locale/LocaleProvider';
+import { FLAppShell } from './components/FLAppShell';
+import { Locale } from './locale/type';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -35,7 +38,11 @@ const InnerFLApp: React.FC = () => {
   return (
     <ContentfulProvider client={contentfulClient}>
       <APIContextProvider>
-        <FLAppShell>{Match}</FLAppShell>
+        <ServiceProvider windowImpl={window}>
+          <LocaleProvider defaultLocale={Locale.Uk}>
+            <FLAppShell>{Match}</FLAppShell>
+          </LocaleProvider>
+        </ServiceProvider>
       </APIContextProvider>
     </ContentfulProvider>
   );
