@@ -10,7 +10,7 @@ import { config } from './config';
 import { ServiceProvider } from './contexts/ServiceContext';
 import { LocaleProvider } from './locale/LocaleProvider';
 import { FLAppShell } from './components/FLAppShell';
-import { Locale } from './locale/type';
+import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -39,7 +39,7 @@ const InnerFLApp: React.FC = () => {
     <ContentfulProvider client={contentfulClient}>
       <APIContextProvider>
         <ServiceProvider windowImpl={window}>
-          <LocaleProvider defaultLocale={Locale.Uk}>
+          <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
             <FLAppShell>{Match}</FLAppShell>
           </LocaleProvider>
         </ServiceProvider>
