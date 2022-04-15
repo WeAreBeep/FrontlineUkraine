@@ -23,6 +23,13 @@ export const useStyles = createStyles((theme) => {
     logo: {
       height: '3rem',
     },
+    headerItemsContainer: {
+      display: 'none',
+      [tablet(theme)]: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+    },
     linksContainer: {
       display: 'none',
       margin: 0,
@@ -30,5 +37,10 @@ export const useStyles = createStyles((theme) => {
         display: 'flex',
       },
     },
+    localeControl: {
+      [tablet(theme)]: {
+        marginLeft: theme.spacing.md,
+      }
+    }
   };
 });

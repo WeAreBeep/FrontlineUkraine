@@ -1,4 +1,5 @@
 import { PpeTypeEnum } from '../../models/ppeType';
+import { MessageID } from '../../locale/type';
 
 export interface PpeRequestTypeSubForm {
   need: boolean;
@@ -20,6 +21,7 @@ export interface RegisterRequestForm {
   email: string;
   phoneNumber: string;
   organisationName: string;
+  orgRegCode: string;
   orgType: string;
   orgTypeOther: string;
   jobTitle: string;
@@ -37,6 +39,7 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
   email: '',
   phoneNumber: '',
   organisationName: '',
+  orgRegCode: '',
   orgType: '',
   orgTypeOther: '',
   jobTitle: '',
@@ -60,3 +63,16 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
     [PpeTypeEnum.Other]: defaultPpeRequestTypeSubForm,
   },
 };
+
+export const ORG_TYPES: {value: string, name: MessageID}[] = [
+  { value: 'LocalCharity', name: 'organisation_type_local_charity' },
+  { value: 'internationalOrgChapter', name: 'organisation_type_international_org_chapter' },
+  { value: 'religious_institution', name: 'organisation_type_religious_institution' },
+  { value: 'LocalOrRegionalAdmin', name: 'organisation_type_local_or_regional_admin' },
+  { value: 'University', name: 'organisation_type_university' },
+  { value: 'School', name: 'organisation_type_school' },
+  { value: 'Community', name: 'organisation_type_community' },
+  { value: 'LocalHospital', name: 'organisation_type_local_hospital' },
+  { value: 'DistributionHub', name: 'organisation_type_distribution' },
+  { value: 'Other', name: 'organisation_type_other' },
+]
