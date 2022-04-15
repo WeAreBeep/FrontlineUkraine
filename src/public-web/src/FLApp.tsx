@@ -21,9 +21,9 @@ const contentfulClient = new ContentfulClient({
 
 const InnerFLApp: React.FC = () => {
   const Match = useRoutes([
-    { path: RouteType.RequestPpe, element: <Containers.RequestPpe /> },
+    { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
     {
-      path: RouteType.RegisterSupplies,
+      path: RouteType.RegisterSupply,
       element: <Containers.RegisterSupplies />,
     },
     { path: RouteType.About, element: <Containers.About /> },
