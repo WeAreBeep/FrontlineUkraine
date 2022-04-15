@@ -1,5 +1,5 @@
 import React from 'react';
-import { CSSObject, Header, MantineTheme, Burger } from '@mantine/core';
+import { CSSObject, Header, MantineTheme, Burger, Box } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useStyles } from './style';
 import { RouteType } from '../../routes';
@@ -9,6 +9,7 @@ import { HEADER_HEIGHT } from '../FLAppShell/style';
 import logoSrc from '../../assets/images/frontline_map_logo.png';
 import { getThemePrimaryColor } from '../../utils/mantine';
 import { MainLinks } from '../MainLinks';
+import { LocaleControl } from '../LocaleControl';
 
 function getHeaderCss(theme: MantineTheme): CSSObject {
   return {
@@ -30,8 +31,8 @@ export const FLHeader: React.FC<Props> = ({
   const { classes } = useStyles();
   return (
     <Header height={HEADER_HEIGHT} padding="sm" sx={getHeaderCss} fixed={true}>
-      <div className={classes.container}>
-        <div className={classes.iconContainer}>
+      <Box className={classes.container}>
+        <Box className={classes.iconContainer}>
           <Burger
             className={classes.burger}
             opened={burgerOpened}
@@ -69,10 +70,12 @@ export const FLHeader: React.FC<Props> = ({
           >
             <FontAwesomeIcon icon={['fab', 'instagram']} size="4x"/>
           </a> */}
-        </div>
-
-        <MainLinks variant="header" className={classes.linksContainer} />
-      </div>
+        </Box>
+        <Box className={classes.headerItemsContainer}>
+          <MainLinks variant="header" />
+          <LocaleControl className={classes.localeControl}/>
+        </Box>
+      </Box>
     </Header>
   );
 };
