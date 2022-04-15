@@ -37,28 +37,31 @@ interface TranslationContextValue extends LocaleContextValue {
 
 const TranslationContext = React.createContext<TranslationContextValue>({} as TranslationContextValue);
 
-const TranslationProvider: React.FC = ({children}) =>{
-  const localeValue = React.useContext(LocaleContext);
+const TranslationProvider: React.FC = ({ children }) => {
+  const { locale, ...restLocaleValue } = React.useContext(LocaleContext);
   const { renderToString } = React.useContext(MFContext);
 
   const value = useMemo(() => ({
-    ...localeValue,
-    renderToString: renderToString as TranslationContextValue['renderToString']
-  }), [localeValue, renderToString]);
+    locale,
+    ...restLocaleValue,
+    renderToString: (id: MessageID, values?: Values) => {
+      return renderToString(id, values,);
+    }
+  }), [locale, restLocaleValue, renderToString]);
 
   return <TranslationContext.Provider value={value}>
     {children}
   </TranslationContext.Provider>
 }
 
-export const LocaleProvider: React.FC<{defaultLocale: Locale}> = ({defaultLocale, children}) => {
+export const LocaleProvider: React.FC<{ defaultLocale: Locale }> = ({ defaultLocale, children }) => {
   const { storage } = useService();
   const [state, setState] = useState<State>({
     locale: storage.getLocale() ?? defaultLocale,
   });
   const actions = useMakeAction(state, setState, storage);
 
-  const value = useMemo(() => ({...state, ...actions}), [state, actions]);
+  const value = useMemo(() => ({ ...state, ...actions }), [state, actions]);
 
   useEffect(() => {
     setState({
