@@ -1,4 +1,5 @@
 import { Nullable } from '../utils/nullable';
+import { MessageID } from '../locale/type';
 
 export enum PpeTypeEnum {
   TypeIIRSurgicalMasks = 'TypeIIRSurgicalMasks',
@@ -16,6 +17,10 @@ export enum PpeTypeEnum {
 }
 
 export const allPpeTypes = Object.keys(PpeTypeEnum);
+
+export const getDisplayNameMessageID: (ppeType: PpeTypeEnum) => MessageID = (ppeType: PpeTypeEnum) => {
+  return `resourceType_ppe_${ppeType}_displayName` as MessageID;
+}
 
 // NOTE: Order matters, it represents the ordinal value
 export const PPE_TYPES = [

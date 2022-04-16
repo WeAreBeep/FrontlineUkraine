@@ -12,7 +12,7 @@ import {
 import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
-import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
+import { getDisplayNameMessageID, PPE_TYPES } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterRequestForm, ORG_TYPES, RegisterRequestForm } from './types';
 import { VALIDATION_MSG } from '../../utils/validation';
@@ -168,7 +168,9 @@ export const RegisterNeeds: React.FC = () => {
               />
             </fieldset>
             <fieldset className={classes.fieldSet}>
-              <legend className={classes.legend}>PPE</legend>
+              <legend className={classes.legend}>
+                <FormattedMessage id="resourceCategory_ppe_displayName" />
+              </legend>
               <InputWrapper
                 label="Needs"
                 className={classes.inputWrapper}
@@ -183,7 +185,7 @@ export const RegisterNeeds: React.FC = () => {
                     <Switch
                       {...register(`ppeTypes.${ppeType}.need`)}
                       className={classes.switchInput}
-                      label={PpeTypeName[ppeType]}
+                      label={renderToString(getDisplayNameMessageID(ppeType))}
                       size="md"
                     />
                     {watchedPpe[ppeType].need && (
