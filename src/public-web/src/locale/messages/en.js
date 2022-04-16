@@ -29,5 +29,17 @@ export default {
   organisation_type_local_hospital: 'Local/Regional Hospital',
   organisation_type_distribution: 'Distribution Hub (UA)',
   organisation_type_other: 'Other (please specify)',
-
+  resourceCategory_ppe_displayName: 'PPE',
+  resourceType_ppe_TypeIIRSurgicalMasks_displayName: 'Type IIR Surgical Masks',
+  resourceType_ppe_FFP1RespiratorMasks_displayName: 'FFP1 Respirator Masks',
+  resourceType_ppe_FFP2RespiratorMasks_displayName: 'FFP2 Respirator Masks',
+  resourceType_ppe_FFP3RespiratorMasks_displayName: 'FFP3 Respirator Masks',
+  resourceType_ppe_Gowns_displayName: 'Gowns',
+  resourceType_ppe_Aprons_displayName: 'Aprons',
+  resourceType_ppe_Gloves_displayName: 'Gloves',
+  resourceType_ppe_Scrubs_displayName: 'Scrubs',
+  resourceType_ppe_SafetyGlasses_displayName: 'Safety Glasses',
+  resourceType_ppe_FaceVisors_displayName: 'Face Visors',
+  resourceType_ppe_AlcoholHandGel_displayName: 'Alcohol Hand Gel',
+  resourceType_ppe_Other_displayName: 'Other (please specify)',
 }
