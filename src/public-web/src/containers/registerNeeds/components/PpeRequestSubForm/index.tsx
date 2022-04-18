@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput } from '@mantine/core';
 import { UseFormReturn } from 'react-hook-form';
 import { RegisterRequestForm } from '../../types';
-import { PpeTypeEnum } from '../../../../models/ppeType';
+import { isResourceTypeOther, PpeTypeEnum } from '../../../../models/ppeType';
 import { ReactHookFormNumberInput } from '../../../../components/ReactHookFormNumberInput';
 import { useStyles } from './style';
 import { VALIDATION_MSG } from '../../../../utils/validation';
@@ -34,7 +34,7 @@ export const PpeRequestSubForm: React.FC<
         max={100000000}
         step={1}
       />
-      {ppeType !== PpeTypeEnum.Other && (
+      {!isResourceTypeOther(ppeType) && (
         <TextInput
           {...register(`ppeTypes.${ppeType}.dailyShortageForWhom`, {
             required: {
@@ -48,7 +48,7 @@ export const PpeRequestSubForm: React.FC<
           description="How many people will this protect for how long?"
         />
       )}
-      {ppeType === PpeTypeEnum.Other && (
+      {isResourceTypeOther(ppeType) && (
         <TextInput
           {...register(`ppeTypes.${ppeType}.ppeTypeOther`, {
             required: { value: true, message: VALIDATION_MSG.required },

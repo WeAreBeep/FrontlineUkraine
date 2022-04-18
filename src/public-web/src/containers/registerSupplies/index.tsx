@@ -7,11 +7,12 @@ import {
   TextInput,
   Button,
   Switch,
+  Text,
 } from '@mantine/core';
 import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeSupplySubForm } from './components/PpeSupplySubForm';
-import { PPE_TYPES, PpeTypeName } from '../../models/ppeType';
+import { getDisplayNameMessageID, getPpeTypeEnumFromInt } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterSuppliesForm, RegisterSuppliesForm } from './types';
 import { VALIDATION_MSG } from '../../utils/validation';
@@ -22,8 +23,12 @@ import {
 } from '../../contexts/APIContext';
 import { useNotifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
+import { useLocale } from '../../locale/LocaleProvider';
+import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
+import { FormattedMessage } from '../../locale/FormattedMessage';
 
 export const RegisterSupplies: React.FC = () => {
+  const { renderToString } = useLocale();
   const { classes } = useStyles();
   const navigate = useNavigate();
   const notification = useNotifications();
@@ -110,7 +115,7 @@ export const RegisterSupplies: React.FC = () => {
           <p>Thank you!</p>
         </section>
         <section className={classes.section}>
-          <DevTool control={control} />
+          <DevTool control={control}/>
           <form
             onSubmit={async (e) =>
               handleSubmit(handleValidSubmit)(e).catch(handleSubmitError)
@@ -146,22 +151,16 @@ export const RegisterSupplies: React.FC = () => {
                 }}
                 error={errors.supplierType?.message}
                 classNames={{ root: classes.inputWrapper }}
-                variant="vertical"
+                orientation="vertical"
                 label="Type"
                 description="Which best describes your organisation?"
                 required={true}
               >
-                <Radio value="ExistingPPEsupplier">
-                  PPE manufacturer/supplier (pre-COVID-19)
-                </Radio>
-                <Radio value="AdaptedPPEsupplier">
-                  Manufacturer/supplier adapted to make PPE in response to
-                  COVID-19
-                </Radio>
-                <Radio value="Individuals">
-                  Individual/group of individuals
-                </Radio>
-                <Radio value="Other">Other...</Radio>
+                <Radio value="ExistingPPEsupplier" label="PPE manufacturer/supplier (pre-COVID-19)"/>
+                <Radio value="AdaptedPPEsupplier" label="Manufacturer/supplier adapted to make PPE in response to
+                  COVID-19"/>
+                <Radio value="Individuals" label="Individual/group of individuals"/>
+                <Radio value="Other" label="Other..."/>
               </ReactHookFormRadioGroup>
               {watchedSupplierType === 'Other' && (
                 <TextInput
@@ -226,39 +225,54 @@ export const RegisterSupplies: React.FC = () => {
                 required={true}
               />
             </fieldset>
-            <fieldset className={classes.fieldSet}>
-              <legend className={classes.legend}>PPE</legend>
-              <InputWrapper
-                className={classes.inputWrapper}
-                label="What You Can Supply"
-                description="Tick as many as apply"
-                // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-                // select at least one of the PPE type.
-                error={errors.ppeTypes?.AlcoholHandGel?.can?.message}
-                required={true}
-              >
-                {PPE_TYPES.map((ppeType) => (
-                  <div key={ppeType}>
-                    <Switch
-                      {...register(`ppeTypes.${ppeType}.can`)}
-                      className={classes.switchInput}
-                      label={PpeTypeName[ppeType]}
-                      size="md"
-                    />
-                    {watchedPpe[ppeType].can && (
-                      <PpeSupplySubForm
-                        ppeType={ppeType}
-                        control={control}
-                        register={register}
-                        watch={watch}
-                        formState={formState}
-                        shouldUnregister={true}
-                      />
-                    )}
-                  </div>
+            {RESOURCE_GROUPS.map((group) => (
+              <fieldset key={group.id} className={classes.fieldSet}>
+                <legend className={classes.legend}>
+                  <FormattedMessage id={group.name}/>
+                </legend>
+                <Text size="sm">
+                  <FormattedMessage id="i_have_form_fieldset_resourceCategory_title"/>
+                </Text>
+                <Text size="xs" color="dimmed">
+                  <FormattedMessage id="resourceCategory_defaultDescription_supply"/>
+                </Text>
+                {group.type === 'node' && group.subGroups.map((subGroup) => (
+                  <InputWrapper
+                    key={`${group.id}_${subGroup.id}`}
+                    label={<FormattedMessage id={subGroup.name}/>}
+                    className={classes.inputWrapper}
+                    labelElement="div"
+                    description={subGroup.description && <FormattedMessage id={subGroup.description}/>}
+                    // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
+                    // select at least one of the PPE type.
+                    error={errors.ppeTypes?.AlcoholHandGel?.can?.message}
+                  >
+                    {subGroup.type === 'leaf' && subGroup.resourceTypes.map((resourceType) => {
+                      const typeEnum = getPpeTypeEnumFromInt(resourceType.id);
+                      if (typeEnum == null) return <></>;
+                      return <div key={resourceType.id}>
+                        <Switch
+                          {...register(`ppeTypes.${typeEnum}.can`)}
+                          className={classes.switchInput}
+                          label={renderToString(getDisplayNameMessageID(typeEnum))}
+                          size="md"
+                        />
+                        {watchedPpe[typeEnum].can && (
+                          <PpeSupplySubForm
+                            ppeType={typeEnum}
+                            control={control}
+                            register={register}
+                            watch={watch}
+                            formState={formState}
+                            shouldUnregister={true}
+                          />
+                        )}
+                      </div>
+                    })}
+                  </InputWrapper>
                 ))}
-              </InputWrapper>
-            </fieldset>
+              </fieldset>
+            ))}
             <Button
               className={classes.submitBtn}
               variant="filled"

@@ -23,6 +23,86 @@ import { Nullable } from '../../../../utils/nullable';
 
 type BreakdownCountMap = Record<PpeTypeEnum, number>;
 const defaultBreakdownCount: BreakdownCountMap = {
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkBabyFood]: 0,
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkCannedFood]: 0,
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkDryFood]: 0,
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks]: 0,
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkInstantFood]: 0,
+  [PpeTypeEnum.DomesticNonPerishableFoodDrinkProteinBars]: 0,
+  [PpeTypeEnum.DomesticOtherBinBags]: 0,
+  [PpeTypeEnum.DomesticOtherBootDriers]: 0,
+  [PpeTypeEnum.DomesticOtherCookingStoves]: 0,
+  [PpeTypeEnum.DomesticOtherDisposableTableware]: 0,
+  [PpeTypeEnum.DomesticOtherElectricityGenerators]: 0,
+  [PpeTypeEnum.DomesticOtherFoilSurvivalBlankets]: 0,
+  [PpeTypeEnum.DomesticOtherHotWaterBottles]: 0,
+  [PpeTypeEnum.DomesticOtherInsulatedFlasks]: 0,
+  [PpeTypeEnum.DomesticOtherLargeOrMediumBackpacks]: 0,
+  [PpeTypeEnum.DomesticOtherOther]: 0,
+  [PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables]: 0,
+  [PpeTypeEnum.DomesticOtherSleepingBags]: 0,
+  [PpeTypeEnum.DomesticOtherThermalClothingNew]: 0,
+  [PpeTypeEnum.DomesticOtherTorches]: 0,
+  [PpeTypeEnum.DomesticSanitaryBreastPads]: 0,
+  [PpeTypeEnum.DomesticSanitaryHairbrushes]: 0,
+  [PpeTypeEnum.DomesticSanitaryLiquidSoap]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappies]: 0,
+  [PpeTypeEnum.DomesticSanitaryOther]: 0,
+  [PpeTypeEnum.DomesticSanitaryPocketTissues]: 0,
+  [PpeTypeEnum.DomesticSanitarySanitaryTowels]: 0,
+  [PpeTypeEnum.DomesticSanitaryShavingGelRazors]: 0,
+  [PpeTypeEnum.DomesticSanitaryToiletPaper]: 0,
+  [PpeTypeEnum.DomesticSanitaryToothbrushes]: 0,
+  [PpeTypeEnum.DomesticSanitaryToothpaste]: 0,
+  [PpeTypeEnum.DomesticSanitaryTowels]: 0,
+  [PpeTypeEnum.DomesticSanitaryWetWipes]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesFirstAidKits]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesGlucometers]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesInsulinSyringes]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesMedicalTourniquets]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionAdult]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesXRayCartridges]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentCapnometer]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDermatome]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSyringePump]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval]: 0,
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows]: 0,
   [PpeTypeEnum.AlcoholHandGel]: 0,
   [PpeTypeEnum.Aprons]: 0,
   [PpeTypeEnum.FFP1RespiratorMasks]: 0,
@@ -34,7 +114,7 @@ const defaultBreakdownCount: BreakdownCountMap = {
   [PpeTypeEnum.Other]: 0,
   [PpeTypeEnum.SafetyGlasses]: 0,
   [PpeTypeEnum.Scrubs]: 0,
-  [PpeTypeEnum.TypeIIRSurgicalMasks]: 0,
+  [PpeTypeEnum.TypeIIRSurgicalMasks]: 0
 };
 
 interface Props {
@@ -53,10 +133,10 @@ interface PpeTypeEnumCheckboxProps {
 }
 
 const PpeTypeEnumCheckbox: React.FC<PpeTypeEnumCheckboxProps> = ({
-  control,
-  name,
-  breakdownCountMap,
-}) => {
+                                                                   control,
+                                                                   name,
+                                                                   breakdownCountMap,
+                                                                 }) => {
   const theme = useMantineTheme();
   const { field } = useController({
     control,
@@ -108,13 +188,13 @@ const PpeTypeEnumCheckbox: React.FC<PpeTypeEnumCheckboxProps> = ({
 };
 
 const AccordionLabel: React.FC<{ category: CategoryEnum; count?: number }> = ({
-  category,
-  count,
-}) => {
+                                                                                category,
+                                                                                count,
+                                                                              }) => {
   const theme = useMantineTheme();
   return (
     <Group noWrap={true} spacing="xs">
-      <ColorSwatch color={POINT_COLORS[category]} size={theme.fontSizes.sm} />
+      <ColorSwatch color={POINT_COLORS[category]} size={theme.fontSizes.sm}/>
       <span style={{ fontSize: theme.fontSizes.sm }}>
         {CATEGORY_NAME[category]}
       </span>
@@ -125,10 +205,10 @@ const AccordionLabel: React.FC<{ category: CategoryEnum; count?: number }> = ({
 
 // eslint-disable-next-line complexity
 export const MapControl: React.FC<Props> = ({
-  visibility,
-  onVisibilityChange,
-  mapData,
-}) => {
+                                              visibility,
+                                              onVisibilityChange,
+                                              mapData,
+                                            }) => {
   const { classes: accordionClasses } = useAccordionStyles();
   const { classes } = useStyles();
   const { control, watch } = useForm<CategoryVisibilityMap>({
@@ -156,22 +236,16 @@ export const MapControl: React.FC<Props> = ({
     if (mapData == null) {
       return null;
     }
-    return CATEGORIES.reduce<
-      Record<
-        CategoryEnum,
-        {
-          posts: number;
-          totalBreakdowns: number;
-          breakdownCount: BreakdownCountMap;
-        }
-      >
-    >((acc, category) => {
+    return CATEGORIES.reduce<Record<CategoryEnum,
+      {
+        posts: number;
+        totalBreakdowns: number;
+        breakdownCount: BreakdownCountMap;
+      }>>((acc, category) => {
       acc[category] = {
         posts: mapData.categories[category].posts.features.length,
         totalBreakdowns: mapData.categories[category].pointsCount,
-        breakdownCount: mapData.categories[category].pointsBreakdowns.reduce<
-          Record<PpeTypeEnum, number>
-        >(
+        breakdownCount: mapData.categories[category].pointsBreakdowns.reduce<Record<PpeTypeEnum, number>>(
           (acc, curr) => {
             acc[getPpeTypeEnumFromInt(curr.type)!] =
               curr.geojsonFeatureCollection.features.length;
@@ -194,26 +268,22 @@ export const MapControl: React.FC<Props> = ({
         iconPosition="right"
         classNames={accordionClasses}
       >
-        <Accordion.Item label={<AccordionLabel category={CategoryEnum.Need} />}>
+        <Accordion.Item label={<AccordionLabel category={CategoryEnum.Need}/>}>
           <ReactHookFormRadioGroup
             size="sm"
             name="needs.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
-              All requests{' '}
+            <Radio value="post" label={<>All requests{' '}
               {countMap?.[CategoryEnum.Need].posts && (
                 <i>{countMap[CategoryEnum.Need].posts}</i>
-              )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+              )}</>}/>
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.Need].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Need].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>}/>
           </ReactHookFormRadioGroup>
           {watchedNeedsVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox
@@ -226,27 +296,23 @@ export const MapControl: React.FC<Props> = ({
           )}
         </Accordion.Item>
         <Accordion.Item
-          label={<AccordionLabel category={CategoryEnum.NeedMet} />}
+          label={<AccordionLabel category={CategoryEnum.NeedMet}/>}
         >
           <ReactHookFormRadioGroup
             size="sm"
             name="needs_met.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
-              All requests{' '}
+            <Radio value="post" label={<>All requests{' '}
               {countMap?.[CategoryEnum.NeedMet].posts && (
                 <i>{countMap[CategoryEnum.NeedMet].posts}</i>
-              )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+              )}</>} />
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.NeedMet].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.NeedMet].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>} />
           </ReactHookFormRadioGroup>
           {watchedNeedsMetVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox
@@ -259,27 +325,25 @@ export const MapControl: React.FC<Props> = ({
           )}
         </Accordion.Item>
         <Accordion.Item
-          label={<AccordionLabel category={CategoryEnum.Supply} />}
+          label={<AccordionLabel category={CategoryEnum.Supply}/>}
         >
           <ReactHookFormRadioGroup
             size="sm"
             name="supplies.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
+            <Radio value="post" label={<>
               All supplies{' '}
               {countMap?.[CategoryEnum.Supply].posts && (
                 <i>{countMap[CategoryEnum.Supply].posts}</i>
               )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+            </>} />
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.Supply].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Supply].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>} />
           </ReactHookFormRadioGroup>
           {watchedSuppliesVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox
