@@ -8,11 +8,12 @@ import {
   Button,
   Textarea,
   Switch,
+  Text,
 } from '@mantine/core';
 import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
-import { getDisplayNameMessageID, PPE_TYPES } from '../../models/ppeType';
+import { getDisplayNameMessageID, getPpeTypeEnumFromInt } from '../../models/ppeType';
 import { ReactHookFormRadioGroup } from '../../components/ReactHookFormRadioGroup';
 import { defaultRegisterRequestForm, ORG_TYPES, RegisterRequestForm } from './types';
 import { VALIDATION_MSG } from '../../utils/validation';
@@ -28,10 +29,11 @@ import { AddressEntry } from '../../models/posttag';
 import { FormattedMessage } from '../../locale/FormattedMessage';
 import { ProcedureList } from './components/ProcedureList';
 import { useLocale } from '../../locale/LocaleProvider';
+import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
 
 export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
-  const {renderToString} = useLocale();
+  const { renderToString } = useLocale();
   const navigate = useNavigate();
   const notification = useNotifications();
   const {
@@ -113,15 +115,15 @@ export const RegisterNeeds: React.FC = () => {
     <div className={classes.scrollContainer}>
       <Container>
         <h1 className={classes.header}>
-          <FormattedMessage id="i_need_form_title" />
+          <FormattedMessage id="i_need_form_title"/>
         </h1>
         <section className={classes.section}>
           <FormattedMessage id="i_need_form_form_intro" components={{
             ProcedureList
-          }} />
+          }}/>
         </section>
         <section className={classes.section}>
-          <DevTool control={control} />
+          <DevTool control={control}/>
           <form
             onSubmit={async (e) =>
               handleSubmit(handleValidSubmit)(e).catch(handleSubmitError)
@@ -135,7 +137,7 @@ export const RegisterNeeds: React.FC = () => {
                 label={renderToString('i_need_form_fieldset_your_detail_field_publish_anonymously_title')}
                 description={renderToString('i_need_form_fieldset_your_detail_field_publish_anonymously_description')}
               >
-                <Switch {...register('publishAnonymously')} size="md" />
+                <Switch {...register('publishAnonymously')} size="md"/>
               </InputWrapper>
               <TextInput
                 {...register('contactName')}
@@ -167,43 +169,55 @@ export const RegisterNeeds: React.FC = () => {
                 required={true}
               />
             </fieldset>
-            <fieldset className={classes.fieldSet}>
-              <legend className={classes.legend}>
-                <FormattedMessage id="resourceCategory_ppe_displayName" />
-              </legend>
-              <InputWrapper
-                label="Needs"
-                className={classes.inputWrapper}
-                description="Tick as many as apply"
-                // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-                // select at least one of the PPE type.
-                error={errors.ppeTypes?.AlcoholHandGel?.need?.message}
-                required={true}
-              >
-                {PPE_TYPES.map((ppeType) => (
-                  <div key={ppeType}>
-                    <Switch
-                      {...register(`ppeTypes.${ppeType}.need`)}
-                      className={classes.switchInput}
-                      label={renderToString(getDisplayNameMessageID(ppeType))}
-                      size="md"
-                    />
-                    {watchedPpe[ppeType].need && (
-                      <PpeRequestSubForm
-                        ppeType={ppeType}
-                        control={control}
-                        register={register}
-                        formState={formState}
-                        shouldUnregister={true}
-                      />
-                    )}
-                  </div>
+            {RESOURCE_GROUPS.map((group) => (
+              <fieldset key={group.id} className={classes.fieldSet}>
+                <legend className={classes.legend}>
+                  <FormattedMessage id={group.name}/>
+                </legend>
+                {
+                  group.description && <Text color="dimmed" size="sm">
+                    <FormattedMessage id={group.description}/>
+                  </Text>
+                }
+                {group.type === 'node' && group.subGroups.map((subGroup) => (
+                  <InputWrapper
+                    key={`${group.id}_${subGroup.id}`}
+                    label={<FormattedMessage id={subGroup.name}/>}
+                    className={classes.inputWrapper}
+                    labelElement="div"
+                    description={subGroup.description && <FormattedMessage id={subGroup.description}/>}
+                    // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
+                    // select at least one of the PPE type.
+                    error={errors.ppeTypes?.AlcoholHandGel?.need?.message}
+                  >
+                    {subGroup.type === 'leaf' && subGroup.resourceTypes.map((resourceType) => {
+                      const typeEnum = getPpeTypeEnumFromInt(resourceType.id);
+                      if (typeEnum == null) return <></>;
+                      return <div key={resourceType.id}>
+                        <Switch
+                          {...register(`ppeTypes.${typeEnum}.need`)}
+                          className={classes.switchInput}
+                          label={renderToString(getDisplayNameMessageID(typeEnum))}
+                          size="md"
+                        />
+                        {watchedPpe[typeEnum].need && (
+                          <PpeRequestSubForm
+                            ppeType={typeEnum}
+                            control={control}
+                            register={register}
+                            formState={formState}
+                            shouldUnregister={true}
+                          />
+                        )}
+                      </div>
+                    })}
+                  </InputWrapper>
                 ))}
-              </InputWrapper>
-            </fieldset>
+              </fieldset>
+            ))}
             <fieldset className={classes.fieldSet}>
               <legend className={classes.legend}>
-                <FormattedMessage id="i_need_form_fieldset_organisation_title" />
+                <FormattedMessage id="i_need_form_fieldset_organisation_title"/>
               </legend>
               <TextInput
                 {...register('organisationName', {
@@ -238,8 +252,8 @@ export const RegisterNeeds: React.FC = () => {
                 description={renderToString('i_need_form_fieldset_organisation_field_org_type_description')}
                 required={true}
               >
-                { ORG_TYPES.map(({ value, name}) => <Radio key={value} value={value}>
-                  <FormattedMessage id={name} />
+                {ORG_TYPES.map(({ value, name }) => <Radio key={value} value={value}>
+                  <FormattedMessage id={name}/>
                 </Radio>)}
               </ReactHookFormRadioGroup>
               {watchedOrgType === 'Other' && (

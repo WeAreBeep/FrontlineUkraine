@@ -1,8 +1,9 @@
 import React from 'react';
-import { PpeTypeEnum, PpeTypeName } from '../../../../models/ppeType';
+import { getDisplayNameMessageID, PpeTypeEnum } from '../../../../models/ppeType';
 import { ColorSwatch, Group } from '@mantine/core';
 import { PPE_TYPE_COLOR } from '../../constant';
 import { useStyles } from './style';
+import { FormattedMessage } from '../../../../locale/FormattedMessage';
 
 export const PpeTypeEnumLabel: React.FC<{
   ppeType: PpeTypeEnum;
@@ -25,7 +26,9 @@ export const PpeTypeEnumLabel: React.FC<{
         size={theme.fontSizes.sm}
         radius="xs"
       />
-      <span>{PpeTypeName[ppeType]}</span>
+      <span>
+        <FormattedMessage id={getDisplayNameMessageID(ppeType)} />
+      </span>
       {count != null && <i>{count}</i>}
     </Group>
   );
