@@ -21,6 +21,8 @@ export interface RegisterRequestForm {
   email: string;
   phoneNumber: string;
   organisationName: string;
+  orgHasGovtApproval: boolean;
+  orgGovtApprovalImageId: string;
   orgRegCode: string;
   orgType: string;
   orgTypeOther: string;
@@ -39,6 +41,8 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
   email: '',
   phoneNumber: '',
   organisationName: '',
+  orgHasGovtApproval: false,
+  orgGovtApprovalImageId: '',
   orgRegCode: '',
   orgType: '',
   orgTypeOther: '',

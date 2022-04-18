@@ -239,6 +239,13 @@ export const RegisterNeeds: React.FC = () => {
                 description={renderToString('i_need_form_fieldset_organisation_field_org_reg_code_description')}
                 required={true}
               />
+              <InputWrapper
+                error={errors.orgHasGovtApproval?.message}
+                className={classes.inputWrapper}
+                label={renderToString('i_need_form_fieldset_organisation_field_orgHasGovtApproval_title')}
+              >
+                <Switch {...register('orgHasGovtApproval')} size="md"/>
+              </InputWrapper>
               <ReactHookFormRadioGroup
                 name="orgType"
                 control={control}
