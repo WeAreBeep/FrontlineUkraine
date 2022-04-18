@@ -133,10 +133,10 @@ interface PpeTypeEnumCheckboxProps {
 }
 
 const PpeTypeEnumCheckbox: React.FC<PpeTypeEnumCheckboxProps> = ({
-  control,
-  name,
-  breakdownCountMap,
-}) => {
+                                                                   control,
+                                                                   name,
+                                                                   breakdownCountMap,
+                                                                 }) => {
   const theme = useMantineTheme();
   const { field } = useController({
     control,
@@ -188,13 +188,13 @@ const PpeTypeEnumCheckbox: React.FC<PpeTypeEnumCheckboxProps> = ({
 };
 
 const AccordionLabel: React.FC<{ category: CategoryEnum; count?: number }> = ({
-  category,
-  count,
-}) => {
+                                                                                category,
+                                                                                count,
+                                                                              }) => {
   const theme = useMantineTheme();
   return (
     <Group noWrap={true} spacing="xs">
-      <ColorSwatch color={POINT_COLORS[category]} size={theme.fontSizes.sm} />
+      <ColorSwatch color={POINT_COLORS[category]} size={theme.fontSizes.sm}/>
       <span style={{ fontSize: theme.fontSizes.sm }}>
         {CATEGORY_NAME[category]}
       </span>
@@ -205,10 +205,10 @@ const AccordionLabel: React.FC<{ category: CategoryEnum; count?: number }> = ({
 
 // eslint-disable-next-line complexity
 export const MapControl: React.FC<Props> = ({
-  visibility,
-  onVisibilityChange,
-  mapData,
-}) => {
+                                              visibility,
+                                              onVisibilityChange,
+                                              mapData,
+                                            }) => {
   const { classes: accordionClasses } = useAccordionStyles();
   const { classes } = useStyles();
   const { control, watch } = useForm<CategoryVisibilityMap>({
@@ -236,22 +236,16 @@ export const MapControl: React.FC<Props> = ({
     if (mapData == null) {
       return null;
     }
-    return CATEGORIES.reduce<
-      Record<
-        CategoryEnum,
-        {
-          posts: number;
-          totalBreakdowns: number;
-          breakdownCount: BreakdownCountMap;
-        }
-      >
-    >((acc, category) => {
+    return CATEGORIES.reduce<Record<CategoryEnum,
+      {
+        posts: number;
+        totalBreakdowns: number;
+        breakdownCount: BreakdownCountMap;
+      }>>((acc, category) => {
       acc[category] = {
         posts: mapData.categories[category].posts.features.length,
         totalBreakdowns: mapData.categories[category].pointsCount,
-        breakdownCount: mapData.categories[category].pointsBreakdowns.reduce<
-          Record<PpeTypeEnum, number>
-        >(
+        breakdownCount: mapData.categories[category].pointsBreakdowns.reduce<Record<PpeTypeEnum, number>>(
           (acc, curr) => {
             acc[getPpeTypeEnumFromInt(curr.type)!] =
               curr.geojsonFeatureCollection.features.length;
@@ -274,26 +268,22 @@ export const MapControl: React.FC<Props> = ({
         iconPosition="right"
         classNames={accordionClasses}
       >
-        <Accordion.Item label={<AccordionLabel category={CategoryEnum.Need} />}>
+        <Accordion.Item label={<AccordionLabel category={CategoryEnum.Need}/>}>
           <ReactHookFormRadioGroup
             size="sm"
             name="needs.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
-              All requests{' '}
+            <Radio value="post" label={<>All requests{' '}
               {countMap?.[CategoryEnum.Need].posts && (
                 <i>{countMap[CategoryEnum.Need].posts}</i>
-              )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+              )}</>}/>
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.Need].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Need].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>}/>
           </ReactHookFormRadioGroup>
           {watchedNeedsVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox
@@ -306,27 +296,23 @@ export const MapControl: React.FC<Props> = ({
           )}
         </Accordion.Item>
         <Accordion.Item
-          label={<AccordionLabel category={CategoryEnum.NeedMet} />}
+          label={<AccordionLabel category={CategoryEnum.NeedMet}/>}
         >
           <ReactHookFormRadioGroup
             size="sm"
             name="needs_met.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
-              All requests{' '}
+            <Radio value="post" label={<>All requests{' '}
               {countMap?.[CategoryEnum.NeedMet].posts && (
                 <i>{countMap[CategoryEnum.NeedMet].posts}</i>
-              )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+              )}</>} />
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.NeedMet].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.NeedMet].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>} />
           </ReactHookFormRadioGroup>
           {watchedNeedsMetVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox
@@ -339,27 +325,25 @@ export const MapControl: React.FC<Props> = ({
           )}
         </Accordion.Item>
         <Accordion.Item
-          label={<AccordionLabel category={CategoryEnum.Supply} />}
+          label={<AccordionLabel category={CategoryEnum.Supply}/>}
         >
           <ReactHookFormRadioGroup
             size="sm"
             name="supplies.visibleType"
             control={control}
-            variant="vertical"
+            orientation="vertical"
             spacing="xs"
           >
-            <Radio value="post">
+            <Radio value="post" label={<>
               All supplies{' '}
               {countMap?.[CategoryEnum.Supply].posts && (
                 <i>{countMap[CategoryEnum.Supply].posts}</i>
               )}
-            </Radio>
-            <Radio value="breakdown">
-              Filter items{' '}
+            </>} />
+            <Radio value="breakdown" label={<>Filter items{' '}
               {countMap?.[CategoryEnum.Supply].totalBreakdowns && (
                 <i>{countMap[CategoryEnum.Supply].totalBreakdowns}</i>
-              )}
-            </Radio>
+              )}</>} />
           </ReactHookFormRadioGroup>
           {watchedSuppliesVisibilityType === 'breakdown' && (
             <PpeTypeEnumCheckbox

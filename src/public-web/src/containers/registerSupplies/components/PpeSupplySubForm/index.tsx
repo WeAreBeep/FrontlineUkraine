@@ -54,11 +54,11 @@ export const PpeSupplySubForm: React.FC<
             will be tested before use by the NHS.
           </span>
         }
-        variant="vertical"
+        orientation="vertical"
       >
-        <Radio value="Yes">Yes</Radio>
-        <Radio value="No">No</Radio>
-        <Radio value="NotSure">I&apos;m not sure</Radio>
+        <Radio value="Yes" label="Yes"/>
+        <Radio value="No" label="No"/>
+        <Radio value="NotSure" label={<>I&apos;m not sure</>}/>
       </ReactHookFormRadioGroup>
       <ReactHookFormRadioGroup
         control={control}
@@ -71,11 +71,11 @@ export const PpeSupplySubForm: React.FC<
         error={errors.ppeTypes?.[ppeType]?.costType?.message}
         label="Costs"
         description="How are you offering this type of PPE"
-        variant="vertical"
+        orientation="vertical"
       >
-        <Radio value="Free">Free of Charge</Radio>
-        <Radio value="Charged">Charged</Radio>
-        <Radio value="Other">Other...</Radio>
+        <Radio value="Free" label="Free of Charge"/>
+        <Radio value="Charged" label="Charged"/>
+        <Radio value="Other" label="Other..."/>
       </ReactHookFormRadioGroup>
       {watchedCostType === 'Other' && (
         <Textarea

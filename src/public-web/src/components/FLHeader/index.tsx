@@ -14,6 +14,7 @@ import { LocaleControl } from '../LocaleControl';
 function getHeaderCss(theme: MantineTheme): CSSObject {
   return {
     backgroundColor: getThemePrimaryColor(theme),
+    padding: theme.spacing.sm,
   };
 }
 
@@ -30,7 +31,7 @@ export const FLHeader: React.FC<Props> = ({
 }) => {
   const { classes } = useStyles();
   return (
-    <Header height={HEADER_HEIGHT} padding="sm" sx={getHeaderCss} fixed={true}>
+    <Header height={HEADER_HEIGHT} sx={getHeaderCss} fixed={true}>
       <Box className={classes.container}>
         <Box className={classes.iconContainer}>
           <Burger

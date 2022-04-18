@@ -28,7 +28,7 @@ import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
 import { FormattedMessage } from '../../locale/FormattedMessage';
 
 export const RegisterSupplies: React.FC = () => {
-  const {renderToString} = useLocale();
+  const { renderToString } = useLocale();
   const { classes } = useStyles();
   const navigate = useNavigate();
   const notification = useNotifications();
@@ -115,7 +115,7 @@ export const RegisterSupplies: React.FC = () => {
           <p>Thank you!</p>
         </section>
         <section className={classes.section}>
-          <DevTool control={control} />
+          <DevTool control={control}/>
           <form
             onSubmit={async (e) =>
               handleSubmit(handleValidSubmit)(e).catch(handleSubmitError)
@@ -151,22 +151,16 @@ export const RegisterSupplies: React.FC = () => {
                 }}
                 error={errors.supplierType?.message}
                 classNames={{ root: classes.inputWrapper }}
-                variant="vertical"
+                orientation="vertical"
                 label="Type"
                 description="Which best describes your organisation?"
                 required={true}
               >
-                <Radio value="ExistingPPEsupplier">
-                  PPE manufacturer/supplier (pre-COVID-19)
-                </Radio>
-                <Radio value="AdaptedPPEsupplier">
-                  Manufacturer/supplier adapted to make PPE in response to
-                  COVID-19
-                </Radio>
-                <Radio value="Individuals">
-                  Individual/group of individuals
-                </Radio>
-                <Radio value="Other">Other...</Radio>
+                <Radio value="ExistingPPEsupplier" label="PPE manufacturer/supplier (pre-COVID-19)"/>
+                <Radio value="AdaptedPPEsupplier" label="Manufacturer/supplier adapted to make PPE in response to
+                  COVID-19"/>
+                <Radio value="Individuals" label="Individual/group of individuals"/>
+                <Radio value="Other" label="Other..."/>
               </ReactHookFormRadioGroup>
               {watchedSupplierType === 'Other' && (
                 <TextInput
@@ -240,7 +234,7 @@ export const RegisterSupplies: React.FC = () => {
                   <FormattedMessage id="i_have_form_fieldset_resourceCategory_title"/>
                 </Text>
                 <Text size="xs" color="dimmed">
-                  <FormattedMessage id="resourceCategory_defaultDescription_supply" />
+                  <FormattedMessage id="resourceCategory_defaultDescription_supply"/>
                 </Text>
                 {group.type === 'node' && group.subGroups.map((subGroup) => (
                   <InputWrapper

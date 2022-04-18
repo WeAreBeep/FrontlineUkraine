@@ -244,7 +244,10 @@ export const RegisterNeeds: React.FC = () => {
                 className={classes.inputWrapper}
                 label={renderToString('i_need_form_fieldset_organisation_field_orgHasGovtApproval_title')}
               >
-                <Switch {...register('orgHasGovtApproval')} size="md"/>
+                <Switch
+                  {...register('orgHasGovtApproval')}
+                  size="md"
+                />
               </InputWrapper>
               <ReactHookFormRadioGroup
                 name="orgType"
@@ -254,14 +257,14 @@ export const RegisterNeeds: React.FC = () => {
                 }}
                 error={errors.orgType?.message}
                 classNames={{ root: classes.inputWrapper }}
-                variant="vertical"
+                orientation="vertical"
                 label={renderToString('i_need_form_fieldset_organisation_field_org_type_title')}
                 description={renderToString('i_need_form_fieldset_organisation_field_org_type_description')}
                 required={true}
               >
-                {ORG_TYPES.map(({ value, name }) => <Radio key={value} value={value}>
-                  <FormattedMessage id={name}/>
-                </Radio>)}
+                {ORG_TYPES.map(({ value, name }) => <Radio key={value} value={value}
+                                                           label={<FormattedMessage id={name}/>}/>
+                )}
               </ReactHookFormRadioGroup>
               {watchedOrgType === 'Other' && (
                 <TextInput
