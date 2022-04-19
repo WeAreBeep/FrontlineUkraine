@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, useRoutes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, useRoutes, useNavigate } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import authgear from '@authgear/web';
 import { MantineProvider } from '@mantine/core';
@@ -20,6 +20,27 @@ const contentfulClient = new ContentfulClient({
   environment: config.contentful.environment,
 });
 
+const AuthgearRedirect: React.FC = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    authgear
+      .finishAuthorization()
+      .then((result) => {
+        const state = result.state ? atob(result.state) : null;
+        let navigateToPath = '/';
+        if (state != null) {
+          navigateToPath = state;
+        }
+        navigate(navigateToPath);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [navigate]);
+
+  return null;
+};
+
 const InnerFLApp: React.FC = () => {
   const Match = useRoutes([
     { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
@@ -36,6 +57,7 @@ const InnerFLApp: React.FC = () => {
       element: <Containers.TermsAndConditions />,
     },
     { path: RouteType.Landing, element: <Containers.Landing /> },
+    { path: '/authgear', element: <AuthgearRedirect /> },
   ]);
   return (
     <ContentfulProvider client={contentfulClient}>
@@ -51,6 +73,7 @@ const InnerFLApp: React.FC = () => {
 };
 
 export const FLApp: React.FC = () => {
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     authgear
       .configure({
@@ -58,12 +81,18 @@ export const FLApp: React.FC = () => {
         endpoint: config.authgear.endpoint,
       })
       .then(
-        () => {},
+        () => {
+          setReady(true);
+        },
         (e) => {
           console.error(e);
         }
       );
   }, []);
+
+  if (!ready) {
+    return null;
+  }
   return (
     <MantineProvider
       theme={{

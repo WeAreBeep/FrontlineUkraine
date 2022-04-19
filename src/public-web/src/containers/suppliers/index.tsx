@@ -29,6 +29,11 @@ export const Suppliers: React.FC = () => {
       .startAuthorization({
         redirectURI,
         prompt: 'login',
+        state: btoa(
+          window.location.pathname +
+            window.location.search +
+            window.location.hash
+        ),
       })
       .catch((e) => {
         console.error(e);
