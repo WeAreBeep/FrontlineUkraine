@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@authgear/web": "0.18.0",
     "@babel/core": "^7.16.0",
     "@contentful/rich-text-html-renderer": "15.11.0",
     "@fortawesome/fontawesome-svg-core": "1.2.36",
