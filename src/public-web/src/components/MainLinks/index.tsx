@@ -31,6 +31,7 @@ export const MainLinks: React.FC<{
     { routeType: RouteType.RegisterNeed, name: renderToString('nav_link_item_i_need') },
     { routeType: RouteType.RegisterSupply, name: renderToString('nav_link_item_i_have') },
     { routeType: RouteType.About, name: renderToString('nav_link_item_about') },
+    { routeType: RouteType.Suppliers, name: renderToString('nav_link_item_suppliers') },
     { routeType: RouteType.Partners, name: renderToString('nav_link_item_partners') },
   ], [renderToString]);
   return (

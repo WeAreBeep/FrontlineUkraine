@@ -27,6 +27,7 @@ const InnerFLApp: React.FC = () => {
       element: <Containers.RegisterSupplies />,
     },
     { path: RouteType.About, element: <Containers.About /> },
+    { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
     { path: RouteType.Partners, element: <Containers.Partners /> },
     { path: RouteType.ContactUs, element: <Containers.ContactUs /> },
     {
