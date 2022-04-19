@@ -8,4 +8,8 @@ window.appConfig = {
     environment: "${REACT_APP_CONTENTFUL_ENVIRONMENT}",
     usePreviewApi: "${REACT_APP_CONTENTFUL_USE_PREVIEW_API}",
   },
+  authgear: {
+    clientID: "${REACT_APP_AUTHGEAR_CLIENT_ID}",
+    endpoint: "${REACT_APP_AUTHGEAR_ENDPOINT}",
+  },
 };

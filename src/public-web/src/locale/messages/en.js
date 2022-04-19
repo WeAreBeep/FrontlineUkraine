@@ -5,6 +5,7 @@ export default {
   nav_link_item_suppliers: 'SUPPLIERS',
   nav_link_item_about: 'ABOUT',
   nav_link_item_partners: 'PARTNERS',
+  suppliers_sign_in_button: 'Sign in to see the full map',
   i_need_form_title: 'I NEED FORM',
   i_need_form_form_intro: '{p, react, children{Frontline Live is a charity registered in the UK. We are here to help you get the specific supplies you need. Your safety and wellbeing is our priority. Please complete this form to let us know which supplies you need. The data you submit on this form will be anonymised and verified by vetted volunteers following a standard operating procedure:}} {ProcedureList, react} {p, react, children{Any information related to a fixed location in Ukraine will not be displayed APART FROM to verified suppliers. This is so they know where to deliver the supplies you need. Please note that for safety reasons, we cannot process individual requests.}} {p, react, children{NB we cannot guarantee WHEN your needs will be met - but by reporting your needs, aid organisations can be more efficient in distributing supplies to where they are most needed.}} {p, react, children{You will receive a mail when your data has been verified and added to the map. PLEASE let us know when supplies have been delivered so we can update the data.}}',
   i_need_form_form_intro_procedure_list_item_1: 'Basic verification of YOUR organisation (name, registration number)',

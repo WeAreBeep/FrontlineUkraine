@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
+import authgear from '@authgear/web';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { RouteType } from './routes';
@@ -50,6 +51,19 @@ const InnerFLApp: React.FC = () => {
 };
 
 export const FLApp: React.FC = () => {
+  useEffect(() => {
+    authgear
+      .configure({
+        clientID: config.authgear.clientID,
+        endpoint: config.authgear.endpoint,
+      })
+      .then(
+        () => {},
+        (e) => {
+          console.error(e);
+        }
+      );
+  }, []);
   return (
     <MantineProvider
       theme={{

@@ -8,6 +8,10 @@ interface Config {
     environment: string;
     usePreviewApi: boolean;
   };
+  authgear: {
+    clientID: string;
+    endpoint: string;
+  };
 }
 
 export const config: Config = window.appConfig;
