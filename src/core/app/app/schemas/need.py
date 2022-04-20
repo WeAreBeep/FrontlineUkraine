@@ -31,6 +31,9 @@ class NeedPpeTypeCreate(BaseModel):
 class NeedCreate(BaseModel):
     publish_anonymously: bool
     organisation_name: str
+    org_govt_approval_image_id: Optional[str]
+    org_has_govt_approval: bool
+    org_reg_code: str
     org_type: OrgType
     org_type_other: Optional[str]
     email: EmailStr

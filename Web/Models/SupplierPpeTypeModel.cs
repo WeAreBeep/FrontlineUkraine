@@ -14,7 +14,7 @@ namespace Web.Models
 
 		public bool Selected { get; set; }
 
-		[Display(Name = "PPE Type Other", Description = "If the list above does not fit choose \"Other...\" and describe here"),
+		[Display(Name = "Other description", Description = "If the list above does not fit choose \"Other...\" and describe here"),
 		StringLength(1000, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string PpeOther { get; set; }
 
@@ -52,9 +52,9 @@ namespace Web.Models
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			List<ValidationResult> respVal = new List<ValidationResult>();
-			if(Type == PpeTypes.Other && Selected && String.IsNullOrWhiteSpace(PpeOther))
+			if(Type.IsOther() && Selected && String.IsNullOrWhiteSpace(PpeOther))
 			{
-				respVal.Add(new ValidationResult("Please add <b>PPE Type Other</b> to describe the PPE Type when choosing <b>\"Other...\"</b>", new List<string> { $"{nameof(PpeOther)}" }));
+				respVal.Add(new ValidationResult("Please add <b>Other description</b> to describe the PPE Type when choosing <b>\"Other...\"</b>", new List<string> { $"{nameof(PpeOther)}" }));
 			}
 			return respVal;
 		}
