@@ -10,6 +10,7 @@ import { APIContextProvider } from './contexts/APIContext';
 import { config } from './config';
 import { ServiceProvider } from './contexts/ServiceContext';
 import { LocaleProvider } from './locale/LocaleProvider';
+import { AuthgearProvider } from './contexts/AuthgearContext';
 import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
 
@@ -61,13 +62,15 @@ const InnerFLApp: React.FC = () => {
   ]);
   return (
     <ContentfulProvider client={contentfulClient}>
-      <APIContextProvider>
-        <ServiceProvider windowImpl={window}>
-          <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-            <FLAppShell>{Match}</FLAppShell>
-          </LocaleProvider>
-        </ServiceProvider>
-      </APIContextProvider>
+      <AuthgearProvider>
+        <APIContextProvider>
+          <ServiceProvider windowImpl={window}>
+            <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+              <FLAppShell>{Match}</FLAppShell>
+            </LocaleProvider>
+          </ServiceProvider>
+        </APIContextProvider>
+      </AuthgearProvider>
     </ContentfulProvider>
   );
 };

@@ -1,25 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import authgear from '@authgear/web';
 import { FormattedMessage } from '@oursky/react-messageformat';
 import { Map } from '../landing/components/Map';
 import { Col, Grid, Text, Button, Stack } from '@mantine/core';
 import { FeedContent } from '../landing/components/FeedContent';
 import { OurVoicesTimeline } from '../landing/components/OurVoicesTimeline';
+import { useSessionState } from '../../contexts/AuthgearContext';
 import { useStyles } from './style';
 
 export const Suppliers: React.FC = () => {
-  const [sessionState, setSessionState] = useState(authgear.sessionState);
-
-  useEffect(() => {
-    authgear.delegate = {
-      onSessionStateChange: (container) => {
-        setSessionState(container.sessionState);
-      },
-    };
-    return () => {
-      authgear.delegate = undefined;
-    };
-  }, []);
+  const sessionState = useSessionState();
 
   const onClickSignIn = useCallback((e) => {
     e.preventDefault();
