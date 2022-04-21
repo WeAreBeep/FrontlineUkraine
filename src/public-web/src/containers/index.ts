@@ -5,3 +5,4 @@ export { RegisterSupplies } from './registerSupplies';
 export { RegisterNeeds } from './registerNeeds';
 export { TermsAndConditions } from './termsAndConditions';
 export { ContactUs } from './contactUs';
+export { Suppliers } from './suppliers';

@@ -10,6 +10,7 @@ import logoSrc from '../../assets/images/frontline_map_logo.png';
 import { getThemePrimaryColor } from '../../utils/mantine';
 import { MainLinks } from '../MainLinks';
 import { LocaleControl } from '../LocaleControl';
+import { AccountMenu } from '../AccountMenu';
 
 function getHeaderCss(theme: MantineTheme): CSSObject {
   return {
@@ -74,7 +75,8 @@ export const FLHeader: React.FC<Props> = ({
         </Box>
         <Box className={classes.headerItemsContainer}>
           <MainLinks variant="header" />
-          <LocaleControl className={classes.localeControl}/>
+          <LocaleControl className={classes.localeControl} />
+          <AccountMenu />
         </Box>
       </Box>
     </Header>
