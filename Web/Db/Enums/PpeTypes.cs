@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using Web.Snippets.System;
 
 namespace Web.Db
@@ -124,7 +125,7 @@ namespace Web.Db
 		NonDrugMedicalSuppliesMedicalEquipmentDermatome,
 		[EnumText("LEG TRACTION SPLINT, pre-hospital care and transport")]
 		NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint,
-		[EnumText("[(Non Drug) Medical Supplies - Equipment] OTHER (please specify)")]
+		[EnumText("OTHER (please specify)")]
 		NonDrugMedicalSuppliesMedicalEquipmentOther,
 		// (Non Drug) Medical Supplies - Consumables
 		[EnumText("Medical tourniquets")]
@@ -186,7 +187,7 @@ namespace Web.Db
 		NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows,
 		[EnumText("SET, EXTERNAL FIXATION, LARGE, FIXATORS & INSTRUMENTS")]
 		NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments,
-		[EnumText("[(Non Drug) Medical Supplies - Surgical Instruments & Fixators] OTHER (please specify)")]
+		[EnumText("OTHER (please specify)")]
 		NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther
 	}
 
@@ -201,6 +202,151 @@ namespace Web.Db
 			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentOther,
 			PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther
 		};
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryDomesticSanitary = new HashSet<PpeTypes>
+		{
+			PpeTypes.DomesticSanitarySanitaryTowels,
+			PpeTypes.DomesticSanitaryNappies,
+			PpeTypes.DomesticSanitaryBreastPads,
+			PpeTypes.DomesticSanitaryHairbrushes,
+			PpeTypes.DomesticSanitaryLiquidSoap,
+			PpeTypes.DomesticSanitaryWetWipes,
+			PpeTypes.DomesticSanitaryToothbrushes,
+			PpeTypes.DomesticSanitaryToothpaste,
+			PpeTypes.DomesticSanitaryTowels,
+			PpeTypes.DomesticSanitaryToiletPaper,
+			PpeTypes.DomesticSanitaryPocketTissues,
+			PpeTypes.DomesticSanitaryShavingGelRazors,
+			PpeTypes.DomesticSanitaryOther,
+		}.ToImmutableHashSet();
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryDomesticNonPerishableFoodDrink = new HashSet<PpeTypes>
+		{
+			PpeTypes.DomesticNonPerishableFoodDrinkProteinBars,
+			PpeTypes.DomesticNonPerishableFoodDrinkCannedFood,
+			PpeTypes.DomesticNonPerishableFoodDrinkDryFood,
+			PpeTypes.DomesticNonPerishableFoodDrinkInstantFood,
+			PpeTypes.DomesticNonPerishableFoodDrinkBabyFood,
+			PpeTypes.DomesticNonPerishableFoodDrinkEnergyDrinks,
+		}.ToImmutableHashSet();
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryDomesticOther = new HashSet<PpeTypes>
+		{
+			PpeTypes.DomesticOtherFoilSurvivalBlankets,
+			PpeTypes.DomesticOtherThermalClothingNew,
+			PpeTypes.DomesticOtherSleepingBags,
+			PpeTypes.DomesticOtherLargeOrMediumBackpacks,
+			PpeTypes.DomesticOtherPowerBanksAndChargingCables,
+			PpeTypes.DomesticOtherTorches,
+			PpeTypes.DomesticOtherElectricityGenerators,
+			PpeTypes.DomesticOtherBootDriers,
+			PpeTypes.DomesticOtherHotWaterBottles,
+			PpeTypes.DomesticOtherInsulatedFlasks,
+			PpeTypes.DomesticOtherDisposableTableware,
+			PpeTypes.DomesticOtherCookingStoves,
+			PpeTypes.DomesticOtherBinBags,
+			PpeTypes.DomesticOtherOther,
+		}.ToImmutableHashSet();
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryNonDrugMedicalSuppliesEquip = new HashSet<PpeTypes>
+		{
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentSyringePump,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentCapnometer,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentDermatome,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint,
+			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentOther,
+		}.ToImmutableHashSet();
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryNonDrugMedicalSuppliesConsumable = new HashSet<PpeTypes>
+		{
+			PpeTypes.NonDrugMedicalSuppliesConsumablesMedicalTourniquets,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesFirstAidKits,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesSetInfusionAdult,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesInsulinSyringes,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesGlucometers,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesXRayCartridges,
+			PpeTypes.NonDrugMedicalSuppliesConsumablesOther,
+		}.ToImmutableHashSet();
+
+		public static ImmutableHashSet<PpeTypes> CategoryNonDrugMedicalSuppliesSurgicalInstrumentsAndFixators =
+			new HashSet<PpeTypes>
+			{
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows,
+				PpeTypes
+					.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments,
+				PpeTypes.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther,
+			}.ToImmutableHashSet();
+
+		public static readonly ImmutableHashSet<PpeTypes> CategoryNonDrugMedicalSuppliesPpe = new HashSet<PpeTypes>
+		{
+			PpeTypes.TypeIIRSurgicalMasks,
+			PpeTypes.FFP1RespiratorMasks,
+			PpeTypes.FFP2RespiratorMasks,
+			PpeTypes.FFP3RespiratorMasks,
+			PpeTypes.Gowns,
+			PpeTypes.Aprons,
+			PpeTypes.Gloves,
+			PpeTypes.Scrubs,
+			PpeTypes.SafetyGlasses,
+			PpeTypes.FaceVisors,
+			PpeTypes.AlcoholHandGel,
+			PpeTypes.Other,
+		}.ToImmutableHashSet();
+		
+		public static readonly List<(string Name, ImmutableHashSet<PpeTypes> CategorySet)> DomesticCategories = new List<(string Name, ImmutableHashSet<PpeTypes> CategorySet)>
+		{
+			(Name: "SANITARY PRODUCTS", CategorySet: CategoryDomesticSanitary),
+			(Name: "NON-PERISHABLE FOOD/DRINK", CategorySet: CategoryDomesticNonPerishableFoodDrink),
+			(Name: "OTHER BASICS / SHELTER EQUIPMENT", CategorySet: CategoryDomesticOther),
+		};
+		
+		public static readonly List<(string Name, ImmutableHashSet<PpeTypes> CategorySet)> NonDrugMedicalSuppliesCategory = new List<(string Name, ImmutableHashSet<PpeTypes> CategorySet)>
+		{
+			(Name: "MEDICAL EQUIPMENT", CategorySet: CategoryNonDrugMedicalSuppliesEquip),
+			(Name: "CONSUMABLES", CategorySet: CategoryNonDrugMedicalSuppliesConsumable),
+			(Name: "SURGICAL INSTRUMENTS & FIXATORS", CategorySet: CategoryNonDrugMedicalSuppliesSurgicalInstrumentsAndFixators),
+			(Name: "PPE", CategorySet: CategoryNonDrugMedicalSuppliesPpe),
+		};
+		
 		public static bool IsOther(this PpeTypes ppeType)
 		{
 			return PpeTypesEnumExtension.OTHER_PPE_TYPES.Contains(ppeType);
