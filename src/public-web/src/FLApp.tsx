@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, useRoutes, useNavigate } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import authgear from '@authgear/web';
@@ -77,21 +77,21 @@ const InnerFLApp: React.FC = () => {
 
 export const FLApp: React.FC = () => {
   const [ready, setReady] = useState(false);
-  useEffect(() => {
-    authgear
-      .configure({
+  const init = useCallback(async () => {
+    try {
+      await authgear.configure({
         clientID: config.authgear.clientID,
         endpoint: config.authgear.endpoint,
-      })
-      .then(
-        () => {
-          setReady(true);
-        },
-        (e) => {
-          console.error(e);
-        }
-      );
+      });
+      await authgear.refreshAccessTokenIfNeeded();
+      setReady(true);
+    } catch (e: unknown) {
+      console.error(e);
+    }
   }, []);
+  useEffect(() => {
+    init().catch(() => {});
+  }, [init]);
 
   if (!ready) {
     return null;
