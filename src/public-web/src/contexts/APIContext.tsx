@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
+import authgear from "@authgear/web";
 import { RegisterSuppliesForm } from '../containers/registerSupplies/types';
 import { RegisterRequestForm } from '../containers/registerNeeds/types';
 import { config } from '../config';
@@ -63,7 +64,7 @@ async function fetchApi(
   init: RequestInit
 ): Promise<any> {
   const url = buildApiHref(apiEndpoint, path);
-  const response = await fetch(url, init);
+  const response = await authgear.fetch(url, init);
   const respData = await response.json();
   if (isStatusSuccess(response.status)) {
     return respData;
