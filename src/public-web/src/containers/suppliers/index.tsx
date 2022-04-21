@@ -52,7 +52,7 @@ export const Suppliers: React.FC = () => {
   if (sessionState === 'NO_SESSION') {
     return (
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
-        <Col span={4} offset={4}>
+        <Col md={12} lg={4} offsetLg={4}>
           <Stack
             align="center"
             justify="center"

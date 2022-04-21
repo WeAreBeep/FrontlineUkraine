@@ -28,5 +28,6 @@ export const useStyles = createStyles((theme) => ({
   },
   noSessionContent: {
     backgroundColor: theme.white,
+    minHeight: '100vh'
   }
 }));
