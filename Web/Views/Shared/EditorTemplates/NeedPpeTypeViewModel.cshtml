@@ -15,7 +15,7 @@
         @Html.HiddenFor(m => m.Type)
     </label>
 
-    @if(Model.Type == PpeTypes.Other)
+    @if(Model.Type.IsOther())
     {
         <div v-bind:class="{ active: @selectedVueName }" class="toggleable indent">
             <div>

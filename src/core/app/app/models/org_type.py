@@ -10,3 +10,12 @@ class OrgType(IntEnum):
     CivicInfrastructure = 6
     Other = 7
     Dentists = 8
+    LocalCharity = 9
+    InternationalOrgChapter = 10
+    ReligiousInstitution = 11
+    LocalOrRegionalAdmin = 12
+    University = 13
+    School = 14
+    Community = 15
+    LocalHospital = 16
+    DistributionHub = 17

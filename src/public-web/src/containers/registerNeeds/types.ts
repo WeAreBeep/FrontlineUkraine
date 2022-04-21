@@ -150,8 +150,8 @@ export const defaultRegisterRequestForm: RegisterRequestForm = {
 
 export const ORG_TYPES: {value: string, name: MessageID}[] = [
   { value: 'LocalCharity', name: 'organisation_type_local_charity' },
-  { value: 'internationalOrgChapter', name: 'organisation_type_international_org_chapter' },
-  { value: 'religious_institution', name: 'organisation_type_religious_institution' },
+  { value: 'InternationalOrgChapter', name: 'organisation_type_international_org_chapter' },
+  { value: 'ReligiousInstitution', name: 'organisation_type_religious_institution' },
   { value: 'LocalOrRegionalAdmin', name: 'organisation_type_local_or_regional_admin' },
   { value: 'University', name: 'organisation_type_university' },
   { value: 'School', name: 'organisation_type_school' },

@@ -90,12 +90,40 @@
 </fieldset>
 
 
-
-<fieldset id="supplier_ppe">
-    <legend>PPE</legend>
-    <div>
-        @Html.LabelsFor(m => m.PpeTypes)
-        @Html.EditorFor(m => m.PpeTypes)
-        @Html.HtmlValidationMessageFor(m => m.PpeTypes)
-    </div>
+<fieldset id="supplier_resource">
+    <legend>Needs</legend>
+    <p>
+        <b>Domestic</b>
+    </p>
+    @foreach (var (name, categorySet) in PpeTypesEnumExtension.DomesticCategories)
+    {
+        <p>@(name)</p>
+        <div>
+        @foreach (var (value, i ) in Model.PpeTypes.Select((value, i) => (value, i)))
+        {
+            if (categorySet.Contains(value.Type))
+            {
+                @Html.EditorFor(m => m.PpeTypes[i])
+                @Html.HtmlValidationMessageFor(m => m.PpeTypes[i])
+            }
+        }
+        </div>
+    }
+    <p>
+        <b>(NON-DRUG) MEDICAL SUPPLIES</b>
+    </p>
+        @foreach (var (name, categorySet) in PpeTypesEnumExtension.NonDrugMedicalSuppliesCategory)
+        {
+            <p>@(name)</p>
+            <div>
+            @foreach (var (value, i ) in Model.PpeTypes.Select((value, i) => (value, i)))
+            {
+                if (categorySet.Contains(value.Type))
+                {
+                    @Html.EditorFor(m => m.PpeTypes[i])
+                    @Html.HtmlValidationMessageFor(m => m.PpeTypes[i])
+                }
+            }
+            </div>
+        }
 </fieldset>
