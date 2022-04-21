@@ -108,3 +108,11 @@ variable "posttag_id" {
 variable "posttag_api_key" {
   type = string
 }
+
+variable "authgear_client_id" {
+  type = string
+}
+
+variable "authgear_endpoint" {
+  type = string
+}

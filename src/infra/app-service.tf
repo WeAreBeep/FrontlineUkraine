@@ -89,6 +89,9 @@ resource "azurerm_app_service" "public_web" {
     REACT_APP_CONTENTFUL_DELIVERY_ACCESS_TOKEN = var.contentful_delivery_access_token
     REACT_APP_CONTENTFUL_SPACE_ID              = var.contentful_space_id
     REACT_APP_CONTENTFUL_ENVIRONMENT           = var.contentful_environment
+    // Authgear
+    REACT_APP_AUTHGEAR_CLIENT_ID               = var.authgear_client_id
+    REACT_APP_AUTHGEAR_ENDPOINT                = var.authgear_endpoint
   }
 }
 

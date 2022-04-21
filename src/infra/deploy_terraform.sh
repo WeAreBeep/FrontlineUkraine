@@ -56,7 +56,9 @@ terraform plan \
     -var "web_custom_domain_list=$WEB_CUSTOM_DOMAIN_LIST" \
     -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
     -var "posttag_id=$POSTTAG_ID" \
-    -var "posttag_api_key=$POSTTAG_API_KEY"
+    -var "posttag_api_key=$POSTTAG_API_KEY" \
+    -var "authgear_client_id=$AUTHGEAR_CLIENT_ID" \
+    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT"
 
 echo "Applying Terraform Deployment..."
 
@@ -80,4 +82,6 @@ terraform apply -auto-approve \
     -var "web_custom_domain_list=$WEB_CUSTOM_DOMAIN_LIST" \
     -var "posttag_endpoint=$POSTTAG_ENDPOINT" \
     -var "posttag_id=$POSTTAG_ID" \
-    -var "posttag_api_key=$POSTTAG_API_KEY"
+    -var "posttag_api_key=$POSTTAG_API_KEY" \
+    -var "authgear_client_id=$AUTHGEAR_CLIENT_ID" \
+    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT"
