@@ -26,4 +26,7 @@ export const useStyles = createStyles((theme) => ({
     margin: '0',
     height: '100%',
   },
+  noSessionContent: {
+    backgroundColor: theme.white,
+  }
 }));

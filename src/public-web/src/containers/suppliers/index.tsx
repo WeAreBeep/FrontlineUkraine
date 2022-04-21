@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import cx from 'classnames';
 import authgear from '@authgear/web';
 import { FormattedMessage } from '@oursky/react-messageformat';
 import { Map } from '../landing/components/Map';
@@ -50,7 +51,7 @@ export const Suppliers: React.FC = () => {
 
   if (sessionState === 'NO_SESSION') {
     return (
-      <Grid className={classes.stackContainer}>
+      <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
         <Col span={4} offset={4}>
           <Stack
             align="center"
