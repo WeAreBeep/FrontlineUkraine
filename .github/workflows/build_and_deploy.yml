@@ -34,8 +34,8 @@ env:
   POSTTAG_ID: "${{ secrets.POSTTAG_ID }}"
   POSTTAG_API_KEY: "${{ secrets.POSTTAG_API_KEY }}"
 
-  AUTHGEAR_CLIENT_ID: "{{ secrets.AUTHGEAR_CLIENT_ID }}"
-  AUTHGEAR_ENDPOINT: "{{ secrets.AUTHGEAR_ENDPOINT }}"
+  AUTHGEAR_CLIENT_ID: "${{ secrets.AUTHGEAR_CLIENT_ID }}"
+  AUTHGEAR_ENDPOINT: "${{ secrets.AUTHGEAR_ENDPOINT }}"
 
 jobs:  
   build:
