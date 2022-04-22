@@ -124,6 +124,16 @@ To add more environment variables, make sure you have already updated the follow
 - src/infra/deploy_terraform.sh
 - .github/workflows/build_and_deploy.yml
 
+### Add new Python package into core API server dependencies
+
+To add new Python package, you need to
+- Add new package by `poetry add` in `src/core/app/app` directory
+- Run the following command to install the package in `core` Docker container for local development
+
+```shell
+$ docker-compose -f ./docker-compose.dev.yml -f ./docker-compose.override.yml run --rm core poetry install
+```
+
 ## Project Structure
 
 This project is organised in the following structure:
