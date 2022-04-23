@@ -1,4 +1,5 @@
 from sqlalchemy import Column, PrimaryKeyConstraint, Text, BigInteger, Numeric
+from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Sequence
 
 from app.db.base_class import FLBase
@@ -17,3 +18,5 @@ class City(FLBase):
     name_ua = Column("NameUa", Text, nullable=False)
     lat = Column("Lat", Numeric, nullable=False)
     lng = Column("Lng", Numeric, nullable=False)
+
+    needs = relationship("Need", back_populates="orgCity")
