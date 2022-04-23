@@ -15,7 +15,7 @@ class City(FLBase):
 
     id = Column("Id", BigInteger, server_default=_id_seq.next_value(), nullable=False)
     name_en = Column("NameEn", Text, nullable=False)
-    name_ua = Column("NameUa", Text, nullable=False)
+    name_uk = Column("NameUk", Text, nullable=False)
     lat = Column("Lat", Numeric, nullable=False)
     lng = Column("Lng", Numeric, nullable=False)
 

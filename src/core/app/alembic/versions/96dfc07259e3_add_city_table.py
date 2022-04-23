@@ -23,7 +23,7 @@ def upgrade():
                     sa.Column('Id', sa.BigInteger(), server_default=sa.text('nextval(\'"Cities_Id_seq"\')'),
                               nullable=False),
                     sa.Column('NameEn', sa.Text(), nullable=False),
-                    sa.Column('NameUa', sa.Text(), nullable=False),
+                    sa.Column('NameUk', sa.Text(), nullable=False),
                     sa.Column('Lat', sa.Numeric(), nullable=False),
                     sa.Column('Lng', sa.Numeric(), nullable=False),
                     sa.PrimaryKeyConstraint('Id', name='idx_PK_Cities')

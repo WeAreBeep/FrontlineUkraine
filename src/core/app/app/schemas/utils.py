@@ -3,7 +3,7 @@ from typing import Any, Callable, Type, Dict
 
 LANGS = [
     'en',
-    'ua'
+    'uk'
 ]
 
 
@@ -18,5 +18,5 @@ def to_multilingual_text(obj: Any, prefix: str) -> Dict[str, str]:
     obj_dict = dict(obj)
     return {
         'en': obj_dict.get(f'{prefix}_en', None),
-        'ua': obj_dict.get(f'{prefix}_ua', None),
+        'uk': obj_dict.get(f'{prefix}_uk', None),
     }
