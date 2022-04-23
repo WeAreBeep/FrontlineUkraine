@@ -86,7 +86,10 @@ function useMakeRpc() {
         const init: RequestInit = {
           method: 'POST',
           mode: 'cors',
-          headers,
+          headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(data),
         };
         return fetchApi(apiEndpoint, path, init);
