@@ -8,3 +8,5 @@ from .record import Record
 from .supply import PublicSupply, PublicSupplyPpeType, SupplyCreate
 from .token import Token, TokenPayload
 from .user import User, UserCreate, UserInDB, UserUpdate
+from .city import City
+from .paginated import PaginatedResponse
