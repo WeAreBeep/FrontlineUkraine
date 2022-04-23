@@ -36,6 +36,7 @@ class NeedCreate(BaseModel):
     org_reg_code: str
     org_type: OrgType
     org_type_other: Optional[str]
+    org_city_id: int
     email: EmailStr
     phone_number: str
     contact_name: str
