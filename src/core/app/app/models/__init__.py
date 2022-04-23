@@ -16,3 +16,4 @@ from .supplier_note import SupplierNote
 from .supplier_ppe_type import SupplierPpeType
 from .supplier_type import SupplierType
 from .user import User
+from .city import City
