@@ -6,6 +6,8 @@ import { config } from '../config';
 import { PpeTypeEnum } from '../models/ppeType';
 import { MapData } from '../models/map';
 import { SearchAddressResponse } from '../models/posttag';
+import { Paginated } from '../models/paginated';
+import { City } from '../models/city';
 
 function isStatusSuccess(status: number) {
   return status >= 200 && status < 400;
@@ -113,6 +115,7 @@ enum ActionType {
   CreateSupply = 'createSupply',
   CreateRequest = 'createRequest',
   SearchAddress = 'searchAddress',
+  GetCityList = 'getCityList',
 }
 
 function useMakeActions(rpc: Rpc) {
@@ -144,7 +147,7 @@ function useMakeActions(rpc: Rpc) {
         return rpc.post('v1/supply', data);
       },
       [ActionType.CreateRequest]: async (form: RegisterRequestForm) => {
-        const { ppeTypes: ppeTypeDict, ...rest } = form;
+        const { ppeTypes: ppeTypeDict, orgCityId, ...rest } = form;
         const needPpeTypes = Object.keys(ppeTypeDict).filter(
           (ppeType) => form.ppeTypes[ppeType as PpeTypeEnum].need
         );
@@ -157,6 +160,7 @@ function useMakeActions(rpc: Rpc) {
         });
         const data = {
           ...rest,
+          orgCityId: parseInt(orgCityId, 10),
           ppeTypes,
         };
         return rpc.post('v1/need', data);
@@ -172,6 +176,10 @@ function useMakeActions(rpc: Rpc) {
         const resp = await rpc.get('v1/address', params);
         return resp as SearchAddressResponse;
       },
+      [ActionType.GetCityList]: async () => {
+        const resp = await rpc.get('v1/city');
+        return resp as Paginated<City>;
+      }
     }),
     [rpc]
   );
