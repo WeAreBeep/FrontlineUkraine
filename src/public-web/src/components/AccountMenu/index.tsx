@@ -7,14 +7,18 @@ import { useSessionState } from '../../contexts/AuthgearContext';
 import { config } from '../../config';
 
 const control = (
-  <ActionIcon>
+  <ActionIcon size="xl">
     <Text>
       <FontAwesomeIcon icon={['fas', 'user']} />
     </Text>
   </ActionIcon>
 );
 
-export function AccountMenu(): React.ReactElement | null {
+export function AccountMenu({
+  className,
+}: {
+  className?: string;
+}): React.ReactElement | null {
   const sessionState = useSessionState();
   const href = config.authgear.endpoint + '/settings';
   const onClickSignOut = useCallback((e) => {
@@ -29,7 +33,7 @@ export function AccountMenu(): React.ReactElement | null {
   }
 
   return (
-    <Menu control={control}>
+    <Menu className={className} control={control}>
       <Menu.Item component="a" href={href} target="_blank">
         <FormattedMessage id="account_menu_settings" />
       </Menu.Item>

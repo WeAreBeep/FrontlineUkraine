@@ -24,7 +24,6 @@ export const useStyles = createStyles((theme) => {
       height: '3rem',
     },
     headerItemsContainer: {
-      display: 'none',
       [tablet(theme)]: {
         display: 'flex',
         alignItems: 'center',
@@ -38,6 +37,12 @@ export const useStyles = createStyles((theme) => {
       },
     },
     localeControl: {
+      [tablet(theme)]: {
+        marginLeft: theme.spacing.md,
+      },
+    },
+    accountMenu: {
+      marginLeft: theme.spacing.sm,
       [tablet(theme)]: {
         marginLeft: theme.spacing.md,
       },

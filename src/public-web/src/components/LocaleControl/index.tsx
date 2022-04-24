@@ -20,7 +20,7 @@ export const LocaleControl: React.FC<
       return acc;
       // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
     }, {} as unknown as Record<Locale, () => void>);
-  }, [changeLocale])
+  }, [changeLocale]);
 
   return (
     <Menu control={control}>
