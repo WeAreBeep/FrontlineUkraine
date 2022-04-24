@@ -13,7 +13,7 @@ interface LeafResourceGroup extends BaseResourceGroup {
 }
 
 interface NodeResourceGroup extends BaseResourceGroup {
-  type: 'node'
+  type: 'node';
   subGroups: ResourceGroup[];
 }
 

@@ -73,19 +73,29 @@ export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
     [PpeTypeEnum.DomesticSanitaryPocketTissues]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticSanitaryShavingGelRazors]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticSanitaryOther]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkProteinBars]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkCannedFood]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkDryFood]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkInstantFood]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkBabyFood]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticOtherFoilSurvivalBlankets]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkProteinBars]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkCannedFood]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkDryFood]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkInstantFood]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkBabyFood]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticOtherFoilSurvivalBlankets]:
+      defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherThermalClothingNew]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherSleepingBags]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticOtherLargeOrMediumBackpacks]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticOtherLargeOrMediumBackpacks]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables]:
+      defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherTorches]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.DomesticOtherElectricityGenerators]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.DomesticOtherElectricityGenerators]:
+      defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherBootDriers]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherHotWaterBottles]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherInsulatedFlasks]: defaultPpeSupplyTypeSubForm,
@@ -93,52 +103,99 @@ export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
     [PpeTypeEnum.DomesticOtherCookingStoves]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherBinBags]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.DomesticOtherOther]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSyringePump]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentCapnometer]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDermatome]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesMedicalTourniquets]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesFirstAidKits]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionAdult]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesInsulinSyringes]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesGlucometers]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesXRayCartridges]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments]: defaultPpeSupplyTypeSubForm,
-    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther]: defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSyringePump]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentCapnometer]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDermatome]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesMedicalTourniquets]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesFirstAidKits]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionAdult]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesInsulinSyringes]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesGlucometers]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesXRayCartridges]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments]:
+      defaultPpeSupplyTypeSubForm,
+    [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther]:
+      defaultPpeSupplyTypeSubForm,
   },
 };
