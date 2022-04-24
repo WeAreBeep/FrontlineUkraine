@@ -1,5 +1,6 @@
 import { PpeTypeEnum } from '../../models/ppeType';
 import { MessageID } from '../../locale/type';
+import { DefaultValues } from 'react-hook-form';
 
 export interface PpeRequestTypeSubForm {
   need: boolean;
@@ -26,6 +27,7 @@ export interface RegisterRequestForm {
   orgRegCode: string;
   orgType: string;
   orgTypeOther: string;
+  orgCityId: string;
   jobTitle: string;
   department: string;
   addressLineOne: string;
@@ -35,7 +37,7 @@ export interface RegisterRequestForm {
   ppeTypes: { [key in PpeTypeEnum]: PpeRequestTypeSubForm };
 }
 
-export const defaultRegisterRequestForm: RegisterRequestForm = {
+export const defaultRegisterRequestForm: DefaultValues<RegisterRequestForm> = {
   publishAnonymously: false,
   contactName: '',
   email: '',

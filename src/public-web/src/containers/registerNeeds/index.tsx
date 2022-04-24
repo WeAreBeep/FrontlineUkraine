@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useStyles } from './style';
 import {
   Container,
@@ -8,9 +9,9 @@ import {
   Button,
   Textarea,
   Switch,
-  Text,
+  Text, Select,
 } from '@mantine/core';
-import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
 import { getDisplayNameMessageID, getPpeTypeEnumFromInt } from '../../models/ppeType';
@@ -30,15 +31,28 @@ import { FormattedMessage } from '../../locale/FormattedMessage';
 import { ProcedureList } from './components/ProcedureList';
 import { useLocale } from '../../locale/LocaleProvider';
 import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
+import { ApiState } from '../../utils/apiState';
+import { Paginated } from '../../models/paginated';
+import { City } from '../../models/city';
 
 export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
-  const { renderToString } = useLocale();
+  const { locale, renderToString } = useLocale();
   const navigate = useNavigate();
   const notification = useNotifications();
   const {
-    actions: { createRequest },
+    actions: { createRequest, getCityList },
   } = useAPIContext();
+  const [cityListState, setCityListState] = useState<ApiState<Paginated<City>>>({
+    state: 'init',
+  });
+  const cityListOptions = useMemo(() => {
+    let cityListData: City[] = [];
+    if (cityListState.state === 'loading' || cityListState.state === 'idle') {
+      cityListData = cityListState.data?.data ?? []
+    }
+    return cityListData.map(({ id, name }) => ({ value: `${id}`, label: name[locale] }))
+  }, [cityListState, locale]);
   const {
     register,
     control,
@@ -111,6 +125,18 @@ export const RegisterNeeds: React.FC = () => {
   );
   const watchedPpe = watch('ppeTypes');
   const watchedOrgType = watch('orgType');
+  useEffect(() => {
+    const fn = async () => {
+      try {
+        setCityListState((prev) => ({ ...prev, state: 'loading' }));
+        setCityListState({ state: 'idle', lastFetchedAt: new Date(), data: await getCityList() });
+      } catch (error: unknown) {
+        setCityListState((prev) => ({ ...prev, state: 'error', lastFetchedAt: new Date(), error }));
+      }
+    }
+    fn().catch(console.error);
+  }, [getCityList])
+
   return (
     <div className={classes.scrollContainer}>
       <Container>
@@ -301,21 +327,40 @@ export const RegisterNeeds: React.FC = () => {
               />
             </fieldset>
             <fieldset className={classes.fieldSet}>
-              <legend className={classes.legend}>Additional Details</legend>
+              <legend className={classes.legend}>
+                <FormattedMessage id="i_need_form_fieldset_additional_detail_title" />
+              </legend>
               <TextInput
                 {...register('addressLineOne', {
                   required: { value: true, message: VALIDATION_MSG.required },
                 })}
                 error={errors.addressLineOne?.message}
                 className={classes.inputWrapper}
-                label="Address line 1"
+                label={renderToString('i_need_form_fieldset_additional_detail_field_address_line_1_title')}
                 required={true}
               />
               <TextInput
                 {...register('addressLineTwo')}
                 error={errors.addressLineTwo?.message}
                 className={classes.inputWrapper}
-                label="Address line 2"
+                label={renderToString('i_need_form_fieldset_additional_detail_field_address_line_2_title')}
+              />
+              <Controller
+                control={control}
+                rules={{ required: { value: true, message: renderToString('common_required_field_error') } }}
+                name="orgCityId"
+                render={({ field: { onChange, ...rest }, fieldState: {error} }) => {
+                  return <Select
+                    {...rest}
+                    label={renderToString('i_need_form_fieldset_additional_detail_field_city_title')}
+                    error={error?.message}
+                    required={true}
+                    onChange={(newVal) => onChange(newVal)}
+                    data={cityListOptions}
+                    searchable={true}
+                    styles={(theme) => ({ selected: { color: theme.white }, })}
+                  />
+                }}
               />
               <ReactHookFormPosttagAddressAutocomplete
                 control={control}
@@ -325,8 +370,8 @@ export const RegisterNeeds: React.FC = () => {
                 }}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
-                label="Postcode"
-                description="Will be added to the map to indicate location of your supplies"
+                label={renderToString('i_need_form_fieldset_additional_detail_field_postcode_title')}
+                description={renderToString('i_need_form_fieldset_additional_detail_field_postcode_description')}
                 required={true}
                 onAddressSelect={handleAddressSelect}
               />
@@ -334,8 +379,8 @@ export const RegisterNeeds: React.FC = () => {
                 {...register('tellUsMore')}
                 error={errors.tellUsMore?.message}
                 className={classes.inputWrapper}
-                label="Tell Us More"
-                description="Tell us more about how the shortage affects you"
+                label={renderToString('i_need_form_fieldset_additional_detail_field_tell_us_more_title')}
+                description={renderToString('i_need_form_fieldset_additional_detail_field_tell_us_more_description')}
               />
             </fieldset>
             <Button
@@ -346,7 +391,8 @@ export const RegisterNeeds: React.FC = () => {
               disabled={isSubmitSuccessful}
               loading={isSubmitting}
             >
-              {isSubmitSuccessful ? 'Saved!' : 'Save'}
+              <FormattedMessage
+                id={isSubmitSuccessful ? 'i_need_form_form_submit_title_saved' : 'i_need_form_form_submit_title_save'}/>
             </Button>
           </form>
         </section>

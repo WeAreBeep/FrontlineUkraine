@@ -7,6 +7,7 @@ from sqlalchemy import (
     Numeric,
     PrimaryKeyConstraint,
     Text,
+    ForeignKeyConstraint,
 )
 from sqlalchemy.orm import relationship
 
@@ -17,7 +18,15 @@ from app.models import PostStatus
 class Need(FLBase):
     __tablename__ = "Needs"
 
-    __table_args__ = (PrimaryKeyConstraint("Id", name="idx_20762_PK_Needs"),)
+    __table_args__ = (
+        PrimaryKeyConstraint("Id", name="idx_20762_PK_Needs"),
+        ForeignKeyConstraint(
+            columns=["OrgCityId"],
+            refcolumns=["Cities.Id"],
+            name="fk_needs_cities",
+            ondelete="CASCADE",
+        ),
+    )
 
     id = Column("Id", BigInteger, quote=True)
     ushahidiId = Column("UshahidiId", BigInteger, quote=True, default=0)
@@ -32,6 +41,7 @@ class Need(FLBase):
     department = Column("Department", Text, quote=True)
     orgTypeId = Column("OrgTypeId", Integer, quote=True)
     orgTypeOther = Column("OrgTypeOther", Text, quote=True)
+    orgCityId = Column("OrgCityId", BigInteger, quote=True)
     townOrCity = Column("TownOrCity", Text, quote=True)
     tweetId = Column("TweetId", Integer, quote=True)
     postcode = Column("Postcode", Text, quote=True)
@@ -41,5 +51,6 @@ class Need(FLBase):
     addressLineOne = Column("AddressLineOne", Text, quote=True)
     addressLineTwo = Column("AddressLineTwo", Text, quote=True)
 
+    orgCity = relationship("City", back_populates="needs")
     notes = relationship("NeedNote", back_populates="need")
     ppeTypes = relationship("NeedPpeType", back_populates="need")

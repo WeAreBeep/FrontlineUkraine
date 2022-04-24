@@ -9,6 +9,7 @@ from app.api.api_v1.endpoints import (
     supply,
     users,
     utils,
+    city,
 )
 
 api_router = APIRouter()
@@ -20,3 +21,4 @@ api_router.include_router(map.router, prefix="/map", tags=["map"])
 api_router.include_router(supply.router, prefix="/supply", tags=["supply"])
 api_router.include_router(need.router, prefix="/need", tags=["needs"])
 api_router.include_router(address.router, prefix="/address", tags=["addresses"])
+api_router.include_router(city.router, prefix="/city", tags=["cities"])
