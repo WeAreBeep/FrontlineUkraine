@@ -14,14 +14,17 @@ export const useStyles = createStyles((theme) => {
       justifyContent: 'space-between',
     },
     burger: {
-      marginRight: theme.spacing.xl,
+      marginRight: theme.spacing.sm,
       display: 'block',
       [tablet(theme)]: {
         display: 'none',
       },
     },
     logo: {
-      height: '3rem',
+      height: '2.3rem',
+      [tablet(theme)]: {
+        height: '3rem',
+      },
     },
     headerItemsContainer: {
       [tablet(theme)]: {

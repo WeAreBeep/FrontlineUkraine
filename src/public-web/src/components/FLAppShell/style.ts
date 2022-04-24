@@ -2,7 +2,7 @@ import { createStyles } from '@mantine/core';
 import { tablet } from '../../utils/mantine';
 
 export const FOOTER_HEIGHT = '4rem';
-export const HEADER_HEIGHT = '4.5rem';
+export const HEADER_HEIGHT = '4.2rem';
 
 export const useStyles = createStyles((theme) => ({
   navbar: {
