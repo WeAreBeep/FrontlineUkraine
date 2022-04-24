@@ -53,14 +53,13 @@ export const Suppliers: React.FC = () => {
     return (
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
         <Col md={12} lg={4} offsetLg={4}>
-          <Stack
-            align="center"
-            className={classes.stackContainer}
-          >
+          <Stack align="center" className={classes.stackContainer}>
             <h1 className={classes.sPheading}>Supplier Portal</h1>
             <Text className={classes.sPdescription}>
-              If you are a verified supplier, please login to see the full map.<br />
-              If you wish to sign up as an verified supplier, please contact <a href="mailto:hello@frontline.live">hello@frontline.live</a> 
+              If you are a verified supplier, please login to see the full map.
+              <br />
+              If you wish to sign up as an verified supplier, please contact{' '}
+              <a href="mailto:hello@frontline.live">hello@frontline.live</a>
             </Text>
             <Button onClick={onClickSignIn}>
               <FormattedMessage id="suppliers_sign_in_button" />

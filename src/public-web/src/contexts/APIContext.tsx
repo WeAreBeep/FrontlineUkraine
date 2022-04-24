@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import authgear from "@authgear/web";
+import authgear from '@authgear/web';
 import { RegisterSuppliesForm } from '../containers/registerSupplies/types';
 import { RegisterRequestForm } from '../containers/registerNeeds/types';
 import { config } from '../config';
@@ -182,7 +182,7 @@ function useMakeActions(rpc: Rpc) {
       [ActionType.GetCityList]: async () => {
         const resp = await rpc.get('v1/city');
         return resp as Paginated<City>;
-      }
+      },
     }),
     [rpc]
   );

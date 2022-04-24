@@ -30,7 +30,9 @@ export const PpeRequestSubForm: React.FC<
         control={control}
         error={errors.ppeTypes?.[ppeType]?.dailyShortage?.message}
         className={classes.inputWrapper}
-        description={<FormattedMessage id="i_need_form_sub_form_how_many_you_need_title" />}
+        description={
+          <FormattedMessage id="i_need_form_sub_form_how_many_you_need_title" />
+        }
         min={0}
         max={100000000}
         step={1}

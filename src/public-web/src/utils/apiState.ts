@@ -19,4 +19,8 @@ interface ErrorApiState {
   lastFetchedAt: Date;
 }
 
-export type ApiState<TData> = InitApiState | LoadingApiState<TData> | IdleApiState<TData> | ErrorApiState;
+export type ApiState<TData> =
+  | InitApiState
+  | LoadingApiState<TData>
+  | IdleApiState<TData>
+  | ErrorApiState;

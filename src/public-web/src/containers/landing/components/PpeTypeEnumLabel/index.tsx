@@ -1,5 +1,8 @@
 import React from 'react';
-import { getDisplayNameMessageID, PpeTypeEnum } from '../../../../models/ppeType';
+import {
+  getDisplayNameMessageID,
+  PpeTypeEnum,
+} from '../../../../models/ppeType';
 import { ColorSwatch, Group } from '@mantine/core';
 import { PPE_TYPE_COLOR } from '../../constant';
 import { useStyles } from './style';

@@ -12,54 +12,83 @@ export default {
   i_need_form_form_submit_title_saved: 'Saved!',
   i_need_form_form_submit_title_save: 'Save',
   i_need_form_title: 'МЕНІ ПОТРІБНО',
-  i_need_form_form_intro: '{p, react, children{Frontline Live —це благодійна організація, яка зареєстрована у Великобританії. Ми тут, щоб допомогти вам отримати необхідні матеріали. Ваша безпека та благополуччя є нашим пріоритетом. Будь ласка, заповніть цю форму, щоб повідомити нам,  що саме вам потрібно. Дані, які ви подаєте в цій формі, будуть анонімізовані та верифіковані волонтерами, які цим опікуються, відповідно до стандартної робочої процедури:}} {ProcedureList, react} {p, react, children{Будь-яка інформація, пов’язана з фіксованим місцем розташування в Україні, не буде відображатися публічно: буде доступна лише для верифікованих постачальників. Це необхідно для того, щоб вони знали, куди доставити необхідні матеріали. Зважте! Із міркувань безпеки,  ми не можемо обробляти індивідуальні запити.}} {p, react, children{Примітка. Ми не можемо гарантувати, КОЛИ саме ваші потреби будуть задоволені, але, повідомляючи про ваші потреби, – ви допомагаєте організаціям,  які доставляють допомогу, максимально ефективно розподілити допомогу для тих місць, які найбільше їх потребують.}} {p, react, children{Ви отримаєте повідомлення, лише коли ваші дані будуть перевірені та додані до мапи. БУДЬ ЛАСКА, повідомте нам, коли поставки надійдуть. Це дасть нам можливість оновити дані.}}',
-  i_need_form_form_intro_procedure_list_item_1: 'Базова перевірка ВАШИХ організацій (назва, реєстраційний номер).',
-  i_need_form_form_intro_procedure_list_item_2: 'Двоетапний процес перевірки для організацій, які мають матеріали для дистрибуції в наявності.',
-  i_need_form_fieldset_your_detail_field_publish_anonymously_title: 'Publish Anonymously',
-  i_need_form_fieldset_your_detail_field_publish_anonymously_description: 'Check this if you do not wish your name to be published on the Frontline Map',
+  i_need_form_form_intro:
+    '{p, react, children{Frontline Live —це благодійна організація, яка зареєстрована у Великобританії. Ми тут, щоб допомогти вам отримати необхідні матеріали. Ваша безпека та благополуччя є нашим пріоритетом. Будь ласка, заповніть цю форму, щоб повідомити нам,  що саме вам потрібно. Дані, які ви подаєте в цій формі, будуть анонімізовані та верифіковані волонтерами, які цим опікуються, відповідно до стандартної робочої процедури:}} {ProcedureList, react} {p, react, children{Будь-яка інформація, пов’язана з фіксованим місцем розташування в Україні, не буде відображатися публічно: буде доступна лише для верифікованих постачальників. Це необхідно для того, щоб вони знали, куди доставити необхідні матеріали. Зважте! Із міркувань безпеки,  ми не можемо обробляти індивідуальні запити.}} {p, react, children{Примітка. Ми не можемо гарантувати, КОЛИ саме ваші потреби будуть задоволені, але, повідомляючи про ваші потреби, – ви допомагаєте організаціям,  які доставляють допомогу, максимально ефективно розподілити допомогу для тих місць, які найбільше їх потребують.}} {p, react, children{Ви отримаєте повідомлення, лише коли ваші дані будуть перевірені та додані до мапи. БУДЬ ЛАСКА, повідомте нам, коли поставки надійдуть. Це дасть нам можливість оновити дані.}}',
+  i_need_form_form_intro_procedure_list_item_1:
+    'Базова перевірка ВАШИХ організацій (назва, реєстраційний номер).',
+  i_need_form_form_intro_procedure_list_item_2:
+    'Двоетапний процес перевірки для організацій, які мають матеріали для дистрибуції в наявності.',
+  i_need_form_fieldset_your_detail_field_publish_anonymously_title:
+    'Publish Anonymously',
+  i_need_form_fieldset_your_detail_field_publish_anonymously_description:
+    'Check this if you do not wish your name to be published on the Frontline Map',
   i_need_form_fieldset_your_detail_field_contact_name_title: 'Your name',
-  i_need_form_fieldset_your_detail_field_contact_name_description: 'Нам потрібне ваше ім’я, щоб ми знали, до кого звертатися. Ваше ім’я та контактні дані НЕ публікуватимуться на веб-сайті та не розголошуватимуться за межами команди Frontline.',
+  i_need_form_fieldset_your_detail_field_contact_name_description:
+    'Нам потрібне ваше ім’я, щоб ми знали, до кого звертатися. Ваше ім’я та контактні дані НЕ публікуватимуться на веб-сайті та не розголошуватимуться за межами команди Frontline.',
   i_need_form_fieldset_organisation_title: 'ОРГАНІЗАЦІЯ',
-  i_need_form_fieldset_organisation_field_organisation_name_title: 'НАЗВА ОРГАНІЗАЦІЇ',
-  i_need_form_fieldset_organisation_field_organisation_name_description: 'Із метою  безпеки,  ми обробляємо запити на допомогу від зареєстрованих організацій',
-  i_need_form_fieldset_organisation_field_org_reg_code_title: 'КОД ЄДРПОУ* / РЕЄСТРАЦІЙНИЙ НОМЕР',
-  i_need_form_fieldset_organisation_field_org_reg_code_description: 'Це 7-значний унікальний реєстраційний код для всіх громадських/благодійних організацій України. Це допоможе нам перевірити та забезпечити, щоб допомога потрапляла в потрібні місця для розподілу між громадянами, які потребують допомоги.',
+  i_need_form_fieldset_organisation_field_organisation_name_title:
+    'НАЗВА ОРГАНІЗАЦІЇ',
+  i_need_form_fieldset_organisation_field_organisation_name_description:
+    'Із метою  безпеки,  ми обробляємо запити на допомогу від зареєстрованих організацій',
+  i_need_form_fieldset_organisation_field_org_reg_code_title:
+    'КОД ЄДРПОУ* / РЕЄСТРАЦІЙНИЙ НОМЕР',
+  i_need_form_fieldset_organisation_field_org_reg_code_description:
+    'Це 7-значний унікальний реєстраційний код для всіх громадських/благодійних організацій України. Це допоможе нам перевірити та забезпечити, щоб допомога потрапляла в потрібні місця для розподілу між громадянами, які потребують допомоги.',
   i_need_form_fieldset_organisation_field_org_type_title: 'ТИП ОРГАНІЗАЦІЇ',
-  i_need_form_fieldset_organisation_field_org_type_description: 'Which best describes your organisation?',
+  i_need_form_fieldset_organisation_field_org_type_description:
+    'Which best describes your organisation?',
   i_need_form_fieldset_organisation_field_orgHasGovtApproval_label_on: 'ТАК',
   i_need_form_fieldset_organisation_field_orgHasGovtApproval_label_off: 'НІ',
-  i_need_form_fieldset_organisation_field_orgHasGovtApproval_title: 'Отримання гуманітарної допомоги?',
-  i_need_form_fieldset_organisation_field_orgGovtApprovalImageId_title: 'Завантажте листи акредитації',
+  i_need_form_fieldset_organisation_field_orgHasGovtApproval_title:
+    'Отримання гуманітарної допомоги?',
+  i_need_form_fieldset_organisation_field_orgGovtApprovalImageId_title:
+    'Завантажте листи акредитації',
   i_need_form_fieldset_additional_detail_title: 'Additional Detail',
-  i_need_form_fieldset_additional_detail_field_address_line_1_title: 'Address Line 1',
-  i_need_form_fieldset_additional_detail_field_address_line_2_title: 'Address Line 2',
+  i_need_form_fieldset_additional_detail_field_address_line_1_title:
+    'Address Line 1',
+  i_need_form_fieldset_additional_detail_field_address_line_2_title:
+    'Address Line 2',
   i_need_form_fieldset_additional_detail_field_city_title: 'City',
   i_need_form_fieldset_additional_detail_field_postcode_title: 'Postcode',
-  i_need_form_fieldset_additional_detail_field_postcode_description: 'Will be added to the map to indicate location of your supplies',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_title: 'Tell Us More',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_description: 'Tell us more about how the shortage affects you',
-  i_need_form_sub_form_how_many_you_need_title: 'Ми - благодійна організація. Наші запаси обмежені. Скільки вам (і вашій команді) дійсно потрібно, щоб подолати розрив, поки не прибудуть запаси?',
+  i_need_form_fieldset_additional_detail_field_postcode_description:
+    'Will be added to the map to indicate location of your supplies',
+  i_need_form_fieldset_additional_detail_field_tell_us_more_title:
+    'Tell Us More',
+  i_need_form_fieldset_additional_detail_field_tell_us_more_description:
+    'Tell us more about how the shortage affects you',
+  i_need_form_sub_form_how_many_you_need_title:
+    'Ми - благодійна організація. Наші запаси обмежені. Скільки вам (і вашій команді) дійсно потрібно, щоб подолати розрив, поки не прибудуть запаси?',
   i_have_form_fieldset_resourceCategory_title: 'What You Can Supply',
-  organisation_type_local_charity: 'Місцева благодійна організація / ГО / Установа / Фонд',
-  organisation_type_international_org_chapter: 'Відділ міжнародної організації (наприклад,  місцева філія Червоного Хреста)',
+  organisation_type_local_charity:
+    'Місцева благодійна організація / ГО / Установа / Фонд',
+  organisation_type_international_org_chapter:
+    'Відділ міжнародної організації (наприклад,  місцева філія Червоного Хреста)',
   organisation_type_religious_institution: 'Парафія / Релігійна установа',
-  organisation_type_local_or_regional_admin: 'Місцеві/Регіональні адміністрації',
+  organisation_type_local_or_regional_admin:
+    'Місцеві/Регіональні адміністрації',
   organisation_type_university: 'Університет',
   organisation_type_school: 'Школа',
   organisation_type_community: 'Громадський центр',
   organisation_type_local_hospital: 'Місцева/обласна лікарня',
   organisation_type_distribution: 'Центр розповсюдження (Україна)',
   organisation_type_other: 'Інше (будь ласка, вкажіть)',
-  resourceCategory_defaultDescription_need: 'Поставте галочку навпроти всіх речей, які вам потрібні',
+  resourceCategory_defaultDescription_need:
+    'Поставте галочку навпроти всіх речей, які вам потрібні',
   resourceCategory_defaultDescription_supply: 'Tick as many apply',
-  resourceCategory_nonDrugMedicalSupplies_ppe_displayName: 'Засоби індивідуального захисту ЗІЗ',
+  resourceCategory_nonDrugMedicalSupplies_ppe_displayName:
+    'Засоби індивідуального захисту ЗІЗ',
   resourceCategory_domestic_displayName: 'Предмети домашнього вжитку',
   resourceCategory_domestic_sanitaryProducts_displayName: 'САНІТАРНІ ВИРОБИ',
-  resourceCategory_domestic_nonPerishableFood_displayName: 'ЇЖА/НАПОЇ ТРИВАЛОГО ЗБЕРІГАННЯ',
-  resourceCategory_domestic_nonPerishableFood_description: '(Без скляної тари. Усі продукти повинні бути доставлені упродовж терміну придатності)',
-  resourceCategory_domestic_other_displayName: 'ІНШІ ТОВАРИ ПЕРШОЇ НЕОБХІДНОСТІ / ОБЛАДНАННЯ ДЛЯ УКРИТТІВ',
-  resourceCategory_nonDrugMedicalSupplies_displayName: 'МЕДИЧНІ ТОВАРИ (НЕ ФАРМАЦЕВТИЧНІ ПРЕПАРАТИ)',
-  resourceCategory_nonDrugMedicalSupplies_medicalEquipment_displayName: 'МЕДИЧНЕ ОБЛАДНАННЯ',
+  resourceCategory_domestic_nonPerishableFood_displayName:
+    'ЇЖА/НАПОЇ ТРИВАЛОГО ЗБЕРІГАННЯ',
+  resourceCategory_domestic_nonPerishableFood_description:
+    '(Без скляної тари. Усі продукти повинні бути доставлені упродовж терміну придатності)',
+  resourceCategory_domestic_other_displayName:
+    'ІНШІ ТОВАРИ ПЕРШОЇ НЕОБХІДНОСТІ / ОБЛАДНАННЯ ДЛЯ УКРИТТІВ',
+  resourceCategory_nonDrugMedicalSupplies_displayName:
+    'МЕДИЧНІ ТОВАРИ (НЕ ФАРМАЦЕВТИЧНІ ПРЕПАРАТИ)',
+  resourceCategory_nonDrugMedicalSupplies_medicalEquipment_displayName:
+    'МЕДИЧНЕ ОБЛАДНАННЯ',
   resourceCategory_nonDrugMedicalSupplies_consumables_displayName: `ВИТРАТНІ МАТЕРІАЛИ`,
   resourceCategory_nonDrugMedicalSupplies_surgicalInstrumentsAndFixators_displayName: `ХІРУРГІЧНІ ІНСТРУМЕНТИ ТА ФІКСАТОРИ`,
   resourceType_TypeIIRSurgicalMasks_displayName: 'Хірургічні маски типу IIR',
@@ -154,4 +183,4 @@ export default {
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows_displayName: `НАБІР, ОРТОХІРУРГІЧНІ ІНСТРУМЕНТИ, ТРАКЦІЯ, + 10 луків`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments_displayName: `НАБІР ДЛЯ ЗОВНІШНЬОЇ ФІКСАЦІЇ, ВЕЛИКИЙ, ФІКСАТОРИ ТА ІНСТРУМЕНТИ`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName: `Інше (будь ласка, вкажіть)`,
-}
+};

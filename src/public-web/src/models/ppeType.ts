@@ -99,9 +99,11 @@ export enum PpeTypeEnum {
 
 export const allPpeTypes = Object.keys(PpeTypeEnum);
 
-export const getDisplayNameMessageID: (ppeType: PpeTypeEnum) => MessageID = (ppeType: PpeTypeEnum) => {
+export const getDisplayNameMessageID: (ppeType: PpeTypeEnum) => MessageID = (
+  ppeType: PpeTypeEnum
+) => {
   return `resourceType_${ppeType}_displayName` as MessageID;
-}
+};
 
 // NOTE: Order matters, it represents the ordinal value
 export const PPE_TYPES = [
@@ -206,7 +208,7 @@ const RESOURCE_TYPES_OTHER = [
   PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther,
   PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther,
   PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther,
-]
+];
 
 export function getPpeTypeEnumFromInt(value: number): PpeTypeEnum | undefined {
   // Starting from 1
@@ -214,7 +216,7 @@ export function getPpeTypeEnumFromInt(value: number): PpeTypeEnum | undefined {
 }
 
 export function isResourceTypeOther(type: PpeTypeEnum): boolean {
-  return RESOURCE_TYPES_OTHER.some(typeOther => typeOther === type);
+  return RESOURCE_TYPES_OTHER.some((typeOther) => typeOther === type);
 }
 
 export const PpeTypeName = {

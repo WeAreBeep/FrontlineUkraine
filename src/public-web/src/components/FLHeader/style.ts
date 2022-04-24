@@ -40,7 +40,7 @@ export const useStyles = createStyles((theme) => {
     localeControl: {
       [tablet(theme)]: {
         marginLeft: theme.spacing.md,
-      }
-    }
+      },
+    },
   };
 });

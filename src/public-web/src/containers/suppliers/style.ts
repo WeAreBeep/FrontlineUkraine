@@ -28,13 +28,13 @@ export const useStyles = createStyles((theme) => ({
   },
   noSessionContent: {
     backgroundColor: theme.white,
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
-  sPdescription : {
+  sPdescription: {
     textAlign: 'center',
   },
   sPheading: {
     margin: 0,
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 }));
