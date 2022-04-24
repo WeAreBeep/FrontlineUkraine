@@ -69,6 +69,7 @@ services:
       - PROJECT_NAME=Frontline.live
       - SERVER_NAME=localhost
       - SERVER_HOST=https://localhost
+      - AUTHGEAR_ENDPOINT=https://frontlineua-staging.authgearapps.com
       # Allow explicit env var override for tests
       - SMTP_HOST=
       - PORT=3001
@@ -99,6 +100,7 @@ services:
       - PROJECT_NAME=Frontline.live
       - SERVER_NAME=localhost
       - SERVER_HOST=https://localhost
+      - AUTHGEAR_ENDPOINT=https://frontlineua-staging.authgearapps.com
       # Allow explicit env var override for tests
       - SMTP_HOST=
       - PORT=3001
