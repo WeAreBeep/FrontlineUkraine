@@ -20,3 +20,7 @@ class City(FLBase):
     lng = Column("Lng", Numeric, nullable=False)
 
     needs = relationship("Need", back_populates="orgCity")
+
+    @property
+    def coordinate_array(self):
+        return [self.lng, self.lat]

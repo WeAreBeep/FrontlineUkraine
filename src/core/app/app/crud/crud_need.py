@@ -2,7 +2,8 @@ from datetime import datetime
 from typing import List, Set
 
 from pydantic import BaseModel
-from sqlalchemy import func
+from sqlalchemy import BigInteger, SmallInteger
+from sqlalchemy.sql import func
 from sqlalchemy.orm import Query, Session
 
 from app.crud.base import CRUDBase
@@ -52,7 +53,7 @@ class CRUDNeed(CRUDBase[Need, NeedCreate, BaseModel]):
         return self.get_queryable_by_post_status(db, status=status).all()
 
     def get_all_published_by_ppe_status(
-        self, db: Session, *, statuses: Set
+            self, db: Session, *, statuses: Set
     ) -> List[Need]:
         subquery: Query = db.query(NeedPpeType.needId).filter(
             NeedPpeType.statusId.in_(statuses)
@@ -61,13 +62,25 @@ class CRUDNeed(CRUDBase[Need, NeedCreate, BaseModel]):
         ).subquery()
         return (
             self.get_queryable_by_post_status(db, status=PostStatus.Published)
-            .filter(Need.id.in_(subquery))
-            .all()
+                .filter(Need.id.in_(subquery))
+                .all()
         )
 
     def create_from_request(self, db: Session, *, request: NeedCreate) -> Need:
         supplier_model = to_model(request)
         return self.create(db, supplier_model)
+
+    def get_city_meta(self,
+                      db: Session,
+                      *,
+                      post_status: PostStatus,
+                      ppe_statuses: Set) -> list[tuple[BigInteger, SmallInteger, int]]:
+        q = db.query(Need.orgCityId, NeedPpeType.ppeTypeId, func.coalesce(func.sum(NeedPpeType.dailyShortage), 0)) \
+            .join(Need.ppeTypes) \
+            .filter(Need.statusId == post_status) \
+            .filter(NeedPpeType.statusId.in_(ppe_statuses)) \
+            .group_by(Need.orgCityId, NeedPpeType.ppeTypeId)
+        return q.all()
 
 
 need = CRUDNeed(Need)
