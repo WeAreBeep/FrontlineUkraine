@@ -42,7 +42,7 @@ class Need(FLBase):
     orgTypeId = Column("OrgTypeId", Integer, quote=True, nullable=False)
     orgTypeOther = Column("OrgTypeOther", Text, quote=True)
     orgCityId = Column("OrgCityId", BigInteger, quote=True)
-    orgRegCode = Column("OrgRegCode", Text, quote=True, nullable=False)
+    orgRegCode = Column("OrgRegCode", Text, quote=True, nullable=False, server_default="")
     townOrCity = Column("TownOrCity", Text, quote=True)
     tweetId = Column("TweetId", Integer, quote=True)
     postcode = Column("Postcode", Text, quote=True, nullable=False)
