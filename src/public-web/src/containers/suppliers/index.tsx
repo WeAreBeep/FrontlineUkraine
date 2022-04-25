@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import cx from 'classnames';
 import authgear from '@authgear/web';
-import { FormattedMessage } from '@oursky/react-messageformat';
 import { Map } from '../landing/components/Map';
 import { Col, Grid, Text, Button, Stack } from '@mantine/core';
 import { FeedContent } from '../landing/components/FeedContent';
@@ -61,9 +60,7 @@ export const Suppliers: React.FC = () => {
               If you wish to sign up as an verified supplier, please contact{' '}
               <a href="mailto:hello@frontline.live">hello@frontline.live</a>
             </Text>
-            <Button onClick={onClickSignIn}>
-              <FormattedMessage id="suppliers_sign_in_button" />
-            </Button>
+            <Button onClick={onClickSignIn}>Login to see the full map</Button>
           </Stack>
         </Col>
       </Grid>
