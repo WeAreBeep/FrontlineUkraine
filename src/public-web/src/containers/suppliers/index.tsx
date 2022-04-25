@@ -53,8 +53,8 @@ export const Suppliers: React.FC = () => {
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
         <Col md={12} lg={4} offsetLg={4}>
           <Stack align="center" className={classes.stackContainer}>
-            <h1 className={classes.sPheading}>Supplier Portal</h1>
-            <Text className={classes.sPdescription}>
+            <h1 className={classes.heading}>Supplier Portal</h1>
+            <Text className={classes.description}>
               If you are a verified supplier, please login to see the full map.
               <br />
               If you wish to sign up as an verified supplier, please contact{' '}

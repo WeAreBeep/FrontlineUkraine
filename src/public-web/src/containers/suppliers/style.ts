@@ -30,10 +30,10 @@ export const useStyles = createStyles((theme) => ({
     backgroundColor: theme.white,
     minHeight: '100vh',
   },
-  sPdescription: {
+  description: {
     textAlign: 'center',
   },
-  sPheading: {
+  heading: {
     margin: 0,
     marginTop: 20,
   },
