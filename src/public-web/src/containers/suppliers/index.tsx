@@ -3,8 +3,6 @@ import cx from 'classnames';
 import authgear from '@authgear/web';
 import { Map } from '../landing/components/Map';
 import { Col, Grid, Text, Button, Stack } from '@mantine/core';
-import { FeedContent } from '../landing/components/FeedContent';
-import { OurVoicesTimeline } from '../landing/components/OurVoicesTimeline';
 import { useSessionState } from '../../contexts/AuthgearContext';
 import { useStyles } from './style';
 
@@ -35,14 +33,8 @@ export const Suppliers: React.FC = () => {
   if (sessionState === 'AUTHENTICATED') {
     return (
       <Grid className={classes.gridContainer} gutter={0}>
-        <Col className={classes.feedContentContainer} span={12} md={4}>
-          <FeedContent />
-        </Col>
-        <Col className={classes.mapContainer} span={12} md={8}>
+        <Col className={classes.mapContainer} span={12}>
           <Map />
-        </Col>
-        <Col span={12}>
-          <OurVoicesTimeline className={classes.ourVoiceTimeline} />
         </Col>
       </Grid>
     );
@@ -53,8 +45,8 @@ export const Suppliers: React.FC = () => {
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
         <Col md={12} lg={4} offsetLg={4}>
           <Stack align="center" className={classes.stackContainer}>
-            <h1 className={classes.sPheading}>Supplier Portal</h1>
-            <Text className={classes.sPdescription}>
+            <h1 className={classes.heading}>Supplier Portal</h1>
+            <Text className={classes.description}>
               If you are a verified supplier, please login to see the full map.
               <br />
               If you wish to sign up as an verified supplier, please contact{' '}
