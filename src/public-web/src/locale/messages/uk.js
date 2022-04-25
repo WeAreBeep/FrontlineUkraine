@@ -1,16 +1,16 @@
 export default {
   landing_headline_our_voice: 'OUR VOICES',
   nav_link_item_i_need: 'МЕНІ ПОТРІБНО',
-  nav_link_item_i_have: 'I HAVE',
-  nav_link_item_suppliers: 'SUPPLIERS',
-  nav_link_item_about: 'ABOUT',
-  nav_link_item_partners: 'PARTNERS',
-  suppliers_sign_in_button: 'Sign in to see the full map',
-  account_menu_settings: 'Settings',
-  account_menu_sign_out: 'Sign out',
+  nav_link_item_i_have: 'У МЕНЕ Є',
+  nav_link_item_suppliers: 'ПОСТАВЧИКИ',
+  nav_link_item_about: 'ПОСТАВЧИКИ',
+  nav_link_item_partners: 'ПАРТНЕРИ',
+  suppliers_sign_in_button: 'Увійдіть, щоб побачити повну карту',
+  account_menu_settings: 'Налаштування',
+  account_menu_sign_out: 'Вийти з аккаунта',
   common_required_field_error: 'This field is required',
-  i_need_form_form_submit_title_saved: 'Saved!',
-  i_need_form_form_submit_title_save: 'Save',
+  i_need_form_form_submit_title_saved: 'Подано!',
+  i_need_form_form_submit_title_save: 'Подати',
   i_need_form_title: 'МЕНІ ПОТРІБНО',
   i_need_form_form_intro:
     '{p, react, children{Frontline Live —це благодійна організація, яка зареєстрована у Великобританії. Ми тут, щоб допомогти вам отримати необхідні матеріали. Ваша безпека та благополуччя є нашим пріоритетом. Будь ласка, заповніть цю форму, щоб повідомити нам,  що саме вам потрібно. Дані, які ви подаєте в цій формі, будуть анонімізовані та верифіковані волонтерами, які цим опікуються, відповідно до стандартної робочої процедури:}} {ProcedureList, react} {p, react, children{Будь-яка інформація, пов’язана з фіксованим місцем розташування в Україні, не буде відображатися публічно: буде доступна лише для верифікованих постачальників. Це необхідно для того, щоб вони знали, куди доставити необхідні матеріали. Зважте! Із міркувань безпеки,  ми не можемо обробляти індивідуальні запити.}} {p, react, children{Примітка. Ми не можемо гарантувати, КОЛИ саме ваші потреби будуть задоволені, але, повідомляючи про ваші потреби, – ви допомагаєте організаціям,  які доставляють допомогу, максимально ефективно розподілити допомогу для тих місць, які найбільше їх потребують.}} {p, react, children{Ви отримаєте повідомлення, лише коли ваші дані будуть перевірені та додані до мапи. БУДЬ ЛАСКА, повідомте нам, коли поставки надійдуть. Це дасть нам можливість оновити дані.}}',
@@ -18,13 +18,21 @@ export default {
     'Базова перевірка ВАШИХ організацій (назва, реєстраційний номер).',
   i_need_form_form_intro_procedure_list_item_2:
     'Двоетапний процес перевірки для організацій, які мають матеріали для дистрибуції в наявності.',
+  i_need_form_fieldset_your_detail_title: 'Ваші дані',
   i_need_form_fieldset_your_detail_field_publish_anonymously_title:
-    'Publish Anonymously',
+    'Опублікувати анонімно  ',
   i_need_form_fieldset_your_detail_field_publish_anonymously_description:
-    'Check this if you do not wish your name to be published on the Frontline Map',
-  i_need_form_fieldset_your_detail_field_contact_name_title: 'Your name',
+    'Поставте прапорець, якщо ви не бажаєте, щоб ваше ім’я було опубліковано на карті Frontline',
+  i_need_form_fieldset_your_detail_field_contact_name_title: "Твоє ім'я",
   i_need_form_fieldset_your_detail_field_contact_name_description:
     'Нам потрібне ваше ім’я, щоб ми знали, до кого звертатися. Ваше ім’я та контактні дані НЕ публікуватимуться на веб-сайті та не розголошуватимуться за межами команди Frontline.',
+  i_need_form_fieldset_your_detail_field_contact_email_title:
+    'електронна пошта',
+  i_need_form_fieldset_your_detail_field_contact_email_description:
+    'Нам потрібно зв’язатися з вами для підтвердження інформації та успішної доставки.',
+  i_need_form_fieldset_your_detail_field_contact_phone_title: "Номер телефону'",
+  i_need_form_fieldset_your_detail_field_contact_phone_description:
+    'Номер телефону',
   i_need_form_fieldset_organisation_title: 'ОРГАНІЗАЦІЯ',
   i_need_form_fieldset_organisation_field_organisation_name_title:
     'НАЗВА ОРГАНІЗАЦІЇ',
@@ -43,21 +51,31 @@ export default {
     'Отримання гуманітарної допомоги?',
   i_need_form_fieldset_organisation_field_orgGovtApprovalImageId_title:
     'Завантажте листи акредитації',
-  i_need_form_fieldset_additional_detail_title: 'Additional Detail',
-  i_need_form_fieldset_additional_detail_field_address_line_1_title:
-    'Address Line 1',
-  i_need_form_fieldset_additional_detail_field_address_line_2_title:
-    'Address Line 2',
-  i_need_form_fieldset_additional_detail_field_city_title: 'City',
-  i_need_form_fieldset_additional_detail_field_postcode_title: 'Postcode',
-  i_need_form_fieldset_additional_detail_field_postcode_description:
-    'Will be added to the map to indicate location of your supplies',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_title:
-    'Tell Us More',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_description:
-    'Tell us more about how the shortage affects you',
+  i_need_form_fieldset_additional_details_title: 'Додаткова інформація',
+  i_need_form_fieldset_additional_details_field_address_line_1_title:
+    'Адресний рядок 1',
+  i_need_form_fieldset_additional_details_field_address_line_2_title:
+    'Адресний рядок 2',
+  i_need_form_fieldset_additional_details_field_city_title: 'City',
+  i_need_form_fieldset_additional_details_field_postcode_title:
+    'Поштовий індекс',
+  i_need_form_fieldset_additional_details_field_postcode_description:
+    'Буде додано на карту, щоб вказати місцезнаходження ваших запасів',
+  i_need_form_fieldset_additional_details_field_tell_us_more_title:
+    'Розкажи нам більше',
+  i_need_form_fieldset_additional_details_field_tell_us_more_description:
+    'Розкажіть нам більше про те, як дефіцит впливає на вас',
+  i_need_form_message_save_successful_title: 'Подача успішна!',
+  i_need_form_message_save_successful_message:
+    "Дякуємо, що ви були додані до бази даних, ми зв'яжемося з вами в установлений термін. Ви будете перенаправлені на домашню сторінку через 10 секунд.",
+  i_need_form_message_cannot_save_error_title: 'Запит не може бути поданий',
+  i_need_form_message_cannot_save_error_message:
+    'Сталася неочікувана помилка. Будь ласка спробуйте ще раз.',
   i_need_form_sub_form_how_many_you_need_title:
     'Ми - благодійна організація. Наші запаси обмежені. Скільки вам (і вашій команді) дійсно потрібно, щоб подолати розрив, поки не прибудуть запаси?',
+  i_need_form_sub_form_other_title: 'Інший',
+  i_need_form_sub_form_other_description:
+    'Якщо список вище не підходить, виберіть "Інше..." і опишіть тут',
   i_have_form_fieldset_resourceCategory_title: 'What You Can Supply',
   organisation_type_local_charity:
     'Місцева благодійна організація / ГО / Установа / Фонд',
@@ -72,6 +90,12 @@ export default {
   organisation_type_local_hospital: 'Місцева/обласна лікарня',
   organisation_type_distribution: 'Центр розповсюдження (Україна)',
   organisation_type_other: 'Інше (будь ласка, вкажіть)',
+  i_need_form_fieldset_organisation_field_job_title_title: 'Назва посади',
+  i_need_form_fieldset_organisation_field_job_title_description:
+    'Це не буде опубліковано на сайті. Він буде використовуватися для анонімної звітності.',
+  i_need_form_fieldset_organisation_field_department_title: 'відділ',
+  i_need_form_fieldset_organisation_field_department_description:
+    'Це не буде опубліковано на сайті. Він буде використовуватися для анонімної звітності.',
   resourceCategory_defaultDescription_need:
     'Поставте галочку навпроти всіх речей, які вам потрібні',
   resourceCategory_defaultDescription_supply: 'Tick as many apply',

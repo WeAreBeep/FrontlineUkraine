@@ -18,6 +18,7 @@ export default {
     'check your registration number against the national database',
   i_need_form_form_intro_procedure_list_item_2:
     'phone to check the contact details provided are valid.',
+  i_need_form_fieldset_your_detail_title: 'Your Details',
   i_need_form_fieldset_your_detail_field_publish_anonymously_title:
     'Publish Anonymously',
   i_need_form_fieldset_your_detail_field_publish_anonymously_description:
@@ -25,6 +26,12 @@ export default {
   i_need_form_fieldset_your_detail_field_contact_name_title: 'Your name',
   i_need_form_fieldset_your_detail_field_contact_name_description:
     'We need your name so we know who to contact, Your name and contact details will NOT be published on the website nor shared outside the Frontline team.',
+  i_need_form_fieldset_your_detail_field_contact_email_title: 'Email',
+  i_need_form_fieldset_your_detail_field_contact_email_description:
+    'We need to contact you to confirm information and successful delivery.',
+  i_need_form_fieldset_your_detail_field_contact_phone_title: 'Phone number',
+  i_need_form_fieldset_your_detail_field_contact_phone_description:
+    'Phone number',
   i_need_form_fieldset_organisation_title: 'ORGANISATION',
   i_need_form_fieldset_organisation_field_organisation_name_title:
     'Organisation Name',
@@ -44,21 +51,30 @@ export default {
   i_need_form_fieldset_organisation_field_orgHasGovtApproval_label_off: 'NO',
   i_need_form_fieldset_organisation_field_orgGovtApprovalImageId_title:
     'Upload proof of accreditation letters',
-  i_need_form_fieldset_additional_detail_title: 'Additional Detail',
-  i_need_form_fieldset_additional_detail_field_address_line_1_title:
-    'Address Line 1',
-  i_need_form_fieldset_additional_detail_field_address_line_2_title:
-    'Address Line 2',
-  i_need_form_fieldset_additional_detail_field_city_title: 'City',
-  i_need_form_fieldset_additional_detail_field_postcode_title: 'Postcode',
-  i_need_form_fieldset_additional_detail_field_postcode_description:
-    'Will be added to the map to indicate location of your supplies',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_title:
-    'Tell Us More',
-  i_need_form_fieldset_additional_detail_field_tell_us_more_description:
-    'Tell us more about how the shortage affects you',
   i_need_form_sub_form_how_many_you_need_title:
     'We are a charity. Our supplies are limited. How many do you (and your team) really need to bridge the gap until supplies arrive?',
+  i_need_form_sub_form_other_title: 'Other',
+  i_need_form_sub_form_other_description:
+    'If the list above does not fit choose "Other..." and describe here',
+  i_need_form_fieldset_additional_details_title: 'Additional Details',
+  i_need_form_fieldset_additional_details_field_address_line_1_title:
+    'Address line 1',
+  i_need_form_fieldset_additional_details_field_address_line_2_title:
+    'Address line 2',
+  i_need_form_fieldset_additional_details_field_city_title: 'City',
+  i_need_form_fieldset_additional_details_field_postcode_title: 'Postcode',
+  i_need_form_fieldset_additional_details_field_postcode_description:
+    'Will be added to the map to indicate location of your supplies',
+  i_need_form_fieldset_additional_details_field_tell_us_more_title:
+    'Tell Us More',
+  i_need_form_fieldset_additional_details_field_tell_us_more_description:
+    'Tell us more about how the shortage affects you',
+  i_need_form_message_save_successful_title: 'Submit successful!',
+  i_need_form_message_save_successful_message:
+    'Thanks you have been added to the database, we will be in contact in due course. You will be redirected to home page in 10 seconds.',
+  i_need_form_message_cannot_save_error_title: 'Request cannot be submmited',
+  i_need_form_message_cannot_save_error_message:
+    'Unexpected error occurred. Please try again.',
   i_have_form_fieldset_resourceCategory_title: 'What You Can Supply',
   organisation_type_local_charity: 'Local Charity / NGO / Foundation',
   organisation_type_international_org_chapter:
@@ -71,6 +87,12 @@ export default {
   organisation_type_local_hospital: 'Local/Regional Hospital',
   organisation_type_distribution: 'Distribution Hub (UA)',
   organisation_type_other: 'Other (please specify)',
+  i_need_form_fieldset_organisation_field_job_title_title: 'Job Title',
+  i_need_form_fieldset_organisation_field_job_title_description:
+    'This will not be published on the site. It will be used for anonymous data reporting.',
+  i_need_form_fieldset_organisation_field_department_title: 'Department',
+  i_need_form_fieldset_organisation_field_department_description:
+    'This will not be published on the site. It will be used for anonymous data reporting.',
   resourceCategory_defaultDescription_need: 'Tick as many apply',
   resourceCategory_defaultDescription_supply: 'Tick as many apply',
   resourceCategory_nonDrugMedicalSupplies_ppe_displayName: 'PPE',
