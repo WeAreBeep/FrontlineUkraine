@@ -1,5 +1,6 @@
 import { CategoryEnum, ClusterColorStep } from './type';
 import { PpeTypeEnum } from '../../models/ppeType';
+import { LngLatBoundsLike } from 'mapbox-gl';
 
 export const CATEGORIES: CategoryEnum[] = [
   CategoryEnum.Need,
@@ -191,3 +192,16 @@ export const PPE_TYPE_COLOR: Record<PpeTypeEnum, string> = {
   //Grey
   [PpeTypeEnum.Other]: '#706F6F',
 };
+
+// Include UK and Ukraine
+// Type: [sw, ne]
+export const DEFAULT_MAP_BOUNDS: LngLatBoundsLike = [
+  {
+    lng: -15.153077355573117,
+    lat: 34.13695366955437,
+  },
+  {
+    lng: 73.8317035268714,
+    lat: 59.72912564207206,
+  },
+];

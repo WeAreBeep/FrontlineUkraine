@@ -29,6 +29,7 @@ import { MapControl } from '../MapControl';
 import {
   CATEGORIES,
   CLUSTER_COLORS,
+  DEFAULT_MAP_BOUNDS,
   POINT_COLORS,
   PPE_TYPE_COLOR,
 } from '../../constant';
@@ -286,10 +287,7 @@ export function Map<TMapData extends MapData<any, any>>({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       // The bound of the UK
-      bounds: [
-        [-10.809872337116673, 49.300494132364435],
-        [9.028203002610155, 59.13892469548853],
-      ],
+      bounds: DEFAULT_MAP_BOUNDS,
       fitBoundsOptions: {
         padding: 20,
       },
