@@ -6,7 +6,8 @@ from sqlalchemy.orm import Session
 
 from app import services
 from app.models import PpeTypeEnum
-from app.schemas import PublicNeed, PublicSupply, City
+from app.schemas import PublicNeed, PublicSupply
+from app.schemas.city_map_data import CityMapData
 from app.schemas.map import (
     FeatureData,
     FeedNew,
@@ -279,14 +280,14 @@ def get_map_data(db: Session):
             "supplies": MapDataFactory.from_supply_records(data=supplies),
         },
         records={"need": need_dict, "supply": supply_dict},
-    ).dict()
+    )
 
 
 def get_public_map_data(db: Session):
     result = services.map.get_public_map_data(db)
     supplies = [PublicSupply.from_data(s) for s in result.suppliers]
 
-    city_dict = dict(map(lambda entry: (entry[0], City.from_data(entry[1])), result.city_dict.items()))
+    city_dict = dict(map(lambda entry: (entry[0], CityMapData.from_data(entry[1])), result.city_dict.items()))
     supply_dict = dict(map(lambda supply: (supply.id, supply), supplies))
     return FeedNew(
         categories={
@@ -295,4 +296,4 @@ def get_public_map_data(db: Session):
             "supplies": MapDataFactory.from_supply_records(data=supplies),
         },
         records={"city": city_dict, "supply": supply_dict},
-    ).dict()
+    )
