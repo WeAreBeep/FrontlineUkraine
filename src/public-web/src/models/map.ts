@@ -57,6 +57,13 @@ export type MapDataResourceType<TMapData> = TMapData extends MapData<
   ? ResourceType
   : never;
 
+export type MapDataRecordMapType<TMapData> = TMapData extends MapData<
+  unknown,
+  infer RecordMapType
+>
+  ? RecordMapType
+  : never;
+
 export type RestrictedMapData = MapData<
   RestrictedMapRecordTypes,
   {

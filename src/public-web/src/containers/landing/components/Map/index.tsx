@@ -14,6 +14,7 @@ import { useAPIContext } from '../../../../contexts/APIContext';
 import {
   FLFeatureProps,
   MapData,
+  MapDataRecordMapType,
   MapDataResourceType,
 } from '../../../../models/map';
 import { Nullable } from '../../../../utils/nullable';
@@ -31,11 +32,17 @@ import {
   POINT_COLORS,
   PPE_TYPE_COLOR,
 } from '../../constant';
-import { MapNeedPopup } from '../MapNeedPopup';
-import { PpeStatus } from '../../../../models/ppeStatus';
-import { MapSupplyPopup } from '../MapSupplyPopup';
+import { resolveDefaultLocale } from '../../../../locale/resolveDefaultLocale';
+import { LocaleProvider } from '../../../../locale/LocaleProvider';
+import { ServiceProvider } from '../../../../contexts/ServiceContext';
 
 mapboxGl.accessToken = config.mapboxToken;
+
+export type MapRenderPopupType<TMapData extends MapData<unknown, unknown>> = (
+  category: CategoryEnum,
+  featureProps: FLFeatureProps<MapDataResourceType<TMapData>>,
+  recordMap: MapDataRecordMapType<TMapData>
+) => React.ReactNode;
 
 function getClusterId(base: string) {
   return {
@@ -224,7 +231,14 @@ function addCluster<TMapData extends MapData<any, any>>(
       })
       .setMaxWidth('70%')
       .setHTML(
-        ReactDOMServer.renderToStaticMarkup(<>{popupRenderer(properties)}</>)
+        // FIXME: Better way to render the React component
+        ReactDOMServer.renderToStaticMarkup(
+          <ServiceProvider windowImpl={window}>
+            <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+              {popupRenderer(properties)}
+            </LocaleProvider>
+          </ServiceProvider>
+        )
       )
       .addTo(map);
   });
@@ -246,8 +260,10 @@ function setClusterVisibility(
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function Map<TMapData extends MapData<any, any>>({
   fetchMapData,
+  renderPopup,
 }: {
   fetchMapData: () => Promise<TMapData>;
+  renderPopup: MapRenderPopupType<TMapData>;
 }) {
   const { classes } = useStyles();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -320,23 +336,8 @@ export function Map<TMapData extends MapData<any, any>>({
         clusterColors: CLUSTER_COLORS[category],
         pointColor: { inner: POINT_COLORS[category] },
         // eslint-disable-next-line react/no-unstable-nested-components
-        popupRenderer: ({ recordId, recordType }) => {
-          if (category === CategoryEnum.Supply) {
-            return (
-              <MapSupplyPopup supply={mapData.records[recordType][recordId]} />
-            );
-          }
-          return (
-            <MapNeedPopup
-              need={mapData.records[recordType][recordId]}
-              allowStatuses={
-                category === CategoryEnum.Need
-                  ? [PpeStatus.New, PpeStatus.InProgress, PpeStatus.NotMet]
-                  : [PpeStatus.Met]
-              }
-              variant={category}
-            />
-          );
+        popupRenderer: (featureProps) => {
+          return renderPopup(category, featureProps, mapData.records);
         },
       });
 
@@ -362,31 +363,14 @@ export function Map<TMapData extends MapData<any, any>>({
               inner: PPE_TYPE_COLOR[ppeType],
             },
             // eslint-disable-next-line react/no-unstable-nested-components
-            popupRenderer: ({ recordId, recordType }) => {
-              if (category === CategoryEnum.Supply) {
-                return (
-                  <MapSupplyPopup
-                    supply={mapData.records[recordType][recordId]}
-                  />
-                );
-              }
-              return (
-                <MapNeedPopup
-                  need={mapData.records[recordType][recordId]}
-                  allowStatuses={
-                    category === CategoryEnum.Need
-                      ? [PpeStatus.New, PpeStatus.InProgress, PpeStatus.NotMet]
-                      : [PpeStatus.Met]
-                  }
-                  variant={category}
-                />
-              );
+            popupRenderer: (featureProps) => {
+              return renderPopup(category, featureProps, mapData.records);
             },
           });
         }
       );
     });
-  }, [mapData, loaded]);
+  }, [mapData, loaded, renderPopup]);
 
   useEffect(() => {
     const map = mapRef.current;
