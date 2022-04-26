@@ -5,8 +5,13 @@ import { Map } from '../landing/components/Map';
 import { Col, Grid, Text, Button, Stack } from '@mantine/core';
 import { useSessionState } from '../../contexts/AuthgearContext';
 import { useStyles } from './style';
+import { RestrictedMapData } from '../../models/map';
+import { useAPIContext } from '../../contexts/APIContext';
 
 export const Suppliers: React.FC = () => {
+  const {
+    actions: { getMapData },
+  } = useAPIContext();
   const sessionState = useSessionState();
 
   const onClickSignIn = useCallback((e) => {
@@ -34,7 +39,7 @@ export const Suppliers: React.FC = () => {
     return (
       <Grid className={classes.gridContainer} gutter={0}>
         <Col className={classes.mapContainer} span={12}>
-          <Map />
+          <Map<RestrictedMapData> fetchMapData={getMapData} />
         </Col>
       </Grid>
     );
