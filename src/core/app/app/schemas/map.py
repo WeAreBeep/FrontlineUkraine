@@ -1,12 +1,12 @@
 from decimal import Decimal
-from typing import Dict, List
+from typing import Dict, List, Any
 
 from geojson_pydantic import Feature, FeatureCollection
 from geojson_pydantic import Point as GeoPoint
 from pydantic import Field
 
 from app.models import PpeTypeEnum
-from app.schemas import BaseModel, PublicNeed, PublicSupply
+from app.schemas import BaseModel
 
 
 class FeatureData(BaseModel):
@@ -41,11 +41,6 @@ class MapData(BaseModel):
     posts: RecordFeatureCollection
 
 
-class RecordMap(BaseModel):
-    need: Dict[int, PublicNeed]
-    supply: Dict[int, PublicSupply]
-
-
 class FeedNew(BaseModel):
     categories: Dict[str, MapData]
-    records: RecordMap
+    records: Dict[str, Dict[int, Any]]

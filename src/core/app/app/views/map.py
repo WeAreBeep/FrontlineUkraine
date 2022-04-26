@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app import services
 from app.models import PpeTypeEnum
 from app.schemas import PublicNeed, PublicSupply
+from app.schemas.city_map_data import CityMapData
 from app.schemas.map import (
     FeatureData,
     FeedNew,
@@ -15,6 +16,7 @@ from app.schemas.map import (
     RecordFeature,
     RecordFeatureCollection,
 )
+from app.services.map import CityAndResourceTypeStats
 
 
 def get_ppe_type_enum_text(e: PpeTypeEnum) -> str:
@@ -195,6 +197,68 @@ class MapDataFactory:
             posts=posts,
         )
 
+    @classmethod
+    def from_city_meta_records(cls, *, data: List[CityAndResourceTypeStats]) -> MapData:
+        type_points_map = make_type_points_breakdown_dict()
+        posts = RecordFeatureCollection(features=[])
+        post_features = list(
+            map(
+                lambda d: {
+                    "post": RecordFeature.construct(
+                        id=f"{d.city.id}_post",
+                        geometry=GeoPoint.construct(coordinates=d.city.coordinate_array),
+                        properties=FeatureData.construct(
+                            record_type="city", record_id=int(d.city.id)
+                        ),
+                    ),
+                    "ppe_type_breakdowns": dict(
+                        map(
+                            lambda ppe_type_record: (
+                                ppe_type_record[0],
+                                RecordFeature.construct(
+                                    id=f"{d.city.id}_{ppe_type_record[0]}",
+                                    geometry=GeoPoint.construct(
+                                        coordinates=d.city.coordinate_array
+                                    ),
+                                    properties=FeatureData(
+                                        record_type="city", record_id=int(d.city.id)
+                                    ),
+                                ),
+                            ),
+                            d.resource_type_stat.items(),
+                        )
+                    ),
+                },
+                data,
+            )
+        )
+        posts.features.extend(list(map(lambda entry: entry["post"], post_features)))
+
+        functools.reduce(
+            lambda acc, curr: functools.reduce(
+                _append_feature_to_breakdown, curr["ppe_type_breakdowns"].items(), acc
+            ),
+            post_features,
+            type_points_map,
+        )
+        return MapData(
+            points_count=functools.reduce(
+                lambda x, y: x + y,
+                map(
+                    lambda point_list: len(point_list.features),
+                    type_points_map.values(),
+                ),
+                0,
+            ),
+            points_breakdowns=[
+                PointsBreakdown.construct(
+                    type=key, geojson_feature_collection=collection
+                )
+                for (key, collection) in type_points_map.items()
+            ],
+            posts=posts,
+        )
+
 
 def get_map_data(db: Session):
     result = services.map.get_map_data(db)
@@ -216,4 +280,20 @@ def get_map_data(db: Session):
             "supplies": MapDataFactory.from_supply_records(data=supplies),
         },
         records={"need": need_dict, "supply": supply_dict},
+    )
+
+
+def get_public_map_data(db: Session):
+    result = services.map.get_public_map_data(db)
+    supplies = [PublicSupply.from_data(s) for s in result.suppliers]
+
+    city_dict = dict(map(lambda entry: (entry[0], CityMapData.from_data(entry[1])), result.city_dict.items()))
+    supply_dict = dict(map(lambda supply: (supply.id, supply), supplies))
+    return FeedNew(
+        categories={
+            "needs": MapDataFactory.from_city_meta_records(data=result.needs),
+            "needs_met": MapDataFactory.from_city_meta_records(data=result.met),
+            "supplies": MapDataFactory.from_supply_records(data=supplies),
+        },
+        records={"city": city_dict, "supply": supply_dict},
     )

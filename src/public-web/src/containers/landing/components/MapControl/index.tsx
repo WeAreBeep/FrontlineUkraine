@@ -117,10 +117,10 @@ const defaultBreakdownCount: BreakdownCountMap = {
   [PpeTypeEnum.TypeIIRSurgicalMasks]: 0,
 };
 
-interface Props {
+interface Props<TMapData extends MapData<any, any>> {
   visibility: CategoryVisibilityMap;
   onVisibilityChange: (updated: CategoryVisibilityMap) => void;
-  mapData: Nullable<MapData>;
+  mapData: Nullable<TMapData>;
 }
 
 interface PpeTypeEnumCheckboxProps {
@@ -203,12 +203,12 @@ const AccordionLabel: React.FC<{ category: CategoryEnum; count?: number }> = ({
   );
 };
 
-// eslint-disable-next-line complexity
-export const MapControl: React.FC<Props> = ({
+// eslint-disable-next-line complexity,@typescript-eslint/explicit-module-boundary-types
+export function MapControl<TMapData extends MapData<any, any>>({
   visibility,
   onVisibilityChange,
   mapData,
-}) => {
+}: Props<TMapData>) {
   const { classes: accordionClasses } = useAccordionStyles();
   const { classes } = useStyles();
   const { control, watch } = useForm<CategoryVisibilityMap>({
@@ -404,4 +404,4 @@ export const MapControl: React.FC<Props> = ({
       </Accordion>
     </div>
   );
-};
+}

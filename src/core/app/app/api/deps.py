@@ -1,6 +1,6 @@
 from typing import AsyncGenerator, Generator
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from pydantic import ValidationError
@@ -65,3 +65,14 @@ def get_current_active_superuser(
 async def get_posttag_client() -> AsyncGenerator:
     async with get_posttag_http_client() as client:
         yield client
+
+
+def get_authgear_user_id(request: Request) -> str:
+    is_logged_in = request.state.user_id is not None
+    if not is_logged_in:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return request.state.user_id

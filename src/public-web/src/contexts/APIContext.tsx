@@ -4,7 +4,7 @@ import { RegisterSuppliesForm } from '../containers/registerSupplies/types';
 import { RegisterRequestForm } from '../containers/registerNeeds/types';
 import { config } from '../config';
 import { PpeTypeEnum } from '../models/ppeType';
-import { MapData } from '../models/map';
+import { PublicMapData, RestrictedMapData } from '../models/map';
 import { SearchAddressResponse } from '../models/posttag';
 import { Paginated } from '../models/paginated';
 import { City } from '../models/city';
@@ -115,6 +115,7 @@ type Rpc = ReturnType<typeof useMakeRpc>;
 
 enum ActionType {
   GetMapData = 'getMapData',
+  GetPublicMapData = 'getPublicMapData',
   CreateSupply = 'createSupply',
   CreateRequest = 'createRequest',
   SearchAddress = 'searchAddress',
@@ -170,7 +171,11 @@ function useMakeActions(rpc: Rpc) {
       },
       [ActionType.GetMapData]: async () => {
         const resp = await rpc.get('v1/map');
-        return resp as MapData;
+        return resp as RestrictedMapData;
+      },
+      [ActionType.GetPublicMapData]: async () => {
+        const resp = await rpc.get('v1/map/public');
+        return resp as PublicMapData;
       },
       [ActionType.SearchAddress]: async (postcode: string) => {
         const params = new URLSearchParams({
