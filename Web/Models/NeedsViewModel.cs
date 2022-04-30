@@ -40,6 +40,16 @@ namespace Web.Models
 		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string OrganisationName { get; set; }
+		
+		[
+			Display(Name = "USREOU Code* / Registration No.", Description = "This is the 7 digits unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need"),
+			Required(ErrorMessage = Settings.ValMsgs.Required),
+			RegularExpression(@"^[\d]{7}$", ErrorMessage = "<b>{0}</b> is the 7 digits unique registration code.")
+		]
+		public string OrgRegCode { get; set; }
+		
+		[Display(Name = "City", Description = "Organisation city"), Required(ErrorMessage = Settings.ValMsgs.Required)]
+		public long OrgCityId { get; set; }
 
 		[Display(Name = "Type", Description = "Which best describes your organisation?"),
 		Required(ErrorMessage = Settings.ValMsgs.Required)]

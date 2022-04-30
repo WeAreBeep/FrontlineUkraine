@@ -77,54 +77,15 @@
     </div>
     <div>
         @Html.LabelsFor(m => m.OrgType)
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.NhsHospital.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.NhsHospital.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.CareHome.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.CareHome.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.GpSurgery.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.GpSurgery.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.PrivateHospital.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.PrivateHospital.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.ShelteredHousing.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.ShelteredHousing.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.CivicInfrastructure.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.CivicInfrastructure.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.Dentists.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.Dentists.GetText()
-            </label>
-        </div>
-        <div class="secondary">
-            <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.OrgType, OrgTypes.Other.ToString(), new { v_model = @orgTypeVueName })
-                @OrgTypes.Other.GetText()
-            </label>
-        </div>
+        @foreach (var orgType in OrgTypesExtension.AllOrgTypes)
+        {
+            <div class="secondary">
+                <label class="cursor_pointer">
+                    @Html.RadioButtonFor(m => m.OrgType, orgType.ToString(), new { v_model = @orgTypeVueName })
+                    @orgType.GetText()
+                </label>
+            </div>
+        }
         <div v-bind:class="{ active: @orgTypeVueName === 'Other' }" class="toggleable indent">
             @Html.LabelsFor(m => m.OrgTypeOther)
             @Html.TextBoxFor(m => m.OrgTypeOther)
@@ -155,6 +116,16 @@
         @Html.TextBoxFor(m => m.AddressLineTwo)
         @Html.HtmlValidationMessageFor(m => m.AddressLineTwo)
     </div>
+    <div>
+        @Html.LabelsFor(m => m.OrgRegCode)
+        @Html.TextBoxFor(m => m.OrgRegCode)
+        @Html.HtmlValidationMessageFor(m => m.OrgRegCode)
+    </div>
+    <div>
+        @Html.LabelsFor(m => m.OrgCityId)
+        @Html.TextBoxFor(m => m.OrgCityId)
+        @Html.HtmlValidationMessageFor(m => m.OrgCityId)
+    </div>    
     <div>
         @Html.LabelsFor(m => m.Postcode)
         @Html.TextBoxFor(

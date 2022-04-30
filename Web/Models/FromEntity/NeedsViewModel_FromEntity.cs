@@ -24,6 +24,8 @@ namespace Web.Models
 				OrganisationName = s.OrganisationName,
 				OrgType = (OrgTypes)s.OrgTypeId,
 				OrgTypeOther = s.OrgTypeOther,
+				OrgRegCode = s.OrgRegCode,
+				OrgCityId = s.OrgCityId,
 				AddressLineOne = s.AddressLineOne,
 				AddressLineTwo = s.AddressLineTwo,
 				Postcode = s.Postcode,
