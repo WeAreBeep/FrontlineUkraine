@@ -25,12 +25,18 @@ namespace Web.Models
 			return new NeedsVueData
 			{
 				OrgType = s.OrgType.ToString(),
+				OrgCityId = s.OrgCityId,
 				PpeTypes = s.PpeTypes.SelectToList(PpeTypeInfo.Project),
+				OrgCity = SelectListItemVueData.FromViewModel(s.OrgCity),
+				Cities = SelectListItemVueData.FromViewModels(s.Cities),
 			};
 		}
 
 		public string OrgType;
+		public long OrgCityId;
 		public List<PpeTypeInfo> PpeTypes;
+		public SelectListItemVueData OrgCity;
+		public List<SelectListItemVueData> Cities;
 
 		public class PpeTypeInfo
 		{

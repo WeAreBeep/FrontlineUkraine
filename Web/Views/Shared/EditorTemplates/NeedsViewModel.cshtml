@@ -6,6 +6,8 @@
 
 @{
     string orgTypeVueName = Html.NameFor(m => m.OrgType);
+    string orgCityIdVueName = Html.NameFor(m => m.OrgCity.Value);
+    string citiesVueName = Html.NameFor(m => m.Cities);
 }
 
 <fieldset id="needs_details">
@@ -123,8 +125,9 @@
     </div>
     <div>
         @Html.LabelsFor(m => m.OrgCityId)
-        @Html.TextBoxFor(m => m.OrgCityId)
+        @Html.VueSelectFor(m => m.OrgCity, citiesVueName, clearable:false)
         @Html.HtmlValidationMessageFor(m => m.OrgCityId)
+        @Html.HiddenFor(m => m.OrgCityId, new { @v_model = orgCityIdVueName })
     </div>    
     <div>
         @Html.LabelsFor(m => m.Postcode)

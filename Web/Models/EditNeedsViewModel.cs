@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Db;
 using Web.Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,12 +20,12 @@ namespace Web.Models
 		public LocationViewModel Location { get; set; }
 		public NotesViewModel Notes { get; set; }
 
-		public static EditNeedsViewModel FromPostData(EditNeedsPost s, List<Supplier> suppliers)
+		public static EditNeedsViewModel FromPostData(EditNeedsPost s, List<Supplier> suppliers, List<City> cities)
 		{
 			List<SelectListItem> ppeStatuses = HtmlEnumExtensions.ToSelectListItems<PpeStatus>();
 			List<SelectListItem> supplierSelectListItems = SelectListItem_FromEntity.FromEntities(suppliers);
 			return new EditNeedsViewModel {
-				Request = s.Request,
+				Request = NeedsViewModel.FromPostData(s.Request, cities),
 				Status = new PostStatusViewModel {
 					Status = s.Status.Status,
 					PostStatuses = HtmlEnumExtensions.ToSelectListItems<PostStatus>()

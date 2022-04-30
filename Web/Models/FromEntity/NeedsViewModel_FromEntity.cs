@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Web.Db;
 using Web.Infrastructure;
+using Web.Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Snippets.System;
 using Web.Snippets.System.Collections.Generic;
 
@@ -12,8 +13,9 @@ namespace Web.Models
 {
 	public partial class NeedsViewModel
 	{
-		public static NeedsViewModel FromEntity(Need s)
+		public static NeedsViewModel FromEntity(Need s, List<City> cities)
 		{
+			var citySelectListItems = SelectListItem_FromEntity.FromEntities(cities, s.OrgCityId);
 			return new NeedsViewModel
 			{
 				Id = s.Id,
@@ -33,7 +35,9 @@ namespace Web.Models
 				Department = s.Department,
 				TownOrCity = s.TownOrCity,
 				TellUsMore = s.TellUsMore,
-				PpeTypes = NeedPpeTypeViewModel.FromNeed(s)
+				PpeTypes = NeedPpeTypeViewModel.FromNeed(s),
+				Cities = citySelectListItems,
+				OrgCity = citySelectListItems.Find(i => i.Selected),
 			};
 		}
 	}

@@ -60,7 +60,8 @@ namespace Web.Controllers
 				.ThenInclude(n => n.User)
 				.Single(n => n.Id == id);
             List<Supplier> suppliers = dataContext.Suppliers.ToList();
-            return View(EditNeedsViewModel.FromEntities(need, suppliers));
+            List<City> cities = dataContext.Cities.ToList();
+            return View(EditNeedsViewModel.FromEntities(need, suppliers, cities));
         }
         [HttpPost("edit-needs/{id}")]
         public IActionResult EditNeeds([FromServices] DataContext dataContext, EditNeedsPost data)
@@ -69,8 +70,9 @@ namespace Web.Controllers
             if(!ModelState.IsValid)
             {
                 List<Supplier> suppliers = dataContext.Suppliers.ToList();
+                List<City> cities = dataContext.Cities.ToList();
                 noty.AddMessage(MsgTypes.Warning, "Problems saving, please try again");
-                return View("EditNeeds", EditNeedsViewModel.FromPostData(data, suppliers));
+                return View("EditNeeds", EditNeedsViewModel.FromPostData(data, suppliers, cities));
             }
             else
             {

@@ -32,5 +32,18 @@ namespace Web.Microsoft.AspNetCore.Mvc.Rendering
 				Text = s.Name
 			};
 		}
+		public static List<SelectListItem> FromEntities(List<City> s, long? selectedId)
+		{
+			return s.SelectToList(c => FromEntity(c, selectedId));
+		}
+		public static SelectListItem FromEntity(City c, long? selectedId)
+		{
+			return new SelectListItem
+			{
+				Value = c.Id.ToString(),
+				Text = c.NameEn,
+				Selected = c.Id == selectedId
+			};
+		}
 	}
 }

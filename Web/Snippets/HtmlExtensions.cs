@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
+using Web.Models;
 using Web.Snippets.System.ComponentModel.DataAnnotations;
 
 namespace Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
@@ -44,6 +46,21 @@ namespace Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
 				respVal = new HtmlString($@"<number-input v-model='{name}' id='{id}' name='{name}' :step='{range.Step}' :min='{range.Min}' :max='{range.Max}' class='number_picker' inline controls></number-input>");
 			}
 			return respVal;
+		}
+
+		public static IHtmlContent VueSelectFor<TModel, TValue>(this IHtmlHelper<TModel> html,
+			Expression<Func<TModel, TValue>> expression, string optionsVueDataName, bool clearable = true)
+		{
+			string id = html.IdFor(expression);
+			string name = html.NameFor(expression);
+			string clearableValue = clearable ? JsonConvert.True : JsonConvert.False;
+			TagBuilder tagBuilder = new TagBuilder("v-select");
+			tagBuilder.Attributes.Add("v-model", name);
+			tagBuilder.Attributes.Add("id", id);
+			tagBuilder.Attributes.Add(":options", optionsVueDataName);
+			tagBuilder.Attributes.Add("label", nameof(SelectListItemVueData.Label));
+			tagBuilder.Attributes.Add("v-bind:clearable", clearableValue);
+			return tagBuilder;
 		}
 
 		public static IHtmlContent DescriptionFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
