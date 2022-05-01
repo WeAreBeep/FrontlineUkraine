@@ -53,19 +53,22 @@
     <script src="~/js/jquery.validate.js" asp-append-version="true"></script>
     <script src="~/js/ac.jquery.validate.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/js/ac.jquery.validate.unobtrusive.additions.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/vue-select@3.0.0"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">
     <partial name="_PosttagAutoCompleteScripts" />
 
     <script>
 
         (function() {
 
-            console.log(@Html.Raw(Model.GetVueData()));
+            const dataStr = `@Html.Raw(Model.GetVueData())`
+            console.log(dataStr);
 
             $(document).ready(function() {
-
+                Vue.component('v-select', VueSelect.VueSelect);
                 var vm = new Vue({
                     el: '#vue_app',
-                    data: JSON.parse('@Html.Raw(Model.GetVueData())'),
+                    data: JSON.parse(dataStr),
                     mounted: function() {
                         Help.setupBackendApp();
                     }

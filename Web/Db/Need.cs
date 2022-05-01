@@ -24,6 +24,8 @@ namespace Web.Db
 		public string PhoneNumber { get; set; }
 		public string OrganisationName { get; set; }
 		public string Department { get; set; }
+		public string OrgRegCode { get; set; }
+		public long OrgCityId { get; set; }
 		public int OrgTypeId { get; set; }
 		public string OrgTypeOther { get; set; }
 		public string TownOrCity { get; set; }
@@ -37,5 +39,6 @@ namespace Web.Db
 
 		public virtual ICollection<NeedNote> NeedNotes { get; set; }
 		public virtual ICollection<NeedPpeType> NeedPpeTypes { get; set; }
+		public virtual City OrgCity { get; set; }
 	}
 }

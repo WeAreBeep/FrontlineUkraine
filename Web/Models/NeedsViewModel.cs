@@ -5,12 +5,45 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Web.Db;
 using Web.Infrastructure;
+using Web.Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Snippets.System;
 using Web.Snippets.System.Collections.Generic;
 using Web.Snippets.System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
+	public partial class NeedsViewModel
+	{
+		public static NeedsViewModel FromPostData(NeedsViewModel request, List<City> cities)
+		{
+			var citySelectListItems = SelectListItem_FromEntity.FromEntities(cities, request.OrgCityId);
+			return new NeedsViewModel
+			{
+				Id = request.Id,
+				PublishAnonymously = request.PublishAnonymously,
+				ContactName = request.ContactName,
+				Email = request.Email,
+				PhoneNumber = request.PhoneNumber,
+				OrganisationName = request.OrganisationName,
+				OrgRegCode = request.OrgRegCode,
+				OrgCityId = request.OrgCityId,
+				OrgType = request.OrgType,
+				OrgTypeOther = request.OrgTypeOther,
+				AddressLineOne = request.AddressLineOne,
+				AddressLineTwo = request.AddressLineTwo,
+				Postcode = request.Postcode,
+				JobTitle = request.JobTitle,
+				Department = request.Department,
+				TownOrCity = request.TownOrCity,
+				TellUsMore = request.TellUsMore,
+				PpeTypes = request.PpeTypes,
+				Cities = citySelectListItems,
+				OrgCity = citySelectListItems.Find(i => i.Selected),
+			};
+		}
+		public List<SelectListItem> Cities { get; set; }
+		public SelectListItem OrgCity { get; set; }
+	}
 	public partial class NeedsViewModel : IValidatableObject
 	{
 		public long Id { get; set; }
@@ -40,6 +73,16 @@ namespace Web.Models
 		Required(ErrorMessage = Settings.ValMsgs.Required),
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string OrganisationName { get; set; }
+		
+		[
+			Display(Name = "USREOU Code* / Registration No.", Description = "This is the 7 digits unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need"),
+			Required(ErrorMessage = Settings.ValMsgs.Required),
+			RegularExpression(@"^[\d]{7}$", ErrorMessage = "<b>{0}</b> is the 7 digits unique registration code.")
+		]
+		public string OrgRegCode { get; set; }
+		
+		[Display(Name = "City", Description = "Organisation city"), Required(ErrorMessage = Settings.ValMsgs.Required)]
+		public long OrgCityId { get; set; }
 
 		[Display(Name = "Type", Description = "Which best describes your organisation?"),
 		Required(ErrorMessage = Settings.ValMsgs.Required)]

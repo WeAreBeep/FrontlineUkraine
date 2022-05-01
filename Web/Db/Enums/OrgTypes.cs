@@ -1,4 +1,7 @@
-﻿using Web.Snippets.System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Web.Snippets.System;
 
 namespace Web.Db
 {
@@ -33,5 +36,15 @@ namespace Web.Db
 		LocalHospital = 16,
 		[EnumText("Distribution Hub (UA)")]
 		DistributionHub = 17,
+	}
+
+	public static class OrgTypesExtension
+	{
+		public static readonly List<OrgTypes> AllOrgTypes = Enum.GetValues(typeof(OrgTypes))
+			.OfType<OrgTypes>()
+			.ToList()
+			.Where(t => t != OrgTypes.Other)
+			.Append(OrgTypes.Other)
+			.ToList();
 	}
 }

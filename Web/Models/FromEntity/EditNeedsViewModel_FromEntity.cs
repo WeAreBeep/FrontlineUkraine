@@ -9,11 +9,11 @@ namespace Web.Models
 {
 	public partial class EditNeedsViewModel
 	{
-		public static EditNeedsViewModel FromEntities(Need s, List<Supplier> suppliers)
+		public static EditNeedsViewModel FromEntities(Need s, List<Supplier> suppliers, List<City> cities)
 		{
 			return new EditNeedsViewModel
 			{
-				Request = NeedsViewModel.FromEntity(s),
+				Request = NeedsViewModel.FromEntity(s, cities),
 				Status = PostStatusViewModel.FromEntity(s),
 				Twitter = TwitterViewModel.FromEntity(s),
 				NeedsMatching = NeedsMatchViewModel.FromEntities(s, suppliers),

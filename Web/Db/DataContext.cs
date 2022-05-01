@@ -36,9 +36,11 @@ namespace Web.Db
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<SupplierNote> SupplierNotes { get; set; }
         public virtual DbSet<SupplierPpeType> SupplierPpeTypes { get; set; }
+        
+        public virtual DbSet<City> Cities { get; set; }
 
         /// <summary>
-        /// 2,621,114 = (‭938000 + 1011997 + 671117‬) 
+        /// 2,621,114 = (938000 + 1011997 + 671117) 
         /// </summary>
         public DbSet<PostcodeRegion> PostcodesRegions { get; set; }
 

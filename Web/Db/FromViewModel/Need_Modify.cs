@@ -94,6 +94,8 @@ namespace Web.Db
 			Department = s.Department;
 			OrgTypeId = (int)s.OrgType;
 			OrgTypeOther = s.OrgTypeOther;
+			OrgRegCode = s.OrgRegCode;
+			OrgCityId = s.OrgCityId;
 			TownOrCity = s.TownOrCity;
 			AddressLineOne = s.AddressLineOne;
 			AddressLineTwo = s.AddressLineTwo ?? "";
