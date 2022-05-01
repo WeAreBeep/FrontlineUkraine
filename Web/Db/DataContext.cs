@@ -40,7 +40,7 @@ namespace Web.Db
         public virtual DbSet<City> Cities { get; set; }
 
         /// <summary>
-        /// 2,621,114 = (‭938000 + 1011997 + 671117‬) 
+        /// 2,621,114 = (938000 + 1011997 + 671117) 
         /// </summary>
         public DbSet<PostcodeRegion> PostcodesRegions { get; set; }
 
