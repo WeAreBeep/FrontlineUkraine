@@ -130,6 +130,8 @@ resource "azurerm_app_service" "core" {
     POSTTAG_ENDPOINT                = var.posttag_endpoint
     POSTTAG_ID                      = var.posttag_id
     POSTTAG_API_KEY                 = var.posttag_api_key
+    // Authgear
+    AUTHGEAR_ENDPOINT               = var.authgear_endpoint
   }
 
   connection_string {
