@@ -7,6 +7,12 @@
       "commands": [
         "dotnet-ef"
       ]
+    },
+    "dotnet-serve": {
+      "version": "1.10.112",
+      "commands": [
+        "dotnet-serve"
+      ]
     }
   }
 }
