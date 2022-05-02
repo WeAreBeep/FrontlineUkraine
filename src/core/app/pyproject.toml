@@ -28,6 +28,7 @@ geojson-pydantic = "^0.3.1"
 httpx = "0.21.3"
 cashews = {extras = ["redis"], version = "3.3.0"}
 jwcrypto = "^1.0"
+what3words = "3.1.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.931"
