@@ -58,7 +58,7 @@ export default {
     'Адресний рядок 2',
   i_need_form_fieldset_additional_details_field_city_title: 'City',
   i_need_form_fieldset_additional_details_field_postcode_title:
-    'Поштовий індекс',
+    'what3words адреса',
   i_need_form_fieldset_additional_details_field_postcode_description:
     'Буде додано на карту, щоб вказати місцезнаходження ваших запасів',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:

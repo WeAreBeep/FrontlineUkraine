@@ -62,7 +62,7 @@ export default {
   i_need_form_fieldset_additional_details_field_address_line_2_title:
     'Address line 2',
   i_need_form_fieldset_additional_details_field_city_title: 'City',
-  i_need_form_fieldset_additional_details_field_postcode_title: 'Postcode',
+  i_need_form_fieldset_additional_details_field_postcode_title: 'what3words address',
   i_need_form_fieldset_additional_details_field_postcode_description:
     'Will be added to the map to indicate location of your supplies',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
