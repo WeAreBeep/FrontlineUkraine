@@ -6,7 +6,7 @@ export interface IStorageService {
 }
 
 export class LocalStorageService implements IStorageService {
-  private static LOCALE_KEY: string = 'locale';
+  private static LOCALE_KEY: string = 'fl_locale';
 
   private readonly storageImpl: Storage;
 
