@@ -61,7 +61,8 @@ export default {
     'what3words адреса',
   i_need_form_fieldset_additional_details_field_postcode_description:
     'Це сервіс, який ми використовуємо, щоб визначити ваше точне місцезнаходження за допомогою 3 слів. Натисніть «Отримати What3Words», скопіюйте та вставте 3 слова, які ви отримаєте нижче.',
-  i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title: 'Отримайте what3words',
+  i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
+    'Отримайте what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
     'Розкажи нам більше',
   i_need_form_fieldset_additional_details_field_tell_us_more_description:
@@ -130,6 +131,20 @@ export default {
   resourceType_Other_displayName: 'Інше (будь ласка, вкажіть)',
   resourceType_DomesticSanitarySanitaryTowels_displayName: `Гігієнічні прокладки (тампони/прокладки)`,
   resourceType_DomesticSanitaryNappies_displayName: `Підгузки (усіх розмірів)`,
+  resourceType_DomesticSanitaryNappiesSize0_displayName:
+    'Підгузки розміру 0 (1-2,5 кг, 2-5 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize1_displayName:
+    'Підгузки розміру 0 (1-2,5 кг, 2-5 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize2_displayName:
+    'Підгузки розміру 1 (2-5 кг, 5-11 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize3_displayName:
+    'Підгузки розміру 2 (3-6 кг, 7-14 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize4_displayName:
+    'Підгузки розміру 3 (4-9 кг, 8-20 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize5_displayName:
+    'Підгузки розміру 4 (7-18 кг, 15-40 фунтів)',
+  resourceType_DomesticSanitaryNappiesSize6_displayName:
+    'Підгузки розміру 5 (11-25 кг, 24-55 фунтів',
   resourceType_DomesticSanitaryBreastPads_displayName: `Прокладки для грудей (для матерів, які годують немовлят)`,
   resourceType_DomesticSanitaryHairbrushes_displayName: `Щітки для волосся`,
   resourceType_DomesticSanitaryLiquidSoap_displayName: `Рідке мило/шампунь`,
@@ -147,9 +162,13 @@ export default {
   resourceType_DomesticNonPerishableFoodDrinkInstantFood_displayName: `Швидкорозчинна їжа (наприклад: супи в чашці)`,
   resourceType_DomesticNonPerishableFoodDrinkBabyFood_displayName: `Дитяче харчування (наприклад, сухе молоко, пакети з готовими стравами)`,
   resourceType_DomesticNonPerishableFoodDrinkEnergyDrinks_displayName: `Енергетичні напої`,
+  resourceType_DomesticNonPerishableOther_displayName:
+    'Інше (будь ласка, вкажіть)',
   resourceType_DomesticOtherFoilSurvivalBlankets_displayName: `Ковдри для виживання з фольги`,
   resourceType_DomesticOtherThermalClothingNew_displayName: `Термоодяг (новий)`,
   resourceType_DomesticOtherSleepingBags_displayName: `Спальні мішки`,
+  resourceType_DomesticOtherBedHospital_displayName:
+    'Ліжко (використання в лікарні)',
   resourceType_DomesticOtherLargeOrMediumBackpacks_displayName: `Великі/середні рюкзаки`,
   resourceType_DomesticOtherPowerBanksAndChargingCables_displayName: `Повербанки та кабелі для зарядки`,
   resourceType_DomesticOtherTorches_displayName: `Ліхтарі з батарейками/налобні ліхтарі (в герметичних упаковках)`,
@@ -208,5 +227,6 @@ export default {
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows_displayName: `НАБІР, ОРТОХІРУРГІЧНІ ІНСТРУМЕНТИ, ТРАКЦІЯ, + 10 луків`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments_displayName: `НАБІР ДЛЯ ЗОВНІШНЬОЇ ФІКСАЦІЇ, ВЕЛИКИЙ, ФІКСАТОРИ ТА ІНСТРУМЕНТИ`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName: `Інше (будь ласка, вкажіть)`,
-  what3words_modal_title: 'Увімкніть GPS і отримайте 3 слова, які описують ваше точне місцезнаходження. Скопіюйте отримані 3 слова, закрийте це поле та вставте його у форму.'
+  what3words_modal_title:
+    'Увімкніть GPS і отримайте 3 слова, які описують ваше точне місцезнаходження. Скопіюйте отримані 3 слова, закрийте це поле та вставте його у форму.',
 };

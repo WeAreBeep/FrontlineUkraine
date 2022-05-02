@@ -26,8 +26,20 @@ namespace Web.Db
 		// Domestic - Sanitary
 		[EnumText("Sanitary Towels (Tampons/Pads)")]
 		DomesticSanitarySanitaryTowels,
-		[EnumText("Nappies (all sizes)")]
-		DomesticSanitaryNappies,
+		[EnumText("Nappies Size 0 (1-2.5kg, 2-5lbs")]
+		DomesticSanitaryNappiesSize0,
+		[EnumText("Nappies Size 1 (2 -5kg, 5-11lbs")]
+		DomesticSanitaryNappiesSize1,
+		[EnumText("Nappies Size 2 (3-6kg, 7-14lbs")]
+		DomesticSanitaryNappiesSize2,
+		[EnumText("Nappies Size 3 (4-9kg, 8-20lbs")]
+		DomesticSanitaryNappiesSize3,
+		[EnumText("Nappies Size 4 (7-18kg, 15-40lbs")]
+		DomesticSanitaryNappiesSize4,
+		[EnumText("Nappies Size 5 (11-25kg, 24-55lbs")]
+		DomesticSanitaryNappiesSize5,
+		[EnumText("Nappies Size 6 (16kg +, 35lbs +)")]
+		DomesticSanitaryNappiesSize6,
 		[EnumText("Breast pads (for breastfeeding mothers)")]
 		DomesticSanitaryBreastPads,
 		[EnumText("Hairbrushes")]
@@ -63,6 +75,8 @@ namespace Web.Db
 		DomesticNonPerishableFoodDrinkBabyFood,
 		[EnumText("Energy drinks")]
 		DomesticNonPerishableFoodDrinkEnergyDrinks,
+		[EnumText("Other (please specify)")]
+		DomesticNonPerishableOther,
 		// Domestic - Other
 		[EnumText("Foil survival blankets")]
 		DomesticOtherFoilSurvivalBlankets,
@@ -70,6 +84,8 @@ namespace Web.Db
 		DomesticOtherThermalClothingNew,
 		[EnumText("Sleeping bags")]
 		DomesticOtherSleepingBags,
+		[EnumText("Bed (Hospital use)")]
+		DomesticOtherBedHospital,
 		[EnumText("Large/medium-sized backpacks")]
 		DomesticOtherLargeOrMediumBackpacks,
 		[EnumText("Power banks and charging cables")]
@@ -197,6 +213,7 @@ namespace Web.Db
 		{
 			PpeTypes.Other,
 			PpeTypes.DomesticSanitaryOther,
+			PpeTypes.DomesticNonPerishableOther,
 			PpeTypes.DomesticOtherOther,
 			PpeTypes.NonDrugMedicalSuppliesConsumablesOther,
 			PpeTypes.NonDrugMedicalSuppliesMedicalEquipmentOther,
@@ -206,7 +223,13 @@ namespace Web.Db
 		public static readonly ImmutableHashSet<PpeTypes> CategoryDomesticSanitary = new HashSet<PpeTypes>
 		{
 			PpeTypes.DomesticSanitarySanitaryTowels,
-			PpeTypes.DomesticSanitaryNappies,
+			PpeTypes.DomesticSanitaryNappiesSize0,
+			PpeTypes.DomesticSanitaryNappiesSize1,
+			PpeTypes.DomesticSanitaryNappiesSize2,
+			PpeTypes.DomesticSanitaryNappiesSize3,
+			PpeTypes.DomesticSanitaryNappiesSize4,
+			PpeTypes.DomesticSanitaryNappiesSize5,
+			PpeTypes.DomesticSanitaryNappiesSize6,
 			PpeTypes.DomesticSanitaryBreastPads,
 			PpeTypes.DomesticSanitaryHairbrushes,
 			PpeTypes.DomesticSanitaryLiquidSoap,
@@ -228,6 +251,7 @@ namespace Web.Db
 			PpeTypes.DomesticNonPerishableFoodDrinkInstantFood,
 			PpeTypes.DomesticNonPerishableFoodDrinkBabyFood,
 			PpeTypes.DomesticNonPerishableFoodDrinkEnergyDrinks,
+			PpeTypes.DomesticNonPerishableOther,
 		}.ToImmutableHashSet();
 
 		public static readonly ImmutableHashSet<PpeTypes> CategoryDomesticOther = new HashSet<PpeTypes>
@@ -235,6 +259,7 @@ namespace Web.Db
 			PpeTypes.DomesticOtherFoilSurvivalBlankets,
 			PpeTypes.DomesticOtherThermalClothingNew,
 			PpeTypes.DomesticOtherSleepingBags,
+			PpeTypes.DomesticOtherBedHospital,
 			PpeTypes.DomesticOtherLargeOrMediumBackpacks,
 			PpeTypes.DomesticOtherPowerBanksAndChargingCables,
 			PpeTypes.DomesticOtherTorches,

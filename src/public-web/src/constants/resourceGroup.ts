@@ -1,4 +1,197 @@
 import { ResourceGroup } from '../models/resourceGroup';
+import { PPE_TYPES_ORDINAL_MAP, PpeTypeEnum } from '../models/ppeType';
+import { MessageID } from '../locale/type';
+import { ResourceType } from '../models/resourceType';
+
+const ResourceTypeMessageIdMap: { [key in PpeTypeEnum]: MessageID } = {
+  DomesticSanitarySanitaryTowels:
+    'resourceType_DomesticSanitarySanitaryTowels_displayName',
+  DomesticSanitaryNappiesSize0:
+    'resourceType_DomesticSanitaryNappiesSize0_displayName',
+  DomesticSanitaryNappiesSize1:
+    'resourceType_DomesticSanitaryNappiesSize1_displayName',
+  DomesticSanitaryNappiesSize2:
+    'resourceType_DomesticSanitaryNappiesSize2_displayName',
+  DomesticSanitaryNappiesSize3:
+    'resourceType_DomesticSanitaryNappiesSize3_displayName',
+  DomesticSanitaryNappiesSize4:
+    'resourceType_DomesticSanitaryNappiesSize4_displayName',
+  DomesticSanitaryNappiesSize5:
+    'resourceType_DomesticSanitaryNappiesSize5_displayName',
+  DomesticSanitaryNappiesSize6:
+    'resourceType_DomesticSanitaryNappiesSize6_displayName',
+  DomesticSanitaryBreastPads:
+    'resourceType_DomesticSanitaryBreastPads_displayName',
+  DomesticSanitaryHairbrushes:
+    'resourceType_DomesticSanitaryHairbrushes_displayName',
+  DomesticSanitaryLiquidSoap:
+    'resourceType_DomesticSanitaryLiquidSoap_displayName',
+  DomesticSanitaryWetWipes: 'resourceType_DomesticSanitaryWetWipes_displayName',
+  DomesticSanitaryToothbrushes:
+    'resourceType_DomesticSanitaryToothbrushes_displayName',
+  DomesticSanitaryToothpaste:
+    'resourceType_DomesticSanitaryToothpaste_displayName',
+  DomesticSanitaryTowels: 'resourceType_DomesticSanitaryTowels_displayName',
+  DomesticSanitaryToiletPaper:
+    'resourceType_DomesticSanitaryToiletPaper_displayName',
+  DomesticSanitaryPocketTissues:
+    'resourceType_DomesticSanitaryPocketTissues_displayName',
+  DomesticSanitaryShavingGelRazors:
+    'resourceType_DomesticSanitaryShavingGelRazors_displayName',
+  DomesticSanitaryOther: 'resourceType_DomesticSanitaryOther_displayName',
+  DomesticNonPerishableFoodDrinkProteinBars:
+    'resourceType_DomesticNonPerishableFoodDrinkProteinBars_displayName',
+  DomesticNonPerishableFoodDrinkCannedFood:
+    'resourceType_DomesticNonPerishableFoodDrinkCannedFood_displayName',
+  DomesticNonPerishableFoodDrinkDryFood:
+    'resourceType_DomesticNonPerishableFoodDrinkDryFood_displayName',
+  DomesticNonPerishableFoodDrinkInstantFood:
+    'resourceType_DomesticNonPerishableFoodDrinkInstantFood_displayName',
+  DomesticNonPerishableFoodDrinkBabyFood:
+    'resourceType_DomesticNonPerishableFoodDrinkBabyFood_displayName',
+  DomesticNonPerishableFoodDrinkEnergyDrinks:
+    'resourceType_DomesticNonPerishableFoodDrinkEnergyDrinks_displayName',
+  DomesticNonPerishableOther:
+    'resourceType_DomesticNonPerishableOther_displayName',
+  DomesticOtherFoilSurvivalBlankets:
+    'resourceType_DomesticOtherFoilSurvivalBlankets_displayName',
+  DomesticOtherThermalClothingNew:
+    'resourceType_DomesticOtherThermalClothingNew_displayName',
+  DomesticOtherSleepingBags:
+    'resourceType_DomesticOtherSleepingBags_displayName',
+  DomesticOtherBedHospital: 'resourceType_DomesticOtherBedHospital_displayName',
+  DomesticOtherLargeOrMediumBackpacks:
+    'resourceType_DomesticOtherLargeOrMediumBackpacks_displayName',
+  DomesticOtherPowerBanksAndChargingCables:
+    'resourceType_DomesticOtherPowerBanksAndChargingCables_displayName',
+  DomesticOtherTorches: 'resourceType_DomesticOtherTorches_displayName',
+  DomesticOtherElectricityGenerators:
+    'resourceType_DomesticOtherElectricityGenerators_displayName',
+  DomesticOtherBootDriers: 'resourceType_DomesticOtherBootDriers_displayName',
+  DomesticOtherHotWaterBottles:
+    'resourceType_DomesticOtherHotWaterBottles_displayName',
+  DomesticOtherInsulatedFlasks:
+    'resourceType_DomesticOtherInsulatedFlasks_displayName',
+  DomesticOtherDisposableTableware:
+    'resourceType_DomesticOtherDisposableTableware_displayName',
+  DomesticOtherCookingStoves:
+    'resourceType_DomesticOtherCookingStoves_displayName',
+  DomesticOtherBinBags: 'resourceType_DomesticOtherBinBags_displayName',
+  DomesticOtherOther: 'resourceType_DomesticOtherOther_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentECGRecorder:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentECGRecorder_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentDefibrillator:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentDefibrillator_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentSyringePump:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSyringePump_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentInfusionPump:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentInfusionPump_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentCapnometer:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentCapnometer_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentXRayUnit:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentXRayUnit_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentDermatome:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentDermatome_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint_displayName',
+  NonDrugMedicalSuppliesMedicalEquipmentOther:
+    'resourceType_NonDrugMedicalSuppliesMedicalEquipmentOther_displayName',
+  NonDrugMedicalSuppliesConsumablesMedicalTourniquets:
+    'resourceType_NonDrugMedicalSuppliesConsumablesMedicalTourniquets_displayName',
+  NonDrugMedicalSuppliesConsumablesFirstAidKits:
+    'resourceType_NonDrugMedicalSuppliesConsumablesFirstAidKits_displayName',
+  NonDrugMedicalSuppliesConsumablesViralBacteriaFilter:
+    'resourceType_NonDrugMedicalSuppliesConsumablesViralBacteriaFilter_displayName',
+  NonDrugMedicalSuppliesConsumablesCentralVenousCatheters:
+    'resourceType_NonDrugMedicalSuppliesConsumablesCentralVenousCatheters_displayName',
+  NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit:
+    'resourceType_NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit_displayName',
+  NonDrugMedicalSuppliesConsumablesSetInfusionAdult:
+    'resourceType_NonDrugMedicalSuppliesConsumablesSetInfusionAdult_displayName',
+  NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric:
+    'resourceType_NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric_displayName',
+  NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet:
+    'resourceType_NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet_displayName',
+  NonDrugMedicalSuppliesConsumablesInsulinSyringes:
+    'resourceType_NonDrugMedicalSuppliesConsumablesInsulinSyringes_displayName',
+  NonDrugMedicalSuppliesConsumablesSyringePensDiabetics:
+    'resourceType_NonDrugMedicalSuppliesConsumablesSyringePensDiabetics_displayName',
+  NonDrugMedicalSuppliesConsumablesGlucometers:
+    'resourceType_NonDrugMedicalSuppliesConsumablesGlucometers_displayName',
+  NonDrugMedicalSuppliesConsumablesXRayCartridges:
+    'resourceType_NonDrugMedicalSuppliesConsumablesXRayCartridges_displayName',
+  NonDrugMedicalSuppliesConsumablesOther:
+    'resourceType_NonDrugMedicalSuppliesConsumablesOther_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments_displayName',
+  NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther:
+    'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName',
+  TypeIIRSurgicalMasks: 'resourceType_TypeIIRSurgicalMasks_displayName',
+  FFP1RespiratorMasks: 'resourceType_FFP1RespiratorMasks_displayName',
+  FFP2RespiratorMasks: 'resourceType_FFP2RespiratorMasks_displayName',
+  FFP3RespiratorMasks: 'resourceType_FFP3RespiratorMasks_displayName',
+  Gowns: 'resourceType_Gowns_displayName',
+  Aprons: 'resourceType_Aprons_displayName',
+  Gloves: 'resourceType_Gloves_displayName',
+  Scrubs: 'resourceType_Scrubs_displayName',
+  SafetyGlasses: 'resourceType_SafetyGlasses_displayName',
+  FaceVisors: 'resourceType_FaceVisors_displayName',
+  AlcoholHandGel: 'resourceType_AlcoholHandGel_displayName',
+  Other: 'resourceType_Other_displayName',
+};
+
+function toResourceType(type: PpeTypeEnum): ResourceType {
+  return {
+    id: PPE_TYPES_ORDINAL_MAP[type],
+    name: ResourceTypeMessageIdMap[type],
+  };
+}
 
 export const RESOURCE_GROUPS: ResourceGroup[] = [
   {
@@ -10,47 +203,26 @@ export const RESOURCE_GROUPS: ResourceGroup[] = [
         type: 'leaf',
         name: 'resourceCategory_domestic_sanitaryProducts_displayName',
         resourceTypes: [
-          {
-            id: 13,
-            name: 'resourceType_DomesticSanitarySanitaryTowels_displayName',
-          },
-          { id: 14, name: 'resourceType_DomesticSanitaryNappies_displayName' },
-          {
-            id: 15,
-            name: 'resourceType_DomesticSanitaryBreastPads_displayName',
-          },
-          {
-            id: 16,
-            name: 'resourceType_DomesticSanitaryHairbrushes_displayName',
-          },
-          {
-            id: 17,
-            name: 'resourceType_DomesticSanitaryLiquidSoap_displayName',
-          },
-          { id: 18, name: 'resourceType_DomesticSanitaryWetWipes_displayName' },
-          {
-            id: 19,
-            name: 'resourceType_DomesticSanitaryToothbrushes_displayName',
-          },
-          {
-            id: 20,
-            name: 'resourceType_DomesticSanitaryToothpaste_displayName',
-          },
-          { id: 21, name: 'resourceType_DomesticSanitaryTowels_displayName' },
-          {
-            id: 22,
-            name: 'resourceType_DomesticSanitaryToiletPaper_displayName',
-          },
-          {
-            id: 23,
-            name: 'resourceType_DomesticSanitaryPocketTissues_displayName',
-          },
-          {
-            id: 24,
-            name: 'resourceType_DomesticSanitaryShavingGelRazors_displayName',
-          },
-          { id: 25, name: 'resourceType_DomesticSanitaryOther_displayName' },
-        ],
+          PpeTypeEnum.DomesticSanitarySanitaryTowels,
+          PpeTypeEnum.DomesticSanitaryNappiesSize0,
+          PpeTypeEnum.DomesticSanitaryNappiesSize1,
+          PpeTypeEnum.DomesticSanitaryNappiesSize2,
+          PpeTypeEnum.DomesticSanitaryNappiesSize3,
+          PpeTypeEnum.DomesticSanitaryNappiesSize4,
+          PpeTypeEnum.DomesticSanitaryNappiesSize5,
+          PpeTypeEnum.DomesticSanitaryNappiesSize6,
+          PpeTypeEnum.DomesticSanitaryBreastPads,
+          PpeTypeEnum.DomesticSanitaryHairbrushes,
+          PpeTypeEnum.DomesticSanitaryLiquidSoap,
+          PpeTypeEnum.DomesticSanitaryWetWipes,
+          PpeTypeEnum.DomesticSanitaryToothbrushes,
+          PpeTypeEnum.DomesticSanitaryToothpaste,
+          PpeTypeEnum.DomesticSanitaryTowels,
+          PpeTypeEnum.DomesticSanitaryToiletPaper,
+          PpeTypeEnum.DomesticSanitaryPocketTissues,
+          PpeTypeEnum.DomesticSanitaryShavingGelRazors,
+          PpeTypeEnum.DomesticSanitaryOther,
+        ].map(toResourceType),
       },
       {
         id: 4,
@@ -58,82 +230,36 @@ export const RESOURCE_GROUPS: ResourceGroup[] = [
         name: 'resourceCategory_domestic_nonPerishableFood_displayName',
         description: 'resourceCategory_domestic_nonPerishableFood_description',
         resourceTypes: [
-          {
-            id: 26,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkProteinBars_displayName',
-          },
-          {
-            id: 27,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkCannedFood_displayName',
-          },
-          {
-            id: 28,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkDryFood_displayName',
-          },
-          {
-            id: 29,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkInstantFood_displayName',
-          },
-          {
-            id: 30,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkBabyFood_displayName',
-          },
-          {
-            id: 31,
-            name: 'resourceType_DomesticNonPerishableFoodDrinkEnergyDrinks_displayName',
-          },
-        ],
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkProteinBars,
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkCannedFood,
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkDryFood,
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkInstantFood,
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkBabyFood,
+          PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks,
+          PpeTypeEnum.DomesticNonPerishableOther,
+        ].map(toResourceType),
       },
       {
         id: 5,
         type: 'leaf',
         name: 'resourceCategory_domestic_other_displayName',
         resourceTypes: [
-          {
-            id: 32,
-            name: 'resourceType_DomesticOtherFoilSurvivalBlankets_displayName',
-          },
-          {
-            id: 33,
-            name: 'resourceType_DomesticOtherThermalClothingNew_displayName',
-          },
-          {
-            id: 34,
-            name: 'resourceType_DomesticOtherSleepingBags_displayName',
-          },
-          {
-            id: 35,
-            name: 'resourceType_DomesticOtherLargeOrMediumBackpacks_displayName',
-          },
-          {
-            id: 36,
-            name: 'resourceType_DomesticOtherPowerBanksAndChargingCables_displayName',
-          },
-          { id: 37, name: 'resourceType_DomesticOtherTorches_displayName' },
-          {
-            id: 38,
-            name: 'resourceType_DomesticOtherElectricityGenerators_displayName',
-          },
-          { id: 39, name: 'resourceType_DomesticOtherBootDriers_displayName' },
-          {
-            id: 40,
-            name: 'resourceType_DomesticOtherHotWaterBottles_displayName',
-          },
-          {
-            id: 41,
-            name: 'resourceType_DomesticOtherInsulatedFlasks_displayName',
-          },
-          {
-            id: 42,
-            name: 'resourceType_DomesticOtherDisposableTableware_displayName',
-          },
-          {
-            id: 43,
-            name: 'resourceType_DomesticOtherCookingStoves_displayName',
-          },
-          { id: 44, name: 'resourceType_DomesticOtherBinBags_displayName' },
-          { id: 45, name: 'resourceType_DomesticOtherOther_displayName' },
-        ],
+          PpeTypeEnum.DomesticOtherFoilSurvivalBlankets,
+          PpeTypeEnum.DomesticOtherThermalClothingNew,
+          PpeTypeEnum.DomesticOtherSleepingBags,
+          PpeTypeEnum.DomesticOtherBedHospital,
+          PpeTypeEnum.DomesticOtherLargeOrMediumBackpacks,
+          PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables,
+          PpeTypeEnum.DomesticOtherTorches,
+          PpeTypeEnum.DomesticOtherElectricityGenerators,
+          PpeTypeEnum.DomesticOtherBootDriers,
+          PpeTypeEnum.DomesticOtherHotWaterBottles,
+          PpeTypeEnum.DomesticOtherInsulatedFlasks,
+          PpeTypeEnum.DomesticOtherDisposableTableware,
+          PpeTypeEnum.DomesticOtherCookingStoves,
+          PpeTypeEnum.DomesticOtherBinBags,
+          PpeTypeEnum.DomesticOtherOther,
+        ].map(toResourceType),
       },
     ],
     name: 'resourceCategory_domestic_displayName',
@@ -147,228 +273,87 @@ export const RESOURCE_GROUPS: ResourceGroup[] = [
         type: 'leaf',
         name: 'resourceCategory_nonDrugMedicalSupplies_medicalEquipment_displayName',
         resourceTypes: [
-          {
-            id: 46,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor_displayName',
-          },
-          {
-            id: 47,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine_displayName',
-          },
-          {
-            id: 48,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentECGRecorder_displayName',
-          },
-          {
-            id: 49,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentDefibrillator_displayName',
-          },
-          {
-            id: 50,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSyringePump_displayName',
-          },
-          {
-            id: 51,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentInfusionPump_displayName',
-          },
-          {
-            id: 52,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed_displayName',
-          },
-          {
-            id: 53,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump_displayName',
-          },
-          {
-            id: 54,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator_displayName',
-          },
-          {
-            id: 55,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner_displayName',
-          },
-          {
-            id: 56,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet_displayName',
-          },
-          {
-            id: 57,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentCapnometer_displayName',
-          },
-          {
-            id: 58,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentXRayUnit_displayName',
-          },
-          {
-            id: 59,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill_displayName',
-          },
-          {
-            id: 60,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentDermatome_displayName',
-          },
-          {
-            id: 61,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint_displayName',
-          },
-          {
-            id: 62,
-            name: 'resourceType_NonDrugMedicalSuppliesMedicalEquipmentOther_displayName',
-          },
-        ],
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSyringePump,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentCapnometer,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDermatome,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint,
+          PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther,
+        ].map(toResourceType),
       },
       {
         id: 7,
         type: 'leaf',
         name: 'resourceCategory_nonDrugMedicalSupplies_consumables_displayName',
         resourceTypes: [
-          {
-            id: 63,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesMedicalTourniquets_displayName',
-          },
-          {
-            id: 64,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesFirstAidKits_displayName',
-          },
-          {
-            id: 65,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesViralBacteriaFilter_displayName',
-          },
-          {
-            id: 66,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesCentralVenousCatheters_displayName',
-          },
-          {
-            id: 67,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit_displayName',
-          },
-          {
-            id: 68,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesSetInfusionAdult_displayName',
-          },
-          {
-            id: 69,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric_displayName',
-          },
-          {
-            id: 70,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet_displayName',
-          },
-          {
-            id: 71,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesInsulinSyringes_displayName',
-          },
-          {
-            id: 72,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesSyringePensDiabetics_displayName',
-          },
-          {
-            id: 73,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesGlucometers_displayName',
-          },
-          {
-            id: 74,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesXRayCartridges_displayName',
-          },
-          {
-            id: 75,
-            name: 'resourceType_NonDrugMedicalSuppliesConsumablesOther_displayName',
-          },
-        ],
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesMedicalTourniquets,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesFirstAidKits,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionAdult,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesInsulinSyringes,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesGlucometers,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesXRayCartridges,
+          PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther,
+        ].map(toResourceType),
       },
       {
         id: 8,
         type: 'leaf',
         name: 'resourceCategory_nonDrugMedicalSupplies_surgicalInstrumentsAndFixators_displayName',
         resourceTypes: [
-          {
-            id: 76,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery_displayName',
-          },
-          {
-            id: 77,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing_displayName',
-          },
-          {
-            id: 78,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy_displayName',
-          },
-          {
-            id: 79,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean_displayName',
-          },
-          {
-            id: 80,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture_displayName',
-          },
-          {
-            id: 81,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement_displayName',
-          },
-          {
-            id: 82,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft_displayName',
-          },
-          {
-            id: 83,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics_displayName',
-          },
-          {
-            id: 84,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary_displayName',
-          },
-          {
-            id: 85,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation_displayName',
-          },
-          {
-            id: 86,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery_displayName',
-          },
-          {
-            id: 87,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes_displayName',
-          },
-          {
-            id: 88,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner_displayName',
-          },
-          {
-            id: 89,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval_displayName',
-          },
-          {
-            id: 90,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows_displayName',
-          },
-          {
-            id: 91,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments_displayName',
-          },
-          {
-            id: 92,
-            name: 'resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName',
-          },
-        ],
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDressing,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsCraniotomy,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsLaparotomyAndCaesarean,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDPCSuture,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsDebridement,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsSkinGraft,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsFinePaediatrics,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsThoracotomyComplementary,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsAmputation,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgery,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBasicBoneSurgeryCurettes,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsBoneWiringAndKirshner,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsPlasterCastsRemoval,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments,
+          PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther,
+        ].map(toResourceType),
       },
       {
         id: 9,
         type: 'leaf',
         name: 'resourceCategory_nonDrugMedicalSupplies_ppe_displayName',
         resourceTypes: [
-          { id: 1, name: 'resourceType_TypeIIRSurgicalMasks_displayName' },
-          { id: 2, name: 'resourceType_FFP1RespiratorMasks_displayName' },
-          { id: 3, name: 'resourceType_FFP2RespiratorMasks_displayName' },
-          { id: 4, name: 'resourceType_FFP3RespiratorMasks_displayName' },
-          { id: 5, name: 'resourceType_Gowns_displayName' },
-          { id: 6, name: 'resourceType_Aprons_displayName' },
-          { id: 7, name: 'resourceType_Gloves_displayName' },
-          { id: 8, name: 'resourceType_Scrubs_displayName' },
-          { id: 9, name: 'resourceType_SafetyGlasses_displayName' },
-          { id: 10, name: 'resourceType_FaceVisors_displayName' },
-          { id: 11, name: 'resourceType_AlcoholHandGel_displayName' },
-          { id: 12, name: 'resourceType_Other_displayName' },
-        ],
+          PpeTypeEnum.TypeIIRSurgicalMasks,
+          PpeTypeEnum.FFP1RespiratorMasks,
+          PpeTypeEnum.FFP2RespiratorMasks,
+          PpeTypeEnum.FFP3RespiratorMasks,
+          PpeTypeEnum.Gowns,
+          PpeTypeEnum.Aprons,
+          PpeTypeEnum.Gloves,
+          PpeTypeEnum.Scrubs,
+          PpeTypeEnum.SafetyGlasses,
+          PpeTypeEnum.FaceVisors,
+          PpeTypeEnum.AlcoholHandGel,
+          PpeTypeEnum.Other,
+        ].map(toResourceType),
       },
     ],
     name: 'resourceCategory_nonDrugMedicalSupplies_displayName',

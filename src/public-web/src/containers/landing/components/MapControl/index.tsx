@@ -23,6 +23,8 @@ import { Nullable } from '../../../../utils/nullable';
 
 type BreakdownCountMap = Record<PpeTypeEnum, number>;
 const defaultBreakdownCount: BreakdownCountMap = {
+  [PpeTypeEnum.DomesticNonPerishableOther]: 0,
+  [PpeTypeEnum.DomesticOtherBedHospital]: 0,
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkBabyFood]: 0,
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkCannedFood]: 0,
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkDryFood]: 0,
@@ -46,7 +48,13 @@ const defaultBreakdownCount: BreakdownCountMap = {
   [PpeTypeEnum.DomesticSanitaryBreastPads]: 0,
   [PpeTypeEnum.DomesticSanitaryHairbrushes]: 0,
   [PpeTypeEnum.DomesticSanitaryLiquidSoap]: 0,
-  [PpeTypeEnum.DomesticSanitaryNappies]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize0]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize1]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize2]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize3]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize4]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize5]: 0,
+  [PpeTypeEnum.DomesticSanitaryNappiesSize6]: 0,
   [PpeTypeEnum.DomesticSanitaryOther]: 0,
   [PpeTypeEnum.DomesticSanitaryPocketTissues]: 0,
   [PpeTypeEnum.DomesticSanitarySanitaryTowels]: 0,

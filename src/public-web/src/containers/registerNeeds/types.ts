@@ -68,7 +68,13 @@ export const defaultRegisterRequestForm: DefaultValues<RegisterRequestForm> = {
     [PpeTypeEnum.AlcoholHandGel]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.Other]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticSanitarySanitaryTowels]: defaultPpeRequestTypeSubForm,
-    [PpeTypeEnum.DomesticSanitaryNappies]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize0]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize1]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize2]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize3]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize4]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize5]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticSanitaryNappiesSize6]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticSanitaryBreastPads]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticSanitaryHairbrushes]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticSanitaryLiquidSoap]: defaultPpeRequestTypeSubForm,
@@ -93,10 +99,12 @@ export const defaultRegisterRequestForm: DefaultValues<RegisterRequestForm> = {
       defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks]:
       defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticNonPerishableOther]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticOtherFoilSurvivalBlankets]:
       defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticOtherThermalClothingNew]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticOtherSleepingBags]: defaultPpeRequestTypeSubForm,
+    [PpeTypeEnum.DomesticOtherBedHospital]: defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticOtherLargeOrMediumBackpacks]:
       defaultPpeRequestTypeSubForm,
     [PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables]:
