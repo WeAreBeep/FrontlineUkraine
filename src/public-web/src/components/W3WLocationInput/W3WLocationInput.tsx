@@ -42,7 +42,11 @@ export const W3WLocationInput: React.ForwardRefExoticComponent<TextInputProps> =
                 </MediaQuery>
 
                 <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
-                  <Button className={classes.getW3wButton} size={props.size} onClick={openDialog}>
+                  <Button
+                    className={classes.getW3wButton}
+                    size={props.size}
+                    onClick={openDialog}
+                  >
                     <FormattedMessage id="i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title" />
                   </Button>
                 </MediaQuery>

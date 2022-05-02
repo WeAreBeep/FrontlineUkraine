@@ -7,8 +7,11 @@ export function getThemePrimaryColor(
   return theme.colors[theme.primaryColor][position];
 }
 
-export function mediaMinWidthConstraint(theme: MantineTheme, breakpoint: MantineSize): string {
-  return `(min-width: ${theme.breakpoints[breakpoint]}px)`
+export function mediaMinWidthConstraint(
+  theme: MantineTheme,
+  breakpoint: MantineSize
+): string {
+  return `(min-width: ${theme.breakpoints[breakpoint]}px)`;
 }
 
 export function mediaScreenMin(

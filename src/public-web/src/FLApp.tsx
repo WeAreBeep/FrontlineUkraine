@@ -45,26 +45,28 @@ const AuthgearRedirect: React.FC = () => {
 const Content: React.FC = () => {
   const { locale } = useLocale();
   const Match = useRoutes([
-    { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds/> },
+    { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
     {
       path: RouteType.RegisterSupply,
-      element: <Containers.RegisterSupplies/>,
+      element: <Containers.RegisterSupplies />,
     },
-    { path: RouteType.About, element: <Containers.About/> },
-    { path: RouteType.Suppliers, element: <Containers.Suppliers/> },
-    { path: RouteType.Partners, element: <Containers.Partners/> },
-    { path: RouteType.ContactUs, element: <Containers.ContactUs/> },
+    { path: RouteType.About, element: <Containers.About /> },
+    { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
+    { path: RouteType.Partners, element: <Containers.Partners /> },
+    { path: RouteType.ContactUs, element: <Containers.ContactUs /> },
     {
       path: RouteType.TermsAndConditions,
-      element: <Containers.TermsAndConditions/>,
+      element: <Containers.TermsAndConditions />,
     },
-    { path: RouteType.Landing, element: <Containers.Landing/> },
-    { path: '/authgear', element: <AuthgearRedirect/> },
+    { path: RouteType.Landing, element: <Containers.Landing /> },
+    { path: '/authgear', element: <AuthgearRedirect /> },
   ]);
-  return <ContentfulProvider locale={locale} client={contentfulClient}>
-    <FLAppShell>{Match}</FLAppShell>
-  </ContentfulProvider>
-}
+  return (
+    <ContentfulProvider locale={locale} client={contentfulClient}>
+      <FLAppShell>{Match}</FLAppShell>
+    </ContentfulProvider>
+  );
+};
 
 const InnerFLApp: React.FC = () => {
   return (

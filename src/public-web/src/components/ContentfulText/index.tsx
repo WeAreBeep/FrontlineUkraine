@@ -31,7 +31,7 @@ function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
 }
 
 export const ContentfulText: React.FC<Props> = ({ contentType, inverted }) => {
-  const {locale} = useLocale()
+  const { locale } = useLocale();
   const { classes } = useStyles();
   const { data } = useContentful({
     contentType,

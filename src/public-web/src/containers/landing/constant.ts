@@ -74,7 +74,13 @@ export const PPE_TYPE_COLOR: Record<PpeTypeEnum, string> = {
   [PpeTypeEnum.DomesticSanitaryBreastPads]: '#FFDA00',
   [PpeTypeEnum.DomesticSanitaryHairbrushes]: '#FFDA00',
   [PpeTypeEnum.DomesticSanitaryLiquidSoap]: '#FFDA00',
-  [PpeTypeEnum.DomesticSanitaryNappies]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize0]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize1]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize2]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize3]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize4]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize5]: '#FFDA00',
+  [PpeTypeEnum.DomesticSanitaryNappiesSize6]: '#FFDA00',
   [PpeTypeEnum.DomesticSanitaryOther]: '#FFDA00',
   [PpeTypeEnum.DomesticSanitaryPocketTissues]: '#FFDA00',
   [PpeTypeEnum.DomesticSanitarySanitaryTowels]: '#FFDA00',
@@ -91,6 +97,7 @@ export const PPE_TYPE_COLOR: Record<PpeTypeEnum, string> = {
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkEnergyDrinks]: '#FFDA00',
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkInstantFood]: '#FFDA00',
   [PpeTypeEnum.DomesticNonPerishableFoodDrinkProteinBars]: '#FFDA00',
+  [PpeTypeEnum.DomesticNonPerishableOther]: '#FFDA00',
   // Domestic - Other basic/ shelter
   [PpeTypeEnum.DomesticOtherBinBags]: '#FFDA00',
   [PpeTypeEnum.DomesticOtherBootDriers]: '#FFDA00',
@@ -104,44 +111,56 @@ export const PPE_TYPE_COLOR: Record<PpeTypeEnum, string> = {
   [PpeTypeEnum.DomesticOtherOther]: '#FFDA00',
   [PpeTypeEnum.DomesticOtherPowerBanksAndChargingCables]: '#FFDA00',
   [PpeTypeEnum.DomesticOtherSleepingBags]: '#FFDA00',
+  [PpeTypeEnum.DomesticOtherBedHospital]: '#FFDA00',
   [PpeTypeEnum.DomesticOtherThermalClothingNew]: '#FFDA00',
   [PpeTypeEnum.DomesticOtherTorches]: '#FFDA00',
   // (Non-drug) Medical Supplies - Medical equipments
-  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentAnaesthesiaMachine]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentCapnometer]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDefibrillator]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentDermatome]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentECGRecorder]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentExaminationLightLed]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentFootOperatedSuctionPump]:
     '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentInfusionPump]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentLegTractionSplint]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentMobileUltrasoundScanner]:
     '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentOther]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientMonitor]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentPatientVentilator]:
+    '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSelfInflatingBagSet]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSurgicalDrill]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentSyringePump]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesMedicalEquipmentXRayUnit]: '#FFDA00',
   // (Non-drug) Medical Supplies - Consumables
-  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesCentralVenousCatheters]:
+    '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesDrainThoracicInsertionSet]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesFirstAidKits]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesGlucometers]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesInsulinSyringes]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesMedicalTourniquets]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesOther]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionAdult]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit]: '#FFDA00',
-  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetInfusionPaediatric]:
+    '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSetIntraosseousInfusionKit]:
+    '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesSyringePensDiabetics]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesViralBacteriaFilter]: '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesConsumablesXRayCartridges]: '#FFDA00',
   // (Non-drug) Medical Supplies - Surgical instruments and fixators
-  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther]: '#FFDA00',
+  [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther]:
+    '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments]:
     '#FFDA00',
   [PpeTypeEnum.NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetGeneralSurgeryInstrumentsBasicSurgery]:

@@ -62,10 +62,12 @@ export default {
   i_need_form_fieldset_additional_details_field_address_line_2_title:
     'Address line 2',
   i_need_form_fieldset_additional_details_field_city_title: 'City',
-  i_need_form_fieldset_additional_details_field_postcode_title: 'what3words address',
+  i_need_form_fieldset_additional_details_field_postcode_title:
+    'what3words address',
   i_need_form_fieldset_additional_details_field_postcode_description:
     'It is a service we use to identify your exact location with 3 words. Click "Get What3Words" and copy and paste the 3 words you get below.',
-  i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title: 'Get what3words',
+  i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
+    'Get what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
     'Tell Us More',
   i_need_form_fieldset_additional_details_field_tell_us_more_description:
@@ -127,7 +129,20 @@ export default {
   resourceType_Other_displayName: 'Other (please specify)',
   resourceType_DomesticSanitarySanitaryTowels_displayName:
     'Sanitary Towels (Tampons/Pads)',
-  resourceType_DomesticSanitaryNappies_displayName: 'Nappies (all sizes)',
+  resourceType_DomesticSanitaryNappiesSize0_displayName:
+    'Nappies Size 0 (1-2.5kg, 2-5lbs)',
+  resourceType_DomesticSanitaryNappiesSize1_displayName:
+    'Nappies Size 1 (2 -5kg, 5-11lbs)',
+  resourceType_DomesticSanitaryNappiesSize2_displayName:
+    'Nappies Size 2 (3-6kg, 7-14lbs)',
+  resourceType_DomesticSanitaryNappiesSize3_displayName:
+    'Nappies Size 3 (4-9kg, 8-20lbs)',
+  resourceType_DomesticSanitaryNappiesSize4_displayName:
+    'Nappies Size 4 (7-18kg, 15-40lbs)',
+  resourceType_DomesticSanitaryNappiesSize5_displayName:
+    'Nappies Size 5 (11-25kg, 24-55lbs)',
+  resourceType_DomesticSanitaryNappiesSize6_displayName:
+    'Nappies Size 6 (16kg +, 35lbs +)',
   resourceType_DomesticSanitaryBreastPads_displayName:
     'Breast pads (for breastfeeding mothers)',
   resourceType_DomesticSanitaryHairbrushes_displayName: 'Hairbrushes',
@@ -150,6 +165,7 @@ export default {
     'Dry food (i.e.: rice, pasta, nuts, dried fruit) / Fast cooking grains (couscous)',
   resourceType_DomesticNonPerishableFoodDrinkInstantFood_displayName:
     'Instant food (i.e.: Cup-a-soups)',
+  resourceType_DomesticNonPerishableOther_displayName: 'Other (please specify)',
   resourceType_DomesticNonPerishableFoodDrinkBabyFood_displayName:
     'Baby food (i.e.: powdered milk, ready-meal pouches)',
   resourceType_DomesticNonPerishableFoodDrinkEnergyDrinks_displayName:
@@ -159,6 +175,7 @@ export default {
   resourceType_DomesticOtherThermalClothingNew_displayName:
     'Thermal clothing (new)',
   resourceType_DomesticOtherSleepingBags_displayName: 'Sleeping bags',
+  resourceType_DomesticOtherBedHospital_displayName: 'Bed (Hospital use)',
   resourceType_DomesticOtherLargeOrMediumBackpacks_displayName:
     'Large/medium-sized backpacks',
   resourceType_DomesticOtherPowerBanksAndChargingCables_displayName:
@@ -270,5 +287,6 @@ export default {
     'SET, EXTERNAL FIXATION, LARGE, FIXATORS & INSTRUMENTS',
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName:
     'OTHER (please specify)',
-  what3words_modal_title: 'Turn on your GPS and get the 3 words that describe your exact location. Copy the 3 words you get, close this box, and paste it into the form.'
+  what3words_modal_title:
+    'Turn on your GPS and get the 3 words that describe your exact location. Copy the 3 words you get, close this box, and paste it into the form.',
 };
