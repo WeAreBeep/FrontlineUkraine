@@ -41,7 +41,7 @@ resource "azurerm_app_service" "web" {
   connection_string {
     name  = "DataContext"
     type  = "Custom"
-    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login};Password=${var.sql_admin_password};SearchPath=${local.pgsql_schema},public;SSL Mode=Require;"
+    value = "Host=${azurerm_postgresql_flexible_server.pgsql_svr.fqdn};Database=${azurerm_postgresql_flexible_server_database.pgsql_db.name};Port=5432;Username=${var.sql_admin_login};Password=${var.sql_admin_password};SearchPath=${local.pgsql_schema},public;SSL Mode=VerifyCA;"
   }
 
   connection_string {
