@@ -1,9 +1,11 @@
 import { Modal, ModalProps } from '@mantine/core';
 import React, { useRef } from 'react';
+import { useLocale } from '../../locale/LocaleProvider';
 
 export function W3WModal(
   props: Omit<ModalProps, 'styles'>
 ): ReturnType<React.FC> {
+  const { renderToString } = useLocale();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   return (
     <Modal
@@ -11,7 +13,7 @@ export function W3WModal(
       styles={{ body: { minHeight: '60vh', position: 'relative' } }}
       title={
         props.title ??
-        'Turn on your GPS and get the 3 words that describe your exact location'
+        renderToString('what3words_modal_title')
       }
     >
       <iframe
