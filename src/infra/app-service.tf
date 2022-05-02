@@ -132,6 +132,8 @@ resource "azurerm_app_service" "core" {
     POSTTAG_API_KEY                 = var.posttag_api_key
     // Authgear
     AUTHGEAR_ENDPOINT               = var.authgear_endpoint
+    // What3words
+    WHAT3WORDS_API_KEY              = var.what3words_api_key
   }
 
   connection_string {

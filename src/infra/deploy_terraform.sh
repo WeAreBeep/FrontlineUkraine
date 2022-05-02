@@ -23,7 +23,8 @@ echo "{
     \"PosttagEndpoint\": \"$POSTTAG_ENDPOINT\",
     \"PosttagId\": \"$POSTTAG_ID\",
     \"PosttagApiKey\": \"$POSTTAG_API_KEY\",
-    \"WebsiteCanonicalUrl\": \"$WEBSITE_CANONICAL_URL\"
+    \"WebsiteCanonicalUrl\": \"$WEBSITE_CANONICAL_URL\",
+    \"What3wordsApiKey\": \"$WHAT3WORDS_API_KEY\"
 }" > ./app-settings.json
 
 echo "Initializing Terraform..."
@@ -58,7 +59,8 @@ terraform plan \
     -var "posttag_id=$POSTTAG_ID" \
     -var "posttag_api_key=$POSTTAG_API_KEY" \
     -var "authgear_client_id=$AUTHGEAR_CLIENT_ID" \
-    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT"
+    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT" \
+    -var "what3words_api_key=$WHAT3WORDS_API_KEY"
 
 echo "Applying Terraform Deployment..."
 
@@ -84,4 +86,5 @@ terraform apply -auto-approve \
     -var "posttag_id=$POSTTAG_ID" \
     -var "posttag_api_key=$POSTTAG_API_KEY" \
     -var "authgear_client_id=$AUTHGEAR_CLIENT_ID" \
-    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT"
+    -var "authgear_endpoint=$AUTHGEAR_ENDPOINT" \
+    -var "what3words_api_key=$WHAT3WORDS_API_KEY"

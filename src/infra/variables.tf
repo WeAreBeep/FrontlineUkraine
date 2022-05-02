@@ -116,3 +116,7 @@ variable "authgear_client_id" {
 variable "authgear_endpoint" {
   type = string
 }
+
+variable "what3words_api_key" {
+  type = string
+}

@@ -37,6 +37,8 @@ env:
   AUTHGEAR_CLIENT_ID: "${{ secrets.AUTHGEAR_CLIENT_ID }}"
   AUTHGEAR_ENDPOINT: "${{ secrets.AUTHGEAR_ENDPOINT }}"
 
+  WHAT3WORDS_API_KEY: "${{ secrets.WHAT3WORDS_API_KEY }}"
+
 jobs:  
   build:
     runs-on: ubuntu-latest
