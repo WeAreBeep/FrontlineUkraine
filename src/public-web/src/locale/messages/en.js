@@ -65,6 +65,7 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_title: 'what3words address',
   i_need_form_fieldset_additional_details_field_postcode_description:
     'Will be added to the map to indicate location of your supplies',
+  i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title: 'Get what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
     'Tell Us More',
   i_need_form_fieldset_additional_details_field_tell_us_more_description:

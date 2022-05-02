@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   ActionIcon,
   Button,
@@ -10,18 +10,19 @@ import {
 import { W3WModal } from './W3WModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMediaQuery } from '@mantine/hooks';
-import { tablet } from '../../utils/mantine';
+import { tabletConstraint } from '../../utils/mantine';
+import { FormattedMessage } from '../../locale/FormattedMessage';
+import { useStyles } from './style';
 
 export const W3WLocationInput: React.ForwardRefExoticComponent<TextInputProps> =
   React.forwardRef<HTMLInputElement, TextInputProps>(
     (props: TextInputProps, ref) => {
+      const { classes } = useStyles();
       const theme = useMantineTheme();
       const [opened, setOpened] = useState(false);
-      const isTablet = useMediaQuery(tablet(theme));
+      const isTablet = useMediaQuery(tabletConstraint(theme));
       const openDialog = useCallback(() => setOpened(true), []);
       const closeDialog = useCallback(() => setOpened(false), []);
-      const iconBtnRef = useRef<HTMLButtonElement>(null);
-      const btnRef = useRef<HTMLButtonElement>(null);
 
       return (
         <>
@@ -32,7 +33,7 @@ export const W3WLocationInput: React.ForwardRefExoticComponent<TextInputProps> =
               <>
                 <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                   <ActionIcon
-                    ref={iconBtnRef}
+                    className={classes.getW3wButton}
                     size={props.size}
                     onClick={openDialog}
                   >
@@ -41,17 +42,13 @@ export const W3WLocationInput: React.ForwardRefExoticComponent<TextInputProps> =
                 </MediaQuery>
 
                 <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
-                  <Button ref={btnRef} size={props.size} onClick={openDialog}>
-                    Get What3Words
+                  <Button className={classes.getW3wButton} size={props.size} onClick={openDialog}>
+                    <FormattedMessage id="i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title" />
                   </Button>
                 </MediaQuery>
               </>
             }
-            rightSectionWidth={
-              isTablet
-                ? btnRef.current?.clientWidth
-                : iconBtnRef.current?.clientWidth
-            }
+            rightSectionWidth={isTablet ? 205 : 31}
           />
           <W3WModal size="full" opened={opened} onClose={closeDialog} />
         </>
