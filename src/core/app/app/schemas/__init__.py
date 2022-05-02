@@ -1,5 +1,6 @@
 from .address import AddressEntry, SearchAddressResponse
 from .base import BaseModel
+from .coordinates import Coordinates
 from .item import Item, ItemCreate, ItemInDB, ItemUpdate
 from .msg import Msg
 from .need import NeedCreate, PublicNeed, PublicNeedPpeType

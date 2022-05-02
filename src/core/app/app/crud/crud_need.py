@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Set
+from typing import List, Set, Optional
 
 from pydantic import BaseModel
 from sqlalchemy import BigInteger, SmallInteger
@@ -10,7 +10,7 @@ from app.crud.base import CRUDBase
 from app.models.need import Need
 from app.models.need_ppe_type import NeedPpeType
 from app.models.post_status import PostStatus
-from app.schemas import NeedCreate
+from app.schemas import NeedCreate, Coordinates
 
 
 def to_model(create_model: NeedCreate) -> Need:
@@ -66,9 +66,16 @@ class CRUDNeed(CRUDBase[Need, NeedCreate, BaseModel]):
                 .all()
         )
 
-    def create_from_request(self, db: Session, *, request: NeedCreate) -> Need:
-        supplier_model = to_model(request)
-        return self.create(db, supplier_model)
+    def create_from_request(self,
+                            db: Session,
+                            *,
+                            request: NeedCreate,
+                            converted_coordinates: Optional[Coordinates]) -> Need:
+        need_model = to_model(request)
+        if converted_coordinates is not None:
+            need_model.latitude = converted_coordinates.lat
+            need_model.longitude = converted_coordinates.lng
+        return self.create(db, need_model)
 
     def get_city_meta(self,
                       db: Session,

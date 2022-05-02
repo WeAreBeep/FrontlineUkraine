@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
+from what3words import what3words
 
 from app import crud, models, schemas
 from app.core import security
@@ -76,3 +77,7 @@ def get_authgear_user_id(request: Request) -> str:
             headers={"WWW-Authenticate": "Bearer"},
         )
     return request.state.user_id
+
+
+def get_what3words_geocoder() -> what3words.Geocoder:
+    return what3words.Geocoder(api_key=settings.WHAT3WORDS_API_KEY)
