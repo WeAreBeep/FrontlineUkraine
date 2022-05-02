@@ -5,7 +5,7 @@ import {
   PpeStatus,
 } from '../../../../models/ppeStatus';
 import { PpeTypeEnumLabel } from '../PpeTypeEnumLabel';
-import { getPpeTypeEnumFromInt, PpeTypeEnum } from '../../../../models/ppeType';
+import { getPpeTypeEnumFromInt, isResourceTypeOther } from '../../../../models/ppeType';
 import { CategoryEnum } from '../../type';
 import { useStyles } from './style';
 
@@ -47,22 +47,14 @@ export const MapNeedPopup: React.FC<Props> = ({
         };
     }
   }, [variant]);
-  const otherTypePpeType = useMemo(() => {
-    const otherTypePpeType = need.ppeTypes.find(
-      ({ ppeType }) => PpeTypeEnum.Other === getPpeTypeEnumFromInt(ppeType)
+  const otherTypePpeTypes = useMemo(() => {
+    return need.ppeTypes.filter(
+      ({ ppeType, status, ppeTypeOther }) => {
+        const typeEnum = getPpeTypeEnumFromInt(ppeType);
+        const statusEnum = getPpeStatusEnumFromInt(status)
+        return typeEnum && statusEnum && isResourceTypeOther(typeEnum) && allowStatusesSet.has(statusEnum) && ppeTypeOther
+      }
     );
-    if (otherTypePpeType == null) {
-      return null;
-    }
-    const status = getPpeStatusEnumFromInt(otherTypePpeType.status);
-    if (
-      status == null ||
-      !allowStatusesSet.has(status) ||
-      otherTypePpeType.ppeTypeOther == null
-    ) {
-      return null;
-    }
-    return otherTypePpeType;
   }, [allowStatusesSet, need.ppeTypes]);
   const { datetime } = useMemo(
     () => ({
@@ -79,7 +71,7 @@ export const MapNeedPopup: React.FC<Props> = ({
     >
       <h1>{title}</h1>
       <dl>
-        <dt>Postcode:</dt>
+        <dt>what3words address:</dt>
         <dd>{need.postcode}</dd>
         <dt>Organisation:</dt>
         <dd>{need.organisation}</dd>
@@ -101,10 +93,12 @@ export const MapNeedPopup: React.FC<Props> = ({
               ))}
           </ul>
         </dd>
-        {otherTypePpeType && (
+        {otherTypePpeTypes.length > 0 && (
           <>
             <dt>{otherPpeTitle}</dt>
-            <dd>{otherTypePpeType.ppeTypeOther}</dd>
+            {otherTypePpeTypes.map(({ppeTypeOther,ppeType}) => <dd key={`ppe_type_other_${ppeType}`}>
+              {ppeTypeOther}
+            </dd>)}
           </>
         )}
       </dl>
