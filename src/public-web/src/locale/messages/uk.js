@@ -60,7 +60,7 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_title:
     'what3words адреса',
   i_need_form_fieldset_additional_details_field_postcode_description:
-    'Буде додано на карту, щоб вказати місцезнаходження ваших запасів',
+    'Це сервіс, який ми використовуємо, щоб визначити ваше точне місцезнаходження за допомогою 3 слів. Натисніть «Отримати What3Words», скопіюйте та вставте 3 слова, які ви отримаєте нижче.',
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title: 'Отримайте what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
     'Розкажи нам більше',
@@ -208,4 +208,5 @@ export default {
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetOrthoSurgeryInstrumentsTractionPlusTenBows_displayName: `НАБІР, ОРТОХІРУРГІЧНІ ІНСТРУМЕНТИ, ТРАКЦІЯ, + 10 луків`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsSetExternalFixationLargeFixatorsAndInstruments_displayName: `НАБІР ДЛЯ ЗОВНІШНЬОЇ ФІКСАЦІЇ, ВЕЛИКИЙ, ФІКСАТОРИ ТА ІНСТРУМЕНТИ`,
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName: `Інше (будь ласка, вкажіть)`,
+  what3words_modal_title: 'Увімкніть GPS і отримайте 3 слова, які описують ваше точне місцезнаходження. Скопіюйте отримані 3 слова, закрийте це поле та вставте його у форму.'
 };

@@ -64,7 +64,7 @@ export default {
   i_need_form_fieldset_additional_details_field_city_title: 'City',
   i_need_form_fieldset_additional_details_field_postcode_title: 'what3words address',
   i_need_form_fieldset_additional_details_field_postcode_description:
-    'Will be added to the map to indicate location of your supplies',
+    'It is a service we use to identify your exact location with 3 words. Click "Get What3Words" and copy and paste the 3 words you get below.',
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title: 'Get what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
     'Tell Us More',
@@ -270,4 +270,5 @@ export default {
     'SET, EXTERNAL FIXATION, LARGE, FIXATORS & INSTRUMENTS',
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName:
     'OTHER (please specify)',
+  what3words_modal_title: 'Turn on your GPS and get the 3 words that describe your exact location. Copy the 3 words you get, close this box, and paste it into the form.'
 };

@@ -102,7 +102,7 @@ namespace Web.Models
 
 		[Display(Name = "what3words address", Description = "Will be added to the map to locate your Needs"),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
-		RegularExpression("^(/{3})?[\\p{L}|\\w]+\\.[\\p{L}|\\w]+\\.[\\p{L}|\\w]+$", ErrorMessage = "{0} should have 3 words connected with fullstops(.)")]
+		RegularExpression("^(/{3})?.+\\..+\\..+$", ErrorMessage = "{0} should have 3 words connected with fullstops(.)")]
 		public string Postcode { get; set; }
 
 		[Display(Name = "Job Title", Description = "This will not be published on the site. It will be used for anonymous data reporting."),

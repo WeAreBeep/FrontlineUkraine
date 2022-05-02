@@ -401,6 +401,20 @@ export const RegisterNeeds: React.FC = () => {
                   'i_need_form_fieldset_additional_details_title'
                 )}
               </legend>
+              <W3WLocationInput
+                {...register('postcode', {
+                  required: { value: true, message: VALIDATION_MSG.required },
+                })}
+                error={errors.postcode?.message}
+                className={classes.inputWrapper}
+                label={renderToString(
+                  'i_need_form_fieldset_additional_details_field_postcode_title'
+                )}
+                description={renderToString(
+                  'i_need_form_fieldset_additional_details_field_postcode_description'
+                )}
+                required={true}
+              />
               <TextInput
                 {...register('addressLineOne', {
                   required: { value: true, message: VALIDATION_MSG.required },
@@ -448,20 +462,6 @@ export const RegisterNeeds: React.FC = () => {
                     />
                   );
                 }}
-              />
-              <W3WLocationInput
-                {...register('postcode', {
-                  required: { value: true, message: VALIDATION_MSG.required },
-                })}
-                error={errors.postcode?.message}
-                className={classes.inputWrapper}
-                label={renderToString(
-                  'i_need_form_fieldset_additional_details_field_postcode_title'
-                )}
-                description={renderToString(
-                  'i_need_form_fieldset_additional_details_field_postcode_description'
-                )}
-                required={true}
               />
               <Textarea
                 {...register('tellUsMore')}
