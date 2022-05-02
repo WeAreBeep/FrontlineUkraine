@@ -131,15 +131,7 @@
     </div>    
     <div>
         @Html.LabelsFor(m => m.Postcode)
-        @Html.TextBoxFor(
-            m => m.Postcode,
-            new
-            {
-                @class = "small",
-                data_posttag = "true",
-                data_address_line_one = Html.IdFor(m => m.AddressLineOne),
-                data_address_line_two = Html.IdFor(m => m.AddressLineTwo),
-            })
+        @Html.TextBoxFor(m => m.Postcode)
         @Html.HtmlValidationMessageFor(m => m.Postcode)
     </div>
     <div>
