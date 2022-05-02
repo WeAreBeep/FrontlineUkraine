@@ -100,9 +100,9 @@ namespace Web.Models
 		[Display(Name = "Address line 2")]
 		public string AddressLineTwo { get; set; }
 
-		[Display(Name = "Postcode", Description = "Will be added to the map to locate your PPE Needs"),
+		[Display(Name = "what3words address", Description = "Will be added to the map to locate your Needs"),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
-		StringLength(8, MinimumLength = 6, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
+		RegularExpression("^(/{3})?[\\p{L}|\\w]+\\.[\\p{L}|\\w]+\\.[\\p{L}|\\w]+$", ErrorMessage = "{0} should have 3 words connected with fullstops(.)")]
 		public string Postcode { get; set; }
 
 		[Display(Name = "Job Title", Description = "This will not be published on the site. It will be used for anonymous data reporting."),

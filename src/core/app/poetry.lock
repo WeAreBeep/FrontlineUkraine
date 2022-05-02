@@ -1145,6 +1145,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "what3words"
+version = "3.1.1"
+description = "What3words API wrapper library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+requests = ">=2.5.3"
+
+[[package]]
 name = "wrapt"
 version = "1.13.3"
 description = "Module for decorators, wrappers and monkey patching."
@@ -1155,7 +1166,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.9"
-content-hash = "b86b79cd9af25f9f7485879ef7b2fddbeb168e430d58bfefdcc1e1a107fd01c2"
+content-hash = "16e6a44de375a77ff6538b58247c9b05843cc11e2efcb5f880460278e178efd1"
 
 [metadata.files]
 aioredis = [
@@ -1940,6 +1951,10 @@ vine = [
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
     {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
+]
+what3words = [
+    {file = "what3words-3.1.1-py2.py3-none-any.whl", hash = "sha256:16aff805c9d9d1f229ae8cdf30aaae5d2fe69dcf497aa65e97369aa31fe271e7"},
+    {file = "what3words-3.1.1.tar.gz", hash = "sha256:8dc8339226c504e6eb66d02be1ad047b32222d528a581286499b7f7a61e4a2f0"},
 ]
 wrapt = [
     {file = "wrapt-1.13.3-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:e05e60ff3b2b0342153be4d1b597bbcfd8330890056b9619f4ad6b8d5c96a81a"},

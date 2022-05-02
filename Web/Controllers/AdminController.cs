@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Shared;
 using Web.Db;
@@ -16,12 +17,21 @@ using Web.Models;
 using Web.Snippets;
 using Web.Snippets.Messaging;
 using Web.Snippets.System.Collections.Generic;
+using what3words.dotnet.wrapper;
+using what3words.dotnet.wrapper.response;
 
 namespace Web.Controllers
 {
     [Authorize(Policy = Settings.Authorization.EditRights)]
     public class AdminController : BaseController
     {
+        private readonly string W3WApiKey;
+
+        public AdminController(IOptions<ServerConfig> serverConfig)
+        {
+            W3WApiKey = serverConfig.Value.What3wordsApiKey;
+        }
+
         [HttpGet("admin")]
         public IActionResult Admin() => View();
 
@@ -64,20 +74,33 @@ namespace Web.Controllers
             return View(EditNeedsViewModel.FromEntities(need, suppliers, cities));
         }
         [HttpPost("edit-needs/{id}")]
-        public IActionResult EditNeeds([FromServices] DataContext dataContext, EditNeedsPost data)
+        public async Task<IActionResult> EditNeeds([FromServices] DataContext dataContext, EditNeedsPost data)
         {
             SimpleNotifier noty = notifier();
+            List<Supplier> suppliers = dataContext.Suppliers.ToList();
+            List<City> cities = dataContext.Cities.ToList();
             if(!ModelState.IsValid)
             {
-                List<Supplier> suppliers = dataContext.Suppliers.ToList();
-                List<City> cities = dataContext.Cities.ToList();
                 noty.AddMessage(MsgTypes.Warning, "Problems saving, please try again");
                 return View("EditNeeds", EditNeedsViewModel.FromPostData(data, suppliers, cities));
             }
             else
             {
-                Need existingNeed = dataContext.Needs.Include(p => p.NeedPpeTypes).Single(n => n.Id == data.Request.Id); 
-                existingNeed.Modify(data, currentUserId);
+                var wrapper = new What3WordsV3(W3WApiKey);
+                var address = await wrapper.ConvertToCoordinates(data.Request.Postcode).RequestAsync();
+                if (!address.IsSuccessful)
+                {
+                    var message = address.Error.Error switch
+                    {
+                        What3WordsError.BadWords => "Bad what3words address is provided",
+                        _ => "Unexpected error returned from what3words"
+                    };
+                    noty.AddMessage(MsgTypes.Warning, message);
+                    return View("EditNeeds", EditNeedsViewModel.FromPostData(data, suppliers, cities));
+                }
+
+                Need existingNeed = dataContext.Needs.Include(p => p.NeedPpeTypes).Single(n => n.Id == data.Request.Id);
+                existingNeed.Modify(data, currentUserId, address.Data.Coordinates);
                 dataContext.SaveChanges(currentUserName);
                 noty.AddMessage(MsgTypes.Success, "Successfully updated the Request");
                 return Redirect("/requests"); 

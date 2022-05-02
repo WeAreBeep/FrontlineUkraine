@@ -36,7 +36,7 @@ namespace Web.Db
 			}
 			else
 			{
-				DateTimeOffset now = DateTimeOffset.Now;
+				DateTimeOffset now = DateTimeOffset.UtcNow;
 				List<AuditEntry> auditEntries = beforeSaveChanges(userName, now);
 				result = base.SaveChanges();
 				afterSaveChanges(auditEntries, userName, now);

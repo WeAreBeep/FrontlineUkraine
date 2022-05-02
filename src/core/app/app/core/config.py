@@ -91,6 +91,7 @@ class Settings(BaseSettings):
     POSTTAG_ENDPOINT: str
     POSTTAG_ID: str
     POSTTAG_API_KEY: str
+    WHAT3WORDS_API_KEY: str
 
     class Config:
         case_sensitive = True
