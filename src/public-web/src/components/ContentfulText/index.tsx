@@ -4,6 +4,7 @@ import { useStyles } from './style';
 import { useContentful } from 'react-contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import cn from 'classnames';
+import { useLocale } from '../../locale/LocaleProvider';
 
 interface Props {
   contentType: string;
@@ -30,13 +31,15 @@ function getVimeoGlobalStyle(_theme: MantineTheme): CSSObject {
 }
 
 export const ContentfulText: React.FC<Props> = ({ contentType, inverted }) => {
+  const {locale} = useLocale()
   const { classes } = useStyles();
   const { data } = useContentful({
     contentType,
     include: 1,
+    locale,
   });
   const rawHtml = useMemo(() => {
-    const doc = data == null ? null : (data as any).items[0].fields.content;
+    const doc = data == null ? null : (data as any).items[0]?.fields?.content;
     if (doc) {
       return {
         __html: documentToHtmlString(doc, {}),

@@ -9,7 +9,7 @@ import * as Containers from './containers';
 import { APIContextProvider } from './contexts/APIContext';
 import { config } from './config';
 import { ServiceProvider } from './contexts/ServiceContext';
-import { LocaleProvider } from './locale/LocaleProvider';
+import { LocaleProvider, useLocale } from './locale/LocaleProvider';
 import { AuthgearProvider } from './contexts/AuthgearContext';
 import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
@@ -42,36 +42,41 @@ const AuthgearRedirect: React.FC = () => {
   return null;
 };
 
-const InnerFLApp: React.FC = () => {
+const Content: React.FC = () => {
+  const { locale } = useLocale();
   const Match = useRoutes([
-    { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
+    { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds/> },
     {
       path: RouteType.RegisterSupply,
-      element: <Containers.RegisterSupplies />,
+      element: <Containers.RegisterSupplies/>,
     },
-    { path: RouteType.About, element: <Containers.About /> },
-    { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
-    { path: RouteType.Partners, element: <Containers.Partners /> },
-    { path: RouteType.ContactUs, element: <Containers.ContactUs /> },
+    { path: RouteType.About, element: <Containers.About/> },
+    { path: RouteType.Suppliers, element: <Containers.Suppliers/> },
+    { path: RouteType.Partners, element: <Containers.Partners/> },
+    { path: RouteType.ContactUs, element: <Containers.ContactUs/> },
     {
       path: RouteType.TermsAndConditions,
-      element: <Containers.TermsAndConditions />,
+      element: <Containers.TermsAndConditions/>,
     },
-    { path: RouteType.Landing, element: <Containers.Landing /> },
-    { path: '/authgear', element: <AuthgearRedirect /> },
+    { path: RouteType.Landing, element: <Containers.Landing/> },
+    { path: '/authgear', element: <AuthgearRedirect/> },
   ]);
+  return <ContentfulProvider locale={locale} client={contentfulClient}>
+    <FLAppShell>{Match}</FLAppShell>
+  </ContentfulProvider>
+}
+
+const InnerFLApp: React.FC = () => {
   return (
-    <ContentfulProvider client={contentfulClient}>
-      <AuthgearProvider>
-        <APIContextProvider>
-          <ServiceProvider windowImpl={window}>
-            <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-              <FLAppShell>{Match}</FLAppShell>
-            </LocaleProvider>
-          </ServiceProvider>
-        </APIContextProvider>
-      </AuthgearProvider>
-    </ContentfulProvider>
+    <AuthgearProvider>
+      <APIContextProvider>
+        <ServiceProvider windowImpl={window}>
+          <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+            <Content />
+          </LocaleProvider>
+        </ServiceProvider>
+      </APIContextProvider>
+    </AuthgearProvider>
   );
 };
 
