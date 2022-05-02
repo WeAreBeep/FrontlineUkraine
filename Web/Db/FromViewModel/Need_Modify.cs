@@ -5,22 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Web.Models;
 using Web.Snippets.System.Collections.Generic;
+using what3words.dotnet.wrapper.models;
 
 namespace Web.Db
 {
 	public partial class Need
 	{
-		public void Modify(EditNeedsPost s, string currentUserId)
+		public void Modify(EditNeedsPost s, string currentUserId, Coordinates what3wordsAddressCoordinates)
 		{
+			// NOTE: Only re-assign Latitude and Longitude when
+			//	- what3words address is changed and
+			//	- both Latitude and Longitude are untouched
+			if (Postcode != s.Request.Postcode && Latitude == s.Location.Latitude && Longitude == s.Location.Longitude)
+			{
+				Latitude = new decimal(what3wordsAddressCoordinates.Lat);
+				Longitude = new decimal(what3wordsAddressCoordinates.Lng);
+			}
+			else
+			{
+				Latitude = s.Location.Latitude;
+				Longitude = s.Location.Longitude;
+			}
+
 			Modify(s.Request);
 			StatusId = (int)s.Status.Status;
 			TweetId = s.Twitter.TweetId;
 
 			updateBasicPpeDetails(s);
 			updatePpeMatchingDetails(s);
-
-			Latitude = s.Location.Latitude;
-			Longitude = s.Location.Longitude;
 
 			if(!String.IsNullOrWhiteSpace(s.Notes.NewNote))
 			{

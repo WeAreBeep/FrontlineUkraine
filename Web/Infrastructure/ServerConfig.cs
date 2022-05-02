@@ -14,5 +14,7 @@ namespace Web.Infrastructure
         public string PosttagApiKey { get; set; }
 
         public string WebsiteCanonicalUrl { get; set; } = "https://www.frontline.live";
+        
+        public string What3wordsApiKey { get; set; }
     }
 }
