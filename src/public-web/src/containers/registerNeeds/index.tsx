@@ -33,8 +33,6 @@ import {
   isSchemaValidationErrorData,
   useAPIContext,
 } from '../../contexts/APIContext';
-import { ReactHookFormPosttagAddressAutocomplete } from '../../components/ReactHookFormPosttagAddressAutocomplete';
-import { AddressEntry } from '../../models/posttag';
 import { FormattedMessage } from '../../locale/FormattedMessage';
 import { ProcedureList } from './components/ProcedureList';
 import { useLocale } from '../../locale/LocaleProvider';
@@ -42,6 +40,7 @@ import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
 import { ApiState } from '../../utils/apiState';
 import { Paginated } from '../../models/paginated';
 import { City } from '../../models/city';
+import { W3WLocationInput } from '../../components/W3WLocationInput/W3WLocationInput';
 
 export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
@@ -66,25 +65,11 @@ export const RegisterNeeds: React.FC = () => {
       label: name[locale],
     }));
   }, [cityListState, locale]);
-  const {
-    register,
-    control,
-    watch,
-    handleSubmit,
-    formState,
-    setError,
-    setValue,
-  } = useForm<RegisterRequestForm>({
-    defaultValues: defaultRegisterRequestForm,
-  });
+  const { register, control, watch, handleSubmit, formState, setError } =
+    useForm<RegisterRequestForm>({
+      defaultValues: defaultRegisterRequestForm,
+    });
   const { isSubmitting, errors, isSubmitSuccessful } = formState;
-  const handleAddressSelect = useCallback(
-    (item: AddressEntry) => {
-      setValue('addressLineOne', item.addressLineOne);
-      setValue('addressLineTwo', item.addressLineTwo);
-    },
-    [setValue]
-  );
   const handleValidSubmit: SubmitHandler<RegisterRequestForm> = useCallback(
     async (data) => {
       await createRequest(data);
@@ -464,12 +449,10 @@ export const RegisterNeeds: React.FC = () => {
                   );
                 }}
               />
-              <ReactHookFormPosttagAddressAutocomplete
-                control={control}
-                name="postcode"
-                rules={{
+              <W3WLocationInput
+                {...register('postcode', {
                   required: { value: true, message: VALIDATION_MSG.required },
-                }}
+                })}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
                 label={renderToString(
@@ -479,7 +462,6 @@ export const RegisterNeeds: React.FC = () => {
                   'i_need_form_fieldset_additional_details_field_postcode_description'
                 )}
                 required={true}
-                onAddressSelect={handleAddressSelect}
               />
               <Textarea
                 {...register('tellUsMore')}
