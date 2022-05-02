@@ -49,6 +49,7 @@
     <PackageReference Include="SendGrid" Version="9.14.1" />
     <PackageReference Include="contentful.aspnetcore" Version="5.0.4" />
     <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+    <PackageReference Include="what3words.dotnet.wrapper" Version="3.0.4" />
   </ItemGroup>
 
   <ItemGroup>
