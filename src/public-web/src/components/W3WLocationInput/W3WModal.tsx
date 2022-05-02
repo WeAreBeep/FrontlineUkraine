@@ -11,10 +11,7 @@ export function W3WModal(
     <Modal
       {...props}
       styles={{ body: { minHeight: '60vh', position: 'relative' } }}
-      title={
-        props.title ??
-        renderToString('what3words_modal_title')
-      }
+      title={props.title ?? renderToString('what3words_modal_title')}
     >
       <iframe
         ref={iframeRef}

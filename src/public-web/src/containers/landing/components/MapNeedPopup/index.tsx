@@ -5,7 +5,10 @@ import {
   PpeStatus,
 } from '../../../../models/ppeStatus';
 import { PpeTypeEnumLabel } from '../PpeTypeEnumLabel';
-import { getPpeTypeEnumFromInt, isResourceTypeOther } from '../../../../models/ppeType';
+import {
+  getPpeTypeEnumFromInt,
+  isResourceTypeOther,
+} from '../../../../models/ppeType';
 import { CategoryEnum } from '../../type';
 import { useStyles } from './style';
 
@@ -48,13 +51,17 @@ export const MapNeedPopup: React.FC<Props> = ({
     }
   }, [variant]);
   const otherTypePpeTypes = useMemo(() => {
-    return need.ppeTypes.filter(
-      ({ ppeType, status, ppeTypeOther }) => {
-        const typeEnum = getPpeTypeEnumFromInt(ppeType);
-        const statusEnum = getPpeStatusEnumFromInt(status)
-        return typeEnum && statusEnum && isResourceTypeOther(typeEnum) && allowStatusesSet.has(statusEnum) && ppeTypeOther
-      }
-    );
+    return need.ppeTypes.filter(({ ppeType, status, ppeTypeOther }) => {
+      const typeEnum = getPpeTypeEnumFromInt(ppeType);
+      const statusEnum = getPpeStatusEnumFromInt(status);
+      return (
+        typeEnum &&
+        statusEnum &&
+        isResourceTypeOther(typeEnum) &&
+        allowStatusesSet.has(statusEnum) &&
+        ppeTypeOther
+      );
+    });
   }, [allowStatusesSet, need.ppeTypes]);
   const { datetime } = useMemo(
     () => ({
@@ -96,9 +103,9 @@ export const MapNeedPopup: React.FC<Props> = ({
         {otherTypePpeTypes.length > 0 && (
           <>
             <dt>{otherPpeTitle}</dt>
-            {otherTypePpeTypes.map(({ppeTypeOther,ppeType}) => <dd key={`ppe_type_other_${ppeType}`}>
-              {ppeTypeOther}
-            </dd>)}
+            {otherTypePpeTypes.map(({ ppeTypeOther, ppeType }) => (
+              <dd key={`ppe_type_other_${ppeType}`}>{ppeTypeOther}</dd>
+            ))}
           </>
         )}
       </dl>
