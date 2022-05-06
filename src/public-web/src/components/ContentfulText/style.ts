@@ -6,7 +6,7 @@ export const useStyles = createStyles((theme) => ({
     'ul.hashtag_list li span': {
       color: getThemePrimaryColor(theme),
     },
-    'h1, h2, p, ul, a': {
+    'h1, h2, h3, h4, p, ul, a': {
       color: getThemePrimaryColor(theme),
     },
   },
@@ -14,7 +14,7 @@ export const useStyles = createStyles((theme) => ({
     'ul.hashtag_list li span': {
       color: '#f7f0f0',
     },
-    'h1, h2, p, ul, a': {
+    'h1, h2, h3, h4, p, ul, a': {
       color: theme.white,
     },
   },
