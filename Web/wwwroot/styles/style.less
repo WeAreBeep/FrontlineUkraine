@@ -185,8 +185,22 @@ body.inverted {
     background-color: @color_background;
 }
 
-#title_bar #logo > .logo-image {
-    height: 30px;
+#title_bar #logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+#title_bar #logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1em;
+
+    & > .logo-image {
+        height: 30px;
+    }
 }
 
 #icons, .icons {
@@ -540,8 +554,11 @@ div#partners {
         justify-content: space-between;
     }
 
-    #title_bar #logo .logo-image {
-        height: 40px;
+    #title_bar #logo {
+        font-size: 2em;
+        & .logo-image {
+            height: 40px;
+        }
     }
 
     #icons, .icons {
@@ -727,8 +744,11 @@ div#partners {
 // NOTE: only for new icon
 @media @tablet {
 
-    #title_bar #logo .logo-image {
-        height: 70px;
+    #title_bar #logo {
+        font-size: 2em;
+        & .logo-image {
+            height: 70px;
+        }
     }
 
     nav {
