@@ -7,4 +7,5 @@ export enum RouteType {
   Partners = '/partners',
   TermsAndConditions = '/terms-and-conditions',
   ContactUs = '/contact-us',
+  Faq = '/faq',
 }

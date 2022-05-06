@@ -38,16 +38,20 @@ export const MainLinks: React.FC<{
         name: renderToString('nav_link_item_i_have'),
       },
       {
-        routeType: RouteType.About,
-        name: renderToString('nav_link_item_about'),
-      },
-      {
         routeType: RouteType.Suppliers,
         name: renderToString('nav_link_item_suppliers'),
       },
       {
         routeType: RouteType.Partners,
         name: renderToString('nav_link_item_partners'),
+      },
+      {
+        routeType: RouteType.About,
+        name: renderToString('nav_link_item_about'),
+      },
+      {
+        routeType: RouteType.Faq,
+        name: "FAQ",
       },
     ],
     [renderToString]

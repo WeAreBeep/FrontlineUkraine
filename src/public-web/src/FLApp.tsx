@@ -47,13 +47,13 @@ const Content: React.FC = () => {
   const Match = useRoutes([
     { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
     {
-      path: RouteType.RegisterSupply,
-      element: <Containers.RegisterSupplies />,
+      path: RouteType.RegisterSupply, element: <Containers.RegisterSupplies />,
     },
-    { path: RouteType.About, element: <Containers.About /> },
     { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
     { path: RouteType.Partners, element: <Containers.Partners /> },
     { path: RouteType.ContactUs, element: <Containers.ContactUs /> },
+    { path: RouteType.Faq, element: <Containers.Faq /> },
+    { path: RouteType.About, element: <Containers.About /> },
     {
       path: RouteType.TermsAndConditions,
       element: <Containers.TermsAndConditions />,

@@ -216,11 +216,11 @@ export const PPE_TYPE_COLOR: Record<PpeTypeEnum, string> = {
 // Type: [sw, ne]
 export const DEFAULT_MAP_BOUNDS: LngLatBoundsLike = [
   {
-    lng: -15.153077355573117,
-    lat: 34.13695366955437,
+    lng: 22.153077355573117,
+    lat: 45.13695366955437,
   },
   {
-    lng: 73.8317035268714,
-    lat: 59.72912564207206,
+    lng: 39.8317035268714,
+    lat: 52.72912564207206,
   },
 ];
