@@ -18,34 +18,9 @@ namespace Web.Controllers
 	[FrontEndFilter]
 	public class HomeController : BaseController
 	{
-		public async Task<IActionResult> Index(
-            [FromServices] DataContext dataContext,
-            [FromServices] IContentfulService contentfulService)
+		public IActionResult Index()
 		{
-			SimpleNotifier noty = notifier();
-            noty.AddMessage(MsgTypes.Information, "TIP: Try changing Map Layers (top right)");
-
-			IQueryable<Need> allNeedsPosts = dataContext.Needs.Include(n => n.NeedPpeTypes);
-
-			//This logic is intentionally "fluffy", we are (justifiably) bumping up the Met and Partially Met percentages 
-			//by excluding posts from the "total" which volunteers cannot possibly meet: see notes on IsNotMarkedAllNotMetAndIsContactable etc
-
-			int countAllNeedsPosts = allNeedsPosts.Count();
-			int countSeeminglyContactableNeedsPosts = allNeedsPosts.ToList().Count(n => n.IsNotMarkedAllNotMetAndIsContactable());
-
-			IQueryable<Need> fullyMetNeeds = allNeedsPosts.Where(p => p.NeedPpeTypes.All(pt => pt.StatusId == (int)PpeStatus.Met));
-			int countFullyMetNeeds = fullyMetNeeds.Count();
-			int countPartiallyMetNeeds = allNeedsPosts.Except(fullyMetNeeds).Count(p => p.NeedPpeTypes.Any(pt => pt.StatusId == (int)PpeStatus.Met));
-
-			ViewData["met"] = countFullyMetNeeds;
-			ViewData["partial"] = countPartiallyMetNeeds;
-			ViewData["new"] = countSeeminglyContactableNeedsPosts - (countFullyMetNeeds + countPartiallyMetNeeds);
-
-			ViewData["contactable"] = countSeeminglyContactableNeedsPosts;
-			ViewData["noncontactable"] = countAllNeedsPosts - countSeeminglyContactableNeedsPosts;
-			ViewData["contentful"] = await contentfulService.GetFirstByContentType<HomePageViewModel>("home-page");
-
-			return View();
+			return RedirectToAction("Admin", "Admin");
 		}
 
 		public async Task<IActionResult> About([FromServices] IContentfulService contentfulService)
