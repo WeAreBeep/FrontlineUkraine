@@ -64,13 +64,17 @@ class SupplyCreate(BaseModel):
     phone_number: str
     contact_name: str
     postcode: str
-    transport_type: TransportType = TransportType.No
+    transport_type: TransportType
     transport_type_other: Optional[str]
     tell_us_more: Optional[str]
     ppe_types: List[SupplyPpeTypeCreate]
 
     _map_supplier_type = validator("supplier_type", pre=True, allow_reuse=True)(
         map_enum_from_name(SupplierType)
+    )
+
+    _map_transport_type_type = validator("transport_type", pre=True, allow_reuse=True)(
+        map_enum_from_name(TransportType)
     )
 
     @validator("supplier_type_other")

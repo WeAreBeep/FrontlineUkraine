@@ -25,6 +25,8 @@ def to_model(create_model: SupplyCreate) -> Supplier:
         contactName=create_model.contact_name,
         postcode=create_model.postcode,
         tellUsMore=create_model.tell_us_more,
+        transport_type=create_model.transport_type,
+        transport_type_other=create_model.transport_type_other,
     )
     for ppe_type in create_model.ppe_types:
         supplier_ppe_type = SupplierPpeType(

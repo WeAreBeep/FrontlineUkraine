@@ -29,6 +29,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocale } from '../../locale/LocaleProvider';
 import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
 import { FormattedMessage } from '../../locale/FormattedMessage';
+import { TransportType } from '../../models/transportType';
 
 export const RegisterSupplies: React.FC = () => {
   const { renderToString } = useLocale();
@@ -297,6 +298,47 @@ export const RegisterSupplies: React.FC = () => {
                   ))}
               </fieldset>
             ))}
+            <fieldset className={classes.fieldSet}>
+              <legend className={classes.legend}>Transport</legend>
+              <ReactHookFormRadioGroup
+                name="transportType"
+                control={control}
+                rules={{
+                  required: { value: true, message: VALIDATION_MSG.required },
+                }}
+                error={errors.transportType?.message}
+                classNames={{ root: classes.inputWrapper }}
+                orientation="vertical"
+                label="Transport"
+                description="Can you transport and deliver the supplies?"
+                required={true}
+              >
+                <Radio
+                  value={TransportType.Yes}
+                  label="Yes"
+                />
+                <Radio
+                  value={TransportType.No}
+                  label="No"
+                />
+                <Radio
+                  value={TransportType.Other}
+                  label="Please specify"
+                />
+              </ReactHookFormRadioGroup>
+              {watch('transportType') === TransportType.Other && (
+                <TextInput
+                  {...register('transportTypeOther', {
+                    required: { value: true, message: VALIDATION_MSG.required },
+                    shouldUnregister: true,
+                  })}
+                  error={errors.transportTypeOther?.message}
+                  className={classes.inputWrapper}
+                  label="Type Other"
+                  description={`If the list above does not fit choose "Other..." and describe here`}
+                />
+              )}
+            </fieldset>
             <Button
               className={classes.submitBtn}
               variant="filled"

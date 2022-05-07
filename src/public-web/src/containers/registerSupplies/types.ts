@@ -1,4 +1,5 @@
 import { PpeTypeEnum } from '../../models/ppeType';
+import { TransportType } from '../../models/transportType';
 
 export interface PpeSupplyTypeSubForm {
   can: boolean;
@@ -34,6 +35,8 @@ export interface RegisterSuppliesForm {
   phoneNumber: string;
   contactName: string;
   postcode: string;
+  transportType: TransportType;
+  transportTypeOther: string;
   ppeTypes: { [key in PpeTypeEnum]: PpeSupplyTypeSubForm };
 }
 
@@ -47,6 +50,8 @@ export const defaultRegisterSuppliesForm: RegisterSuppliesForm = {
   phoneNumber: '',
   contactName: '',
   postcode: '',
+  transportType: TransportType.No,
+  transportTypeOther: '',
   ppeTypes: {
     [PpeTypeEnum.TypeIIRSurgicalMasks]: defaultPpeSupplyTypeSubForm,
     [PpeTypeEnum.FFP1RespiratorMasks]: defaultPpeSupplyTypeSubForm,
