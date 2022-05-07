@@ -10,7 +10,8 @@ export const useStyles = createStyles((theme) => ({
     overflowY: 'scroll',
   },
   mapContainer: {
-    minHeight: 320,
+    // NOTE: Hotfix for full screen map on mobile
+    minHeight: `calc(100vh - 4.2rem)`,
     [tablet(theme)]: {
       minHeight: '100%',
     },
