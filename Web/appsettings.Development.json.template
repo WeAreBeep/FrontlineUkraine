@@ -18,5 +18,12 @@
   "PosttagEndpoint": "<POSTTAG_ENDPOINT>",
   "PosttagId": "<POSTTAG_ID>",
   "PosttagApiKey": "<POSTTAG_API_KEY>",
-  "WebsiteCanonicalUrl": "http://localhost:3000"
+  "WebsiteCanonicalUrl": "http://localhost:3000",
+  "Emails": {
+    "SendGridKey": "<SENDGRID_KEY>",
+    "ToAddresses": "no-reply@example.com",
+    "FromAddress": "no-reply@example.com"
+  },  
+  "AuthgearAppAdminPortalUrl": "",
+  "PublicWebPublicMapUrl": "http://localhost:3002"
 }

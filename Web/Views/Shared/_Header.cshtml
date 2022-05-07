@@ -1,34 +1,36 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
 @using Web.Db
+@using Web.Infrastructure
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
+@inject IOptions<ServerConfig> ServerConfig
 
 <div id="title_bar">
         <span id="icons">
-
             <a id="logo" href="/" title="Home">
                 <img alt="Frontline.live" class="logo-image" src="/images/frontline_map_logo.png">
                 <span>
                     Admin Portal
                 </span>
             </a>
-
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <a id="account"
-                   href="/admin"
-                   class="smlogo faa-parent animated-hover">
-                    <i class="faa-tada far fa-user fa-4x"></i>
-                </a>
-            }
-           
         </span>
 
         <nav>
             <ol>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <li><a href="/requests">Requests</a></li>
+                    <li>
+                        <a href="@ServerConfig.Value.AuthgearAppAdminPortalUrl" target="_blank">
+                            Create supplier account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@ServerConfig.Value.PublicWebPublicMapUrl" target="_blank">
+                            Public map
+                        </a>
+                    </li>
+
                 }
             </ol>
         </nav>
