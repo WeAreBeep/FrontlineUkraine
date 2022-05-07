@@ -23,11 +23,13 @@ namespace Web.Models
 			{
 				SupplierType = s.SupplierType.ToString(),
 				PpeTypes = s.PpeTypes.SelectToList(PpeTypeInfo.Project),
+				TransportType = s.TransportType.ToString()
 			};
 		}
 
 		public string SupplierType;
 		public List<PpeTypeInfo> PpeTypes;
+		public string TransportType;
 		
 		public class PpeTypeInfo
 		{

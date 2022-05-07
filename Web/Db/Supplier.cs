@@ -32,6 +32,8 @@ namespace Web.Db
         /// Added to retain the Ushahidi capacity data as was 
         /// </summary>
 		public string CapacityNotes { get; set; }
+        public TransportType TransportType { get; set; }
+        public string TransportTypeOther { get; set; }
 
         public virtual ICollection<SupplierPpeType> SupplierPpeTypes { get; set; }
 		public virtual ICollection<SupplierNote> SupplierNotes { get; set; }

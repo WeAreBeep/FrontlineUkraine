@@ -1,4 +1,5 @@
 from .audit import Audit
+from .transport_type import TransportType
 from .cost_type import CostType
 from .item import Item
 from .meet_regulations import MeetRegulations
