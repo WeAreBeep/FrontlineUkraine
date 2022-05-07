@@ -79,7 +79,11 @@ export const MapNeedPopup: React.FC<Props> = ({
       <h1>{title}</h1>
       <dl>
         <dt>what3words address:</dt>
-        <dd>{need.postcode}</dd>
+        <dd>
+          <a href={`https://what3words.com/${need.postcode}`} title="what3words address" target="_blank" rel="noreferrer" >
+            {need.postcode}  
+          </a>
+        </dd>
         <dt>Organisation:</dt>
         <dd>{need.organisation}</dd>
         {need.department && <>
