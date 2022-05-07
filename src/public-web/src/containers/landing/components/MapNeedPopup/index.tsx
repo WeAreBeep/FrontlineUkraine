@@ -19,10 +19,10 @@ interface Props {
 }
 
 export const MapNeedPopup: React.FC<Props> = ({
-  need,
-  allowStatuses,
-  variant,
-}) => {
+                                                need,
+                                                allowStatuses,
+                                                variant,
+                                              }) => {
   const { classes, cx } = useStyles();
   const allowStatusesSet = useMemo(
     () => new Set<PpeStatus>(allowStatuses),
@@ -82,6 +82,18 @@ export const MapNeedPopup: React.FC<Props> = ({
         <dd>{need.postcode}</dd>
         <dt>Organisation:</dt>
         <dd>{need.organisation}</dd>
+        {need.department && <>
+          <dt>Department:</dt>
+          <dd>{need.department}</dd>
+        </>}
+        {need.contactName && <>
+          <dt>Contact name:</dt>
+          <dd>{need.contactName}</dd>
+        </>}
+        {need.phoneNumber && <>
+          <dt>Phone number:</dt>
+          <dd>{need.phoneNumber}</dd>
+        </>}
         <dt>{ppeTypeTitle}:</dt>
         <dd>
           <ul>
