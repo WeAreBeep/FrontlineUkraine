@@ -146,6 +146,8 @@ function useMakeActions(rpc: Rpc) {
           phoneNumber: form.phoneNumber,
           contactName: form.contactName,
           postcode: form.postcode,
+          transportType: form.transportType,
+          transportTypeOther: form.transportTypeOther,
           ppeTypes,
         };
         return rpc.post('v1/supply', data);
