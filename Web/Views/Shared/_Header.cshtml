@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
 @using Web.Db
+@using Web.Infrastructure
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
+@inject IOptions<ServerConfig> ServerConfig
 
 <div id="title_bar">
         <span id="icons">
@@ -28,7 +31,17 @@
             <ol>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <li><a href="/requests">Requests</a></li>
+                    <li>
+                        <a href="@ServerConfig.Value.AuthgearAppAdminPortalUrl" target="_blank">
+                            Create supplier account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@ServerConfig.Value.PublicWebPublicMapUrl" target="_blank">
+                            Public map
+                        </a>
+                    </li>
+
                 }
             </ol>
         </nav>

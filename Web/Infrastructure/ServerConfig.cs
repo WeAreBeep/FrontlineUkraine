@@ -16,5 +16,9 @@ namespace Web.Infrastructure
         public string WebsiteCanonicalUrl { get; set; } = "https://www.frontline.live";
         
         public string What3wordsApiKey { get; set; }
+        
+        public string AuthgearAppAdminPortalUrl { get; set; }
+        
+        public string PublicWebPublicMapUrl { get; set; }
     }
 }

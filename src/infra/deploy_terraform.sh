@@ -24,7 +24,9 @@ echo "{
     \"PosttagId\": \"$POSTTAG_ID\",
     \"PosttagApiKey\": \"$POSTTAG_API_KEY\",
     \"WebsiteCanonicalUrl\": \"$WEBSITE_CANONICAL_URL\",
-    \"What3wordsApiKey\": \"$WHAT3WORDS_API_KEY\"
+    \"What3wordsApiKey\": \"$WHAT3WORDS_API_KEY\",
+    \"AuthgearAppAdminPortalUrl\": \"$AUTHGEAR_ADMIN_PORTAL\",
+    \"PublicWebPublicMapUrl\": \"$PUBLIC_WEB_PUBLIC_MAP_URL\"
 }" > ./app-settings.json
 
 echo "Initializing Terraform..."
