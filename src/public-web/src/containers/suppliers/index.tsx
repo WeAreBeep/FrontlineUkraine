@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import cx from 'classnames';
 import authgear from '@authgear/web';
 import { Map, MapRenderPopupType } from '../landing/components/Map';
-import { Button, Col, Grid, Stack, Text } from '@mantine/core';
+import { Anchor, Button, Col, Grid, List, Stack } from '@mantine/core';
 import { useSessionState } from '../../contexts/AuthgearContext';
 import { useStyles } from './style';
 import { RestrictedMapData } from '../../models/map';
@@ -79,15 +79,35 @@ export const Suppliers: React.FC = () => {
   if (sessionState === 'NO_SESSION') {
     return (
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
-        <Col md={12} lg={4} offsetLg={4}>
+        <Col md={12} lg={6} offsetLg={3}>
           <Stack align="center" className={classes.stackContainer}>
             <h1 className={classes.heading}>Supplier Portal</h1>
-            <Text className={classes.description}>
-              If you are a verified supplier, please login to see the full map.
-              <br />
-              If you wish to sign up as an verified supplier, please contact{' '}
-              <a href="mailto:hello@frontline.live">hello@frontline.live</a>
-            </Text>
+            <h2>
+              How to login
+            </h2>
+            <List type="ordered">
+              <List.Item>
+                If you don’t have an account, please contact <Anchor href="mailto:hello@frontline.live">hello@frontline.live</Anchor> to request an account.
+              </List.Item>
+              <List.Item>
+                Click the button below to login to your account.
+              </List.Item>
+              <List.Item>
+                Enter your email and the password sent to you by our team.
+              </List.Item>
+              <List.Item>
+                You will be asked to set up 2FA. Feel free to use any 2FA app you have. If you yet have an 2FA app before, we suggest using <Anchor href="https://authy.com/download/" target="_blank">Authy</Anchor>
+              </List.Item>
+              <List.Item>
+                Fire up your 2FA app to scan the QR code, then you will get a 6-digit number.
+              </List.Item>
+              <List.Item>
+                Enter the 6-digit number to login.
+              </List.Item>
+              <List.Item>
+                2FA is required for every login.
+              </List.Item>
+            </List>
             <Button onClick={onClickSignIn}>Login to see the full map</Button>
           </Stack>
         </Col>
