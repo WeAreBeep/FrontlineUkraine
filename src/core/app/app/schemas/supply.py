@@ -10,6 +10,7 @@ from app.models import (
     Supplier,
     SupplierPpeType,
     SupplierType,
+    TransportType,
 )
 
 from .base import BaseModel
@@ -63,6 +64,8 @@ class SupplyCreate(BaseModel):
     phone_number: str
     contact_name: str
     postcode: str
+    transport_type: TransportType = TransportType.No
+    transport_type_other: Optional[str]
     tell_us_more: Optional[str]
     ppe_types: List[SupplyPpeTypeCreate]
 
@@ -75,6 +78,13 @@ class SupplyCreate(BaseModel):
         if values["supplier_type"] == SupplierType.Other:
             if v is None or len(v) == 0:
                 raise ValueError("Field cannot be empty when supplier type is Other")
+        return v
+
+    @validator("transport_type_other")
+    def transport_type_other_required(cls, v, values):
+        if values["transport_type"] == TransportType.Other:
+            if v is None or len(v) == 0:
+                raise ValueError("Field cannot be empty when transport type is Other")
         return v
 
     @validator("ppe_types")
@@ -107,6 +117,8 @@ class PublicSupply(Record):
     description: str
     capacity_notes: Optional[str]
     website: Optional[str]
+    transport_type: TransportType
+    transport_type_other: Optional[str]
 
     @classmethod
     def from_data(cls, data: Supplier) -> "PublicSupply":
@@ -122,4 +134,6 @@ class PublicSupply(Record):
             description=data.description,
             capacity_notes=data.capacityNotes,
             website=data.website,
+            transport_type=data.transport_type,
+            transport_type_other=data.transport_type_other,
         )

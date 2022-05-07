@@ -11,6 +11,8 @@ from sqlalchemy.orm import relationship
 
 from app.db.base_class import FLBase
 
+from app.models import TransportType
+
 
 class Supplier(FLBase):
     __tablename__ = "Suppliers"
@@ -34,6 +36,13 @@ class Supplier(FLBase):
     latitude = Column("Latitude", Numeric, quote=True)
     longitude = Column("Longitude", Numeric, quote=True)
     capacityNotes = Column("CapacityNotes", Text, quote=True)
+    transport_type = Column("TransportType",
+                            Integer,
+                            quote=True,
+                            server_default=f"{TransportType.No}",
+                            default=TransportType.No,
+                            nullable=False)
+    transport_type_other = Column("TransportTypeOther", Text, quote=True, nullable=True)
 
     notes = relationship("SupplierNote", back_populates="supplier")
     ppeTypes = relationship("SupplierPpeType", back_populates="supplier")

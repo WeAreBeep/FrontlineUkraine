@@ -21,7 +21,9 @@ namespace Web.Db
 				PhoneNumber = s.PhoneNumber,
 				ContactName = s.ContactName,
 				Postcode = s.Postcode,
-				TellUsMore = s.TellUsMore
+				TellUsMore = s.TellUsMore,
+				TransportType = s.TransportType,
+				TransportTypeOther = s.TransportTypeOther,
 			};
 		}
 	}

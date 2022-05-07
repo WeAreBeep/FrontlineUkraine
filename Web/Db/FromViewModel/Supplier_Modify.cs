@@ -80,6 +80,8 @@ namespace Web.Db
 			SupplierTypeId = (int)s.SupplierType;
 			SupplierTypeOther = s.SupplierTypeOther;
 			Website = s.Website;
+			TransportType = s.TransportType;
+			TransportTypeOther = s.TransportTypeOther;
 		}
 	}
 }

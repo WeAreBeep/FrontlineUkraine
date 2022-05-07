@@ -84,6 +84,9 @@ class PublicNeedPpeType(BaseModel):
 
 class PublicNeed(Record):
     ppe_types: List[PublicNeedPpeType]
+    contact_name: Optional[str]
+    department: Optional[str]
+    phone_number: Optional[str]
 
     @classmethod
     def from_data(cls, data: Need) -> "PublicNeed":
@@ -96,4 +99,7 @@ class PublicNeed(Record):
             organisation=f"{data.organisationName}",
             ppe_types=[PublicNeedPpeType.from_data(p) for p in data.ppeTypes],
             tweet_id=f"{data.tweetId}" if data.tweetId else None,
+            contact_name=data.contactName,
+            department=data.department,
+            phone_number=data.phoneNumber
         )

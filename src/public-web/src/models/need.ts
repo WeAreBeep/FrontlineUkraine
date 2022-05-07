@@ -31,6 +31,9 @@ export interface Need {
   latitude: number;
   longitude: string;
   organisation: string;
+  contactName: Nullable<string>;
+  department: Nullable<string>;
+  phoneNumber: Nullable<string>;
   tweetId: Nullable<string>;
   ppeTypes: NeedPpeType[];
 }
