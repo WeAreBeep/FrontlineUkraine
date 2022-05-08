@@ -52,7 +52,7 @@ export default {
   i_need_form_fieldset_organisation_field_orgGovtApprovalImageId_title:
     'Upload proof of accreditation letters',
   i_need_form_sub_form_how_many_you_need_title:
-    'We are a charity. Our supplies are limited. How many do you (and your team) really need to bridge the gap until supplies arrive?',
+    'Choose quantity. While we do our best to match your requests, please note that some needs may be covered gradually.',
   i_need_form_sub_form_other_title: 'Other',
   i_need_form_sub_form_other_description:
     'If the list above does not fit choose "Other..." and describe here',
