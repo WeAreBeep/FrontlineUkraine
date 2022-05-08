@@ -26,20 +26,20 @@
         @Html.LabelsFor(m => m.SupplierType)
         <div class="secondary">
             <label>
-                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.ExistingPPEsupplier.ToString(), new { v_model = @supplierTypeVueName })
-                @SupplierTypes.ExistingPPEsupplier.GetText()
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.Manufacturer.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.Manufacturer.GetText()
             </label>
         </div>
         <div class="secondary">
             <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.AdaptedPPEsupplier.ToString(), new { v_model = @supplierTypeVueName })
-                @SupplierTypes.AdaptedPPEsupplier.GetText()
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.AidOrganisationOrCharity.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.AidOrganisationOrCharity.GetText()
             </label>
         </div>
         <div class="secondary">
             <label class="cursor_pointer">
-                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.Individuals.ToString(), new { v_model = @supplierTypeVueName })
-                @SupplierTypes.Individuals.GetText()
+                @Html.RadioButtonFor(m => m.SupplierType, SupplierTypes.CommunityGroup.ToString(), new { v_model = @supplierTypeVueName })
+                @SupplierTypes.CommunityGroup.GetText()
             </label>
         </div>
         <div class="secondary">

@@ -8,6 +8,7 @@ import {
   Button,
   Switch,
   Text,
+  List,
 } from '@mantine/core';
 import { FieldPath, SubmitHandler, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -101,22 +102,35 @@ export const RegisterSupplies: React.FC = () => {
   return (
     <div className={classes.scrollContainer}>
       <Container>
-        <h1 className={classes.header}>PPE Supplies</h1>
+        <h1 className={classes.header}>Supplies</h1>
         <section className={classes.section}>
+          <List type="unordered">
+            <List.Item>
+              Complete the form below with your organisation&apos;s details.
+            </List.Item>
+            <List.Item>
+              Please, <strong>tick</strong>, all the needs you can cover.
+            </List.Item>
+            <List.Item>Submit the form.</List.Item>
+          </List>
           <p>
-            Use this form so we can add you to our collated database of
-            suppliers
+            <strong>Next</strong>
           </p>
-          <p>
-            Email{' '}
-            <a href="mailto:frontline@wearebeep.com">frontline@wearebeep.com</a>{' '}
-            to tell us about:
-          </p>
-          <ul>
-            <li>any needs you have met: so we can remove them from the map</li>
-            <li>any stories of supplying needs: so we can raise awareness</li>
-          </ul>
-          <p>Thank you!</p>
+          <List type="unordered">
+            <List.Item>
+              Our team of volunteers will contact you shortly over
+              videocall/Zoom to verify your credentials (this step is for the
+              safety of those we wish to support in Ukraine)
+            </List.Item>
+            <List.Item>
+              Once verification is completed, you will receive a Login ID &
+              password.
+            </List.Item>
+            <List.Item>
+              Log-in to access the map of needs and other useful resources.
+            </List.Item>
+          </List>
+          <p>Thank you for taking this journey and supporting those in need.</p>
         </section>
         <section className={classes.section}>
           <DevTool control={control} />
@@ -160,19 +174,12 @@ export const RegisterSupplies: React.FC = () => {
                 description="Which best describes your organisation?"
                 required={true}
               >
+                <Radio value="Manufacturer" label="Manufacturer/Supplier" />
                 <Radio
-                  value="ExistingPPEsupplier"
-                  label="PPE manufacturer/supplier (pre-COVID-19)"
+                  value="AidOrganisationOrCharity"
+                  label="Aid Organisation/Charity"
                 />
-                <Radio
-                  value="AdaptedPPEsupplier"
-                  label="Manufacturer/supplier adapted to make PPE in response to
-                  COVID-19"
-                />
-                <Radio
-                  value="Individuals"
-                  label="Individual/group of individuals"
-                />
+                <Radio value="CommunityGroup" label="Community Group" />
                 <Radio value="Other" label="Other..." />
               </ReactHookFormRadioGroup>
               {watchedSupplierType === 'Other' && (

@@ -74,7 +74,6 @@ export const PpeSupplySubForm: React.FC<
         orientation="vertical"
       >
         <Radio value="Free" label="Free of Charge" />
-        <Radio value="Charged" label="Charged" />
         <Radio value="Other" label="Other..." />
       </ReactHookFormRadioGroup>
       {watchedCostType === 'Other' && (
