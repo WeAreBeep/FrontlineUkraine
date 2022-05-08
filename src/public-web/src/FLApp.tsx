@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, useRoutes, useNavigate } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import authgear from '@authgear/web';
-import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { RouteType } from './routes';
 import * as Containers from './containers';
@@ -14,6 +13,7 @@ import { AuthgearProvider } from './contexts/AuthgearContext';
 import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
 import { FLGlobalStyle } from './components/FLGlobalStyle';
+import { FLMantineProvider } from './components/FLMantineProvider';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -106,33 +106,12 @@ export const FLApp: React.FC = () => {
     return null;
   }
   return (
-    <MantineProvider
-      theme={{
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue',
-        colors: {
-          flGreen: [
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-          ],
-        },
-        lineHeight: 1.5,
-        primaryColor: 'flGreen',
-      }}
-    >
+    <FLMantineProvider>
       <NotificationsProvider>
         <BrowserRouter>
           <InnerFLApp />
         </BrowserRouter>
       </NotificationsProvider>
-    </MantineProvider>
+    </FLMantineProvider>
   );
 };
