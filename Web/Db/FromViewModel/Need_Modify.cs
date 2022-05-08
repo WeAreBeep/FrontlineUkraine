@@ -104,7 +104,6 @@ namespace Web.Db
 			PhoneNumber = s.PhoneNumber;
 			OrganisationName = s.OrganisationName;
 			Department = s.Department;
-			OrgTypeId = (int)s.OrgType;
 			OrgTypeOther = s.OrgTypeOther;
 			OrgRegCode = s.OrgRegCode;
 			OrgCityId = s.OrgCityId;
@@ -113,6 +112,11 @@ namespace Web.Db
 			AddressLineTwo = s.AddressLineTwo ?? "";
 			Postcode = s.Postcode;
 			TellUsMore = s.TellUsMore;
+
+			if (s.OrgType != null)
+			{
+				OrgTypeId = (int)s.OrgType;
+			}
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace Web.Db
 		public string Department { get; set; }
 		public string OrgRegCode { get; set; }
 		public long OrgCityId { get; set; }
-		public int OrgTypeId { get; set; }
+		public int? OrgTypeId { get; set; }
 		public string OrgTypeOther { get; set; }
 		public string TownOrCity { get; set; }
 		public long? TweetId { get; set; }

@@ -9,6 +9,8 @@ LANGS = [
 
 def map_enum_from_name(enum: Type[Enum]) -> Callable[[Any], Enum]:
     def mapper(v: Any):
+        if v is None or len(str(v)) == 0:
+            return None
         return enum[v]
 
     return mapper

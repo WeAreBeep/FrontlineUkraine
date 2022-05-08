@@ -34,14 +34,14 @@ class NeedCreate(BaseModel):
     org_govt_approval_image_id: Optional[str]
     org_has_govt_approval: bool
     org_reg_code: str
-    org_type: OrgType
+    org_type: Optional[OrgType]
     org_type_other: Optional[str]
     org_city_id: int
     email: EmailStr
     phone_number: str
     contact_name: str
-    job_title: str
-    department: str
+    job_title: Optional[str]
+    department: Optional[str]
     address_line_one: str
     address_line_two: Optional[str]
     postcode: str
@@ -52,10 +52,10 @@ class NeedCreate(BaseModel):
         map_enum_from_name(OrgType)
     )
 
-    @validator("org_type_other")
+    @validator("org_type")
     def org_type_other_required(cls, v, values):
-        if values["org_type"] == OrgType.Other:
-            if v is None or len(v) == 0:
+        if v == OrgType.Other:
+            if values["org_type"] is None or len(values["org_type"]) == 0:
                 raise ValueError(
                     "Field cannot be empty when organisation type is Other"
                 )

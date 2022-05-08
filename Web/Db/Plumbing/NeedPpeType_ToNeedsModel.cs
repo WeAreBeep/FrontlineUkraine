@@ -29,7 +29,7 @@ namespace Web.Db
 			respVal.PhoneNumber = s.PhoneNumber;
 			respVal.Department = s.Department;
 			respVal.JobTitle = s.JobTitle;
-			respVal.NeedsOrgType = ((OrgTypes)s.OrgTypeId).GetText();
+			respVal.NeedsOrgType = s.OrgTypeId != null ? ((OrgTypes)s.OrgTypeId).GetText() : "";
 			respVal.NeedsOrgTypeOther = s.OrgTypeOther;
 			respVal.AddressLineOne = s.AddressLineOne;
 			respVal.AddressLineTwo = s.AddressLineTwo;

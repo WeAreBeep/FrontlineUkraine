@@ -84,9 +84,8 @@ namespace Web.Models
 		[Display(Name = "City", Description = "Organisation city"), Required(ErrorMessage = Settings.ValMsgs.Required)]
 		public long OrgCityId { get; set; }
 
-		[Display(Name = "Type", Description = "Which best describes your organisation?"),
-		Required(ErrorMessage = Settings.ValMsgs.Required)]
-		public OrgTypes OrgType { get; set; }
+		[Display(Name = "Type", Description = "Which best describes your organisation?")]
+		public OrgTypes? OrgType { get; set; }
 
 		[Display(Name = "Type Other", Description = "If the list above does not fit choose \"Other...\" and describe here"),
 		StringLength(1000, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum),
@@ -106,13 +105,11 @@ namespace Web.Models
 		public string Postcode { get; set; }
 
 		[Display(Name = "Job Title", Description = "This will not be published on the site. It will be used for anonymous data reporting."),
-		Required(ErrorMessage = Settings.ValMsgs.Required),
-		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
+		 StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string JobTitle { get; set; }
 
 		[Display(Name = "Department", Description = "This will not be published on the site. It will be used for anonymous data reporting."),
-		Required(ErrorMessage = Settings.ValMsgs.Required),
-		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
+		 StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string Department { get; set; }
 
 		[Display(Name = "Town/City", Description = ""),
