@@ -40,6 +40,10 @@ import { ApiState } from '../../utils/apiState';
 import { Paginated } from '../../models/paginated';
 import { City } from '../../models/city';
 import { W3WLocationInput } from '../../components/W3WLocationInput/W3WLocationInput';
+import {
+  USREOU_CODE_PATTERN,
+  WHAT_3_WORDS_ADDRESS_PATTERN,
+} from '../../constants/patterns';
 
 export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
@@ -193,7 +197,10 @@ export const RegisterNeeds: React.FC = () => {
               </InputWrapper>
               <TextInput
                 {...register('contactName', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.contactName?.message}
                 className={classes.inputWrapper}
@@ -207,7 +214,10 @@ export const RegisterNeeds: React.FC = () => {
               />
               <TextInput
                 {...register('email', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.email?.message}
                 className={classes.inputWrapper}
@@ -222,7 +232,10 @@ export const RegisterNeeds: React.FC = () => {
               />
               <TextInput
                 {...register('phoneNumber', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.phoneNumber?.message}
                 className={classes.inputWrapper}
@@ -300,7 +313,10 @@ export const RegisterNeeds: React.FC = () => {
               </legend>
               <TextInput
                 {...register('organisationName', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.organisationName?.message}
                 className={classes.inputWrapper}
@@ -314,7 +330,14 @@ export const RegisterNeeds: React.FC = () => {
               />
               <TextInput
                 {...register('orgRegCode', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
+                  pattern: {
+                    value: USREOU_CODE_PATTERN,
+                    message: VALIDATION_MSG.USREOUPattern(renderToString),
+                  },
                 })}
                 error={errors.orgRegCode?.message}
                 className={classes.inputWrapper}
@@ -350,7 +373,10 @@ export const RegisterNeeds: React.FC = () => {
               {watchedOrgType === 'Other' && (
                 <TextInput
                   {...register('orgTypeOther', {
-                    required: { value: true, message: VALIDATION_MSG.required },
+                    required: {
+                      value: true,
+                      message: VALIDATION_MSG.required(renderToString),
+                    },
                     shouldUnregister: true,
                   })}
                   error={errors.orgTypeOther?.message}
@@ -391,7 +417,14 @@ export const RegisterNeeds: React.FC = () => {
               </legend>
               <W3WLocationInput
                 {...register('postcode', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
+                  pattern: {
+                    value: WHAT_3_WORDS_ADDRESS_PATTERN,
+                    message: VALIDATION_MSG.what3wordsPattern(renderToString),
+                  },
                 })}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
@@ -405,7 +438,10 @@ export const RegisterNeeds: React.FC = () => {
               />
               <TextInput
                 {...register('addressLineOne', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.addressLineOne?.message}
                 className={classes.inputWrapper}

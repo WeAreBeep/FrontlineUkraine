@@ -143,7 +143,10 @@ export const RegisterSupplies: React.FC = () => {
               <legend className={classes.legend}>Company Details</legend>
               <TextInput
                 {...register('organisationName', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.organisationName?.message}
                 className={classes.inputWrapper}
@@ -153,7 +156,10 @@ export const RegisterSupplies: React.FC = () => {
               />
               <TextInput
                 {...register('description', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.description?.message}
                 className={classes.inputWrapper}
@@ -165,7 +171,10 @@ export const RegisterSupplies: React.FC = () => {
                 name="supplierType"
                 control={control}
                 rules={{
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 }}
                 error={errors.supplierType?.message}
                 classNames={{ root: classes.inputWrapper }}
@@ -185,7 +194,10 @@ export const RegisterSupplies: React.FC = () => {
               {watchedSupplierType === 'Other' && (
                 <TextInput
                   {...register('supplierTypeOther', {
-                    required: { value: true, message: VALIDATION_MSG.required },
+                    required: {
+                      value: true,
+                      message: VALIDATION_MSG.required(renderToString),
+                    },
                     shouldUnregister: true,
                   })}
                   error={errors.supplierTypeOther?.message}
@@ -199,7 +211,10 @@ export const RegisterSupplies: React.FC = () => {
               <legend className={classes.legend}>Contact Details</legend>
               <TextInput
                 {...register('email', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.email?.message}
                 className={classes.inputWrapper}
@@ -216,7 +231,10 @@ export const RegisterSupplies: React.FC = () => {
               />
               <TextInput
                 {...register('phoneNumber', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.phoneNumber?.message}
                 className={classes.inputWrapper}
@@ -226,7 +244,10 @@ export const RegisterSupplies: React.FC = () => {
               />
               <TextInput
                 {...register('contactName', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.contactName?.message}
                 className={classes.inputWrapper}
@@ -236,7 +257,10 @@ export const RegisterSupplies: React.FC = () => {
               />
               <TextInput
                 {...register('postcode', {
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 })}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
@@ -311,7 +335,10 @@ export const RegisterSupplies: React.FC = () => {
                 name="transportType"
                 control={control}
                 rules={{
-                  required: { value: true, message: VALIDATION_MSG.required },
+                  required: {
+                    value: true,
+                    message: VALIDATION_MSG.required(renderToString),
+                  },
                 }}
                 error={errors.transportType?.message}
                 classNames={{ root: classes.inputWrapper }}
@@ -327,7 +354,10 @@ export const RegisterSupplies: React.FC = () => {
               {watch('transportType') === TransportType.Other && (
                 <TextInput
                   {...register('transportTypeOther', {
-                    required: { value: true, message: VALIDATION_MSG.required },
+                    required: {
+                      value: true,
+                      message: VALIDATION_MSG.required(renderToString),
+                    },
                     shouldUnregister: true,
                   })}
                   error={errors.transportTypeOther?.message}

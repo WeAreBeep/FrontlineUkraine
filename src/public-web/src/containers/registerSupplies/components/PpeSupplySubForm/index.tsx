@@ -7,6 +7,7 @@ import { isResourceTypeOther, PpeTypeEnum } from '../../../../models/ppeType';
 import { ReactHookFormNumberInput } from '../../../../components/ReactHookFormNumberInput';
 import { useStyles } from '../../../registerNeeds/components/PpeRequestSubForm/style';
 import { VALIDATION_MSG } from '../../../../utils/validation';
+import { useLocale } from '../../../../locale/LocaleProvider';
 
 interface Props {
   ppeType: PpeTypeEnum;
@@ -20,6 +21,7 @@ export const PpeSupplySubForm: React.FC<
       'control' | 'formState' | 'register' | 'watch'
     >
 > = ({ ppeType, shouldUnregister, control, formState, register, watch }) => {
+  const { renderToString } = useLocale();
   const watchedCostType = watch(`ppeTypes.${ppeType}.costType`);
   const { errors } = formState;
   const { classes } = useStyles();
@@ -28,7 +30,10 @@ export const PpeSupplySubForm: React.FC<
       {isResourceTypeOther(ppeType) && (
         <TextInput
           {...register(`ppeTypes.${ppeType}.typeOther`, {
-            required: { value: true, message: VALIDATION_MSG.required },
+            required: {
+              value: true,
+              message: VALIDATION_MSG.required(renderToString),
+            },
             shouldUnregister,
           })}
           className={classes.inputWrapper}
@@ -41,7 +46,10 @@ export const PpeSupplySubForm: React.FC<
         name={`ppeTypes.${ppeType}.meetRegulations`}
         classNames={{ root: classes.inputWrapper }}
         rules={{
-          required: { value: true, message: VALIDATION_MSG.required },
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
           shouldUnregister,
         }}
         error={errors.ppeTypes?.[ppeType]?.meetRegulations?.message}
@@ -65,7 +73,10 @@ export const PpeSupplySubForm: React.FC<
         name={`ppeTypes.${ppeType}.costType`}
         classNames={{ root: classes.inputWrapper }}
         rules={{
-          required: { value: true, message: VALIDATION_MSG.required },
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
           shouldUnregister,
         }}
         error={errors.ppeTypes?.[ppeType]?.costType?.message}
@@ -81,7 +92,10 @@ export const PpeSupplySubForm: React.FC<
           label="Other Cost Type"
           description="Describe how are you offering this type of PPE"
           {...register(`ppeTypes.${ppeType}.costTypeOther`, {
-            required: { value: true, message: VALIDATION_MSG.required },
+            required: {
+              value: true,
+              message: VALIDATION_MSG.required(renderToString),
+            },
             shouldUnregister,
           })}
           error={errors.ppeTypes?.[ppeType]?.costTypeOther?.message}
@@ -91,7 +105,10 @@ export const PpeSupplySubForm: React.FC<
         name={`ppeTypes.${ppeType}.capacityPerWeek`}
         control={control}
         rules={{
-          required: { value: true, message: VALIDATION_MSG.required },
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
           shouldUnregister,
         }}
         error={errors.ppeTypes?.[ppeType]?.capacityPerWeek?.message}
@@ -106,7 +123,10 @@ export const PpeSupplySubForm: React.FC<
         name={`ppeTypes.${ppeType}.currentStock`}
         control={control}
         rules={{
-          required: { value: true, message: VALIDATION_MSG.required },
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
           shouldUnregister,
         }}
         error={errors.ppeTypes?.[ppeType]?.currentStock?.message}
@@ -121,7 +141,10 @@ export const PpeSupplySubForm: React.FC<
         name={`ppeTypes.${ppeType}.leadTimeInDays`}
         control={control}
         rules={{
-          required: { value: true, message: VALIDATION_MSG.required },
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
           shouldUnregister,
         }}
         error={errors.ppeTypes?.[ppeType]?.leadTimeInDays?.message}

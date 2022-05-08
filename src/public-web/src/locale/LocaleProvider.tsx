@@ -48,7 +48,7 @@ type LocaleContextValue = State & Actions;
 
 const LocaleContext = React.createContext<LocaleContextValue>(null as any);
 
-interface TranslationContextValue extends LocaleContextValue {
+export interface TranslationContextValue extends LocaleContextValue {
   renderToString: (id: MessageID, values?: Values) => string;
 }
 

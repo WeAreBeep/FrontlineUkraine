@@ -8,7 +8,10 @@ export default {
   suppliers_sign_in_button: 'Увійдіть, щоб побачити повну карту',
   account_menu_settings: 'Налаштування',
   account_menu_sign_out: 'Вийти з аккаунта',
-  common_required_field_error: 'This field is required',
+  common_required_field_error: "Це поле є обов'язковим",
+  common_what_3_words_address_pattern_error:
+    'Адреса what3words має складатися з 3 слів, розділених крапками (.)',
+  common_usreou_code_pattern_error: 'Це 7-значний унікальний реєстраційний код',
   i_need_form_form_submit_title_saved: 'Подано!',
   i_need_form_form_submit_title_save: 'Подати',
   i_need_form_title: 'МЕНІ ПОТРІБНО',

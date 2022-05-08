@@ -7,6 +7,7 @@ import { ReactHookFormNumberInput } from '../../../../components/ReactHookFormNu
 import { useStyles } from './style';
 import { VALIDATION_MSG } from '../../../../utils/validation';
 import { FormattedMessage } from '../../../../locale/FormattedMessage';
+import { useLocale } from '../../../../locale/LocaleProvider';
 
 interface Props {
   ppeType: PpeTypeEnum;
@@ -20,13 +21,19 @@ export const PpeRequestSubForm: React.FC<
       'control' | 'formState' | 'register'
     >
 > = ({ ppeType, shouldUnregister, control, formState, register }) => {
+  const { renderToString } = useLocale();
   const { errors } = formState;
   const { classes } = useStyles();
   return (
     <div>
       <ReactHookFormNumberInput
         name={`ppeTypes.${ppeType}.dailyShortage`}
-        rules={{ required: { value: true, message: VALIDATION_MSG.required } }}
+        rules={{
+          required: {
+            value: true,
+            message: VALIDATION_MSG.required(renderToString),
+          },
+        }}
         control={control}
         error={errors.ppeTypes?.[ppeType]?.dailyShortage?.message}
         className={classes.inputWrapper}
@@ -40,7 +47,10 @@ export const PpeRequestSubForm: React.FC<
       {isResourceTypeOther(ppeType) && (
         <TextInput
           {...register(`ppeTypes.${ppeType}.ppeTypeOther`, {
-            required: { value: true, message: VALIDATION_MSG.required },
+            required: {
+              value: true,
+              message: VALIDATION_MSG.required(renderToString),
+            },
             shouldUnregister,
           })}
           error={errors.ppeTypes?.[ppeType]?.ppeTypeOther?.message}
