@@ -60,7 +60,7 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_title:
     'what3words адреса',
   i_need_form_fieldset_additional_details_field_postcode_description:
-    'Це сервіс, який ми використовуємо, щоб визначити ваше точне місцезнаходження за допомогою 3 слів. Натисніть «Отримати What3Words», скопіюйте та вставте 3 слова, які ви отримаєте нижче.',
+    'what3Words – це дуже простий спосіб переконатися, що ми точно знаємо, де ви знаходитесь. Дуже важливо, щоб у нас була така інформація, щоб гарантувати, що ви швидко та ефективно отримаєте необхідні матеріали. Вам буде надана унікальна комбінація з трьох слів для визначення вашого конкретного місцезнаходження. Примітка: тільки перевірені постачальники зможуть побачити ваше точне місцезнаходження. Натисніть «Отримати What3Words», скопіюйте та вставте 3 слова, які ви отримаєте нижче.',
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
     'Отримайте what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:

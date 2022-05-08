@@ -65,7 +65,7 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_title:
     'what3words address',
   i_need_form_fieldset_additional_details_field_postcode_description:
-    'It is a service we use to identify your exact location with 3 words. Click "Get What3Words" and copy and paste the 3 words you get below.',
+    'what3Words is a very simple way to make sure we know exactly where you are. It is vital that we have this information to make sure you get the supplies you need quickly and efficiently. You will be given a unique combination of three words to identify your specific location. NB: only verified suppliers will be able to see your exact location. Click "Get What3Words" and copy and paste the 3 words you get below.',
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
     'Get what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
