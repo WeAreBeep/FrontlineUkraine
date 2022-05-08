@@ -101,7 +101,7 @@ export const RegisterSupplies: React.FC = () => {
   return (
     <div className={classes.scrollContainer}>
       <Container>
-        <h1 className={classes.header}>PPE Supplies</h1>
+        <h1 className={classes.header}>Supplies</h1>
         <section className={classes.section}>
           <p>
             Use this form so we can add you to our collated database of
