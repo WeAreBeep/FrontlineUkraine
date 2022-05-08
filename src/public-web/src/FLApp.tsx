@@ -13,6 +13,7 @@ import { LocaleProvider, useLocale } from './locale/LocaleProvider';
 import { AuthgearProvider } from './contexts/AuthgearContext';
 import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
+import { FLGlobalStyle } from './components/FLGlobalStyle';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -74,6 +75,7 @@ const InnerFLApp: React.FC = () => {
       <APIContextProvider>
         <ServiceProvider windowImpl={window}>
           <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+            <FLGlobalStyle />
             <Content />
           </LocaleProvider>
         </ServiceProvider>
@@ -122,6 +124,7 @@ export const FLApp: React.FC = () => {
             '#00966B',
           ],
         },
+        lineHeight: 1.5,
         primaryColor: 'flGreen',
       }}
     >
