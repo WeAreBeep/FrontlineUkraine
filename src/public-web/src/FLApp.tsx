@@ -48,7 +48,8 @@ const Content: React.FC = () => {
   const Match = useRoutes([
     { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
     {
-      path: RouteType.RegisterSupply, element: <Containers.RegisterSupplies />,
+      path: RouteType.RegisterSupply,
+      element: <Containers.RegisterSupplies />,
     },
     { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
     { path: RouteType.Partners, element: <Containers.Partners /> },
@@ -75,8 +76,10 @@ const InnerFLApp: React.FC = () => {
       <APIContextProvider>
         <ServiceProvider windowImpl={window}>
           <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-            <FLGlobalStyle />
-            <Content />
+            <NotificationsProvider>
+              <FLGlobalStyle />
+              <Content />
+            </NotificationsProvider>
           </LocaleProvider>
         </ServiceProvider>
       </APIContextProvider>
@@ -107,11 +110,9 @@ export const FLApp: React.FC = () => {
   }
   return (
     <FLMantineProvider>
-      <NotificationsProvider>
-        <BrowserRouter>
-          <InnerFLApp />
-        </BrowserRouter>
-      </NotificationsProvider>
+      <BrowserRouter>
+        <InnerFLApp />
+      </BrowserRouter>
     </FLMantineProvider>
   );
 };
