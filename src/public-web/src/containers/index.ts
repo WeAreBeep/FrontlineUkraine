@@ -7,4 +7,3 @@ export { TermsAndConditions } from './termsAndConditions';
 export { ContactUs } from './contactUs';
 export { Suppliers } from './suppliers';
 export { Faq } from './faq';
-
