@@ -1,8 +1,8 @@
-from enum import IntEnum
+from enum import IntEnum, auto
 
 
 class SupplierType(IntEnum):
-    ExistingPPEsupplier = 1
-    AdaptedPPEsupplier = 2
-    Individuals = 3
-    Other = 4
+    Manufacturer = 1
+    AidOrganisationOrCharity = auto()
+    CommunityGroup = auto()
+    Other = auto()

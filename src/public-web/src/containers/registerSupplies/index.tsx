@@ -161,17 +161,16 @@ export const RegisterSupplies: React.FC = () => {
                 required={true}
               >
                 <Radio
-                  value="ExistingPPEsupplier"
-                  label="PPE manufacturer/supplier (pre-COVID-19)"
+                  value="Manufacturer"
+                  label="Manufacturer/Supplier"
                 />
                 <Radio
-                  value="AdaptedPPEsupplier"
-                  label="Manufacturer/supplier adapted to make PPE in response to
-                  COVID-19"
+                  value="AidOrganisationOrCharity"
+                  label="Aid Organisation/Charity"
                 />
                 <Radio
-                  value="Individuals"
-                  label="Individual/group of individuals"
+                  value="CommunityGroup"
+                  label="Community Group"
                 />
                 <Radio value="Other" label="Other..." />
               </ReactHookFormRadioGroup>
