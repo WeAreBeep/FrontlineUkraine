@@ -34,7 +34,7 @@ export const useStyles = createStyles((theme) => ({
     [tablet(theme)]: {
       paddingTop: HEADER_HEIGHT,
       minHeight: 0,
-      height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`,
+      height: `calc(100vh - ${FOOTER_HEIGHT})`,
       overflowY: 'scroll',
     },
   },
