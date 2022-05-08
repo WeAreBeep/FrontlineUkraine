@@ -39,7 +39,7 @@ class Need(FLBase):
     phoneNumber = Column("PhoneNumber", Text, quote=True)
     organisationName = Column("OrganisationName", Text, quote=True)
     department = Column("Department", Text, quote=True)
-    orgTypeId = Column("OrgTypeId", Integer, quote=True, nullable=False)
+    orgTypeId = Column("OrgTypeId", Integer, quote=True)
     orgTypeOther = Column("OrgTypeOther", Text, quote=True)
     orgCityId = Column("OrgCityId", BigInteger, quote=True)
     orgRegCode = Column("OrgRegCode", Text, quote=True, nullable=False, server_default="")

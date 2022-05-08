@@ -24,7 +24,7 @@ namespace Web.Models
 				Email = s.Email,
 				PhoneNumber = s.PhoneNumber,
 				OrganisationName = s.OrganisationName,
-				OrgType = (OrgTypes)s.OrgTypeId,
+				OrgType = (OrgTypes?)s.OrgTypeId,
 				OrgTypeOther = s.OrgTypeOther,
 				OrgRegCode = s.OrgRegCode,
 				OrgCityId = s.OrgCityId,

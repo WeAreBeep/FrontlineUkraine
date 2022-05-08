@@ -82,12 +82,14 @@ export const Suppliers: React.FC = () => {
         <Col md={12} lg={6} offsetLg={3}>
           <Stack align="center" className={classes.stackContainer}>
             <h1 className={classes.heading}>Supplier Portal</h1>
-            <h2>
-              How to login
-            </h2>
+            <h2>How to login</h2>
             <List type="ordered">
               <List.Item>
-                If you don’t have an account, please contact <Anchor href="mailto:hello@frontline.live">hello@frontline.live</Anchor> to request an account.
+                If you don’t have an account, please contact{' '}
+                <Anchor href="mailto:hello@frontline.live">
+                  hello@frontline.live
+                </Anchor>{' '}
+                to request an account.
               </List.Item>
               <List.Item>
                 Click the button below to login to your account.
@@ -96,17 +98,18 @@ export const Suppliers: React.FC = () => {
                 Enter your email and the password sent to you by our team.
               </List.Item>
               <List.Item>
-                You will be asked to set up 2FA. Feel free to use any 2FA app you have. If you yet have an 2FA app before, we suggest using <Anchor href="https://authy.com/download/" target="_blank">Authy</Anchor>
+                You will be asked to set up 2FA. Feel free to use any 2FA app
+                you have. If you yet have an 2FA app before, we suggest using{' '}
+                <Anchor href="https://authy.com/download/" target="_blank">
+                  Authy
+                </Anchor>
               </List.Item>
               <List.Item>
-                Fire up your 2FA app to scan the QR code, then you will get a 6-digit number.
+                Fire up your 2FA app to scan the QR code, then you will get a
+                6-digit number.
               </List.Item>
-              <List.Item>
-                Enter the 6-digit number to login.
-              </List.Item>
-              <List.Item>
-                2FA is required for every login.
-              </List.Item>
+              <List.Item>Enter the 6-digit number to login.</List.Item>
+              <List.Item>2FA is required for every login.</List.Item>
             </List>
             <Button onClick={onClickSignIn}>Login to see the full map</Button>
           </Stack>

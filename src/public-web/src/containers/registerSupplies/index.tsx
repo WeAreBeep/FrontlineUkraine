@@ -313,18 +313,9 @@ export const RegisterSupplies: React.FC = () => {
                 description="Can you transport and deliver the supplies?"
                 required={true}
               >
-                <Radio
-                  value={TransportType.Yes}
-                  label="Yes"
-                />
-                <Radio
-                  value={TransportType.No}
-                  label="No"
-                />
-                <Radio
-                  value={TransportType.Other}
-                  label="Please specify"
-                />
+                <Radio value={TransportType.Yes} label="Yes" />
+                <Radio value={TransportType.No} label="No" />
+                <Radio value={TransportType.Other} label="Please specify" />
               </ReactHookFormRadioGroup>
               {watch('transportType') === TransportType.Other && (
                 <TextInput

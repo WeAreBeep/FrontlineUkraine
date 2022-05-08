@@ -13,7 +13,6 @@ import {
   Select,
 } from '@mantine/core';
 import { Controller, FieldPath, SubmitHandler, useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { PpeRequestSubForm } from './components/PpeRequestSubForm';
 import {
   getDisplayNameMessageID,
@@ -170,7 +169,6 @@ export const RegisterNeeds: React.FC = () => {
           />
         </section>
         <section className={classes.section}>
-          <DevTool control={control} />
           <form
             onSubmit={async (e) =>
               handleSubmit(handleValidSubmit)(e).catch(handleSubmitError)
@@ -331,9 +329,6 @@ export const RegisterNeeds: React.FC = () => {
               <ReactHookFormRadioGroup
                 name="orgType"
                 control={control}
-                rules={{
-                  required: { value: true, message: VALIDATION_MSG.required },
-                }}
                 error={errors.orgType?.message}
                 classNames={{ root: classes.inputWrapper }}
                 orientation="vertical"
@@ -343,7 +338,6 @@ export const RegisterNeeds: React.FC = () => {
                 description={renderToString(
                   'i_need_form_fieldset_organisation_field_org_type_description'
                 )}
-                required={true}
               >
                 {ORG_TYPES.map(({ value, name }) => (
                   <Radio
@@ -367,9 +361,7 @@ export const RegisterNeeds: React.FC = () => {
               )}
 
               <TextInput
-                {...register('jobTitle', {
-                  required: { value: true, message: VALIDATION_MSG.required },
-                })}
+                {...register('jobTitle')}
                 error={errors.jobTitle?.message}
                 className={classes.inputWrapper}
                 label={renderToString(
@@ -378,12 +370,9 @@ export const RegisterNeeds: React.FC = () => {
                 description={renderToString(
                   'i_need_form_fieldset_organisation_field_job_title_description'
                 )}
-                required={true}
               />
               <TextInput
-                {...register('department', {
-                  required: { value: true, message: VALIDATION_MSG.required },
-                })}
+                {...register('department')}
                 error={errors.department?.message}
                 className={classes.inputWrapper}
                 label={renderToString(
@@ -392,7 +381,6 @@ export const RegisterNeeds: React.FC = () => {
                 description={renderToString(
                   'i_need_form_fieldset_organisation_field_department_description'
                 )}
-                required={true}
               />
             </fieldset>
             <fieldset className={classes.fieldSet}>

@@ -37,6 +37,7 @@ export const useStyles = createStyles((theme) => {
       margin: 0,
       [tablet(theme)]: {
         display: 'flex',
+        lineHeight: 1,
       },
     },
     localeControl: {

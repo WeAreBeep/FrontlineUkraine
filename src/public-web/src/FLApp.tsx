@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, useRoutes, useNavigate } from 'react-router-dom';
 import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 import authgear from '@authgear/web';
-import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { RouteType } from './routes';
 import * as Containers from './containers';
@@ -13,6 +12,8 @@ import { LocaleProvider, useLocale } from './locale/LocaleProvider';
 import { AuthgearProvider } from './contexts/AuthgearContext';
 import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
+import { FLGlobalStyle } from './components/FLGlobalStyle';
+import { FLMantineProvider } from './components/FLMantineProvider';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -47,7 +48,8 @@ const Content: React.FC = () => {
   const Match = useRoutes([
     { path: RouteType.RegisterNeed, element: <Containers.RegisterNeeds /> },
     {
-      path: RouteType.RegisterSupply, element: <Containers.RegisterSupplies />,
+      path: RouteType.RegisterSupply,
+      element: <Containers.RegisterSupplies />,
     },
     { path: RouteType.Suppliers, element: <Containers.Suppliers /> },
     { path: RouteType.Partners, element: <Containers.Partners /> },
@@ -74,7 +76,10 @@ const InnerFLApp: React.FC = () => {
       <APIContextProvider>
         <ServiceProvider windowImpl={window}>
           <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-            <Content />
+            <NotificationsProvider>
+              <FLGlobalStyle />
+              <Content />
+            </NotificationsProvider>
           </LocaleProvider>
         </ServiceProvider>
       </APIContextProvider>
@@ -104,32 +109,10 @@ export const FLApp: React.FC = () => {
     return null;
   }
   return (
-    <MantineProvider
-      theme={{
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue',
-        colors: {
-          flGreen: [
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-            '#00966B',
-          ],
-        },
-        primaryColor: 'flGreen',
-      }}
-    >
-      <NotificationsProvider>
-        <BrowserRouter>
-          <InnerFLApp />
-        </BrowserRouter>
-      </NotificationsProvider>
-    </MantineProvider>
+    <FLMantineProvider>
+      <BrowserRouter>
+        <InnerFLApp />
+      </BrowserRouter>
+    </FLMantineProvider>
   );
 };

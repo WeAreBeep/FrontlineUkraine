@@ -51,7 +51,7 @@ export const MainLinks: React.FC<{
       },
       {
         routeType: RouteType.Faq,
-        name: "FAQ",
+        name: 'FAQ',
       },
     ],
     [renderToString]

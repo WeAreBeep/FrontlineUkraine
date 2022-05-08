@@ -15,7 +15,7 @@ namespace Web.Db
         public string PhoneNumber { get; set; }
         public string Department { get; set; }
         public string JobTitle { get; set; }
-        public int OrgTypeId { get; set; }
+        public int? OrgTypeId { get; set; }
         public string OrgTypeOther { get; set; }
         public string AddressLineOne { get; set; }
         public string AddressLineTwo { get; set; }
