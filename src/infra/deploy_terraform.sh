@@ -26,7 +26,8 @@ echo "{
     \"WebsiteCanonicalUrl\": \"$WEBSITE_CANONICAL_URL\",
     \"What3wordsApiKey\": \"$WHAT3WORDS_API_KEY\",
     \"AuthgearAppAdminPortalUrl\": \"$AUTHGEAR_ADMIN_PORTAL\",
-    \"PublicWebPublicMapUrl\": \"$PUBLIC_WEB_PUBLIC_MAP_URL\"
+    \"PublicWebPublicMapUrl\": \"$PUBLIC_WEB_PUBLIC_MAP_URL\",
+    \"PublicWebSupplierMapUrl\": \"$PUBLIC_WEB_SUPPLIER_MAP_URL\"
 }" > ./app-settings.json
 
 echo "Initializing Terraform..."

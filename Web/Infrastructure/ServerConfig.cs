@@ -20,5 +20,7 @@ namespace Web.Infrastructure
         public string AuthgearAppAdminPortalUrl { get; set; }
         
         public string PublicWebPublicMapUrl { get; set; }
+        
+        public string PublicWebSupplierMapUrl { get; set; }
     }
 }
