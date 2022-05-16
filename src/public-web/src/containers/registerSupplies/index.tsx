@@ -79,7 +79,7 @@ export const RegisterSupplies: React.FC = () => {
         let key = loc[loc.length - 1] as FieldPath<RegisterSuppliesForm>;
         if (key === 'ppeTypes') {
           // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-          // select at least one of the PPE type.
+          // select at least one of the resource type.
           key = 'ppeTypes.AlcoholHandGel.can';
         }
         setError(key, {
@@ -252,7 +252,7 @@ export const RegisterSupplies: React.FC = () => {
                 error={errors.contactName?.message}
                 className={classes.inputWrapper}
                 label="Contact Name"
-                description="Name of person who deals with PPE enquiries"
+                description="Name of person who deals with resource enquiries"
                 required={true}
               />
               <TextInput
@@ -293,7 +293,7 @@ export const RegisterSupplies: React.FC = () => {
                         )
                       }
                       // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-                      // select at least one of the PPE type.
+                      // select at least one of the resource type.
                       error={errors.ppeTypes?.AlcoholHandGel?.can?.message}
                     >
                       {subGroup.type === 'leaf' &&
