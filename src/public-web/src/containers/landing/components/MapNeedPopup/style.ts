@@ -18,6 +18,7 @@ export const useStyles = createStyles((theme, _, getRef) => {
       overflowY: 'auto',
       [tablet(theme)]: {
         maxHeight: '30rem',
+        maxWidth: '20vw',
       },
       [`&.${needRef} h1, &.${needRef} dt`]: {
         color: POINT_COLORS[CategoryEnum.Need],
