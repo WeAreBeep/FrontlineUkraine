@@ -37,7 +37,7 @@ export const PpeSupplySubForm: React.FC<
             shouldUnregister,
           })}
           className={classes.inputWrapper}
-          label="PPE Type Other"
+          label="Resource Type Other"
           description={`If the list above does not fit choose "Other..." and describe here`}
         />
       )}
@@ -57,8 +57,8 @@ export const PpeSupplySubForm: React.FC<
         label="Meets Regulations"
         description={
           <span>
-            Does this type of PPE you supply meet the appropriate regulatory
-            requirements? <br /> All PPE must meet the required standards and
+            Does this type of resource you supply meet the appropriate regulatory
+            requirements? <br /> All resource must meet the required standards and
             will be tested before use by the NHS.
           </span>
         }
@@ -81,7 +81,7 @@ export const PpeSupplySubForm: React.FC<
         }}
         error={errors.ppeTypes?.[ppeType]?.costType?.message}
         label="Costs"
-        description="How are you offering this type of PPE"
+        description="How are you offering this type of resource"
         orientation="vertical"
       >
         <Radio value="Free" label="Free of Charge" />
@@ -90,7 +90,7 @@ export const PpeSupplySubForm: React.FC<
       {watchedCostType === 'Other' && (
         <Textarea
           label="Other Cost Type"
-          description="Describe how are you offering this type of PPE"
+          description="Describe how are you offering this type of resource"
           {...register(`ppeTypes.${ppeType}.costTypeOther`, {
             required: {
               value: true,

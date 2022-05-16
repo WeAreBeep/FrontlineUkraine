@@ -114,7 +114,7 @@ export const RegisterNeeds: React.FC = () => {
         let key = loc[loc.length - 1] as FieldPath<RegisterRequestForm>;
         if (key === 'ppeTypes') {
           // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-          // select at least one of the PPE type.
+          // select at least one of the resource type.
           key = 'ppeTypes.AlcoholHandGel.need';
         }
         setError(key, {
@@ -272,7 +272,7 @@ export const RegisterNeeds: React.FC = () => {
                         )
                       }
                       // NOTE: Hijack this field to show the validation error of ppeTypes. User need to
-                      // select at least one of the PPE type.
+                      // select at least one of the resource type.
                       error={errors.ppeTypes?.AlcoholHandGel?.need?.message}
                     >
                       {subGroup.type === 'leaf' &&
