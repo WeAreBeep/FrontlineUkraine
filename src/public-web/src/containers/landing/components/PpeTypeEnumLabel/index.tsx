@@ -27,6 +27,7 @@ export const PpeTypeEnumLabel: React.FC<{
       <ColorSwatch
         color={PPE_TYPE_COLOR[ppeType]}
         size={theme.fontSizes.sm}
+        sx={{ flexShrink: 0, }}
         radius="xs"
       />
       <span>
