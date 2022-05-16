@@ -33,7 +33,7 @@ class NeedCreate(BaseModel):
     organisation_name: str
     org_govt_approval_image_id: Optional[str]
     org_has_govt_approval: bool
-    org_reg_code: constr(regex=r"^(/{3})?.+\..+\..+$")
+    org_reg_code: constr(regex=r"^\d{7}$")
     org_type: Optional[OrgType]
     org_type_other: Optional[str]
     org_city_id: int
@@ -44,7 +44,7 @@ class NeedCreate(BaseModel):
     department: Optional[str]
     address_line_one: str
     address_line_two: Optional[str]
-    postcode: constr(regex=r"^\d{7}$")
+    postcode: constr(regex=r"^(/{3})?.+\..+\..+$")
     tell_us_more: Optional[str]
     ppe_types: List[NeedPpeTypeCreate]
 
