@@ -43,6 +43,7 @@ export const Landing: React.FC = () => {
         <Map<PublicMapData>
           fetchMapData={getPublicMapData}
           renderPopup={renderMapPopup}
+          focus={null}
         />
       </Col>
       <Col span={12}>
