@@ -150,7 +150,7 @@ export const PpeSupplySubForm: React.FC<
         error={errors.ppeTypes?.[ppeType]?.leadTimeInDays?.message}
         className={classes.inputWrapper}
         label="Lead Time"
-        description="Lead times on production in days"
+        description="Lead times on production in DAYS"
         min={0}
         max={1000}
         step={1}
