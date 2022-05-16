@@ -7,6 +7,8 @@ export const useStyles = createStyles((_theme) => ({
     zIndex: 10,
     top: '0.5rem',
     right: '0.5rem',
+    maxHeight: '80vh',
+    overflowY: 'auto',
   },
   container: {
     width: '100%',
