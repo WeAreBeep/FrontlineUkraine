@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import cx from 'classnames';
 import authgear from '@authgear/web';
 import { Map, MapRenderPopupType } from '../landing/components/Map';
@@ -11,6 +11,7 @@ import { CategoryEnum } from '../landing/type';
 import { MapSupplyPopup } from '../landing/components/MapSupplyPopup';
 import { MapNeedPopup } from '../landing/components/MapNeedPopup';
 import { PpeStatus } from '../../models/ppeStatus';
+import { useSearchParams } from 'react-router-dom';
 
 const renderMapPopup: MapRenderPopupType<RestrictedMapData> = (
   category,
@@ -41,6 +42,14 @@ export const Suppliers: React.FC = () => {
     actions: { getMapData },
   } = useAPIContext();
   const sessionState = useSessionState();
+  const [searchParams] = useSearchParams();
+
+  const focus = useMemo(() => {
+    const lat = parseFloat(searchParams.get('lat') ?? '');
+    const lng = parseFloat(searchParams.get('lng') ?? '');
+    const zoom = parseFloat(searchParams.get('zoom') ?? '');
+    return !isNaN(lat) && !isNaN(lat) ? {lat, lng, zoom: isNaN(zoom) ? undefined : zoom } : null;
+  }, [searchParams]);
 
   const onClickSignIn = useCallback((e) => {
     e.preventDefault();
@@ -70,6 +79,7 @@ export const Suppliers: React.FC = () => {
           <Map<RestrictedMapData>
             fetchMapData={getMapData}
             renderPopup={renderMapPopup}
+            focus={focus}
           />
         </Col>
       </Grid>

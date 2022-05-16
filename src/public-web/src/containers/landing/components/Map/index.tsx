@@ -262,9 +262,11 @@ function setClusterVisibility(
 export function Map<TMapData extends MapData<any, any>>({
   fetchMapData,
   renderPopup,
+  focus,
 }: {
   fetchMapData: () => Promise<TMapData>;
   renderPopup: MapRenderPopupType<TMapData>;
+  focus: Nullable<{ lat: number, lng: number, zoom?: number }>
 }) {
   const { classes } = useStyles();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -369,6 +371,19 @@ export function Map<TMapData extends MapData<any, any>>({
       );
     });
   }, [mapData, loaded, renderPopup]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (map == null) return;
+    if (focus) {
+      map.setCenter(focus)
+
+      if (focus.zoom) {
+        map.setZoom(focus.zoom)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus?.lat, focus?.lng, focus?.zoom]);
 
   useEffect(() => {
     const map = mapRef.current;

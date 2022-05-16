@@ -1,10 +1,17 @@
 import { createStyles } from '@mantine/core';
 import { POINT_COLORS } from '../../constant';
 import { CategoryEnum } from '../../type';
+import { tablet } from '../../../../utils/mantine';
 
 export const useStyles = createStyles((theme) => {
   return {
     container: {
+      maxHeight: '20rem',
+      overflowY: 'auto',
+      [tablet(theme)]: {
+        maxHeight: '30rem',
+        maxWidth: '20vw',
+      },
       [`h1, dt`]: {
         color: POINT_COLORS[CategoryEnum.Supply],
       },

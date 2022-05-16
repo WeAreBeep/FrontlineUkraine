@@ -1,6 +1,14 @@
 ﻿@using Web.Snippets
 @using Web.Snippets.Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.Extensions.Options
+@using Web.Infrastructure
+@using Microsoft.AspNetCore.WebUtilities
 @model LocationViewModel
+@inject IOptions<ServerConfig> ServerConfig
+
+@{
+    var mapUrl = Model.LocationSearchParams != null ? new Uri(QueryHelpers.AddQueryString(ServerConfig.Value.PublicWebSupplierMapUrl, Model.LocationSearchParams)) : null; 
+}
 
 <fieldset id="location">
     <legend>Location</legend>
@@ -15,4 +23,8 @@
         @Html.TextBoxFor(m => m.Longitude)
         @Html.HtmlValidationMessageFor(m => m.Longitude)
     </div>
+    @if (mapUrl != null)
+    {
+        <a href="@mapUrl" target="_blank">Go to supplier map</a>
+    }
 </fieldset>
