@@ -40,6 +40,7 @@ env:
 
   WHAT3WORDS_API_KEY: "${{ secrets.WHAT3WORDS_API_KEY }}"
   PUBLIC_WEB_PUBLIC_MAP_URL: "${{ secrets.PUBLIC_WEB_PUBLIC_MAP_URL }}"
+  PUBLIC_WEB_SUPPLIER_MAP_URL: "${{ secrets.PUBLIC_WEB_SUPPLIER_MAP_URL }}"
 
 jobs:  
   build:
