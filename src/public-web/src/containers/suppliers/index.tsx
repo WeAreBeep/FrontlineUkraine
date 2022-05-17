@@ -19,7 +19,7 @@ const renderMapPopup: MapRenderPopupType<RestrictedMapData> = (
   recordMap
 ) => {
   if (category === CategoryEnum.Supply && recordType === 'supply') {
-    return <MapSupplyPopup supply={recordMap[recordType][recordId]} />;
+    return <MapSupplyPopup supply={recordMap[recordType][recordId]}/>;
   }
   if (category !== CategoryEnum.Supply && recordType === 'need') {
     return (
@@ -48,7 +48,7 @@ export const Suppliers: React.FC = () => {
     const lat = parseFloat(searchParams.get('lat') ?? '');
     const lng = parseFloat(searchParams.get('lng') ?? '');
     const zoom = parseFloat(searchParams.get('zoom') ?? '');
-    return !isNaN(lat) && !isNaN(lat) ? {lat, lng, zoom: isNaN(zoom) ? undefined : zoom } : null;
+    return !isNaN(lat) && !isNaN(lat) ? { lat, lng, zoom: isNaN(zoom) ? undefined : zoom } : null;
   }, [searchParams]);
 
   const onClickSignIn = useCallback((e) => {
@@ -61,8 +61,8 @@ export const Suppliers: React.FC = () => {
         prompt: 'login',
         state: btoa(
           window.location.pathname +
-            window.location.search +
-            window.location.hash
+          window.location.search +
+          window.location.hash
         ),
       })
       .catch((e) => {
@@ -94,32 +94,20 @@ export const Suppliers: React.FC = () => {
             <h1 className={classes.heading}>Supplier Portal</h1>
             <h2>How to login</h2>
             <List type="ordered">
-              <List.Item>
-                If you don’t have an account, please contact{' '}
-                <Anchor href="mailto:hello@frontline.live">
-                  hello@frontline.live
-                </Anchor>{' '}
-                to request an account.
-              </List.Item>
-              <List.Item>
-                Click the button below to login to your account.
-              </List.Item>
-              <List.Item>
-                Enter your email and the password sent to you by our team.
-              </List.Item>
-              <List.Item>
-                You will be asked to set up 2FA. Feel free to use any 2FA app
-                you have. If you yet have an 2FA app before, we suggest using{' '}
-                <Anchor href="https://authy.com/download/" target="_blank">
-                  Authy
-                </Anchor>
-              </List.Item>
-              <List.Item>
-                Fire up your 2FA app to scan the QR code, then you will get a
-                6-digit number.
-              </List.Item>
-              <List.Item>Enter the 6-digit number to login.</List.Item>
-              <List.Item>2FA is required for every login.</List.Item>
+              <List.Item>First, please fill in the <Anchor href="/register-supplies">I HAVE FORM</Anchor> &
+                Submit</List.Item>
+              <List.Item>A volunteer will contact you shortly (within 24hrs) over video call.</List.Item>
+              <List.Item>Once verification is completed you will receive your LOG IN credentials.</List.Item>
+              <List.Item>On the SUPPLIERS’ portal, enter your email and the password sent to you by our
+                team.</List.Item>
+              <List.Item>You will be asked to set up 2FA. Feel free to use any 2FA app you have. If you haven’t used a
+                2FA app before, we suggest using <Anchor href="https://authy.com/download/" target="_blank">
+                  <strong>Authy</strong>
+                </Anchor>.</List.Item>
+              <List.Item>Fire up your 2FA app to scan the QR code, then you will get a 6-digit number.</List.Item>
+              <List.Item>Enter the 6-digit number to login. Now you can access the needs map.</List.Item>
+              <List.Item>2FA is required for every. login. This is for the safety of all those we wish to
+                support.</List.Item>
             </List>
             <Button onClick={onClickSignIn}>Login to see the full map</Button>
           </Stack>
