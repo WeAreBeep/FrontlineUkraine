@@ -40,23 +40,17 @@ export const MapSupplyPopup: React.FC<Props> = ({ supply }) => {
         <dd>
           {supply.website != null && supply.website.length !== 0 ? (
             <a href={supply.website}>
-              <AutoTranslatedText>
-                {supply.website}
-              </AutoTranslatedText>
+              <AutoTranslatedText>{supply.website}</AutoTranslatedText>
             </a>
           ) : (
-            <AutoTranslatedText>
-              {supply.organisation}
-            </AutoTranslatedText>
+            <AutoTranslatedText>{supply.organisation}</AutoTranslatedText>
           )}
         </dd>
         {supply.description && (
           <>
             <dt>Description:</dt>
             <dd>
-              <AutoTranslatedText>
-                {supply.description}
-              </AutoTranslatedText>
+              <AutoTranslatedText>{supply.description}</AutoTranslatedText>
             </dd>
           </>
         )}
@@ -87,9 +81,7 @@ export const MapSupplyPopup: React.FC<Props> = ({ supply }) => {
           <>
             <dt>Capacity Notes:</dt>
             <dd>
-              <AutoTranslatedText>
-                {supply.capacityNotes}
-              </AutoTranslatedText>
+              <AutoTranslatedText>{supply.capacityNotes}</AutoTranslatedText>
             </dd>
           </>
         )}

@@ -15,12 +15,16 @@ export class TranslatorCacheProvider implements CacheProvider {
   async get(language: string, key: string): Promise<string | undefined> {
     const storageKeyWordArray = md5(key);
     const storageKeyStr = Hex.stringify(storageKeyWordArray);
-    return this.storageProvider.getTranslationData(language, storageKeyStr)
+    return this.storageProvider.getTranslationData(language, storageKeyStr);
   }
 
   set(language: string, key: string, translation: string): void {
     const storageKeyWordArray = md5(key);
     const storageKeyStr = Hex.stringify(storageKeyWordArray);
-    this.storageProvider.setTranslationData(language, storageKeyStr, translation);
+    this.storageProvider.setTranslationData(
+      language,
+      storageKeyStr,
+      translation
+    );
   }
 }

@@ -9,7 +9,7 @@ export interface IStorageService {
 
 export class LocalStorageService implements IStorageService {
   private static LOCALE_KEY: string = 'fl_locale';
-  private static TRANSLATION_KEY: string = 'fl_translation'
+  private static TRANSLATION_KEY: string = 'fl_translation';
 
   private readonly storageImpl: Storage;
 
@@ -32,24 +32,35 @@ export class LocalStorageService implements IStorageService {
   }
 
   setTranslationData(language: string, key: string, content: string): void {
-    const translationDataKey = LocalStorageService.getTranslationDictKey(language);
+    const translationDataKey =
+      LocalStorageService.getTranslationDictKey(language);
     try {
-      this.storageImpl.setItem(translationDataKey, JSON.stringify({
-        ...this.getTranslationDict(translationDataKey),
-        [key]: content,
-      }))
+      this.storageImpl.setItem(
+        translationDataKey,
+        JSON.stringify({
+          ...this.getTranslationDict(translationDataKey),
+          [key]: content,
+        })
+      );
     } catch (e: unknown) {
       console.error(e);
       // NOTE: could be running out of space, reset item
       this.storageImpl.removeItem(translationDataKey);
-      this.storageImpl.setItem(translationDataKey, JSON.stringify({
-        [key]: content
-      }))
+      this.storageImpl.setItem(
+        translationDataKey,
+        JSON.stringify({
+          [key]: content,
+        })
+      );
     }
   }
 
-  private getTranslationDict(language: string): Record<string, string | undefined> {
-    const raw = this.storageImpl.getItem(LocalStorageService.getTranslationDictKey(language));
+  private getTranslationDict(
+    language: string
+  ): Record<string, string | undefined> {
+    const raw = this.storageImpl.getItem(
+      LocalStorageService.getTranslationDictKey(language)
+    );
     try {
       if (!raw) {
         return {};
@@ -57,7 +68,7 @@ export class LocalStorageService implements IStorageService {
       return JSON.parse(raw);
     } catch (e: unknown) {
       console.error(e);
-      return { };
+      return {};
     }
   }
 

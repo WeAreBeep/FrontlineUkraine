@@ -217,14 +217,15 @@ function addCluster<TMapData extends MapData<any, any>>(
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
-    const popupNode = document.createElement("div")
-    ReactDOM.render(<ServiceProvider windowImpl={window}>
-      <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-        <TranslatorProvider>
-          {popupRenderer(properties)}
-        </TranslatorProvider>
-      </LocaleProvider>
-    </ServiceProvider>, popupNode)
+    const popupNode = document.createElement('div');
+    ReactDOM.render(
+      <ServiceProvider windowImpl={window}>
+        <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+          <TranslatorProvider>{popupRenderer(properties)}</TranslatorProvider>
+        </LocaleProvider>
+      </ServiceProvider>,
+      popupNode
+    );
     new Popup()
       .setLngLat(coordinates as [number, number])
       .setOffset({
@@ -265,7 +266,7 @@ export function Map<TMapData extends MapData<any, any>>({
 }: {
   fetchMapData: () => Promise<TMapData>;
   renderPopup: MapRenderPopupType<TMapData>;
-  focus: Nullable<{ lat: number, lng: number, zoom?: number }>
+  focus: Nullable<{ lat: number; lng: number; zoom?: number }>;
 }) {
   const { classes } = useStyles();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -375,10 +376,10 @@ export function Map<TMapData extends MapData<any, any>>({
     const map = mapRef.current;
     if (map == null) return;
     if (focus) {
-      map.setCenter(focus)
+      map.setCenter(focus);
 
       if (focus.zoom) {
-        map.setZoom(focus.zoom)
+        map.setZoom(focus.zoom);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,8 +1,14 @@
 import React, { useMemo } from 'react';
 import { Need } from '../../../../models/need';
-import { getPpeStatusEnumFromInt, PpeStatus, } from '../../../../models/ppeStatus';
+import {
+  getPpeStatusEnumFromInt,
+  PpeStatus,
+} from '../../../../models/ppeStatus';
 import { PpeTypeEnumLabel } from '../PpeTypeEnumLabel';
-import { getPpeTypeEnumFromInt, isResourceTypeOther, } from '../../../../models/ppeType';
+import {
+  getPpeTypeEnumFromInt,
+  isResourceTypeOther,
+} from '../../../../models/ppeType';
 import { CategoryEnum } from '../../type';
 import { useStyles } from './style';
 import { AutoTranslatedText } from '../../../../components/AutoTranslatedText';
@@ -86,17 +92,13 @@ export const MapNeedPopup: React.FC<Props> = ({
         </dd>
         <dt>Organisation:</dt>
         <dd>
-          <AutoTranslatedText>
-            {need.organisation}
-          </AutoTranslatedText>
+          <AutoTranslatedText>{need.organisation}</AutoTranslatedText>
         </dd>
         {need.department && (
           <>
             <dt>Department:</dt>
             <dd>
-              <AutoTranslatedText>
-                {need.department}
-              </AutoTranslatedText>
+              <AutoTranslatedText>{need.department}</AutoTranslatedText>
             </dd>
           </>
         )}
@@ -135,9 +137,7 @@ export const MapNeedPopup: React.FC<Props> = ({
             <dt>{otherPpeTitle}</dt>
             {otherTypePpeTypes.map(({ ppeTypeOther, ppeType }) => (
               <dd key={`ppe_type_other_${ppeType}`}>
-                <AutoTranslatedText>
-                  {ppeTypeOther ?? ''}
-                </AutoTranslatedText>
+                <AutoTranslatedText>{ppeTypeOther ?? ''}</AutoTranslatedText>
               </dd>
             ))}
           </>
