@@ -12,6 +12,7 @@ interface Config {
     clientID: string;
     endpoint: string;
   };
+  googleTranslationApiKey: string;
 }
 
 export const config: Config = window.appConfig;
