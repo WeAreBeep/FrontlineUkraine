@@ -45,16 +45,16 @@ variable "sql_admin_password" {
 }
 
 variable "core_custom_domain_list" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
 variable "core_server_host" {
-  type    = string
+  type = string
 }
 
 variable "core_cors_allowed_origins" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
@@ -64,12 +64,12 @@ variable "core_api_key" {
 }
 
 variable "web_custom_domain_list" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
 variable "publicweb_custom_domain_list" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
@@ -119,4 +119,9 @@ variable "authgear_endpoint" {
 
 variable "what3words_api_key" {
   type = string
+}
+
+variable "google_translation_api_key" {
+  type      = string
+  sensitive = true
 }

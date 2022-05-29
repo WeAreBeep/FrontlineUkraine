@@ -12,4 +12,5 @@ window.appConfig = {
     clientID: "${REACT_APP_AUTHGEAR_CLIENT_ID}",
     endpoint: "${REACT_APP_AUTHGEAR_ENDPOINT}",
   },
+  googleTranslationApiKey: "${REACT_APP_GOOGLE_TRANSLATION_API_KEY}"
 };

@@ -92,6 +92,8 @@ resource "azurerm_app_service" "public_web" {
     // Authgear
     REACT_APP_AUTHGEAR_CLIENT_ID               = var.authgear_client_id
     REACT_APP_AUTHGEAR_ENDPOINT                = var.authgear_endpoint
+    // Google translate
+    REACT_APP_GOOGLE_TRANSLATION_API_KEY       = var.google_translation_api_key
   }
 }
 

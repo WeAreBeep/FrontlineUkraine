@@ -14,6 +14,7 @@ import { FLAppShell } from './components/FLAppShell';
 import { resolveDefaultLocale } from './locale/resolveDefaultLocale';
 import { FLGlobalStyle } from './components/FLGlobalStyle';
 import { FLMantineProvider } from './components/FLMantineProvider';
+import { TranslatorProvider } from './contexts/translator/TranslatorContext';
 
 // @ts-expect-error
 const contentfulClient = new ContentfulClient({
@@ -76,10 +77,12 @@ const InnerFLApp: React.FC = () => {
       <APIContextProvider>
         <ServiceProvider windowImpl={window}>
           <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-            <NotificationsProvider>
-              <FLGlobalStyle />
-              <Content />
-            </NotificationsProvider>
+            <TranslatorProvider>
+              <NotificationsProvider>
+                <FLGlobalStyle />
+                <Content />
+              </NotificationsProvider>
+            </TranslatorProvider>
           </LocaleProvider>
         </ServiceProvider>
       </APIContextProvider>

@@ -57,9 +57,9 @@ export const PpeSupplySubForm: React.FC<
         label="Meets Regulations"
         description={
           <span>
-            Does this type of resource you supply meet the appropriate regulatory
-            requirements? <br /> All resource must meet the required standards and
-            will be tested before use by the NHS.
+            Does this type of resource you supply meet the appropriate
+            regulatory requirements? <br /> All resource must meet the required
+            standards and will be tested before use by the NHS.
           </span>
         }
         orientation="vertical"

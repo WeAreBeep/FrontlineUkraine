@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import mapboxGl, {
   CirclePaint,
   Expression,
@@ -36,6 +35,8 @@ import {
 import { resolveDefaultLocale } from '../../../../locale/resolveDefaultLocale';
 import { LocaleProvider } from '../../../../locale/LocaleProvider';
 import { ServiceProvider } from '../../../../contexts/ServiceContext';
+import { TranslatorProvider } from '../../../../contexts/translator/TranslatorContext';
+import ReactDOM from 'react-dom';
 
 mapboxGl.accessToken = config.mapboxToken;
 
@@ -216,7 +217,15 @@ function addCluster<TMapData extends MapData<any, any>>(
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
-
+    const popupNode = document.createElement('div');
+    ReactDOM.render(
+      <ServiceProvider windowImpl={window}>
+        <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+          <TranslatorProvider>{popupRenderer(properties)}</TranslatorProvider>
+        </LocaleProvider>
+      </ServiceProvider>,
+      popupNode
+    );
     new Popup()
       .setLngLat(coordinates as [number, number])
       .setOffset({
@@ -231,16 +240,7 @@ function addCluster<TMapData extends MapData<any, any>>(
         'bottom-right': [-5, -5],
       })
       .setMaxWidth('70%')
-      .setHTML(
-        // FIXME: Better way to render the React component
-        ReactDOMServer.renderToStaticMarkup(
-          <ServiceProvider windowImpl={window}>
-            <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-              {popupRenderer(properties)}
-            </LocaleProvider>
-          </ServiceProvider>
-        )
-      )
+      .setDOMContent(popupNode)
       .addTo(map);
   });
 }
@@ -266,7 +266,7 @@ export function Map<TMapData extends MapData<any, any>>({
 }: {
   fetchMapData: () => Promise<TMapData>;
   renderPopup: MapRenderPopupType<TMapData>;
-  focus: Nullable<{ lat: number, lng: number, zoom?: number }>
+  focus: Nullable<{ lat: number; lng: number; zoom?: number }>;
 }) {
   const { classes } = useStyles();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -376,10 +376,10 @@ export function Map<TMapData extends MapData<any, any>>({
     const map = mapRef.current;
     if (map == null) return;
     if (focus) {
-      map.setCenter(focus)
+      map.setCenter(focus);
 
       if (focus.zoom) {
-        map.setZoom(focus.zoom)
+        map.setZoom(focus.zoom);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

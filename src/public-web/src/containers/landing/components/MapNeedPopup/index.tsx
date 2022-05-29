@@ -11,6 +11,7 @@ import {
 } from '../../../../models/ppeType';
 import { CategoryEnum } from '../../type';
 import { useStyles } from './style';
+import { AutoTranslatedText } from '../../../../components/AutoTranslatedText';
 
 interface Props {
   need: Need;
@@ -90,11 +91,15 @@ export const MapNeedPopup: React.FC<Props> = ({
           </a>
         </dd>
         <dt>Organisation:</dt>
-        <dd>{need.organisation}</dd>
+        <dd>
+          <AutoTranslatedText>{need.organisation}</AutoTranslatedText>
+        </dd>
         {need.department && (
           <>
             <dt>Department:</dt>
-            <dd>{need.department}</dd>
+            <dd>
+              <AutoTranslatedText>{need.department}</AutoTranslatedText>
+            </dd>
           </>
         )}
         {need.contactName && (
@@ -131,7 +136,9 @@ export const MapNeedPopup: React.FC<Props> = ({
           <>
             <dt>{otherPpeTitle}</dt>
             {otherTypePpeTypes.map(({ ppeTypeOther, ppeType }) => (
-              <dd key={`ppe_type_other_${ppeType}`}>{ppeTypeOther}</dd>
+              <dd key={`ppe_type_other_${ppeType}`}>
+                <AutoTranslatedText>{ppeTypeOther ?? ''}</AutoTranslatedText>
+              </dd>
             ))}
           </>
         )}
