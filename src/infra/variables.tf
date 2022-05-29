@@ -123,5 +123,4 @@ variable "what3words_api_key" {
 
 variable "google_translation_api_key" {
   type      = string
-  sensitive = true
 }
