@@ -3,6 +3,7 @@ import { PpeTypeEnumLabel } from '../PpeTypeEnumLabel';
 import { getPpeTypeEnumFromInt, PpeTypeEnum } from '../../../../models/ppeType';
 import { useStyles } from './style';
 import { Supply } from '../../../../models/supply';
+import { AutoTranslatedText } from '../../../../components/AutoTranslatedText';
 
 interface Props {
   supply: Supply;
@@ -38,15 +39,25 @@ export const MapSupplyPopup: React.FC<Props> = ({ supply }) => {
         <dt>Organisation:</dt>
         <dd>
           {supply.website != null && supply.website.length !== 0 ? (
-            <a href={supply.website}>{supply.organisation}</a>
+            <a href={supply.website}>
+              <AutoTranslatedText>
+                {supply.website}
+              </AutoTranslatedText>
+            </a>
           ) : (
-            supply.organisation
+            <AutoTranslatedText>
+              {supply.organisation}
+            </AutoTranslatedText>
           )}
         </dd>
         {supply.description && (
           <>
             <dt>Description:</dt>
-            <dd>{supply.description}</dd>
+            <dd>
+              <AutoTranslatedText>
+                {supply.description}
+              </AutoTranslatedText>
+            </dd>
           </>
         )}
         <dt>Supplies:</dt>
@@ -65,13 +76,21 @@ export const MapSupplyPopup: React.FC<Props> = ({ supply }) => {
         {otherTypePpeType && (
           <>
             <dt>Other Supplies:</dt>
-            <dd>{otherTypePpeType.ppeTypeOther}</dd>
+            <dd>
+              <AutoTranslatedText>
+                {otherTypePpeType.ppeTypeOther ?? ''}
+              </AutoTranslatedText>
+            </dd>
           </>
         )}
         {supply.capacityNotes && (
           <>
             <dt>Capacity Notes:</dt>
-            <dd>{supply.capacityNotes}</dd>
+            <dd>
+              <AutoTranslatedText>
+                {supply.capacityNotes}
+              </AutoTranslatedText>
+            </dd>
           </>
         )}
       </dl>

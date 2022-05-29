@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import mapboxGl, {
   CirclePaint,
   Expression,
@@ -36,6 +35,8 @@ import {
 import { resolveDefaultLocale } from '../../../../locale/resolveDefaultLocale';
 import { LocaleProvider } from '../../../../locale/LocaleProvider';
 import { ServiceProvider } from '../../../../contexts/ServiceContext';
+import { TranslatorProvider } from '../../../../contexts/translator/TranslatorContext';
+import ReactDOM from 'react-dom';
 
 mapboxGl.accessToken = config.mapboxToken;
 
@@ -216,7 +217,14 @@ function addCluster<TMapData extends MapData<any, any>>(
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
-
+    const popupNode = document.createElement("div")
+    ReactDOM.render(<ServiceProvider windowImpl={window}>
+      <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
+        <TranslatorProvider>
+          {popupRenderer(properties)}
+        </TranslatorProvider>
+      </LocaleProvider>
+    </ServiceProvider>, popupNode)
     new Popup()
       .setLngLat(coordinates as [number, number])
       .setOffset({
@@ -231,16 +239,7 @@ function addCluster<TMapData extends MapData<any, any>>(
         'bottom-right': [-5, -5],
       })
       .setMaxWidth('70%')
-      .setHTML(
-        // FIXME: Better way to render the React component
-        ReactDOMServer.renderToStaticMarkup(
-          <ServiceProvider windowImpl={window}>
-            <LocaleProvider defaultLocale={resolveDefaultLocale(window)}>
-              {popupRenderer(properties)}
-            </LocaleProvider>
-          </ServiceProvider>
-        )
-      )
+      .setDOMContent(popupNode)
       .addTo(map);
   });
 }
