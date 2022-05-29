@@ -120,3 +120,8 @@ variable "authgear_endpoint" {
 variable "what3words_api_key" {
   type = string
 }
+
+variable "google_translation_api_key" {
+  type = string
+  sensitive = true
+}
