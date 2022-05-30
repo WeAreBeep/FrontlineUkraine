@@ -207,9 +207,7 @@ function addCluster<TMapData extends MapData<any, any>>(
     const point = feature.geometry;
     if (point.type !== 'Point') return;
     const coordinates = point.coordinates.slice();
-    const properties = feature.properties as FLFeatureProps<
-      MapDataResourceType<TMapData>
-    >;
+    const properties = feature.properties as FLFeatureProps<MapDataResourceType<TMapData>>;
 
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
@@ -242,6 +240,13 @@ function addCluster<TMapData extends MapData<any, any>>(
       .setMaxWidth('70%')
       .setDOMContent(popupNode)
       .addTo(map);
+
+    const popupBoundingClientRect = popupNode.getBoundingClientRect();
+    const popupCenter = map.unproject(new mapboxGl.Point(popupBoundingClientRect.left, popupBoundingClientRect.top + popupBoundingClientRect.height / 2));
+    map.easeTo({
+      center: popupCenter,
+      padding: 20,
+    })
   });
 }
 
@@ -260,10 +265,10 @@ function setClusterVisibility(
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function Map<TMapData extends MapData<any, any>>({
-  fetchMapData,
-  renderPopup,
-  focus,
-}: {
+                                                          fetchMapData,
+                                                          renderPopup,
+                                                          focus,
+                                                        }: {
   fetchMapData: () => Promise<TMapData>;
   renderPopup: MapRenderPopupType<TMapData>;
   focus: Nullable<{ lat: number; lng: number; zoom?: number }>;
@@ -419,7 +424,7 @@ export function Map<TMapData extends MapData<any, any>>({
           mapData={mapData}
         />
       </div>
-      <div ref={mapContainer} className={classes.map} />
+      <div ref={mapContainer} className={classes.map}/>
     </div>
   );
 }
