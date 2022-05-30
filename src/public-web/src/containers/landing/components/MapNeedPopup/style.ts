@@ -17,7 +17,7 @@ export const useStyles = createStyles((theme, _, getRef) => {
       maxHeight: '20rem',
       overflowY: 'auto',
       [tablet(theme)]: {
-        maxHeight: '30rem',
+        maxHeight: '32rem',
         maxWidth: '20vw',
       },
       [`&.${needRef} h1, &.${needRef} dt`]: {

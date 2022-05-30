@@ -12,6 +12,9 @@ import {
 import { CategoryEnum } from '../../type';
 import { useStyles } from './style';
 import { AutoTranslatedText } from '../../../../components/AutoTranslatedText';
+import { RemarkContextProvider } from '../../../../components/Remark/RemarkContext';
+import { RemarkLegend } from '../../../../components/Remark/RemarkLegend';
+import { useLocale } from '../../../../locale/LocaleProvider';
 
 interface Props {
   need: Need;
@@ -24,6 +27,7 @@ export const MapNeedPopup: React.FC<Props> = ({
   allowStatuses,
   variant,
 }) => {
+  const { renderToString } = useLocale();
   const { classes, cx } = useStyles();
   const allowStatusesSet = useMemo(
     () => new Set<PpeStatus>(allowStatuses),
@@ -70,85 +74,100 @@ export const MapNeedPopup: React.FC<Props> = ({
     }),
     [need]
   );
+  const remarks = useMemo(
+    () => ({
+      '*': renderToString('map_pop_up_translate_by_google_description'),
+    }),
+    [renderToString]
+  );
   return (
-    <div
-      className={cx(classes.container, {
-        [classes.need]: variant === CategoryEnum.Need,
-        [classes.needMet]: variant === CategoryEnum.NeedMet,
-      })}
-    >
-      <h1>{title}</h1>
-      <dl>
-        <dt>what3words address:</dt>
-        <dd>
-          <a
-            href={`https://what3words.com/${need.postcode}`}
-            title="what3words address"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {need.postcode}
-          </a>
-        </dd>
-        <dt>Organisation:</dt>
-        <dd>
-          <AutoTranslatedText>{need.organisation}</AutoTranslatedText>
-        </dd>
-        {need.department && (
-          <>
-            <dt>Department:</dt>
-            <dd>
-              <AutoTranslatedText>{need.department}</AutoTranslatedText>
-            </dd>
-          </>
-        )}
-        {need.contactName && (
-          <>
-            <dt>Contact name:</dt>
-            <dd>{need.contactName}</dd>
-          </>
-        )}
-        {need.phoneNumber && (
-          <>
-            <dt>Phone number:</dt>
-            <dd>{need.phoneNumber}</dd>
-          </>
-        )}
-        <dt>{ppeTypeTitle}:</dt>
-        <dd>
-          <ul>
-            {need.ppeTypes
-              .filter(({ status: ordValue }) => {
-                const status = getPpeStatusEnumFromInt(ordValue);
-                return status != null && allowStatusesSet.has(status);
-              })
-              .map(({ ppeType }) => (
-                <li key={ppeType}>
-                  <PpeTypeEnumLabel
-                    ppeType={getPpeTypeEnumFromInt(ppeType)!}
-                    variant="compact"
-                  />
-                </li>
-              ))}
-          </ul>
-        </dd>
-        {otherTypePpeTypes.length > 0 && (
-          <>
-            <dt>{otherPpeTitle}</dt>
-            {otherTypePpeTypes.map(({ ppeTypeOther, ppeType }) => (
-              <dd key={`ppe_type_other_${ppeType}`}>
-                <AutoTranslatedText>{ppeTypeOther ?? ''}</AutoTranslatedText>
-              </dd>
-            ))}
-          </>
-        )}
-      </dl>
+    <RemarkContextProvider remarks={remarks}>
       <div
-        className={classes.datetime}
-        title={`Received ${datetime.toLocaleString()}`}
+        className={cx(classes.container, {
+          [classes.need]: variant === CategoryEnum.Need,
+          [classes.needMet]: variant === CategoryEnum.NeedMet,
+        })}
       >
-        {datetime.toLocaleString()}
+        <h1>{title}</h1>
+        <dl>
+          <dt>what3words address:</dt>
+          <dd>
+            <a
+              href={`https://what3words.com/${need.postcode}`}
+              title="what3words address"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {need.postcode}
+            </a>
+          </dd>
+          <dt>Organisation:</dt>
+          <dd>
+            <AutoTranslatedText remark="*">
+              {need.organisation}
+            </AutoTranslatedText>
+          </dd>
+          {need.department && (
+            <>
+              <dt>Department:</dt>
+              <dd>
+                <AutoTranslatedText remark="*">
+                  {need.department}
+                </AutoTranslatedText>
+              </dd>
+            </>
+          )}
+          {need.contactName && (
+            <>
+              <dt>Contact name:</dt>
+              <dd>{need.contactName}</dd>
+            </>
+          )}
+          {need.phoneNumber && (
+            <>
+              <dt>Phone number:</dt>
+              <dd>{need.phoneNumber}</dd>
+            </>
+          )}
+          <dt>{ppeTypeTitle}:</dt>
+          <dd>
+            <ul>
+              {need.ppeTypes
+                .filter(({ status: ordValue }) => {
+                  const status = getPpeStatusEnumFromInt(ordValue);
+                  return status != null && allowStatusesSet.has(status);
+                })
+                .map(({ ppeType }) => (
+                  <li key={ppeType}>
+                    <PpeTypeEnumLabel
+                      ppeType={getPpeTypeEnumFromInt(ppeType)!}
+                      variant="compact"
+                    />
+                  </li>
+                ))}
+            </ul>
+          </dd>
+          {otherTypePpeTypes.length > 0 && (
+            <>
+              <dt>{otherPpeTitle}</dt>
+              {otherTypePpeTypes.map(({ ppeTypeOther, ppeType }) => (
+                <dd key={`ppe_type_other_${ppeType}`}>
+                  <AutoTranslatedText remark="*">
+                    {ppeTypeOther ?? ''}
+                  </AutoTranslatedText>
+                </dd>
+              ))}
+            </>
+          )}
+        </dl>
+        <div
+          className={classes.datetime}
+          title={`Received ${datetime.toLocaleString()}`}
+        >
+          {datetime.toLocaleString()}
+        </div>
+        <RemarkLegend />
       </div>
-    </div>
+    </RemarkContextProvider>
   );
 };

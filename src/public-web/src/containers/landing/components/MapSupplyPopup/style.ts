@@ -9,7 +9,7 @@ export const useStyles = createStyles((theme) => {
       maxHeight: '20rem',
       overflowY: 'auto',
       [tablet(theme)]: {
-        maxHeight: '30rem',
+        maxHeight: '32rem',
         maxWidth: '20vw',
       },
       [`h1, dt`]: {

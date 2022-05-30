@@ -5,6 +5,8 @@ export default {
   nav_link_item_suppliers: 'SUPPLIERS',
   nav_link_item_about: 'ABOUT',
   nav_link_item_partners: 'PARTNERS',
+  map_pop_up_translate_by_google_description:
+    'Translation provided by Google Translate',
   suppliers_sign_in_button: 'Sign in to see the full map',
   account_menu_settings: 'Settings',
   account_menu_sign_out: 'Sign out',

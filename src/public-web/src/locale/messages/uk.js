@@ -5,6 +5,8 @@ export default {
   nav_link_item_suppliers: 'ПОСТАВЧИКИ',
   nav_link_item_about: 'ПОСТАВЧИКИ',
   nav_link_item_partners: 'ПАРТНЕРИ',
+  map_pop_up_translate_by_google_description:
+    'Translation provided by Google Translate',
   suppliers_sign_in_button: 'Увійдіть, щоб побачити повну карту',
   account_menu_settings: 'Налаштування',
   account_menu_sign_out: 'Вийти з аккаунта',
