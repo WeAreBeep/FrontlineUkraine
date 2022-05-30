@@ -161,7 +161,6 @@ export const RegisterNeeds: React.FC = () => {
 
   return (
     <div className={classes.scrollContainer}>
-      <AutoTranslatedText>I need translation</AutoTranslatedText>
       <Container>
         <h1 className={classes.header}>
           <FormattedMessage id="i_need_form_title" />
