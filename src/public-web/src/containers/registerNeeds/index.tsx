@@ -44,7 +44,6 @@ import {
   USREOU_CODE_PATTERN,
   WHAT_3_WORDS_ADDRESS_PATTERN,
 } from '../../constants/patterns';
-import { AutoTranslatedText } from '../../components/AutoTranslatedText';
 
 export const RegisterNeeds: React.FC = () => {
   const { classes } = useStyles();
@@ -161,7 +160,6 @@ export const RegisterNeeds: React.FC = () => {
 
   return (
     <div className={classes.scrollContainer}>
-      <AutoTranslatedText>I need translation</AutoTranslatedText>
       <Container>
         <h1 className={classes.header}>
           <FormattedMessage id="i_need_form_title" />
