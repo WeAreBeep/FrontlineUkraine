@@ -247,8 +247,17 @@ function addCluster<TMapData extends MapData<any, any>>(
       center: popupCenter,
       padding: 20,
     })
+
+
+    map.on('click', 'circle', (e) => {
+      map.flyTo({
+      center: e.staticBreadcrumbs.features[0].geometry.coordinates
+      });
+      });
   });
 }
+
+
 
 function setClusterVisibility(
   map: MapboxMap,
