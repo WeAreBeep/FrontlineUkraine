@@ -120,7 +120,7 @@ namespace Web.Controllers
             return View(EditSuppliesViewModel.FromEntities(supplier));
         }
         [HttpPost("edit-supplies/{id}")]
-        public IActionResult EditSupplies([FromServices] DataContext dataContext, EditSuppliesPost data)
+        public async Task<IActionResult> EditSupplies([FromServices] DataContext dataContext, EditSuppliesPost data)
         {
             SimpleNotifier noty = notifier();  
             if (!ModelState.IsValid)
@@ -129,9 +129,21 @@ namespace Web.Controllers
                 return View("EditSupplies", EditSuppliesViewModel.FromPostData(data));
             }
             else
-            { 
+            {
+                var wrapper = new What3WordsV3(W3WApiKey);
+                var address = await wrapper.ConvertToCoordinates(data.Supplies.Postcode).RequestAsync();
+                if (!address.IsSuccessful)
+                {
+                    var message = address.Error.Error switch
+                    {
+                        What3WordsError.BadWords => "Bad what3words address is provided",
+                        _ => "Unexpected error returned from what3words"
+                    };
+                    noty.AddMessage(MsgTypes.Warning, message);
+                    return View("EditSupplies", EditSuppliesViewModel.FromPostData(data));
+                }
                 Supplier existingSupplies = dataContext.Suppliers.Include(p => p.SupplierPpeTypes).Single(n => n.Id == data.Supplies.Id);
-                existingSupplies.Modify(data, currentUserId);
+                existingSupplies.Modify(data, currentUserId, address.Data.Coordinates);
                 dataContext.SaveChanges(currentUserName);
                 noty.AddMessage(MsgTypes.Success, "Successfully updated Supplier");
                 return Redirect("/suppliers");

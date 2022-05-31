@@ -4,20 +4,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Web.Models;
 using Web.Snippets.System.Collections.Generic;
+using what3words.dotnet.wrapper.models;
 
 namespace Web.Db
 {
 	public partial class Supplier
 	{
-		public void Modify(EditSuppliesPost s, string currentUserId)
+		public void Modify(EditSuppliesPost s, string currentUserId, Coordinates what3wordsAddressCoordinates)
 		{
+			// NOTE: Only re-assign Latitude and Longitude when
+			//	- what3words address is changed and
+			//	- both Latitude and Longitude are untouched
+			if (Postcode != s.Supplies.Postcode && Latitude == s.Location.Latitude && Longitude == s.Location.Longitude)
+			{
+				Latitude = new decimal(what3wordsAddressCoordinates.Lat);
+				Longitude = new decimal(what3wordsAddressCoordinates.Lng);
+			}
+			else
+			{
+				Latitude = s.Location.Latitude;
+				Longitude = s.Location.Longitude;
+			}
+
 			Modify(s.Supplies);
 			StatusId = (int)s.Status.Status;
 
 			updateBasicPpeDetails(s);
-
-			Latitude = s.Location.Latitude;
-			Longitude = s.Location.Longitude;
 
 			if(!String.IsNullOrWhiteSpace(s.Notes.NewNote))
 			{

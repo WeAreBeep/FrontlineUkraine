@@ -59,9 +59,9 @@ namespace Web.Models
 		StringLength(100, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string ContactName { get; set; }
 
-		[Display(Name = "Postcode", Description = "Will be added to the map to indicate location of your supplies"),
+		[Display(Name = "what3words address", Description = "Will be added to the map to indicate location of your supplies"),
 		Required(ErrorMessage = Settings.ValMsgs.Required),
-		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
+		RegularExpression("^(/{3})?.+\\..+\\..+$", ErrorMessage = "<b>{0}</b> should have 3 words connected with fullstops(.)")]
 		public string Postcode { get; set; }
 
 		[Display(Name = "Tell Us More", Description = "Please tell us your COVID-19 story here. We may use this in marketing/media to share good news stories")]
