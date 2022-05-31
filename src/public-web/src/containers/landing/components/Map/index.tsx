@@ -214,7 +214,12 @@ function addCluster<TMapData extends MapData<any, any>>(
     // popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+
+      map.flyTo({
+        center: e.staticBreadcrumbs.features[0].geometry.coordinates
+        });
     }
+
     const popupNode = document.createElement('div');
     ReactDOM.render(
       <ServiceProvider windowImpl={window}>
@@ -224,7 +229,7 @@ function addCluster<TMapData extends MapData<any, any>>(
       </ServiceProvider>,
       popupNode
     );
-    new Popup()
+    new Popup({anchor: 'left'})
       .setLngLat(coordinates as [number, number])
       .setOffset({
         // Set offset to avoid overlapping with the marker
@@ -247,13 +252,6 @@ function addCluster<TMapData extends MapData<any, any>>(
     //   center: popupCenter,
     //   padding: 20,
     // })
-
-
-    map.on('click', 'unclusterId', (e) => {
-      map.flyTo({
-      center: e.staticBreadcrumbs.features[0].geometry.coordinates
-      });
-      });
   });
 }
 
