@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 from sqlalchemy.orm import Query, Session
@@ -8,7 +8,7 @@ from app.crud.base import CRUDBase
 from app.models.post_status import PostStatus
 from app.models.supplier import Supplier
 from app.models.supplier_ppe_type import SupplierPpeType
-from app.schemas import SupplyCreate
+from app.schemas import SupplyCreate, Coordinates
 
 
 def to_model(create_model: SupplyCreate) -> Supplier:
@@ -58,8 +58,15 @@ class CRUDSupply(CRUDBase[Supplier, SupplyCreate, BaseModel]):
     ) -> List[Supplier]:
         return self.get_queryable_by_post_status(db, status=status).all()
 
-    def create_from_request(self, db: Session, *, request: SupplyCreate) -> Supplier:
+    def create_from_request(self,
+                            db: Session,
+                            *,
+                            request: SupplyCreate,
+                            converted_coordinates: Optional[Coordinates]) -> Supplier:
         supplier_model = to_model(request)
+        if converted_coordinates is not None:
+            supplier_model.latitude = converted_coordinates.lat
+            supplier_model.longitude = converted_coordinates.lng
         return self.create(db, supplier_model)
 
 
