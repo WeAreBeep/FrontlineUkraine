@@ -241,15 +241,15 @@ function addCluster<TMapData extends MapData<any, any>>(
       .setDOMContent(popupNode)
       .addTo(map);
 
-    // const popupBoundingClientRect = popupNode.getBoundingClientRect();
-    // const popupCenter = map.unproject(new mapboxGl.Point(popupBoundingClientRect.left, popupBoundingClientRect.top + popupBoundingClientRect.height / 2));
-    // map.easeTo({
-    //   center: popupCenter,
-    //   padding: 20,
-    // })
+    const popupBoundingClientRect = popupNode.getBoundingClientRect();
+    const popupCenter = map.unproject(new mapboxGl.Point(popupBoundingClientRect.left, popupBoundingClientRect.top + popupBoundingClientRect.height / 2));
+    map.easeTo({
+      center: popupCenter,
+      padding: 20,
+    })
 
 
-    map.on('click', 'circle', (e) => {
+    map.on('click', 'clusterId', (e) => {
       map.flyTo({
       center: e.staticBreadcrumbs.features[0].geometry.coordinates
       });
