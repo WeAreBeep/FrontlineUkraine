@@ -249,7 +249,7 @@ function addCluster<TMapData extends MapData<any, any>>(
     // })
 
 
-    map.on('click', 'clusterId', (e) => {
+    map.on('click', 'unclusterId', (e) => {
       map.flyTo({
       center: e.staticBreadcrumbs.features[0].geometry.coordinates
       });
