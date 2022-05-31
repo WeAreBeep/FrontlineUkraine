@@ -209,15 +209,15 @@ function addCluster<TMapData extends MapData<any, any>>(
     const coordinates = point.coordinates.slice();
     const properties = feature.properties as FLFeatureProps<MapDataResourceType<TMapData>>;
 
+    map.flyTo({
+      center: e.lngLat.wrap()
+      });
+
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
     // popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-
-      map.flyTo({
-        center: e.staticBreadcrumbs.features[0].geometry.coordinates
-        });
     }
 
     const popupNode = document.createElement('div');
