@@ -1,7 +1,7 @@
 from datetime import timezone
 from typing import List, Optional
 
-from pydantic import EmailStr, conint, validator
+from pydantic import EmailStr, conint, validator, constr
 
 from app.models import (
     CostType,
@@ -63,7 +63,7 @@ class SupplyCreate(BaseModel):
     website: Optional[str]
     phone_number: str
     contact_name: str
-    postcode: str
+    postcode: constr(regex=r"^(/{3})?.+\..+\..+$")
     transport_type: TransportType
     transport_type_other: Optional[str]
     tell_us_more: Optional[str]

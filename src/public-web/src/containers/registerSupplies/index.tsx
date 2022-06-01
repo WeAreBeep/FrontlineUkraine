@@ -31,6 +31,8 @@ import { useLocale } from '../../locale/LocaleProvider';
 import { RESOURCE_GROUPS } from '../../constants/resourceGroup';
 import { FormattedMessage } from '../../locale/FormattedMessage';
 import { TransportType } from '../../models/transportType';
+import { WHAT_3_WORDS_ADDRESS_PATTERN } from '../../constants/patterns';
+import { W3WLocationInput } from '../../components/W3WLocationInput/W3WLocationInput';
 
 export const RegisterSupplies: React.FC = () => {
   const { renderToString } = useLocale();
@@ -255,16 +257,20 @@ export const RegisterSupplies: React.FC = () => {
                 description="Name of person who deals with resource enquiries"
                 required={true}
               />
-              <TextInput
+              <W3WLocationInput
                 {...register('postcode', {
                   required: {
                     value: true,
                     message: VALIDATION_MSG.required(renderToString),
                   },
+                  pattern: {
+                    value: WHAT_3_WORDS_ADDRESS_PATTERN,
+                    message: VALIDATION_MSG.what3wordsPattern(renderToString),
+                  },
                 })}
                 error={errors.postcode?.message}
                 className={classes.inputWrapper}
-                label="Postcode"
+                label="what3words address"
                 description="Will be added to the map to indicate location of your supplies"
                 required={true}
               />
