@@ -74,5 +74,9 @@ export const useStyles = createStyles((theme) => ({
         color: '#000000',
       },
     },
+    img: {
+      maxWidth: '100%',
+      height: 'auto',
+    }
   },
 }));
