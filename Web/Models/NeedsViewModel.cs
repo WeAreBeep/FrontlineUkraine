@@ -116,7 +116,7 @@ namespace Web.Models
 		StringLength(200, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string TownOrCity { get; set; }
 
-		[Display(Name = "Tell Us More", Description = "Tell us more about how the shortage affects you"),
+		[Display(Name = "ANY OTHER COMMENTS?", Description = "We use anonymised data in press releases and social media posts to raise awareness and inspire more people to help. What do we need to understand about the situation in Ukraine? How does it feel to be Ukrainian right now?"),
 		StringLength(10000, MinimumLength = 3, ErrorMessage = Settings.ValMsgs.StringLengthWithMinimum)]
 		public string TellUsMore { get; set; }
 

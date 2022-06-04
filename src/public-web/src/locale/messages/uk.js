@@ -69,9 +69,9 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
     'Отримайте what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
-    'Розкажи нам більше',
+    'ІНШІ КОМЕНТАРІ?',
   i_need_form_fieldset_additional_details_field_tell_us_more_description:
-    'Розкажіть нам більше про те, як дефіцит впливає на вас',
+    'Ми використовуємо анонімні дані в прес-релізах і публікаціях у соціальних мережах, щоб підвищити обізнаність і надихнути більше людей допомогти. Що нам потрібно розуміти про ситуацію в Україні? Яке відчуття бути українцем зараз?',
   i_need_form_message_save_successful_title: 'Подача успішна!',
   i_need_form_message_save_successful_message:
     "Дякуємо, що ви були додані до бази даних, ми зв'яжемося з вами в установлений термін. Ви будете перенаправлені на домашню сторінку через 10 секунд.",
