@@ -75,9 +75,9 @@ export default {
   i_need_form_fieldset_additional_details_field_postcode_get_what3words_btn_title:
     'Get what3words',
   i_need_form_fieldset_additional_details_field_tell_us_more_title:
-    'Tell Us More',
+    'ANY OTHER COMMENTS?',
   i_need_form_fieldset_additional_details_field_tell_us_more_description:
-    'Tell us more about how the shortage affects you',
+    'We use anonymised data in press releases and social media posts to raise awareness and inspire more people to help. What do we need to understand about the situation in Ukraine? How does it feel to be Ukrainian right now?',
   i_need_form_message_save_successful_title: 'Submit successful!',
   i_need_form_message_save_successful_message:
     'Thanks you have been added to the database, we will be in contact in due course. You will be redirected to home page in 10 seconds.',
