@@ -64,7 +64,7 @@ class NeedCreate(BaseModel):
     @validator("ppe_types")
     def ppe_types_should_not_empty(cls, v):
         has_can = len(v) != 0
-        assert has_can, "Please choose at least one PPE Type which you can supply"
+        assert has_can, "Please choose at least one resource category which you need"
         return v
 
 
