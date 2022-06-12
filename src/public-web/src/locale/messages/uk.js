@@ -1,5 +1,6 @@
 export default {
   landing_headline_our_voice: 'OUR VOICES',
+  landing_welcome_banner_message: 'Ця карта показує лише ресурси, необхідні кожному місту. Якщо ви бажаєте отримати список ресурсів, необхідних для кожного місця, зв’яжіться з нами, щоб зареєструватися як постачальник.',
   nav_link_item_i_need: 'МЕНІ ПОТРІБНО',
   nav_link_item_i_have: 'У МЕНЕ Є',
   nav_link_item_suppliers: 'ПОСТАВЧИКИ',

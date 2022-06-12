@@ -1,5 +1,6 @@
 export default {
   landing_headline_our_voice: 'OUR VOICES',
+  landing_welcome_banner_message: 'This map shows only resources each city needs. If you wish to get the list of resources each location needs, please contact us to sign up as a supplier.',
   nav_link_item_i_need: 'I NEED',
   nav_link_item_i_have: 'I HAVE',
   nav_link_item_suppliers: 'SUPPLIERS',

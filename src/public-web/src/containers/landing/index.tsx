@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './style';
 import { Map, MapRenderPopupType } from './components/Map';
 import { Col, Grid } from '@mantine/core';
@@ -9,6 +9,8 @@ import { PublicMapData } from '../../models/map';
 import { CategoryEnum } from './type';
 import { MapSupplyPopup } from './components/MapSupplyPopup';
 import { MapCityDataPopup } from './components/MapCityDataPopup';
+import { useNotifications } from '@mantine/notifications';
+import { FormattedMessage } from '../../locale/FormattedMessage';
 
 const renderMapPopup: MapRenderPopupType<PublicMapData> = (
   category,
@@ -34,6 +36,18 @@ export const Landing: React.FC = () => {
     actions: { getPublicMapData },
   } = useAPIContext();
   const { classes } = useStyles();
+  const notifications = useNotifications();
+  useEffect(() => {
+    notifications.showNotification({
+      color: 'flGreen',
+      message: (
+        <FormattedMessage id="landing_welcome_banner_message" />
+      ),
+      autoClose: false,
+    })
+    // NOTE: Only show the notification on page mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Grid className={classes.gridContainer} gutter={0}>
       <Col className={classes.feedContentContainer} span={12} md={4}>
