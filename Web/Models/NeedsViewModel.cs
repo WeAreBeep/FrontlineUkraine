@@ -75,9 +75,9 @@ namespace Web.Models
 		public string OrganisationName { get; set; }
 		
 		[
-			Display(Name = "USREOU Code* / Registration No.", Description = "This is the 7 digits unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need"),
+			Display(Name = "USREOU Code* / Registration No.", Description = "This is the 7-digit or 8-digit unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need"),
 			Required(ErrorMessage = Settings.ValMsgs.Required),
-			RegularExpression(@"^[\d]{7}$", ErrorMessage = "<b>{0}</b> is the 7 digits unique registration code.")
+			RegularExpression(@"^[\d]{7,8}$", ErrorMessage = "<b>{0}</b> is the 7-digit or 8-digit unique registration code.")
 		]
 		public string OrgRegCode { get; set; }
 		
