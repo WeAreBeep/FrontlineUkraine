@@ -33,7 +33,7 @@ class NeedCreate(BaseModel):
     organisation_name: str
     org_govt_approval_image_id: Optional[str]
     org_has_govt_approval: bool
-    org_reg_code: constr(regex=r"^\d{7}$")
+    org_reg_code: constr(regex=r"^\d{7,8}$")
     org_type: Optional[OrgType]
     org_type_other: Optional[str]
     org_city_id: int
