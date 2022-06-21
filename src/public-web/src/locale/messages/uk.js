@@ -47,7 +47,7 @@ export default {
   i_need_form_fieldset_organisation_field_org_reg_code_title:
     'КОД ЄДРПОУ* / РЕЄСТРАЦІЙНИЙ НОМЕР',
   i_need_form_fieldset_organisation_field_org_reg_code_description:
-    'Це 7-значний унікальний реєстраційний код для всіх громадських/благодійних організацій України. Це допоможе нам перевірити та забезпечити, щоб допомога потрапляла в потрібні місця для розподілу між громадянами, які потребують допомоги.',
+    'Це 7-значний або 8-значний унікальний реєстраційний код для всіх громадських/благодійних організацій України. Це допоможе нам перевірити та забезпечити, щоб допомога потрапляла в потрібні місця для розподілу між громадянами, які потребують допомоги.',
   i_need_form_fieldset_organisation_field_org_type_title: 'ТИП ОРГАНІЗАЦІЇ',
   i_need_form_fieldset_organisation_field_org_type_description:
     'Which best describes your organisation?',

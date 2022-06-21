@@ -47,7 +47,7 @@ export default {
   i_need_form_fieldset_organisation_field_org_reg_code_title:
     'USREOU CODE* / REGISTRATION NO.',
   i_need_form_fieldset_organisation_field_org_reg_code_description:
-    'This is the 7 digits unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need',
+    'This is the 7-digit or 8-digit unique registration code for all public/charitable Ukrainian organisations. This will helps us verify and ensure that aid gets to the right places to be distributed to citizens in need',
   i_need_form_fieldset_organisation_field_org_type_title:
     'TYPE OF ORGANISATION',
   i_need_form_fieldset_organisation_field_org_type_description:
