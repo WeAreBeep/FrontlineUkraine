@@ -15,7 +15,7 @@ export default {
   common_what_3_words_address_pattern_error:
     'what3words address should be 3 words separated by fullstops (.)',
   common_usreou_code_pattern_error:
-    'This is the 7 digits unique registration code',
+    'This is the 7-digit or 8-digit unique registration code',
   i_need_form_form_submit_title_saved: 'Saved!',
   i_need_form_form_submit_title_save: 'Save',
   i_need_form_title: 'I NEED',
