@@ -235,4 +235,15 @@ export default {
   resourceType_NonDrugMedicalSuppliesSurgicalInstrumentsAndFixatorsOther_displayName: `Інше (будь ласка, вкажіть)`,
   what3words_modal_title:
     'Увімкніть GPS і отримайте 3 слова, які описують ваше точне місцезнаходження. Скопіюйте отримані 3 слова, закрийте це поле та вставте його у форму.',
+  supplier_portal_no_session_title: 'Портал постачальників',
+  supplier_portal_no_session_how_to_login_title: 'Як увійти',
+  supplier_portal_no_session_how_to_login_steps_step1: 'Спочатку заповніть {Anchor, react, href{{iHaveFormHref}} children{Я МАЮ ФОРМУ}} та надішліть',
+  supplier_portal_no_session_how_to_login_steps_step2: 'Незабаром (протягом 24 годин) з вами зв’яжеться волонтер за допомогою відеодзвінка.',
+  supplier_portal_no_session_how_to_login_steps_step3: 'Після завершення перевірки ви отримаєте свої облікові дані для ВХОДУ.',
+  supplier_portal_no_session_how_to_login_steps_step4: 'На порталі ПОСТАЧАЛЬНИКІВ введіть свою електронну пошту та пароль, надісланий вам нашою командою.',
+  supplier_portal_no_session_how_to_login_steps_step5: 'Вам буде запропоновано налаштувати 2FA. Не соромтеся використовувати будь-який додаток 2FA, який у вас є. Якщо ви раніше не використовували програму 2FA, радимо використовувати {Anchor, react, href{{authyHref}} target{_blank} children{{strong, react, children{Authy}}}}.',
+  supplier_portal_no_session_how_to_login_steps_step6: 'Запустіть програму 2FA, щоб відсканувати QR-код, тоді ви отримаєте 6-значний номер.',
+  supplier_portal_no_session_how_to_login_steps_step7: 'Введіть 6-значний номер для входу. Тепер ви можете отримати доступ до карти потреб.',
+  supplier_portal_no_session_how_to_login_steps_step8: '2FA необхідна для кожного. увійти. Це для безпеки всіх тих, кого ми хочемо підтримати.',
+  supplier_portal_no_session_how_to_login_login_btn: 'Увійдіть, щоб побачити повну карту',
 };

@@ -12,6 +12,7 @@ import { MapSupplyPopup } from '../landing/components/MapSupplyPopup';
 import { MapNeedPopup } from '../landing/components/MapNeedPopup';
 import { PpeStatus } from '../../models/ppeStatus';
 import { useSearchParams } from 'react-router-dom';
+import { FormattedMessage } from '../../locale/FormattedMessage';
 
 const renderMapPopup: MapRenderPopupType<RestrictedMapData> = (
   category,
@@ -93,47 +94,41 @@ export const Suppliers: React.FC = () => {
       <Grid className={cx(classes.stackContainer, classes.noSessionContent)}>
         <Col md={12} lg={6} offsetLg={3}>
           <Stack align="center" className={classes.stackContainer}>
-            <h1 className={classes.heading}>Supplier Portal</h1>
-            <h2>How to login</h2>
+            <h1 className={classes.heading}>
+              <FormattedMessage id="supplier_portal_no_session_title" />
+            </h1>
+            <h2>
+              <FormattedMessage id="supplier_portal_no_session_how_to_login_title" />
+            </h2>
             <List type="ordered">
               <List.Item>
-                First, please fill in the{' '}
-                <Anchor href="/register-supplies">I HAVE FORM</Anchor> & Submit
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step1" components={{Anchor}} values={{iHaveFormHref: '/register-supplies'}} />
               </List.Item>
               <List.Item>
-                A volunteer will contact you shortly (within 24hrs) over video
-                call.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step2" />
               </List.Item>
               <List.Item>
-                Once verification is completed you will receive your LOG IN
-                credentials.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step3" />
               </List.Item>
               <List.Item>
-                On the SUPPLIERS’ portal, enter your email and the password sent
-                to you by our team.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step4" />
               </List.Item>
               <List.Item>
-                You will be asked to set up 2FA. Feel free to use any 2FA app
-                you have. If you haven’t used a 2FA app before, we suggest using{' '}
-                <Anchor href="https://authy.com/download/" target="_blank">
-                  <strong>Authy</strong>
-                </Anchor>
-                .
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step5" components={{Anchor}} values={{authyHref: '//authy.com/download/'}} />
               </List.Item>
               <List.Item>
-                Fire up your 2FA app to scan the QR code, then you will get a
-                6-digit number.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step6" />
               </List.Item>
               <List.Item>
-                Enter the 6-digit number to login. Now you can access the needs
-                map.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step7" />
               </List.Item>
               <List.Item>
-                2FA is required for every. login. This is for the safety of all
-                those we wish to support.
+                <FormattedMessage id="supplier_portal_no_session_how_to_login_steps_step8" />
               </List.Item>
             </List>
-            <Button onClick={onClickSignIn}>Login to see the full map</Button>
+            <Button onClick={onClickSignIn}>
+              <FormattedMessage id="supplier_portal_no_session_how_to_login_login_btn" />
+            </Button>
           </Stack>
         </Col>
       </Grid>

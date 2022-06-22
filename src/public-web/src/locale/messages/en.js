@@ -296,4 +296,15 @@ export default {
     'OTHER (please specify)',
   what3words_modal_title:
     'Turn on your GPS and get the 3 words that describe your exact location. Copy the 3 words you get, close this box, and paste it into the form.',
+  supplier_portal_no_session_title: 'Supplier Portal',
+  supplier_portal_no_session_how_to_login_title: 'How to login',
+  supplier_portal_no_session_how_to_login_steps_step1: 'First, please fill in the {Anchor, react, href{{iHaveFormHref}} children{I HAVE FORM}} & Submit',
+  supplier_portal_no_session_how_to_login_steps_step2: 'A volunteer will contact you shortly (within 24hrs) over video call.',
+  supplier_portal_no_session_how_to_login_steps_step3: 'Once verification is completed you will receive your LOG IN credentials.',
+  supplier_portal_no_session_how_to_login_steps_step4: 'On the SUPPLIERS’ portal, enter your email and the password sent to you by our team.',
+  supplier_portal_no_session_how_to_login_steps_step5: 'You will be asked to set up 2FA. Feel free to use any 2FA app you have. If you haven’t used a 2FA app before, we suggest using {Anchor, react, href{{authyHref}} target{_blank} children{{strong, react, children{Authy}}}}.',
+  supplier_portal_no_session_how_to_login_steps_step6: 'Fire up your 2FA app to scan the QR code, then you will get a 6-digit number.',
+  supplier_portal_no_session_how_to_login_steps_step7: 'Enter the 6-digit number to login. Now you can access the needs map.',
+  supplier_portal_no_session_how_to_login_steps_step8: '2FA is required for every. login. This is for the safety of all those we wish to support.',
+  supplier_portal_no_session_how_to_login_login_btn: 'Login to see the full map',
 };
