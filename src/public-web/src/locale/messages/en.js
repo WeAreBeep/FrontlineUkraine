@@ -1,6 +1,6 @@
 export default {
   landing_headline_our_voice: 'OUR VOICES',
-  landing_welcome_banner_message: 'This map shows only resources each city needs. If you wish to get the list of resources each location needs, please contact us to sign up as a supplier.',
+  landing_welcome_banner_message: 'To keep users safe, only verified users can see granular data. This public map shows aggregated data at city scale. To become a verified user complete {a, react, href{/register-supplies} children{I HAVE form}} (suppliers) or the {a, react, href{/register-needs} children{I NEED form}} (registered aid organisations).',
   nav_link_item_i_need: 'I NEED',
   nav_link_item_i_have: 'I HAVE',
   nav_link_item_suppliers: 'SUPPLIERS',
