@@ -8,6 +8,8 @@
 @if(SignInManager.IsSignedIn(User))
 {
     <a class="btn_submit btn_manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-cog"></i><span>Manage</span></a>
+    @* Check GuidAuth for the x query params *@
+    <a class="btn_submit btn_manage" asp-area="Identity" asp-page="/Account/Register" asp-route-x="b6f094ee-ab03-4576-af6c-d917c8c133a7" title="Add new user"><i class="fas fa-user-circle"></i><span>Add new user</span></a>
     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { })">
         <button id="logout" type="submit" class="btn_submit">
             <i class="fa fa-check"></i><span>Logout</span>

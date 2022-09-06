@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
+using Web.Infrastructure;
 
 namespace Web.Snippets
 {
@@ -25,7 +27,7 @@ namespace Web.Snippets
 
 		public async Task InvokeAsync(HttpContext httpContext)
 		{
-			if(!httpContext.User.Identity.IsAuthenticated && httpContext.Request.Path.Value.Contains(_pathToProtect) && !requestIncludesGuid(httpContext))
+			if(httpContext.Request.Path.Value.Contains(_pathToProtect) && (!httpContext.User.Identity.IsAuthenticated || !requestIncludesGuid(httpContext)))
 			{
 				httpContext.Response.Redirect($"/Identity/Account/Login?ReturnUrl={httpContext.Request.Path}");
 			}
