@@ -94,8 +94,6 @@ namespace Web
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGuidAuth();
-
             if (_currentEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -115,6 +113,7 @@ namespace Web
             app.UseAuthentication(); //Identity
             app.UseAuthorization();
             app.UseSession();
+            app.UseGuidAuth();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
