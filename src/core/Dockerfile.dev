@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ./app/poetry.lock ./app/pyproject.toml ./
-RUN pip install poetry==1.1 && \
+RUN pip install poetry==1.2.0 && \
     poetry install
 
 COPY ./app/ ./
